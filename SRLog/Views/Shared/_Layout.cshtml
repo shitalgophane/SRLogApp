@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container-fuild">
+
+        <div class="row" style="background-color: #5DBCD2 !important">
+            <div class="col-md-2">
+                <img src="~/Images/logo1.png" />
+            </div>
+            <div class="col-md-8">
+                <div>
+                    <div class="panelhead" style="font-size:27px"><center>SR Log Application</center></div>
+                </div>
+            </div>
+            <div class="col-md-2">
+
+                <br />
+                <div>
+
+
+                    <ul class="nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle welcome " data-toggle="dropdown">Welcome, @Session["User"] <b class="glyphicon glyphicon-user"></b></a>
+                            <ul class="dropdown-menu">
+
+                                <li>@Html.ActionLink(" LogOut", "Login", "Account", null, new { @class = "btn btn-info btn-sm glyphicon glyphicon-log-out logout" })</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                @*<div class="btn-group dropdown">
+
+                        <button class="btn-welcome btn-sm dropdown-toggle logout" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            WelCome  @Session["User"]
+                            <span class="glyphicon glyphicon-user"></span>
+                        </button>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                @Html.ActionLink(" LogOut", "Login", "Account", null, new { @class = "btn btn-info btn-sm glyphicon glyphicon-log-out logout" })
+                            </li>
+
+                        </ul>
+
+                    </div>*@
+            </div>
+
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation" style="margin-top:10px">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            @*<a class="navbar-brand" href="#">Brand</a>*@
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
+                                <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="collapse navbar-collapse navbar-menubuilder">
+                            <ul class="nav navbar-nav navbar-left">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">SR LOG<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Create New SR</a></li>
+                                        <li><a href="#">List All By SR Number</a></li>
+                                        <li><a href="#">Keyword Search</a></li>
+                                        <li><a href="#">Custom Sort//Filter All Records</a></li>
+                                        <li>@Html.ActionLink("Configure Column Order", "ConfigureColumns", "SRLog") </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">BID LOG<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("View/Create Bids", "Index", "BidLog")</li>
+                                        <li><a href="#">View Archived Bids</a></li>
+                                        <li><a href="#">Keyword Search Archived Bids</a></li>
+                                        <li><a href="#">Settings</a></li>
+                                        <li><a href="#">Login With Different Password</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">QUOTE LOG<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">View Active Quotes</a></li>
+                                        <li><a href="#">View Archived Quotes</a></li>
+                                        <li><a href="#">Keyword Search</a></li>
+                                        <li><a href="#">Manage Customer Details</a></li>
+                                        <li><a href="#">Create New Customer</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @RenderBody()
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <center>
+                    <footer>
+                        <p>Copyright @DateTime.Now.Year - SR Log</p>
+                    </footer>
+                </center>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div>
+        <div style="margin: 0 auto;width:98%">
+
+
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        function CreateNewSR(SRNo) {
+            alert(SRNo);
+        }
+    </script>
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jqueryui")*@
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>

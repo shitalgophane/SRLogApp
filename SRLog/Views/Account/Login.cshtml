@@ -1,0 +1,98 @@
+﻿@model SRLog.Entities.Account.ViewModels.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="container">
+    @*<div class="well">Basic Well</div>*@
+    @*<div style="height:80px">
+
+        </div>*@
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+
+
+
+    <div class="panel panel-primary">
+        <div class="panel-heading panelhead panelhead"><center><h2>SR Log Application</h2></center></div>
+        <div class="panel-body background">
+            <div class="row">
+                <div class="col-md-8">
+                </div>
+                <div class="col-md-5 divlogin">
+                    @using (Html.BeginForm("LogIn", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="panel panel-default">
+                            <div class="panel-heading login">LogIn</div>
+                            <div class="panel-body">
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.LoginName, new { @class = "col-md-4 control-label padding-to-15" })
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(m => m.LoginName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.LoginName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Password, new { @class = "col-md-4 control-label padding-to-15" })
+                                    <div class="col-md-8">
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <div class="col-md-offset-4 col-md-6">
+                                        <input type="submit" value="Log in" class="btn btn-primary btnMain" />&nbsp;&nbsp;&nbsp;
+                                        @*@Html.ActionLink("Forgot your password?", "ForgotPassword", null, new { @style = "color:blue;" })*@
+
+
+
+                                        @*<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>*@
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-4 col-md-8">
+                                        <a href="" style="color:blue" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">Forgot Password</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+            </div> <!-- /container -->
+
+        </div>
+        <div class="panel-footer panel-heading panelhead">
+            <center>
+                <footer>
+                    <p>Copyright @DateTime.Now.Year - SR Log</p>
+                </footer>
+            </center>
+        </div>
+
+    </div>
+
+
+
+
+
+</div>

@@ -1,0 +1,253 @@
+﻿@{
+    ViewBag.Title = "ConfigureColumns";
+}
+
+<style>
+    .subject-info-box-1,
+    .subject-info-box-2 {
+        float: left;
+        width: 35%;
+    }
+
+    select {
+        height: 250px !important;
+        padding: 0;
+    }
+
+    option {
+        padding: 4px 10px 4px 10px;
+    }
+
+        option:hover {
+            background: #EEEEEE;
+        }
+
+    .subject-info-arrows {
+        float: left;
+        width: 10%;
+        vertical-align: middle;
+    }
+
+    input {
+        width: 50%;
+        margin-top: 5px;
+    }
+
+    .selected-right {
+        margin-top: 5px;
+        align-content: center;
+    }
+</style>
+
+<div class="subject-info-box-1">
+    <span>
+        <b>
+            Select and click on ">" or ">>" to add column in SRLog grid
+            <br />
+            &nbsp;
+        </b>
+    </span>
+
+
+    <select multiple="multiple" id='lstBox1' class="form-control"></select>
+</div>
+
+<div class="subject-info-arrows text-center">
+    <span>
+        <br /><br />
+    </span>
+    <input type='button' id='btnAllRight' value='>>' class="btn btn-default" /><br />
+    <input type='button' id='btnRight' value='>' class="btn btn-default" /><br />
+    <input type='button' id='btnLeft' value='<' class="btn btn-default" /><br />
+    <input type='button' id='btnAllLeft' value='<<' class="btn btn-default" />
+</div>
+
+
+<div class="subject-info-box-2">
+    <span>
+        <b>
+            Select and click on "<" or "<<" to remove column from SRLog Grid.
+            <br />
+            Select an item and click <span class="glyphicon glyphicon-chevron-up"></span> or <span class="glyphicon glyphicon-chevron-down"></span> to change order of column in SRLog Grid.
+        </b>
+    </span>
+
+    <select multiple="multiple" id='lstBox2' class="form-control"></select>
+</div>
+<div class="subject-info-arrows text-center">
+    <span>
+        <br /><br />
+    </span>
+    <button type="button" class="btn btn-default" id="btnUp">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </button><br /><br />
+    <button type="button" class="btn btn-default" id="btnDown">
+        <span class="glyphicon glyphicon-chevron-down"></span>
+    </button>
+</div>
+
+
+<div class="form-group">
+    <div class="col-md-offset-4 col-md-6">
+        <br />
+        <br />
+        <input type="button" value="Save Settings" id="btnSaveSettings" class="btn btn-primary btnMain" />
+        <br />
+        <br />
+    </div>
+</div>
+
+
+@section scripts
+{
+
+    <script type="text/javascript">
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: '@Url.Action("GetSRLogColumns")',
+            data: '',
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (ind) {
+                    var columnnames = data[ind].trim().toString();
+                    $("#lstBox1").append('<option value=' + columnnames + '>' + columnnames + '</option>');
+                });
+
+            },
+            error: function (xhr) {
+                alert(xhr);
+                alert('Error occured');
+            }
+        });
+
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: '@Url.Action("GetConfiguredSRLogColumns")',
+            data: '',
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (ind) {
+                    var columnnames = data[ind].trim().toString();
+                    $("#lstBox2").append('<option value=' + columnnames + '>' + columnnames + '</option>');
+                });
+
+            },
+            error: function (xhr) {
+                alert(xhr);
+                alert('Error occured');
+            }
+        });
+
+        (function () {
+            $('#btnSaveSettings').click(function (e) {
+                
+                var optionValues = [];
+
+                $('#lstBox2 option').each(function () {
+                    optionValues.push($(this).val());
+                });
+
+                
+                if (optionValues.length == 0) {
+                    alert("Nothing to save.");
+                    e.preventDefault();
+                }
+                else {
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        url: '@Url.Action("SaveConfiguredColumns")',
+                        data:
+                            {
+                                optionValues: JSON.stringify(optionValues)
+                            },
+                        dataType: "json",
+                        success: function (data) {
+                            alert(data);
+                        },
+                        error: function (xhr) {
+                            alert('Error occured');
+                        }
+                    });
+                }
+
+            });
+
+            $('#btnUp').click(function (e) {
+                $('select').moveUpDown('#lstBox2', true, false);
+                e.preventDefault();
+            });
+
+            $('#btnDown').click(function (e) {
+                $('select').moveUpDown('#lstBox2', false, true);
+                e.preventDefault();
+            });
+
+            $('#btnRight').click(function (e) {
+                var selectedOpts = $('#lstBox1 option:selected');
+                if (selectedOpts.length == 0) {
+                    alert("Nothing to move.");
+                    e.preventDefault();
+                }
+
+                $('#lstBox2').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                e.preventDefault();
+            });
+
+            $('#btnAllRight').click(function (e) {
+                var selectedOpts = $('#lstBox1 option');
+                if (selectedOpts.length == 0) {
+                    alert("Nothing to move.");
+                    e.preventDefault();
+                }
+
+                $('#lstBox2').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                e.preventDefault();
+            });
+
+            $('#btnLeft').click(function (e) {
+                var selectedOpts = $('#lstBox2 option:selected');
+                if (selectedOpts.length == 0) {
+                    alert("Nothing to move.");
+                    e.preventDefault();
+                }
+
+                $('#lstBox1').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                e.preventDefault();
+            });
+
+            $('#btnAllLeft').click(function (e) {
+                var selectedOpts = $('#lstBox2 option');
+                if (selectedOpts.length == 0) {
+                    alert("Nothing to move.");
+                    e.preventDefault();
+                }
+
+                $('#lstBox1').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                e.preventDefault();
+            });
+
+            $.fn.moveUpDown = function (list, btnUp, btnDown) {
+                var opts = $(list + ' option:selected');
+                if (opts.length == 0) {
+                    alert("Nothing to move");
+                }
+
+                if (btnUp) {
+                    opts.first().prev().before(opts);
+                } else if (btnDown) {
+                    opts.last().next().after(opts);
+                }
+            };
+
+        }(jQuery));
+    </script>
+}
+
+

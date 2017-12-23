@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/Scripts/jtable/themes/lightcolor/blue/jtable.css" rel="stylesheet" />
+
+<div id="BidLogTableContainer" style="border:1px solid #c6c3c3">
+
+</div>
+
+
+@section scripts
+{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            @*'@Url.Action("GetBidLogsList")'
+                 'http://localhost:61172/BidLog/GetBidLogsList'*@
+            $('#BidLogTableContainer').jtable({
+                //title: 'View/Create Bids',
+                paging: true, //Enable paging
+                pageSize: 6, //Set page size (default: 10)
+                sorting: true, //Enable sorting
+                defaultSorting: 'Owner ASC', //Set default sorting
+                bautowidth:true ,
+                actions: {
+                    listAction: '@Url.Action("GetBidLogsList")'
+                },
+                fields: {
+                    BidId: {
+                        key: true,
+                        list: false
+                    },
+                    BidDate: {
+                        title: 'Bid Due Date',
+                        width: '15%',
+                        type: 'date',
+                        displayFormat: 'mm/dd/yy'
+                    },
+                    BiddingAs: {
+                        title: 'Bidding As',
+                        width: '10%'
+                    },
+                    Customer: {
+                        title: 'Customer',
+                        width: '15%',
+                        sorting: false
+                    },
+                    CityState: {
+                        title: 'City, State',
+                        width: '10%'
+                    },
+                    Owner: {
+                        title: 'Owner',
+                        width: '10%'
+                    },
+                    ProjectName: {
+                        title: 'Project Description',
+                        width: '15%'
+                    },
+                    IAndCEstimate: {
+                        title: 'I & C Estimate',
+                        width: '10%'
+                    },
+                    Division: {
+                        title: 'Division',
+                        width: '10%'
+                    },
+                    LastAddendumRecvd: {
+                        title: 'Last Addendum Received',
+                        width: '10%'
+                    },
+                    Estimator: {
+                        title: 'Estimator',
+                        width: '10%'
+                    },
+                    AdevertiseDate: {
+                        title: 'Advertise Date',
+                        width: '10%',
+                        type: 'date',
+                        displayFormat: 'mm/dd/yyyy'
+                    },
+                    ProjectFolder: {
+                        title: 'Project Folder',
+                        width: '10%'
+                    },
+                    QuoteNumber: {
+                        title: 'Quote Number',
+                        width: '10%'
+                    },
+                    RedSheet: {
+                        title: "Generate SR",
+                        width: '20%',
+                        sorting: false,
+                        display: function (data) {
+                            if (data.record.QuoteNumber == 0) {
+                                return '<a onclick="GenerateSR()" style="cursor:pointer">Generate SR</a>';
+                            }
+                            else {
+                                return 'SR Generated';
+                            }
+                        }
+                    },
+                    ScopeLetter: {
+                        title: "",
+                        width: '20%',
+                        sorting: false,
+                        display: function (data) {
+                            return '<a onclick="ArchieveRecord(' + data.record.QuoteNumber + ')" style="cursor:pointer">Archive Record</a>';
+                        }
+                    }
+                }
+            });
+            //Load student list from server
+            $('#BidLogTableContainer').jtable('load');
+
+
+
+        });
+
+        function GenerateSR() {
+            confirm("This Will Generate SR Number For Current Record. Are You Sure?")
+
+        }
+
+        function ArchieveRecord(quotenumber) {
+
+            confirm("This Will Move Current Record To Obsolete Items Table. Are You Sure?")
+        }
+    </script>
+}
+

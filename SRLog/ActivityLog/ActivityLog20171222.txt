@@ -1,0 +1,74 @@
+22-Dec-2017 10:47:15 Login - Validating user.
+22-Dec-2017 10:47:17 Login - User Validation completed.
+22-Dec-2017 12:20:41 Login - Validating user.
+22-Dec-2017 12:20:46 Login - User Validation completed.
+22-Dec-2017 12:23:24 Login - Validating user.
+22-Dec-2017 12:23:26 Login - User Validation completed.
+22-Dec-2017 12:25:34 Login - Validating user.
+22-Dec-2017 12:25:34 Login - User Validation completed.
+22-Dec-2017 12:27:40 Login - Validating user.
+22-Dec-2017 12:27:40 Login - User Validation completed.
+22-Dec-2017 12:28:08 Login - Validating user.
+22-Dec-2017 12:28:09 Login - User Validation completed.
+22-Dec-2017 12:33:58 Login - Validating user.
+22-Dec-2017 12:33:59 Login - User Validation completed.
+22-Dec-2017 12:39:22 Login - Validating user.
+22-Dec-2017 12:39:23 Login - User Validation completed.
+22-Dec-2017 12:46:27 Login - Validating user.
+22-Dec-2017 12:46:28 Login - User Validation completed.
+22-Dec-2017 12:48:09 Login - Validating user.
+22-Dec-2017 12:48:11 Login - User Validation completed.
+22-Dec-2017 12:48:51 Login - Validating user.
+22-Dec-2017 12:48:53 Login - User Validation completed.
+22-Dec-2017 14:01:58 Login - Validating user.
+22-Dec-2017 14:01:59 Login - User Validation completed.
+22-Dec-2017 14:12:46 Login - Validating user.
+22-Dec-2017 14:12:46 Login - User Validation completed.
+22-Dec-2017 15:14:17 Login - Validating user.
+22-Dec-2017 15:14:18 Login - User Validation completed.
+22-Dec-2017 15:18:50 Login - Validating user.
+22-Dec-2017 15:18:51 Login - User Validation completed.
+22-Dec-2017 15:21:26 Login - Validating user.
+22-Dec-2017 15:21:32 Login - User Validation completed.
+22-Dec-2017 15:23:47 Login - Validating user.
+22-Dec-2017 15:23:48 Login - User Validation completed.
+22-Dec-2017 15:33:27 Login - Validating user.
+22-Dec-2017 15:33:28 Login - User Validation completed.
+22-Dec-2017 15:36:47 Login - Validating user.
+22-Dec-2017 15:36:48 Login - User Validation completed.
+22-Dec-2017 15:42:09 Login - Validating user.
+22-Dec-2017 15:42:10 Login - User Validation completed.
+22-Dec-2017 15:47:18 Login - Validating user.
+22-Dec-2017 15:47:19 Login - User Validation completed.
+22-Dec-2017 15:50:04 Login - Validating user.
+22-Dec-2017 15:50:05 Login - User Validation completed.
+22-Dec-2017 16:05:21 Login - Validating user.
+22-Dec-2017 16:05:21 Login - User Validation completed.
+22-Dec-2017 16:17:21 Login - Validating user.
+22-Dec-2017 16:17:22 Login - User Validation completed.
+22-Dec-2017 16:20:13 Login - Validating user.
+22-Dec-2017 16:20:13 Login - User Validation completed.
+22-Dec-2017 16:22:04 Login - Validating user.
+22-Dec-2017 16:22:05 Login - User Validation completed.
+22-Dec-2017 16:25:05 Login - Validating user.
+22-Dec-2017 16:25:06 Login - User Validation completed.
+22-Dec-2017 16:30:06 Login - Validating user.
+22-Dec-2017 16:30:06 Login - User Validation completed.
+22-Dec-2017 16:38:02 Login - Validating user.
+22-Dec-2017 16:38:02 Login - User Validation completed.
+22-Dec-2017 16:46:37 Login - Validating user.
+22-Dec-2017 16:46:38 Login - User Validation completed.
+22-Dec-2017 17:00:40 Login - Validating user.
+22-Dec-2017 17:00:40 Login - User Validation completed.
+22-Dec-2017 17:02:01 Login - Validating user.
+22-Dec-2017 17:02:01 Login - User Validation completed.
+22-Dec-2017 17:11:54 Login - Validating user.
+22-Dec-2017 17:11:54 Login - User Validation completed.
+22-Dec-2017 17:14:18 Login - Validating user.
+22-Dec-2017 17:14:19 Login - User Validation completed.
+22-Dec-2017 17:15:33 Login - Validating user.
+22-Dec-2017 17:15:33 Login - User Validation completed.
+22-Dec-2017 17:23:35 Login - Validating user.
+22-Dec-2017 17:23:35 Login - User Validation completed.
+22-Dec-2017 17:24:21 Login - Validating user.
+22-Dec-2017 17:24:21 Login - User Validation completed.
