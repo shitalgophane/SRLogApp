@@ -142,36 +142,36 @@
 
         (function () {
             $('#btnSaveSettings').click(function (e) {
-                
+
                 var optionValues = [];
 
                 $('#lstBox2 option').each(function () {
                     optionValues.push($(this).val());
                 });
 
-                
-                if (optionValues.length == 0) {
-                    alert("Nothing to save.");
-                    e.preventDefault();
-                }
-                else {
-                    $.ajax({
-                        cache: false,
-                        type: "POST",
-                        url: '@Url.Action("SaveConfiguredColumns")',
-                        data:
-                            {
-                                optionValues: JSON.stringify(optionValues)
-                            },
-                        dataType: "json",
-                        success: function (data) {
-                            alert(data);
+
+                //if (optionValues.length == 0) {
+                //    alert("Nothing to save.");
+                //    e.preventDefault();
+                //}
+                //else {
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: '@Url.Action("SaveConfiguredColumns")',
+                    data:
+                        {
+                            optionValues: JSON.stringify(optionValues)
                         },
-                        error: function (xhr) {
-                            alert('Error occured');
-                        }
-                    });
-                }
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function (xhr) {
+                        alert('Error occured');
+                    }
+                });
+                //}
 
             });
 

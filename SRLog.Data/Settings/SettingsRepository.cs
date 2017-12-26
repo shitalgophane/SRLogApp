@@ -27,26 +27,26 @@ namespace SRLog.Data.Settings
         public List<string> GetExistingConfigurableColumns(int userid)
         {
             List<string> setting = (from u in db.tblSettings
-                           where u.UserId == userid
-                           && u.SectionName == "ReportQuery" && u.IsFixedInGrid == false
-                           select u.Value).ToList();
+                                    where u.UserId == userid
+                                    && u.SectionName == "ReportQuery" && u.IsFixedInGrid == false
+                                    select u.Value).ToList();
             return setting;
         }
 
         public List<string> GetExistingColumns(int userid)
         {
             List<string> setting = (from u in db.tblSettings
-                           where u.UserId == userid
-                           && u.SectionName == "ReportQuery"
-                           select u.Value).ToList();
+                                    where u.UserId == userid
+                                    && u.SectionName == "ReportQuery"
+                                    select u.Value).ToList();
 
             return setting;
-            
+
         }
 
         public void AddSetting(int userid, string section, string key, string value, bool IsFixed = false)
         {
-            
+
             tblSetting setting = new tblSetting();
             setting.UserId = userid;
             setting.SectionName = section;
@@ -59,15 +59,31 @@ namespace SRLog.Data.Settings
         }
 
 
-        public void SaveColumnOrdering(int userid,List<string> columns)
+        public void SaveColumnOrdering(int userid, List<string> columns)
         {
             List<tblSetting> setting = (from u in db.tblSettings
-                                    where u.UserId == userid
-                                    && u.SectionName == "ReportQuery" && u.IsFixedInGrid == false
-                                    select u).ToList();
+                                        where u.UserId == userid
+                                        && u.SectionName == "ReportQuery" && u.IsFixedInGrid == false
+                                        select u).ToList();
+            //Delete all existing settings
 
-            
-            
+            if (setting.Count > 0)
+            {
+                foreach (tblSetting t in setting)
+                {
+                    db.tblSettings.Remove(t);
+                    db.SaveChanges();
+                }
+            }
+            //Save new settings
+            if (columns.Count > 0)
+            {
+                foreach (string c in columns)
+                {
+                    AddSetting(userid, "ReportQuery", c, c, false);
+                }
+            }
+
         }
     }
 }

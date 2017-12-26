@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "List All Jobs By SR Number";
+}
+
+<link href="~/Scripts/jtable/themes/lightcolor/blue/jtable.css" rel="stylesheet" />
+
+<style type="text/css">
+    #SRLogTableContainer {
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+    }
+</style>
+
+
+<div id="SRLogTableContainer" style="border:1px solid #c6c3c3">
+
+</div>
+
+@section scripts
+{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var fields = {
+                Id: {
+                    key: true,
+                    list: false
+                }
+            };
+
+            $.ajax({
+                url: '@Url.Action("GetAllSRLogColumns")',
+                async: false,
+                type: "POST",
+                dataType: "json",
+                success: function (fielddata) {                    
+                    $.each(fielddata, function (i, item) {
+                        fields[item.fieldname] =
+                            {
+                                title: item.fieldname,
+                                width: '10%'
+                            };
+                    });
+                },
+                error: function (xhr) {
+                    alert(xhr);
+                    alert('Error occured');
+                }
+            });
+
+
+
+            $("#SRLogTableContainer").jtable({
+                paging: true, //Enable paging
+                pageSize: 6, //Set page size (default: 10)
+                sorting: true, //Enable sorting
+                defaultSorting: 'Owner ASC', //Set default sorting
+                bautowidth: true,
+                actions:
+                    {
+                        listAction: '@Url.Action("GetSRLogsList")'
+                    },
+                fields: fields
+            });
+            $("#SRLogTableContainer").jtable('load');
+        });
+    </script>
+}

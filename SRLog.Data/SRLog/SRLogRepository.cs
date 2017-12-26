@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 using SRLog.Data;
 using SRLog.Data.Settings;
 using SRLog.Entities.SRLog.ViewModels;
 using SRLog.Entities.Settings.ViewModels;
+using System.Data.SqlClient;
 
 namespace SRLog.Data.SRLog
 {
@@ -34,5 +36,25 @@ namespace SRLog.Data.SRLog
 
             return existingcolumns;
         }
+
+        public List<tblSR_Log> GetSRLogsList(int UserId, int startIndex, int count, string sorting)
+        {
+            IEnumerable<tblSR_Log> query = db.tblSR_Logs;
+
+
+
+
+            return count > 0
+                        ? query.Skip(startIndex).Take(count).ToList() //Paging
+                        : query.ToList(); //No paging
+
+
+        }
+
+        public int GetSRLogcount()
+        {
+            return db.tblSR_Logs.Count();
+        }
+
     }
 }

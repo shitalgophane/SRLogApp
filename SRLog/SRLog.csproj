@@ -142,6 +142,7 @@
     </Compile>
     <Compile Include="GlobalSettings.cs" />
     <Compile Include="IniFile.cs" />
+    <Compile Include="Models\SRLogColumnConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -899,10 +900,10 @@
     <Content Include="Scripts\jtable\themes\Redmond\jquery-ui-themes-1.10.1\MANIFEST" />
     <Content Include="Scripts\jtable\themes\Redmond\jquery-ui-themes-1.10.1\package.json" />
     <Content Include="Views\SRLog\ConfigureColumns.cshtml" />
+    <Content Include="Views\SRLog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

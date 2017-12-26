@@ -103,8 +103,7 @@ namespace SRLog.Controllers
                         {
                             setting.AddSetting(userid, "ReportQuery", queryfields[i].ToString().Trim(), queryfields[i].ToString().Trim());
                         }
-                    }
-                    setting.AddSetting(userid, "ReportQuery", "Id", "Id", true);
+                    }                    
                 }
 
                 //Read columnsettings
