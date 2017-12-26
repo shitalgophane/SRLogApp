@@ -39,10 +39,7 @@ namespace SRLog.Data.SRLog
 
         public List<tblSR_Log> GetSRLogsList(int UserId, int startIndex, int count, string sorting)
         {
-            IEnumerable<tblSR_Log> query = db.tblSR_Logs;
-
-
-
+            IEnumerable<tblSR_Log> query = db.tblSR_Logs.OrderByDescending(x => x.SRNumber);
 
             return count > 0
                         ? query.Skip(startIndex).Take(count).ToList() //Paging

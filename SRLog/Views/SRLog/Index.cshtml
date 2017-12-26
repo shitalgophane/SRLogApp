@@ -6,7 +6,7 @@
 
 <style type="text/css">
     #SRLogTableContainer {
-        width: 100%;
+        width: 99%;
         display: block;
         overflow-x: auto;
     }
@@ -35,13 +35,40 @@
                 async: false,
                 type: "POST",
                 dataType: "json",
-                success: function (fielddata) {                    
+                success: function (fielddata) {
                     $.each(fielddata, function (i, item) {
-                        fields[item.fieldname] =
-                            {
-                                title: item.fieldname,
-                                width: '10%'
-                            };
+                        if (item.fieldname == "CreationDate" || item.fieldname == "QuoteDue" || item.fieldname == "JobWalkDate" || item.fieldname == "QuoteDate" || item.fieldname == "QuoteTime" || item.fieldname == "AdvertiseDate") {
+                            fields[item.fieldname] =
+                                {
+                                    title: item.fieldname,
+                                    width: '10%',
+                                    type: 'date',
+                                    displayFormat: 'mm/dd/yy'                               
+                                };
+                        }
+                        else if (item.fieldname == "JobOrQuote")
+                        {
+                            fields[item.fieldname] =
+                                {
+                                    title: item.fieldname,
+                                    width: '10%',                                    
+                                    display: function (data) {
+                                        if (data.record.JobOrQuote == 1) {
+                                            return 'Job';
+                                        }
+                                        else {
+                                            return 'Quote';
+                                        }
+                                    }
+                                };
+                        }
+                        else {
+                            fields[item.fieldname] =
+                                {
+                                    title: item.fieldname,
+                                    width: '10%'                                    
+                                };
+                        }
                     });
                 },
                 error: function (xhr) {
@@ -50,14 +77,12 @@
                 }
             });
 
-
-
             $("#SRLogTableContainer").jtable({
                 paging: true, //Enable paging
                 pageSize: 6, //Set page size (default: 10)
                 sorting: true, //Enable sorting
-                defaultSorting: 'Owner ASC', //Set default sorting
                 bautowidth: true,
+                columnSelectable:false,
                 actions:
                     {
                         listAction: '@Url.Action("GetSRLogsList")'
