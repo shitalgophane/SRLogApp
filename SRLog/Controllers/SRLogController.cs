@@ -7,16 +7,18 @@ using SRLog.Data;
 using SRLog.Data.SRLog;
 using SRLog.Data.Settings;
 using SRLog.Entities.Account.ViewModels;
+using SRLog.Entities.Settings.ViewModels;
 using Newtonsoft.Json;
-
+using SRLog.Filters;
 
 namespace SRLog.Controllers
 {
+    [AdminFilter]
     public class SRLogController : Controller
     {
         //
         // GET: /SRLog/
-
+        [AdminFilter]
         public ActionResult Index()
         {
             UserInfoViewModel userinfo = (UserInfoViewModel)Session["UserInfo"];
@@ -28,6 +30,7 @@ namespace SRLog.Controllers
                 return RedirectToAction("Login", "Account");
         }
 
+        [AdminFilter]
         public ActionResult ConfigureColumns()
         {
             return View();
@@ -35,6 +38,7 @@ namespace SRLog.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [AdminFilter]
         public JsonResult GetSRLogColumns()
         {
             try
@@ -65,6 +69,7 @@ namespace SRLog.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [AdminFilter]
         public JsonResult GetConfiguredSRLogColumns()
         {
             try
@@ -97,6 +102,8 @@ namespace SRLog.Controllers
         public class fields
         {
             public string fieldname { get; set; }
+            public string width { get; set; }
+            public string displayname { get; set; }
         }
 
         /// <summary>
@@ -105,6 +112,7 @@ namespace SRLog.Controllers
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
+        [AdminFilter]
         public JsonResult GetAllSRLogColumns()
         {
             try
@@ -116,15 +124,58 @@ namespace SRLog.Controllers
                     {
                         SettingsRepository _repository = new SettingsRepository();
 
-                        List<string> SRLogColumns = _repository.GetExistingColumns(userinfo.UserId);
-                        List<fields> JFields = new List<fields>();
+                        List<SRLogDisplayViewModel> SRLogColumns = _repository.GetExistingColumnsWithDisplayNames(userinfo.UserId);
 
-                        foreach (string s in SRLogColumns)
+                        List<string> SRLogColumnsWidth = _repository.GetExistingColumnsWidth(userinfo.UserId);
+                        int totalwidth = 0;
+                        if (SRLogColumns.Count <= 28)
                         {
-                            fields f = new fields();
-                            f.fieldname = s;
-                            JFields.Add(f);
+                            for (int i = 0; i < SRLogColumns.Count; i++)
+                            {
+                                totalwidth += Convert.ToInt32(SRLogColumnsWidth[i]);
+                            }
                         }
+                        else
+                        {
+                            foreach (string w in SRLogColumnsWidth)
+                            {
+                                totalwidth += Convert.ToInt32(w);
+                            }
+                        }
+
+                        List<fields> JFields = new List<fields>();
+                        if (SRLogColumns.Count <= 28)
+                        {
+                            for (int i = 0; i < SRLogColumns.Count; i++)
+                            {
+                                fields f = new fields();
+                                f.fieldname = SRLogColumns[i].FieldName;
+                                f.displayname = SRLogColumns[i].DisplayName;
+                                f.width = (Convert.ToDouble(SRLogColumnsWidth[i]) / Convert.ToDouble(totalwidth) * 100).ToString("0.00") + "%";
+                                JFields.Add(f);
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < SRLogColumns.Count; i++)
+                            {
+                                fields f = new fields();
+                                f.fieldname = SRLogColumns[i].FieldName;
+                                f.displayname = SRLogColumns[i].DisplayName;
+                                if (f.fieldname == "ProjectDescription" || f.fieldname == "Notes")
+                                {
+                                    f.width = "10%";
+                                }
+                                else if (f.fieldname == "CreationDate" || f.fieldname == "QuoteDue" || f.fieldname == "JobWalkDate" || f.fieldname == "QuoteDate" || f.fieldname == "QuoteTime" || f.fieldname == "AdvertiseDate")
+                                {
+                                    f.width = "5%";
+                                }
+                                else
+                                    f.width = "2%";                                
+                                JFields.Add(f);
+                            }
+                        }
+                       
                         return Json(JFields, JsonRequestBehavior.AllowGet);
                     }
                     else
@@ -142,6 +193,7 @@ namespace SRLog.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [AdminFilter]
         public JsonResult SaveConfiguredColumns(string optionValues)
         {
             try
@@ -174,6 +226,7 @@ namespace SRLog.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [AdminFilter]
         public JsonResult GetSRLogsList(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
         {
             try
@@ -201,6 +254,63 @@ namespace SRLog.Controllers
             {
                 return Json(new { Result = "ERROR", Message = ex.Message });
             }
+        }
+
+        [HttpPost]
+        [AdminFilter]
+        public string SaveColumnWidth(string fieldsettings)
+        {
+            int colno = 2;
+            UserInfoViewModel userinfo = (UserInfoViewModel)Session["UserInfo"];
+            SettingsRepository _repository = new SettingsRepository();
+            if (string.IsNullOrEmpty(fieldsettings) == false)
+            {
+                string[] Columns = fieldsettings.Split('|');
+                if (Columns.Length > 0)
+                {
+                    List<string> SRLogColumnsWidth = _repository.GetExistingColumnsWidth(userinfo.UserId);
+                    int totalwidth = 0;
+                    if ((Columns.Length - 1) <= 28)
+                    {
+                        for (int i = 0; i < Columns.Length - 1; i++)
+                        {
+                            totalwidth += Convert.ToInt32(SRLogColumnsWidth[i]);
+                        }
+                    }
+                    else
+                    {
+                        foreach (string w in SRLogColumnsWidth)
+                        {
+                            totalwidth += Convert.ToInt32(w);
+                        }
+                    }
+
+                    for (int i = 0; i < Columns.Length; i++)
+                    {
+                        string[] widths = Columns[i].Split('=');
+                        if (widths.Length == 2)
+                        {
+                            //Save setting                            
+                            if (userinfo != null)
+                            {
+                                if (colno <= 29)
+                                {
+                                    if (widths[1] != "undefined" && widths[1] != "NaN")
+                                    {
+                                        double widthinpixel = (Convert.ToDouble(widths[1]) * totalwidth) / 100;
+
+                                        _repository.UpdateSetting(userinfo.UserId, "Grid_Dsp_COLUMNSETTINGS1", "Col_" + colno.ToString(), widthinpixel.ToString("0").Trim());
+                                        colno++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            EventLog.LogData("Column width changed successfully by " + userinfo.User_Name + " on " + DateTime.Now, true);
+            return "Settings saved successfully";
+
         }
     }
 }

@@ -33,7 +33,7 @@ THE SOFTWARE.
 (function ($) {
 
     var unloadingPage;
-    
+
     $(window).on('beforeunload', function () {
         unloadingPage = true;
     });
@@ -146,7 +146,7 @@ THE SOFTWARE.
             this._createErrorDialogDiv();
             this._addNoDataRow();
 
-            this._cookieKeyPrefix = this._generateCookieKeyPrefix();            
+            this._cookieKeyPrefix = this._generateCookieKeyPrefix();
         },
 
         /* Normalizes some options for all fields (sets default values).
@@ -309,6 +309,7 @@ THE SOFTWARE.
         *  Returns th jQuery object.
         *************************************************************************/
         _createHeaderCellForField: function (fieldName, field) {
+            debugger;
             field.width = field.width || '10%'; //default column width: 10%.
 
             var $headerTextSpan = $('<span />')
@@ -432,7 +433,7 @@ THE SOFTWARE.
         _reloadTable: function (completeCallback) {
             var self = this;
 
-            var completeReload = function(data) {
+            var completeReload = function (data) {
                 self._hideBusy();
 
                 //Show the error message if server returns error
@@ -464,11 +465,11 @@ THE SOFTWARE.
 
                 //Check if result is a jQuery Deferred object
                 if (self._isDeferredObject(funcResult)) {
-                    funcResult.done(function(data) {
+                    funcResult.done(function (data) {
                         completeReload(data);
-                    }).fail(function() {
+                    }).fail(function () {
                         self._showError(self.options.messages.serverCommunicationError);
-                    }).always(function() {
+                    }).always(function () {
                         self._hideBusy();
                     });
                 } else { //assume it's the data we're loading
@@ -502,7 +503,7 @@ THE SOFTWARE.
             return this.options.actions.listAction;
         },
 
-        _createJtParamsForLoading: function() {
+        _createJtParamsForLoading: function () {
             return {
                 //Empty as default, paging, sorting or other extensions can override this method to add additional params to load request
             };
@@ -1156,7 +1157,7 @@ THE SOFTWARE.
             });
         },
 
-        _unAuthorizedRequestHandler: function() {
+        _unAuthorizedRequestHandler: function () {
             if (this.options.unAuthorizedRequestRedirectUrl) {
                 location.href = this.options.unAuthorizedRequestRedirectUrl;
             } else {
@@ -1199,7 +1200,7 @@ THE SOFTWARE.
                     jqXHR.abort();
                     return;
                 }
-                
+
                 if (options.error) {
                     options.error(arguments);
                 }
@@ -1581,10 +1582,10 @@ THE SOFTWARE.
         *************************************************************************/
         _createDateInputForField: function (field, fieldName, value) {
             var $input = $('<input class="' + field.inputClass + '" id="Edit-' + fieldName + '" type="text" name="' + fieldName + '"></input>');
-            if(value != undefined) {
+            if (value != undefined) {
                 $input.val(value);
             }
-            
+
             var displayFormat = field.displayFormat || this.options.defaultDateFormat;
             $input.datepicker({ dateFormat: displayFormat });
             return $('<div />')
@@ -1599,7 +1600,7 @@ THE SOFTWARE.
             if (value != undefined) {
                 $textArea.val(value);
             }
-            
+
             return $('<div />')
                 .addClass('jtable-input jtable-textarea-input')
                 .append($textArea);
@@ -1612,7 +1613,7 @@ THE SOFTWARE.
             if (value != undefined) {
                 $input.val(value);
             }
-            
+
             return $('<div />')
                 .addClass('jtable-input jtable-text-input')
                 .append($input);
@@ -1625,7 +1626,7 @@ THE SOFTWARE.
             if (value != undefined) {
                 $input.val(value);
             }
-            
+
             return $('<div />')
                 .addClass('jtable-input jtable-password-input')
                 .append($input);
@@ -1715,7 +1716,7 @@ THE SOFTWARE.
 
             return $containerDiv;
         },
-        
+
         /* Fills a dropdown list with given options.
         *************************************************************************/
         _fillDropDownListWithOptions: function ($select, options, value) {
@@ -1762,7 +1763,7 @@ THE SOFTWARE.
                 source: source
             });
 
-            $.each(options, function(i, option) {
+            $.each(options, function (i, option) {
                 var $radioButtonDiv = $('<div class=""></div>')
                     .addClass('jtable-radio-input')
                     .appendTo($containerDiv);
@@ -1852,7 +1853,7 @@ THE SOFTWARE.
                     }
 
                     var field = self.options.fields[fieldName];
-                    
+
                     //check if this combobox depends on others
                     if (!field.dependsOn) {
                         return;
@@ -2357,11 +2358,11 @@ THE SOFTWARE.
         *************************************************************************/
         _create: function () {
             base._create.apply(this, arguments);
-            
+
             if (!this.options.actions.updateAction) {
                 return;
             }
-            
+
             this._createEditDialogDiv();
         },
 
@@ -2410,7 +2411,7 @@ THE SOFTWARE.
         *************************************************************************/
         _onSaveClickedOnEditForm: function () {
             var self = this;
-            
+
             //row maybe removed by another source, if so, do nothing
             if (self._$editingRow.hasClass('jtable-row-removed')) {
                 self._$editDiv.dialog('close');
@@ -2619,7 +2620,7 @@ THE SOFTWARE.
                         form: $editForm
                     }));
             }
-            
+
             self._makeCascadeDropDowns($editForm, record, 'edit');
 
             $editForm.submit(function () {
@@ -2637,7 +2638,7 @@ THE SOFTWARE.
         *************************************************************************/
         _saveEditForm: function ($editForm, $saveButton) {
             var self = this;
-            
+
             var completeEdit = function (data) {
                 if (data.Result != 'OK') {
                     self._showError(data.Message);
@@ -2688,10 +2689,10 @@ THE SOFTWARE.
                 self._submitFormUsingAjax(
                     self.options.actions.updateAction,
                     $editForm.serialize(),
-                    function(data) {
+                    function (data) {
                         completeEdit(data);
                     },
-                    function() {
+                    function () {
                         self._showError(self.options.messages.serverCommunicationError);
                         self._setEnabledOfDialogButton($saveButton, true, self.options.messages.save);
                     });
@@ -3104,7 +3105,7 @@ THE SOFTWARE.
         _deleteRecordFromServer: function ($row, success, error, url) {
             var self = this;
 
-            var completeDelete = function(data) {
+            var completeDelete = function (data) {
                 if (data.Result != 'OK') {
                     $row.data('deleting', false);
                     if (error) {
@@ -3130,7 +3131,7 @@ THE SOFTWARE.
 
             var postData = {};
             postData[self._keyField] = self._getKeyValueOfRecord($row.data('record'));
-            
+
             //deleteAction may be a function, check if it is
             if (!url && $.isFunction(self.options.actions.deleteAction)) {
 
@@ -3642,7 +3643,7 @@ THE SOFTWARE.
 
         /* Overrides base method to do paging-specific constructions.
         *************************************************************************/
-        _create: function() {
+        _create: function () {
             base._create.apply(this, arguments);
             if (this.options.paging) {
                 this._loadPagingSettings();
@@ -3655,7 +3656,7 @@ THE SOFTWARE.
 
         /* Loads user preferences for paging.
         *************************************************************************/
-        _loadPagingSettings: function() {
+        _loadPagingSettings: function () {
             if (!this.options.saveUserPreferences) {
                 return;
             }
@@ -3668,7 +3669,7 @@ THE SOFTWARE.
 
         /* Creates bottom panel and adds to the page.
         *************************************************************************/
-        _createBottomPanel: function() {
+        _createBottomPanel: function () {
             this._$bottomPanel = $('<div />')
                 .addClass('jtable-bottom-panel')
                 .insertAfter(this._$table);
@@ -3681,7 +3682,7 @@ THE SOFTWARE.
 
         /* Creates page list area.
         *************************************************************************/
-        _createPageListArea: function() {
+        _createPageListArea: function () {
             this._$pagingListArea = $('<span></span>')
                 .addClass('jtable-page-list')
                 .appendTo(this._$bottomPanel.find('.jtable-left-area'));
@@ -3693,7 +3694,7 @@ THE SOFTWARE.
 
         /* Creates page list change area.
         *************************************************************************/
-        _createPageSizeSelection: function() {
+        _createPageSizeSelection: function () {
             var self = this;
 
             if (!self.options.pageSizeChangeArea) {
@@ -3703,7 +3704,7 @@ THE SOFTWARE.
             //Add current page size to page sizes list if not contains it
             if (self._findIndexInArray(self.options.pageSize, self.options.pageSizes) < 0) {
                 self.options.pageSizes.push(parseInt(self.options.pageSize));
-                self.options.pageSizes.sort(function(a, b) { return a - b; });
+                self.options.pageSizes.sort(function (a, b) { return a - b; });
             }
 
             //Add a span to contain page size change items
@@ -3726,14 +3727,14 @@ THE SOFTWARE.
             $pageSizeChangeCombobox.val(self.options.pageSize);
 
             //Change page size on combobox change
-            $pageSizeChangeCombobox.change(function() {
+            $pageSizeChangeCombobox.change(function () {
                 self._changePageSize(parseInt($(this).val()));
             });
         },
 
         /* Creates go to page area.
         *************************************************************************/
-        _createGotoPageInput: function() {
+        _createGotoPageInput: function () {
             var self = this;
 
             if (!self.options.gotoPageArea || self.options.gotoPageArea == 'none') {
@@ -3754,7 +3755,7 @@ THE SOFTWARE.
                 self._$gotoPageInput = $('<select></select>')
                     .appendTo(this._$gotoPageArea)
                     .data('pageCount', 1)
-                    .change(function() {
+                    .change(function () {
                         self._changePage(parseInt($(this).val()));
                     });
                 self._$gotoPageInput.append('<option value="1">1</option>');
@@ -3763,7 +3764,7 @@ THE SOFTWARE.
 
                 self._$gotoPageInput = $('<input type="text" maxlength="10" value="' + self._currentPageNo + '" />')
                     .appendTo(this._$gotoPageArea)
-                    .keypress(function(event) {
+                    .keypress(function (event) {
                         if (event.which == 13) { //enter
                             event.preventDefault();
                             self._changePage(parseInt(self._$gotoPageInput.val()));
@@ -3792,7 +3793,7 @@ THE SOFTWARE.
 
         /* Refreshes the 'go to page' input.
         *************************************************************************/
-        _refreshGotoPageInput: function() {
+        _refreshGotoPageInput: function () {
             if (!this.options.gotoPageArea || this.options.gotoPageArea == 'none') {
                 return;
             }
@@ -3839,7 +3840,7 @@ THE SOFTWARE.
 
         /* Overrides load method to set current page to 1.
         *************************************************************************/
-        load: function() {
+        load: function () {
             this._currentPageNo = 1;
 
             base.load.apply(this, arguments);
@@ -3847,7 +3848,7 @@ THE SOFTWARE.
 
         /* Used to change options dynamically after initialization.
         *************************************************************************/
-        _setOption: function(key, value) {
+        _setOption: function (key, value) {
             base._setOption.apply(this, arguments);
 
             if (key == 'pageSize') {
@@ -3857,7 +3858,7 @@ THE SOFTWARE.
 
         /* Changes current page size with given value.
         *************************************************************************/
-        _changePageSize: function(pageSize) {
+        _changePageSize: function (pageSize) {
             if (pageSize == this.options.pageSize) {
                 return;
             }
@@ -3890,7 +3891,7 @@ THE SOFTWARE.
 
         /* Saves user preferences for paging
         *************************************************************************/
-        _savePagingSettings: function() {
+        _savePagingSettings: function () {
             if (!this.options.saveUserPreferences) {
                 return;
             }
@@ -3900,7 +3901,7 @@ THE SOFTWARE.
 
         /* Overrides _createRecordLoadUrl method to add paging info to URL.
         *************************************************************************/
-        _createRecordLoadUrl: function() {
+        _createRecordLoadUrl: function () {
             var loadUrl = base._createRecordLoadUrl.apply(this, arguments);
             loadUrl = this._addPagingInfoToUrl(loadUrl, this._currentPageNo);
             return loadUrl;
@@ -3910,7 +3911,7 @@ THE SOFTWARE.
         *************************************************************************/
         _createJtParamsForLoading: function () {
             var jtParams = base._createJtParamsForLoading.apply(this, arguments);
-            
+
             if (this.options.paging) {
                 jtParams.jtStartIndex = (this._currentPageNo - 1) * this.options.pageSize;
                 jtParams.jtPageSize = this.options.pageSize;
@@ -4088,7 +4089,7 @@ THE SOFTWARE.
                 .appendTo(this._$pagingListArea);
 
             this._jqueryuiThemeAddClass($pageNumber, 'ui-button ui-state-default', 'ui-state-hover');
-            
+
             if (this._currentPageNo == pageNumber) {
                 $pageNumber.addClass('jtable-page-number-active jtable-page-number-disabled');
                 this._jqueryuiThemeAddClass($pageNumber, 'ui-state-active');
@@ -4289,7 +4290,7 @@ THE SOFTWARE.
         *************************************************************************/
         _makeColumnSortable: function ($columnHeader, fieldName) {
             var self = this;
-            
+
             $columnHeader
                 .addClass('jtable-column-header-sortable')
                 .click(function (e) {
@@ -4298,7 +4299,7 @@ THE SOFTWARE.
                     if (!self.options.multiSorting || !e.ctrlKey) {
                         self._lastSorting = []; //clear previous sorting
                     }
-                    
+
                     self._sortTableByColumn($columnHeader);
                 });
 
@@ -4436,8 +4437,10 @@ THE SOFTWARE.
             if (this.options.saveUserPreferences) {
                 this._loadColumnSettings();
             }
-
-            this._normalizeColumnWidths();
+            //HD
+            //27 Dec 2017
+            //To avoid recalculation of column width
+            // this._normalizeColumnWidths();
         },
 
         /* Normalizes some options for a field (sets default values).
@@ -4552,12 +4555,12 @@ THE SOFTWARE.
             this._$columnSelectionDiv = $('<div />')
                 .addClass('jtable-column-selection-container')
                 .appendTo(self._$mainContainer);
-            
+
             this._$table.children('thead').bind('contextmenu', function (e) {
                 if (!self.options.columnSelectable) {
                     return;
                 }
-                
+
                 e.preventDefault();
 
                 //Make an overlay div to disable page clicks
@@ -4571,13 +4574,13 @@ THE SOFTWARE.
                     .appendTo(document.body);
 
                 self._fillColumnSelection();
-                
+
                 //Calculate position of column selection list and show it
 
                 var containerOffset = self._$mainContainer.offset();
                 var selectionDivTop = e.pageY - containerOffset.top;
                 var selectionDivLeft = e.pageX - containerOffset.left;
-                
+
                 var selectionDivMinWidth = 100; //in pixels
                 var containerWidth = self._$mainContainer.width();
 
@@ -4593,7 +4596,7 @@ THE SOFTWARE.
                 }).show();
             });
         },
-        
+
         /* Prepares content of settings dialog.
         *************************************************************************/
         _fillColumnSelection: function () {
@@ -4672,7 +4675,10 @@ THE SOFTWARE.
                     }
 
                     //Store some information to be used on resizing
-                    var minimumColumnWidth = 10; //A column's width can not be smaller than 10 pixel.
+                    //HD
+                    //27 Dec 2017
+                    //Changed from 10 to 1
+                    var minimumColumnWidth = 1; //A column's width can not be smaller than 10 pixel.
                     self._currentResizeArgs = {
                         currentColumnStartWidth: $columnHeader.outerWidth(),
                         minWidth: minimumColumnWidth,
@@ -4694,6 +4700,8 @@ THE SOFTWARE.
 
                     //Handle mouse up event to finish resizing of the column
                     var resizeonmouseup = function (upevent) {
+                        debugger;
+
                         if (!self._currentResizeArgs) {
                             return;
                         }
@@ -4747,7 +4755,7 @@ THE SOFTWARE.
         /* Normalizes column widths as percent for current view.
         *************************************************************************/
         _normalizeColumnWidths: function () {
-
+            debugger;
             //Set command column width
             var commandColumnHeaders = this._$table
                 .find('>thead th.jtable-command-column-header')
@@ -4795,15 +4803,36 @@ THE SOFTWARE.
         _saveColumnSettings: function () {
             var self = this;
             var fieldSettings = '';
+            //HD
+            //27 Dec 2017
+            //Save column widths in database
+            var fieldWidths = '';            
+            var s = self.bindings;
             this._$table.find('>thead >tr >th.jtable-column-header').each(function () {
                 var $cell = $(this);
                 var fieldName = $cell.data('fieldName');
                 var columnWidth = $cell.data('width-in-percent');
                 var fieldVisibility = self.options.fields[fieldName].visibility;
                 var fieldSetting = fieldName + "=" + fieldVisibility + ';' + columnWidth;
+                var fieldWidth = fieldName + "=" + columnWidth;
                 fieldSettings = fieldSettings + fieldSetting + '|';
+                fieldWidths = fieldWidths + fieldWidth + '|';
             });
+            if (s[0].baseURI.indexOf("SRLog") > 0) {
+                $.ajax({
+                    url: '/SRLog/SaveColumnWidth',
+                    async: false,
+                    type: "POST",
+                    dataType: "json",
+                    data: { fieldsettings: JSON.stringify(fieldWidths) },
+                    success: function (fielddata) {
 
+                    },
+                    error: function (xhr) {
+
+                    }
+                });
+            }
             this._setCookie('column-settings', fieldSettings.substr(0, fieldSettings.length - 1));
         },
 
@@ -4910,7 +4939,7 @@ THE SOFTWARE.
                 $childTableContainer.hide().slideDown('fast', function () {
                     if (opened) {
                         opened({
-                             childTable: $childTableContainer
+                            childTable: $childTableContainer
                         });
                     }
                 });
@@ -4921,7 +4950,7 @@ THE SOFTWARE.
         *************************************************************************/
         closeChildTable: function ($row, closed) {
             var self = this;
-            
+
             var $childRowColumn = this.getChildRow($row).children('td');
             var $childTable = $childRowColumn.data('childTable');
             if (!$childTable) {

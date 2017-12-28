@@ -45,6 +45,7 @@ namespace SRLog.Data
         public DbSet<tblSR_Log> tblSR_Logs { get; set; }
         public DbSet<tblObsolete_Quote> tblObsolete_Quotes { get; set; }
         public DbSet<tblQuoteLog> tblQuoteLogs { get; set; }
+        public DbSet<tblSRLogColumn> tblSRLogColumns { get; set; }
     
         public virtual ObjectResult<USP_TT_GetBidLogModifiedToday_Result> USP_TT_GetBidLogModifiedToday(Nullable<System.DateTime> modifiedDate)
         {

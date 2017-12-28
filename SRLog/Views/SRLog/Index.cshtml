@@ -4,6 +4,8 @@
 
 <link href="~/Scripts/jtable/themes/lightcolor/blue/jtable.css" rel="stylesheet" />
 
+
+
 <style type="text/css">
     #SRLogTableContainer {
         width: 99%;
@@ -13,15 +15,13 @@
 </style>
 
 
-<div id="SRLogTableContainer" style="border:1px solid #c6c3c3">
+<div id="SRLogTableContainer" style="border:1px solid #c6c3c3;">
 
 </div>
 
 @section scripts
 {
-
     <script type="text/javascript">
-
         $(document).ready(function () {
             var fields = {
                 Id: {
@@ -29,7 +29,6 @@
                     list: false
                 }
             };
-
             $.ajax({
                 url: '@Url.Action("GetAllSRLogColumns")',
                 async: false,
@@ -40,18 +39,17 @@
                         if (item.fieldname == "CreationDate" || item.fieldname == "QuoteDue" || item.fieldname == "JobWalkDate" || item.fieldname == "QuoteDate" || item.fieldname == "QuoteTime" || item.fieldname == "AdvertiseDate") {
                             fields[item.fieldname] =
                                 {
-                                    title: item.fieldname,
-                                    width: '10%',
+                                    title: item.displayname,
                                     type: 'date',
-                                    displayFormat: 'mm/dd/yy'                               
+                                    displayFormat: 'mm/dd/yy',
+                                    width: item.width
                                 };
                         }
-                        else if (item.fieldname == "JobOrQuote")
-                        {
+                        else if (item.fieldname == "JobOrQuote") {
                             fields[item.fieldname] =
                                 {
-                                    title: item.fieldname,
-                                    width: '10%',                                    
+                                    title: item.displayname,
+                                    width: item.width,
                                     display: function (data) {
                                         if (data.record.JobOrQuote == 1) {
                                             return 'Job';
@@ -65,8 +63,8 @@
                         else {
                             fields[item.fieldname] =
                                 {
-                                    title: item.fieldname,
-                                    width: '10%'                                    
+                                    title: item.displayname,
+                                    width: item.width                                    
                                 };
                         }
                     });
@@ -80,9 +78,10 @@
             $("#SRLogTableContainer").jtable({
                 paging: true, //Enable paging
                 pageSize: 6, //Set page size (default: 10)
-                sorting: true, //Enable sorting
-                bautowidth: true,
-                columnSelectable:false,
+                sorting: false, //Enable sorting
+                columnResizable: true,
+                columnSelectable: false,
+                //saveUserPreferences: false,
                 actions:
                     {
                         listAction: '@Url.Action("GetSRLogsList")'

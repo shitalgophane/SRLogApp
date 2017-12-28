@@ -7,9 +7,11 @@ using SRLog.Entities.BidLog.ViewModels;
 using SRLog.Data;
 using SRLog.Data.Account;
 using SRLog.Data.BidLog;
+using SRLog.Filters;
 
 namespace SRLog.Controllers
 {
+    [AdminFilter]
     public class BidLogController : Controller
     {
         //

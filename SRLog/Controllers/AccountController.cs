@@ -8,20 +8,27 @@ using SRLog.Data;
 using SRLog.Data.Account;
 using SRLog.Data.Activity;
 using SRLog.Data.Settings;
+using SRLog.Filters;
 
 namespace SRLog.Controllers
 {
+    [Authorize]
+    
     public class AccountController : Controller
     {
         //
         // GET: /Account/
-
+        [AllowAnonymous]
+        [SkipCustomAuthFilter]
         public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        [SkipCustomAuthFilter]
         public ActionResult Login(LoginViewModel model)
         {
             try

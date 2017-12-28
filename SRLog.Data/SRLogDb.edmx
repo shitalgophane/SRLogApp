@@ -344,6 +344,14 @@ warning 6002: The table/view 'SR Log DatabaseSQL.dbo.tblSR Log Test' does not ha
           <Property Name="Owner" Type="nvarchar" MaxLength="50" />
           <Property Name="AdvertiseDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="tblSRLogColumns">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FieldName" Type="nvarchar" MaxLength="100" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SR Log DatabaseSQL.dbo.tblst temp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tblst temp">
@@ -547,6 +555,7 @@ warning 6002: The table/view 'SR Log DatabaseSQL.dbo.tblst temp' does not have a
           <EntitySet Name="tblQuoteLog" EntityType="Self.tblQuoteLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSettings" EntityType="Self.tblSettings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSR Log" EntityType="Self.tblSR Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSRLogColumns" EntityType="Self.tblSRLogColumns" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblObsolete BID Log" EntityType="Self.tblObsolete BID Log" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1109,6 +1118,7 @@ FROM [dbo].[tblst temp] AS [tblst temp]</DefiningQuery>
           <EntitySet Name="tblSR_Logs" EntityType="Model.tblSR_Log" />
           <EntitySet Name="tblObsolete_Quotes" EntityType="Model.tblObsolete_Quote" />
           <EntitySet Name="tblQuoteLogs" EntityType="Model.tblQuoteLog" />
+          <EntitySet Name="tblSRLogColumns" EntityType="Model.tblSRLogColumn" />
         </EntityContainer>
         <ComplexType Name="USP_TT_GetBidLogModifiedToday_Result">
           <Property Type="Int32" Name="QuoteNumber" Nullable="true" />
@@ -1318,6 +1328,14 @@ FROM [dbo].[tblst temp] AS [tblst temp]</DefiningQuery>
           <Property Name="FollowupNote" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="tblSRLogColumn">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FieldName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1838,6 +1856,15 @@ FROM [dbo].[tblst temp] AS [tblst temp]</DefiningQuery>
                 <ScalarProperty Name="BidTo" ColumnName="BidTo" />
                 <ScalarProperty Name="BiddingAs" ColumnName="BiddingAs" />
                 <ScalarProperty Name="BidDate" ColumnName="BidDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSRLogColumns">
+            <EntityTypeMapping TypeName="Model.tblSRLogColumn">
+              <MappingFragment StoreEntitySet="tblSRLogColumns">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

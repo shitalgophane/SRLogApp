@@ -111,6 +111,9 @@
     <Compile Include="tblSetting.cs">
       <DependentUpon>SRLogDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblSRLogColumn.cs">
+      <DependentUpon>SRLogDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblSR_Log.cs">
       <DependentUpon>SRLogDb.tt</DependentUpon>
     </Compile>
