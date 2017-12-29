@@ -45,6 +45,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="SRLog.Data">
       <HintPath>..\SRLog.Data\obj\Debug\SRLog.Data.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SRLog.Entities">
       <HintPath>..\SRLog.Entities\obj\Debug\SRLog.Entities.dll</HintPath>
