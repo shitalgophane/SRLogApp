@@ -3,6 +3,9 @@
 jTable 2.4.0
 http://www.jtable.org
 
+
+
+
 ---------------------------------------------------------------------------
 
 Copyright (C) 2011-2014 by Halil İbrahim Kalkan (http://www.halilibrahimkalkan.com)
@@ -30,7 +33,11 @@ THE SOFTWARE.
 /************************************************************************
 * CORE jTable module                                                    *
 *************************************************************************/
+
 (function ($) {
+
+    
+    
 
     var unloadingPage;
 
@@ -309,7 +316,7 @@ THE SOFTWARE.
         *  Returns th jQuery object.
         *************************************************************************/
         _createHeaderCellForField: function (fieldName, field) {
-            debugger;
+            
             field.width = field.width || '10%'; //default column width: 10%.
 
             var $headerTextSpan = $('<span />')
@@ -4700,8 +4707,8 @@ THE SOFTWARE.
 
                     //Handle mouse up event to finish resizing of the column
                     var resizeonmouseup = function (upevent) {
-                        debugger;
-
+                        
+                        
                         if (!self._currentResizeArgs) {
                             return;
                         }
@@ -4724,7 +4731,7 @@ THE SOFTWARE.
                         //Set new widths to columns (resize!)
                         $columnHeader.css('width', $columnHeader.data('width-in-percent') + '%');
                         $nextColumnHeader.css('width', $nextColumnHeader.data('width-in-percent') + '%');
-
+                        
                         //Normalize all column widths
                         self._normalizeColumnWidths();
 
@@ -4735,6 +4742,10 @@ THE SOFTWARE.
                         if (self.options.saveUserPreferences) {
                             self._saveColumnSettings();
                         }
+                        
+                        //HD
+                        //29 Dec 2017                        
+                        self._saveColumnWidthSettings();
                     };
 
                     //Show vertical resize bar
@@ -4755,7 +4766,7 @@ THE SOFTWARE.
         /* Normalizes column widths as percent for current view.
         *************************************************************************/
         _normalizeColumnWidths: function () {
-            debugger;
+            
             //Set command column width
             var commandColumnHeaders = this._$table
                 .find('>thead th.jtable-command-column-header')
@@ -4803,10 +4814,33 @@ THE SOFTWARE.
         _saveColumnSettings: function () {
             var self = this;
             var fieldSettings = '';
+            
+            this._$table.find('>thead >tr >th.jtable-column-header').each(function () {
+                var $cell = $(this);
+                var fieldName = $cell.data('fieldName');
+                var columnWidth = $cell.data('width-in-percent');
+                var fieldVisibility = self.options.fields[fieldName].visibility;
+                var fieldSetting = fieldName + "=" + fieldVisibility + ';' + columnWidth;
+                
+                fieldSettings = fieldSettings + fieldSetting + '|';
+                
+            });
+            
+            this._setCookie('column-settings', fieldSettings.substr(0, fieldSettings.length - 1));
+        },
+
+        /* Saves field setting to cookie.
+       *  Saved setting will be a string like that:
+       * fieldName1=visible;23|fieldName2=hidden;17|...
+       *************************************************************************/
+        _saveColumnWidthSettings: function () {
+            
+            var self = this;
+            var fieldSettings = '';
             //HD
             //27 Dec 2017
             //Save column widths in database
-            var fieldWidths = '';            
+            var fieldWidths = '';
             var s = self.bindings;
             this._$table.find('>thead >tr >th.jtable-column-header').each(function () {
                 var $cell = $(this);
@@ -4832,8 +4866,7 @@ THE SOFTWARE.
 
                     }
                 });
-            }
-            this._setCookie('column-settings', fieldSettings.substr(0, fieldSettings.length - 1));
+            }           
         },
 
         /* Loads field settings from cookie that is saved by _saveFieldSettings method.

@@ -79,7 +79,6 @@ namespace SRLog.Data.Settings
 
         public void AddSetting(int userid, string section, string key, string value, bool IsFixed = false)
         {
-
             tblSetting setting = new tblSetting();
             setting.UserId = userid;
             setting.SectionName = section;

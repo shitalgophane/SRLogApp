@@ -18,27 +18,32 @@ namespace SRLog.Controllers
     {
         //
         // GET: /SRLog/
-        [AdminFilter]
-        public ActionResult Index()
+
+        public ActionResult Index(string Flag = "ListAllJobsBySRNumber")
         {
             UserInfoViewModel userinfo = (UserInfoViewModel)Session["UserInfo"];
             if (userinfo != null)
             {
+                ViewBag.Flag = Flag;
+                if (Flag == "ListAllJobsBySRNumber")
+                    ViewBag.Title = "List All Jobs By SR Number";
+                else if (Flag == "ListAllJobsByKeywordSearch")
+                    ViewBag.Title = "List All Jobs By Keywords";
+
+
                 return View();
             }
             else
                 return RedirectToAction("Login", "Account");
         }
 
-        [AdminFilter]
+
         public ActionResult ConfigureColumns()
         {
             return View();
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        [AdminFilter]
         public JsonResult GetSRLogColumns()
         {
             try
@@ -68,8 +73,6 @@ namespace SRLog.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        [AdminFilter]
         public JsonResult GetConfiguredSRLogColumns()
         {
             try
@@ -111,8 +114,6 @@ namespace SRLog.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [AllowAnonymous]
-        [AdminFilter]
         public JsonResult GetAllSRLogColumns()
         {
             try
@@ -171,11 +172,11 @@ namespace SRLog.Controllers
                                     f.width = "5%";
                                 }
                                 else
-                                    f.width = "2%";                                
+                                    f.width = "2%";
                                 JFields.Add(f);
                             }
                         }
-                       
+
                         return Json(JFields, JsonRequestBehavior.AllowGet);
                     }
                     else
@@ -192,8 +193,6 @@ namespace SRLog.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        [AdminFilter]
         public JsonResult SaveConfiguredColumns(string optionValues)
         {
             try
@@ -225,9 +224,7 @@ namespace SRLog.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        [AdminFilter]
-        public JsonResult GetSRLogsList(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
+        public JsonResult GetSRLogsList(string keyword = "", int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
         {
             try
             {
@@ -237,12 +234,24 @@ namespace SRLog.Controllers
                     if (userinfo != null)
                     {
                         SRLogRepository _repository = new SRLogRepository();
-                        var srCount = _repository.GetSRLogcount();
+                        if (keyword == "")
+                        {
+                            var srCount = _repository.GetSRLogcount();
 
-                        var srlogs = _repository.GetSRLogsList(userinfo.UserId, jtStartIndex, jtPageSize, jtSorting);
+                            var srlogs = _repository.GetSRLogsList(userinfo.UserId, jtStartIndex, jtPageSize, jtSorting);
 
-                        //  List<tblBID_Log> bidlogs = _repository .GetBidLogs();
-                        return Json(new { Result = "OK", Records = srlogs, TotalRecordCount = srCount });
+                            //  List<tblBID_Log> bidlogs = _repository .GetBidLogs();
+                            return Json(new { Result = "OK", Records = srlogs, TotalRecordCount = srCount });
+                        }
+                        else
+                        {
+                            var srCount = _repository.GetSRLogcountByFilter(keyword);
+
+                            var srlogs = _repository.GetSRLogsListByFilter(keyword, userinfo.UserId, jtStartIndex, jtPageSize, jtSorting);
+
+                            //  List<tblBID_Log> bidlogs = _repository .GetBidLogs();
+                            return Json(new { Result = "OK", Records = srlogs, TotalRecordCount = srCount });
+                        }
                     }
                     else
                         return Json(new { Result = "ERROR", Message = "Session expired. Please login again" });
@@ -257,7 +266,6 @@ namespace SRLog.Controllers
         }
 
         [HttpPost]
-        [AdminFilter]
         public string SaveColumnWidth(string fieldsettings)
         {
             int colno = 2;
