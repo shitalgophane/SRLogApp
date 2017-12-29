@@ -78,8 +78,8 @@ body {
 
 .container-fuild
 {
-    margin-left:10px !important;
-    margin-right:10px!important;
+    /*margin-left:10px !important;
+    margin-right:10px!important;*/
 }
 
 #custom-bootstrap-menu.navbar-default .navbar-brand {
@@ -92,6 +92,7 @@ body {
     background: linear-gradient(to bottom, rgba(50, 155, 181, 1) 0%, rgba(93, 188, 210, 1) 100%);
     border-width: 1px;
     border-radius: 4px;
+     
 }
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
     color: rgba(255, 255, 255, 1);
@@ -128,6 +129,17 @@ body {
 #custom-bootstrap-menu.navbar-default .navbar-nav > li > .dropdown-menu {
  
     background: #216d80;
+}
+
+#custom-bootstrap-menu.navbar-default {
+    background-color: #f8f8f8;
+    /* border-color: #e7e7e7; */
+    border:none!important;
+}
+
+.navbar
+{
+    border-radius:0px !important;
 }
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
     /*color: #262626;
