@@ -27,6 +27,10 @@ body {
     display: none;
 }
 
+.homeimage {
+    padding-top:20px!important;
+    border:none !important;
+}
 
 
 
