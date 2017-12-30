@@ -11,7 +11,7 @@
 
     <div class="container-fuild">
 
-        <div class="row" style="background-color: #5DBCD2 !important">
+        <div class="row rowheader" style="background-color: #5DBCD2 !important">
             <div class="col-md-2">
                 <img src="~/Images/logo1.png" />
             </div>
@@ -23,34 +23,19 @@
             <div class="col-md-2">
 
                 <br />
-                <div>
 
 
-                    <ul class="nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle welcome " data-toggle="dropdown">Welcome, @Session["User"] <b class="glyphicon glyphicon-user"></b></a>
-                            <ul class="dropdown-menu">
-
-                                <li>@Html.ActionLink(" LogOut", "Login", "Account", null, new { @class = "btn btn-info btn-sm glyphicon glyphicon-log-out logout" })</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                @*<div class="btn-group dropdown">
-
-                        <button class="btn-welcome btn-sm dropdown-toggle logout" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            WelCome  @Session["User"]
-                            <span class="glyphicon glyphicon-user"></span>
-                        </button>
-
+                <ul class="nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle welcome " data-toggle="dropdown">Welcome, @Session["User"] <b class="glyphicon glyphicon-user"></b></a>
                         <ul class="dropdown-menu">
-                            <li>
-                                @Html.ActionLink(" LogOut", "Login", "Account", null, new { @class = "btn btn-info btn-sm glyphicon glyphicon-log-out logout" })
-                            </li>
 
+                            <li>@Html.ActionLink(" LogOut", "Login", "Account", null, new { @class = "btn btn-info btn-sm glyphicon glyphicon-log-out logout" })</li>
                         </ul>
+                    </li>
+                </ul>
 
-                    </div>*@
+
             </div>
 
         </div>
@@ -60,53 +45,55 @@
         <div class="row">
             <div class="col-md-12">
                 <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
-                    @*<div class="container-fluid">*@
-                        <div class="navbar-header">
-                            <a class="navbar-brand" href="#" style="color:#fff">Home</a>
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
-                                <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                            </button>
-                        </div>
-                        <div class="collapse navbar-collapse navbar-menubuilder">
-                            <ul class="nav navbar-nav navbar-left">
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">SR LOG<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Create New SR</a></li>
-                                        <li>@Html.ActionLink("List All By SR Number", "Index", "SRLog")</li>
-                                        <li><a href="#">Keyword Search</a></li>
-                                        <li><a href="#">Custom Sort//Filter All Records</a></li>
-                                        <li>@Html.ActionLink("Configure Column Order", "ConfigureColumns", "SRLog") </li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">BID LOG<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li>@Html.ActionLink("View/Create Bids", "Index", "BidLog")</li>
-                                        <li><a href="#">View Archived Bids</a></li>
-                                        <li><a href="#">Keyword Search Archived Bids</a></li>
-                                        <li><a href="#">Settings</a></li>
-                                        <li><a href="#">Login With Different Password</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">QUOTE LOG<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">View Active Quotes</a></li>
-                                        <li><a href="#">View Archived Quotes</a></li>
-                                        <li><a href="#">Keyword Search</a></li>
-                                        <li><a href="#">Manage Customer Details</a></li>
-                                        <li><a href="#">Create New Customer</a></li>
-                                    </ul>
-                                </li>
 
-                            </ul>
-                        </div>
-                    @*</div>*@
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/home/Index" style="color:#fff">Home</a>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
+                            <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse navbar-menubuilder">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">SR LOG<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Create New SR</a></li>
+                                    <li>@Html.ActionLink("List All By SR Number", "Index", "SRLog")</li>
+                                    <li><a href="#">Keyword Search</a></li>
+                                    <li><a href="#">Custom Sort//Filter All Records</a></li>
+                                    <li>@Html.ActionLink("Configure Column Order", "ConfigureColumns", "SRLog") </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">BID LOG<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("View/Create Bids", "Index", "BidLog")</li>
+                                    <li><a href="#">View Archived Bids</a></li>
+                                    <li><a href="#">Keyword Search Archived Bids</a></li>
+                                    <li><a href="#">Settings</a></li>
+                                    <li><a href="#">Login With Different Password</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">QUOTE LOG<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">View Active Quotes</a></li>
+                                    <li><a href="#">View Archived Quotes</a></li>
+                                    <li><a href="#">Keyword Search</a></li>
+                                    <li><a href="#">Manage Customer Details</a></li>
+                                    <li><a href="#">Create New Customer</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+
                 </div>
 
             </div>
         </div>
+
+
         <div class="row">
             <div class="col-md-12">
                 @RenderBody()
@@ -134,7 +121,7 @@
 
     </div>
 
-   
+
     @Scripts.Render("~/bundles/jquery")
     @*@Scripts.Render("~/bundles/jqueryui")*@
 

@@ -35,7 +35,10 @@ body {
 
 
 
-
+.rowheader {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
 
 
 .header {
@@ -76,11 +79,7 @@ body {
     background-color: #2c8ba0 !important;
 }
 
-.container-fuild
-{
-    /*margin-left:10px !important;
-    margin-right:10px!important;*/
-}
+
 
 #custom-bootstrap-menu.navbar-default .navbar-brand {
     color: rgba(119, 119, 119, 1);
