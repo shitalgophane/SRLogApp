@@ -29,8 +29,9 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle welcome " data-toggle="dropdown">Welcome, @Session["User"] <b class="glyphicon glyphicon-user"></b></a>
                             <ul class="dropdown-menu">
-
                                 <li>@Html.ActionLink(" LogOut", "Login", "Account", null, new { @class = "btn btn-info btn-sm glyphicon glyphicon-log-out logout" })</li>
+                                <li>@Html.ActionLink(" Settings", "ConfigureColumns", "SRLog", null, new { @class = "btn btn-info btn-sm glyphicon glyphicon-tasks logout" })</li>
+
                             </ul>
                         </li>
                     </ul>
@@ -74,8 +75,8 @@
                                         <li><a href="#">Create New SR</a></li>
                                         <li>@Html.ActionLink("List All By SR Number", "Index", "SRLog")</li>
                                         <li>@Html.ActionLink("Keyword Search", "Index", "SRLog", new { Flag = "ListAllJobsByKeywordSearch" }, null)</li>
-                                        <li><a href="#">Custom Sort//Filter All Records</a></li>
-                                        <li>@Html.ActionLink("Configure Column Order", "ConfigureColumns", "SRLog") </li>
+                                        <li>@Html.ActionLink("Custom Sort/Filter All Records", "Index", "SRLog", new { Flag = "ListAllJobsByFilter" }, null)</li>
+                                        @*<li>@Html.ActionLink("Configure Column Order", "ConfigureColumns", "SRLog") </li>*@
                                     </ul>
                                 </li>
                                 <li class="dropdown">
@@ -127,19 +128,18 @@
 
     <div>
         <div style="margin: 0 auto;width:98%">
-
-
         </div>
-
     </div>
 
-
     @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jtable")*@
+
     @*@Scripts.Render("~/bundles/jqueryui")*@
 
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/jtable/jquery.jtable.js"></script>
     @RenderSection("scripts", required: false)
-
+    
 
 </body>
 </html>

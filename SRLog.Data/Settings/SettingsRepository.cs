@@ -135,5 +135,26 @@ namespace SRLog.Data.Settings
             }
 
         }
+
+        public List<tblSRLogColumn> GetSortableColumnNames(int userid)
+        {
+            List<tblSRLogColumn> dispnames = (from u in db.tblSRLogColumns                                      
+                                     where u.IsSortable == true
+                                     orderby u.FieldName
+                                     select u).ToList();
+
+
+            return dispnames;
+        }
+
+        public string GetSort(string key)
+        {
+            string sortby = (from u in db.tblSettings
+                             where u.SectionName == "REPORT_BY_SR" && u.Key == key
+                             select u.Value).FirstOrDefault();
+
+            return sortby;
+        }
+       
     }
 }

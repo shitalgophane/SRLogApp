@@ -155,3 +155,11 @@ body {
    background-color: #5DBCD2 !important;
    color:rgb(5, 95, 117);
 }
+
+.headerlabel{
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: smaller;    
+}

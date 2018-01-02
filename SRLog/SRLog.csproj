@@ -59,6 +59,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -153,6 +157,7 @@
     </Compile>
     <Compile Include="GlobalSettings.cs" />
     <Compile Include="IniFile.cs" />
+    <Compile Include="OrderByOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +243,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Ini File\Settings.ini" />
     <None Include="Properties\PublishProfiles\Telstar.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -260,7 +266,6 @@
     <Content Include="Scripts\jtable\external\json2.js" />
     <Content Include="Scripts\jtable\external\json2.min.js" />
     <Content Include="Scripts\jtable\jquery.jtable.js" />
-    <Content Include="Scripts\jtable\jquery.jtable.min.js" />
     <Content Include="Scripts\jtable\localization\jquery.jtable.bd.js" />
     <Content Include="Scripts\jtable\localization\jquery.jtable.ca.js" />
     <Content Include="Scripts\jtable\localization\jquery.jtable.cz.js" />

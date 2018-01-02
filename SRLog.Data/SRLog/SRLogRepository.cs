@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
@@ -38,9 +39,27 @@ namespace SRLog.Data.SRLog
             return existingcolumns;
         }
 
-        public List<tblSR_Log> GetSRLogsList(int UserId, int startIndex, int count, string sorting)
+        public List<tblSR_Log> GetSRLogsList(int UserId, string sorting1, string sorting2, int startIndex, int count, string sorting)
         {
-            IEnumerable<tblSR_Log> query = db.tblSR_Logs.OrderByDescending(x => x.SRNumber);
+            IEnumerable<tblSR_Log> query = db.tblSR_Logs;//.OrderByDescending(x =>  x.SRNumber);
+            if (sorting1 != "" && sorting2 != "")
+            {
+                string sort = sorting1 + "," + sorting2;
+                query = query.OrderBy(sort);
+            }
+            else if (sorting1 != "" && sorting2 == "")
+            {
+                query = query.OrderBy(sorting1);
+            }
+            else if (sorting1 == "" && sorting2 != "")
+            {
+                query = query.OrderBy(sorting2);
+            }
+            else
+            {
+                query = query.OrderByDescending(x => x.SRNumber);
+            }
+
 
             return count > 0
                         ? query.Skip(startIndex).Take(count).ToList() //Paging
@@ -53,7 +72,7 @@ namespace SRLog.Data.SRLog
             return db.tblSR_Logs.Count();
         }
 
-        public List<tblSR_Log> GetSRLogsListByFilter(string keyword, int UserId, int startIndex, int count, string sorting)
+        public List<tblSR_Log> GetSRLogsListByFilter(string keyword, string sorting1, string sorting2, int UserId, int startIndex, int count, string sorting)
         {
             IEnumerable<tblSR_Log> query = db.tblSR_Logs.Where(x =>
                     SqlFunctions.PatIndex("%" + keyword + "%", SqlFunctions.StringConvert(x.SRNumber)) > 0
@@ -68,7 +87,25 @@ namespace SRLog.Data.SRLog
                     || SqlFunctions.PatIndex("%" + keyword + "%", x.Owner) > 0
                     || SqlFunctions.PatIndex("%" + keyword + "%", x.JobsiteAddress) > 0
                     || SqlFunctions.PatIndex("%" + keyword + "%", x.Bonding) > 0
-               ).OrderByDescending(x => x.SRNumber);
+               );//.OrderByDescending(x => x.SRNumber);
+
+            if (sorting1 != "" && sorting2 != "")
+            {
+                string sort = sorting1 + "," + sorting2;
+                query = query.OrderBy(sort);
+            }
+            else if (sorting1 != "" && sorting2 == "")
+            {
+                query = query.OrderBy(sorting1);
+            }
+            else if (sorting1 == "" && sorting2 != "")
+            {
+                query = query.OrderBy(sorting2);
+            }
+            else
+            {
+                query = query.OrderByDescending(x => x.SRNumber);
+            }
 
             return count > 0
                         ? query.Skip(startIndex).Take(count).ToList() //Paging
@@ -93,5 +130,7 @@ namespace SRLog.Data.SRLog
                     || SqlFunctions.PatIndex("%" + keyword + "%", x.Bonding) > 0
                ).Count();
         }
+
+       
     }
 }

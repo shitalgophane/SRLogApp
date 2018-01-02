@@ -14,7 +14,54 @@
     }
 </style>
 
-<div id="SRLogTableContainer" style="border:1px solid #c6c3c3;">
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-3 table-bordered">
+            <label class="headerlabel">Records Sorted By :-</label>
+            <br />
+            <table>
+                <tr>
+                    <td>
+                        @Html.DropDownList("FieldList1", ViewBag.FieldList as SelectList, new { @class = "form-control", @style = "width:150px" })
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>
+                        @Html.DropDownList("FieldList2", ViewBag.FieldListTwo as SelectList, new { @class = "form-control", @style = "width:150px" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="height:5px;"></td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DropDownList("ddlOrderBy1", ViewBag.OrderList as SelectList, new { @class = "form-control", @style = "width:150px" })
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>
+                        @Html.DropDownList("ddlOrderBy2", ViewBag.OrderListTwo as SelectList, new { @class = "form-control", @style = "width:150px" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="height:5px;"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align:right;">
+                        <button type="button" class="btn btn-primary btnMain" id="SortRecordsButton">Apply Sort</button>
+                        <button type="button" class="btn btn-primary btnMain" id="SaveSortButton">Save Sort</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="height:5px;"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="SRLogTableContainer" style="border:1px solid #c6c3c3;margin-top:10px;">
 
 </div>
 
@@ -41,8 +88,6 @@
 
 @section scripts
 {
-    
-
     <script type="text/javascript">
         $(document).ready(function () {
             var Flag = '@ViewBag.Flag';
@@ -77,7 +122,7 @@
                             fields[item.fieldname] =
                                 {
                                     title: item.displayname,
-                                    width: item.width,                                    
+                                    width: item.width,
                                     display: function (data) {
                                         if (data.record[item.fieldname] == '1') {
                                             return '<input type="checkbox" checked="checked" disabled="disabled" />';
@@ -136,28 +181,90 @@
             //Re-load records when user click 'load records' button.
             $('#LoadRecordsButton').click(function (e) {
                 e.preventDefault();
-                
+                var sort1 = '';
+                if ($('#FieldList1').val() != '') {
+                    sort1 = $('#FieldList1').val() + ' ' + $('#ddlOrderBy1').val();
+                }
+
+                var sort2 = '';
+                if ($('#FieldList2').val() != '') {
+                    sort2 = $('#FieldList2').val() + ' ' + $('#ddlOrderBy2').val();
+                }
+
                 $('#SRLogTableContainer').jtable('load', {
-                    keyword: $('#keyword').val()
+                    keyword: $('#keyword').val(),
+                    sortby1: sort1,
+                    sortby2: sort2
                 });
                 $('#myModalForKeywordSearch').hide();
-                
-                
-
             });
 
-         
+            $('#SortRecordsButton').click(function (e) {
+                var sort1 = '';
+                if ($('#FieldList1').val() != '') {
+                    sort1 = $('#FieldList1').val() + ' ' + $('#ddlOrderBy1').val();
+                }
+
+                var sort2 = '';
+                if ($('#FieldList2').val() != '') {
+                    sort2 = $('#FieldList2').val() + ' ' + $('#ddlOrderBy2').val();
+                }
+
+                $('#SRLogTableContainer').jtable('load', {
+                    keyword: $('#keyword').val(),
+                    sortby1: sort1,
+                    sortby2: sort2
+                });
+            });
+
+            //if (Flag == "ListAllJobsBySRNumber" || Flag == "ListAllJobsByFilter") {
             if (Flag == "ListAllJobsBySRNumber") {
                 //Load all records when page is first shown
+                $("#SaveSortButton").css("visibility", "hidden");
+                $('#LoadRecordsButton').click();
+            }
+            else if (Flag == "ListAllJobsByFilter") {
+                $("#SaveSortButton").css("visibility", "visible");
                 $('#LoadRecordsButton').click();
             }
             else if (Flag == "ListAllJobsByKeywordSearch") {
+                $("#SaveSortButton").css("visibility", "hidden");
                 $('#myModalForKeywordSearch').modal({
                     show: true,
                     backdrop: 'static',
                     keyboard: false
                 });
             }
+
+
+            $('#SaveSortButton').click(function (e) {
+                var sort1 = $('#FieldList1').val();
+                var order1 = $('#ddlOrderBy1').val();
+
+                var sort2 = $('#FieldList2').val();
+                var order2 = $('#ddlOrderBy2').val();
+
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: '@Url.Action("SaveOrderBy")',
+                    data:
+                        {
+                            sort1: sort1,
+                            order1: order1,
+                            sort2: sort2,
+                            order2: order2
+                        },
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data);
+                        $('#LoadRecordsButton').click();
+                    },
+                    error: function (xhr) {
+                        alert('Error occured');
+                    }
+                });
+            });
         });
     </script>
 }

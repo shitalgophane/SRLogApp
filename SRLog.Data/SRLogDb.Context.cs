@@ -38,9 +38,6 @@ namespace SRLog.Data
         public DbSet<tblCustomer> tblCustomers { get; set; }
         public DbSet<tblGroupUser> tblGroupUsers { get; set; }
         public DbSet<tblUser> tblUsers { get; set; }
-        public DbSet<tblObsolete_BID_Log> tblObsolete_BID_Logs { get; set; }
-        public DbSet<tblSR_Log_Test> tblSR_Log_Tests { get; set; }
-        public DbSet<tblst_temp> tblst_temps { get; set; }
         public DbSet<tblSetting> tblSettings { get; set; }
         public DbSet<tblSR_Log> tblSR_Logs { get; set; }
         public DbSet<tblObsolete_Quote> tblObsolete_Quotes { get; set; }

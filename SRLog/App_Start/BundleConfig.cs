@@ -10,8 +10,12 @@ namespace SRLog
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-3.1.1.js",
-                        "~/Scripts/jquery-ui-1.9.2.js",
-                        "~/Scripts/jtable/jquery.jtable.js"));
+                        "~/Scripts/jquery-ui-1.9.2.js"
+                        ));
+
+            //bundles.Add(new ScriptBundle("~/bundles/jtable").Include(
+            //    "~/Scripts/jtable/jquery.jtable.js"
+            //    ));
 
 
             //bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
@@ -37,11 +41,11 @@ namespace SRLog
                       "~/Content/Site.css"
                       ));
 
-            
+
 
             //////////////////////////////////
-            
-           
+
+
         }
     }
 }
