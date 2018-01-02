@@ -52,7 +52,8 @@ body {
 
 .background {
     background-image: url('../../../Images/bk1.jpg');
-    height: auto;
+    /*height: auto;*/
+    height:490px;
     background-repeat: no-repeat;
 }
 
@@ -72,7 +73,7 @@ body {
 .panelhead {
  
     color: #fff;
-    margin-top: 15px;
+
 }
 
 .btnMain {
