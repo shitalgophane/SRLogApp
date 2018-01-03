@@ -34,6 +34,10 @@ namespace SRLog.Controllers
 
                     ViewBag.Order1 = "ASC";
                     ViewBag.Order2 = "ASC";
+
+                    ViewBag.IsDateFilter = false;
+                    ViewBag.FromDate = "";
+                    ViewBag.ToDate = "";
                 }
                 else if (Flag == "ListAllJobsByKeywordSearch")
                 {
@@ -43,16 +47,20 @@ namespace SRLog.Controllers
 
                     ViewBag.Order1 = "ASC";
                     ViewBag.Order2 = "ASC";
+
+                    ViewBag.IsDateFilter = false;
+                    ViewBag.FromDate = "";
+                    ViewBag.ToDate = "";
                 }
                 else if (Flag == "ListAllJobsByFilter")
                 {
                     ViewBag.Title = "List All Jobs By Custom Sort";
 
-                    ViewBag.Sort1 = _repository.GetSort("Level1_Field_Name");
-                    ViewBag.Sort2 = _repository.GetSort("Level2_Field_Name");
+                    ViewBag.Sort1 = _repository.GetSort("REPORT_BY_SR", "Level1_Field_Name");
+                    ViewBag.Sort2 = _repository.GetSort("REPORT_BY_SR", "Level2_Field_Name");
 
-                    ViewBag.Order1 = _repository.GetSort("Level1_Sort_Type");
-                    ViewBag.Order2 = _repository.GetSort("Level2_Sort_Type");
+                    ViewBag.Order1 = _repository.GetSort("REPORT_BY_SR", "Level1_Sort_Type");
+                    ViewBag.Order2 = _repository.GetSort("REPORT_BY_SR", "Level2_Sort_Type");
                     if (ViewBag.Order1 == "Descending")
                         ViewBag.Order1 = "DESC";
 
@@ -65,6 +73,15 @@ namespace SRLog.Controllers
                     if (ViewBag.Order2 == "Ascending")
                         ViewBag.Order2 = "ASC";
 
+                    ViewBag.FromDate = _repository.GetSort("SRJob_Filter_Criteria", "CreationFromDateCond");
+                    ViewBag.ToDate = _repository.GetSort("SRJob_Filter_Criteria", "CreationToDateCond");
+
+                    if (ViewBag.FromDate != "" && ViewBag.ToDate != "")
+                    {
+                        ViewBag.IsDateFilter = true;
+                    }
+                    else
+                        ViewBag.IsDateFilter = false;
                 }
 
                 List<tblSRLogColumn> fields = _repository.GetSortableColumnNames(userinfo.UserId);
@@ -319,7 +336,7 @@ namespace SRLog.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetSRLogsList(string keyword = "", string sortby1 = "", string sortby2 = "", int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
+        public JsonResult GetSRLogsList(string keyword = "", string sortby1 = "", string sortby2 = "", string FromDate = "", string ToDate = "", int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
         {
             try
             {
@@ -331,18 +348,18 @@ namespace SRLog.Controllers
                         SRLogRepository _repository = new SRLogRepository();
                         if (keyword == "")
                         {
-                            var srCount = _repository.GetSRLogcount();
+                            var srCount = _repository.GetSRLogcount(FromDate, ToDate);
 
-                            var srlogs = _repository.GetSRLogsList(userinfo.UserId, sortby1, sortby2, jtStartIndex, jtPageSize, jtSorting);
+                            var srlogs = _repository.GetSRLogsList(userinfo.UserId, sortby1, sortby2, FromDate, ToDate, jtStartIndex, jtPageSize, jtSorting);
 
                             //  List<tblBID_Log> bidlogs = _repository .GetBidLogs();
                             return Json(new { Result = "OK", Records = srlogs, TotalRecordCount = srCount });
                         }
                         else
                         {
-                            var srCount = _repository.GetSRLogcountByFilter(keyword);
+                            var srCount = _repository.GetSRLogcountByFilter(keyword, FromDate, ToDate);
 
-                            var srlogs = _repository.GetSRLogsListByFilter(keyword, sortby1, sortby2, userinfo.UserId, jtStartIndex, jtPageSize, jtSorting);
+                            var srlogs = _repository.GetSRLogsListByFilter(keyword, sortby1, sortby2, FromDate, ToDate, userinfo.UserId, jtStartIndex, jtPageSize, jtSorting);
 
                             //  List<tblBID_Log> bidlogs = _repository .GetBidLogs();
                             return Json(new { Result = "OK", Records = srlogs, TotalRecordCount = srCount });
@@ -417,7 +434,7 @@ namespace SRLog.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveOrderBy(string sort1, string order1, string sort2, string order2)
+        public JsonResult SaveOrderBy(string sort1, string order1, string sort2, string order2, string FromDate, string ToDate)
         {
             try
             {
@@ -449,6 +466,12 @@ namespace SRLog.Controllers
                         _repository.UpdateSetting(userinfo.UserId, "REPORT_BY_SR", "Level1_Sort_Type", order1);
                         _repository.UpdateSetting(userinfo.UserId, "REPORT_BY_SR", "Level2_Field_Name", sort2);
                         _repository.UpdateSetting(userinfo.UserId, "REPORT_BY_SR", "Level2_Sort_Type", order2);
+
+                        if (FromDate != "" && ToDate != "")
+                        {
+                            _repository.UpdateSetting(userinfo.UserId, "SRJob_Filter_Criteria", "CreationFromDateCond", FromDate);
+                            _repository.UpdateSetting(userinfo.UserId, "SRJob_Filter_Criteria", "CreationToDateCond", ToDate);
+                        }
 
                         return Json("Sort order saved successfully.", JsonRequestBehavior.AllowGet);
                     }
