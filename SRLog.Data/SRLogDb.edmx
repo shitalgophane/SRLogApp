@@ -135,45 +135,6 @@
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SR Log DatabaseSQL.dbo.tblObsolete BID Log' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="tblObsolete BID Log">
-          <Key>
-            <PropertyRef Name="Mandatory Job Walk" />
-            <PropertyRef Name="BidDate" />
-            <PropertyRef Name="BiddingAs" />
-            <PropertyRef Name="BidTo" />
-          </Key>
-          <Property Name="Mandatory Job Walk" Type="bit" Nullable="false" />
-          <Property Name="BidDate" Type="datetime" Nullable="false" />
-          <Property Name="BiddingAs" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="BidTo" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ProjectName" Type="nvarchar" MaxLength="125" />
-          <Property Name="LastAddendumRecvd" Type="smallint" />
-          <Property Name="Estimator" Type="nvarchar" MaxLength="50" />
-          <Property Name="QuoteNumber" Type="int" />
-          <Property Name="Division" Type="nvarchar" MaxLength="10" />
-          <Property Name="UID" Type="int" />
-          <Property Name="Notes" Type="ntext" />
-          <Property Name="EngineersEstimate" Type="nvarchar" MaxLength="20" />
-          <Property Name="RedSheet" Type="ntext" />
-          <Property Name="ScopeLetter" Type="ntext" />
-          <Property Name="Job Walk Date" Type="datetime" />
-          <Property Name="Bid_Rev" Type="nvarchar" MaxLength="2" />
-          <Property Name="Bid_Duration" Type="nvarchar" MaxLength="10" />
-          <Property Name="Bid_LiqDamage" Type="nvarchar" MaxLength="15" />
-          <Property Name="Bid_Warranty" Type="nvarchar" MaxLength="10" />
-          <Property Name="Bid_BondingReq" Type="nvarchar" MaxLength="255" />
-          <Property Name="Bid_LicenseReqd" Type="nvarchar" MaxLength="10" />
-          <Property Name="Bid_Qualified" Type="bit" />
-          <Property Name="Bid_PrevailingWage" Type="bit" />
-          <Property Name="Bid_UL508Reqd" Type="bit" />
-          <Property Name="QADeadLineDateTime" Type="datetime" />
-          <Property Name="ProjectFolder" Type="nvarchar" MaxLength="500" />
-          <Property Name="OwnerName" Type="nvarchar" MaxLength="50" />
-          <Property Name="AdvertiseDate" Type="datetime" />
-          <Property Name="CityState" Type="nvarchar" MaxLength="500" />
-          <Property Name="PrimeSIEstimate" Type="nvarchar" MaxLength="20" />
-          <Property Name="IAndCEstimate" Type="nvarchar" MaxLength="20" />
-        </EntityType>
         <EntityType Name="tblObsolete Quotes">
           <Key>
             <PropertyRef Name="Id" />
@@ -297,53 +258,6 @@ warning 6002: The table/view 'SR Log DatabaseSQL.dbo.tblObsolete BID Log' does n
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SR Log DatabaseSQL.dbo.tblSR Log Test' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="tblSR Log Test">
-          <Key>
-            <PropertyRef Name="SRNumber" />
-          </Key>
-          <Property Name="FileFolder" Type="bit" />
-          <Property Name="Quote" Type="bit" />
-          <Property Name="ChemFeed" Type="bit" />
-          <Property Name="InactiveJob" Type="bit" />
-          <Property Name="PW" Type="bit" />
-          <Property Name="NotQuoted" Type="bit" />
-          <Property Name="Closed" Type="bit" />
-          <Property Name="SRNumber" Type="int" Nullable="false" />
-          <Property Name="Customer" Type="nvarchar" MaxLength="50" />
-          <Property Name="ProjectDescription" Type="nvarchar" MaxLength="125" />
-          <Property Name="CustomerContact" Type="nvarchar" MaxLength="50" />
-          <Property Name="ContactPhone" Type="nvarchar" MaxLength="50" />
-          <Property Name="Estimator" Type="nvarchar" MaxLength="10" />
-          <Property Name="Division" Type="nvarchar" MaxLength="10" />
-          <Property Name="CreationDate" Type="datetime" />
-          <Property Name="QuoteDue" Type="datetime" />
-          <Property Name="JobWalkDate" Type="datetime" />
-          <Property Name="MandatoryJobWalk" Type="bit" />
-          <Property Name="WhoJobWalk" Type="nvarchar" MaxLength="10" />
-          <Property Name="BidAsPrimeOrSub" Type="bit" />
-          <Property Name="Bonding" Type="nvarchar" MaxLength="50" />
-          <Property Name="BondingMailSent" Type="bit" />
-          <Property Name="PrevailingMailSent" Type="bit" />
-          <Property Name="Notes" Type="ntext" />
-          <Property Name="ProjectManager" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="JobOrQuote" Type="nvarchar" MaxLength="1" />
-          <Property Name="ProjectType" Type="nvarchar" MaxLength="1" />
-          <Property Name="PrevailingWageTBD" Type="bit" />
-          <Property Name="JobsiteAddress" Type="nvarchar" MaxLength="255" />
-          <Property Name="Billing" Type="bit" />
-          <Property Name="NewCustomer" Type="bit" />
-          <Property Name="ContactEmail" Type="nvarchar" MaxLength="255" />
-          <Property Name="QuoteDate" Type="datetime" />
-          <Property Name="QuoteTime" Type="datetime" />
-          <Property Name="QuoteTypeI&amp;C" Type="bit" />
-          <Property Name="QuoteTypeElectrical" Type="bit" />
-          <Property Name="QuoteTypeNoBid" Type="bit" />
-          <Property Name="FollowUp" Type="bit" />
-          <Property Name="QuoteType" Type="nvarchar" MaxLength="20" />
-          <Property Name="Owner" Type="nvarchar" MaxLength="50" />
-          <Property Name="AdvertiseDate" Type="datetime" />
-        </EntityType>
         <EntityType Name="tblSRLogColumns">
           <Key>
             <PropertyRef Name="id" />
@@ -351,56 +265,10 @@ warning 6002: The table/view 'SR Log DatabaseSQL.dbo.tblSR Log Test' does not ha
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FieldName" Type="nvarchar" MaxLength="100" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsSortable" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SR Log DatabaseSQL.dbo.tblst temp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="tblst temp">
-          <Key>
-            <PropertyRef Name="SRNumber" />
-          </Key>
-          <Property Name="FileFolder" Type="bit" />
-          <Property Name="Quote" Type="bit" />
-          <Property Name="ChemFeed" Type="bit" />
-          <Property Name="InactiveJob" Type="bit" />
-          <Property Name="PW" Type="bit" />
-          <Property Name="NotQuoted" Type="bit" />
-          <Property Name="Closed" Type="bit" />
-          <Property Name="SRNumber" Type="decimal" Precision="18" Scale="5" Nullable="false" />
-          <Property Name="Customer" Type="nvarchar" MaxLength="50" />
-          <Property Name="ProjectDescription" Type="nvarchar" MaxLength="125" />
-          <Property Name="CustomerContact" Type="nvarchar" MaxLength="50" />
-          <Property Name="ContactPhone" Type="nvarchar" MaxLength="50" />
-          <Property Name="Estimator" Type="nvarchar" MaxLength="10" />
-          <Property Name="Division" Type="nvarchar" MaxLength="10" />
-          <Property Name="CreationDate" Type="datetime" />
-          <Property Name="QuoteDue" Type="datetime" />
-          <Property Name="JobWalkDate" Type="datetime" />
-          <Property Name="MandatoryJobWalk" Type="bit" />
-          <Property Name="WhoJobWalk" Type="nvarchar" MaxLength="10" />
-          <Property Name="BidAsPrimeOrSub" Type="bit" />
-          <Property Name="Bonding" Type="nvarchar" MaxLength="50" />
-          <Property Name="BondingMailSent" Type="bit" />
-          <Property Name="PrevailingMailSent" Type="bit" />
-          <Property Name="Notes" Type="ntext" />
-          <Property Name="ProjectManager" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="JobOrQuote" Type="nvarchar" MaxLength="1" />
-          <Property Name="ProjectType" Type="nvarchar" MaxLength="1" />
-          <Property Name="PrevailingWageTBD" Type="bit" />
-          <Property Name="JobsiteAddress" Type="nvarchar" MaxLength="255" />
-          <Property Name="Billing" Type="bit" />
-          <Property Name="NewCustomer" Type="bit" />
-          <Property Name="ContactEmail" Type="nvarchar" MaxLength="255" />
-          <Property Name="QuoteDate" Type="datetime" />
-          <Property Name="QuoteTime" Type="datetime" />
-          <Property Name="QuoteTypeI&amp;C" Type="bit" />
-          <Property Name="QuoteTypeElectrical" Type="bit" />
-          <Property Name="QuoteTypeNoBid" Type="bit" />
-          <Property Name="FollowUp" Type="bit" />
-          <Property Name="QuoteType" Type="nvarchar" MaxLength="20" />
-          <Property Name="Owner" Type="nvarchar" MaxLength="50" />
-          <Property Name="AdvertiseDate" Type="datetime" />
-        </EntityType>
         <EntityType Name="tblUser">
           <Key>
             <PropertyRef Name="UserId" />
@@ -557,133 +425,6 @@ warning 6002: The table/view 'SR Log DatabaseSQL.dbo.tblst temp' does not have a
           <EntitySet Name="tblSR Log" EntityType="Self.tblSR Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSRLogColumns" EntityType="Self.tblSRLogColumns" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblObsolete BID Log" EntityType="Self.tblObsolete BID Log" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[tblObsolete BID Log].[Mandatory Job Walk] AS [Mandatory Job Walk], 
-[tblObsolete BID Log].[BidDate] AS [BidDate], 
-[tblObsolete BID Log].[BiddingAs] AS [BiddingAs], 
-[tblObsolete BID Log].[BidTo] AS [BidTo], 
-[tblObsolete BID Log].[ProjectName] AS [ProjectName], 
-[tblObsolete BID Log].[LastAddendumRecvd] AS [LastAddendumRecvd], 
-[tblObsolete BID Log].[Estimator] AS [Estimator], 
-[tblObsolete BID Log].[QuoteNumber] AS [QuoteNumber], 
-[tblObsolete BID Log].[Division] AS [Division], 
-[tblObsolete BID Log].[UID] AS [UID], 
-[tblObsolete BID Log].[Notes] AS [Notes], 
-[tblObsolete BID Log].[EngineersEstimate] AS [EngineersEstimate], 
-[tblObsolete BID Log].[RedSheet] AS [RedSheet], 
-[tblObsolete BID Log].[ScopeLetter] AS [ScopeLetter], 
-[tblObsolete BID Log].[Job Walk Date] AS [Job Walk Date], 
-[tblObsolete BID Log].[Bid_Rev] AS [Bid_Rev], 
-[tblObsolete BID Log].[Bid_Duration] AS [Bid_Duration], 
-[tblObsolete BID Log].[Bid_LiqDamage] AS [Bid_LiqDamage], 
-[tblObsolete BID Log].[Bid_Warranty] AS [Bid_Warranty], 
-[tblObsolete BID Log].[Bid_BondingReq] AS [Bid_BondingReq], 
-[tblObsolete BID Log].[Bid_LicenseReqd] AS [Bid_LicenseReqd], 
-[tblObsolete BID Log].[Bid_Qualified] AS [Bid_Qualified], 
-[tblObsolete BID Log].[Bid_PrevailingWage] AS [Bid_PrevailingWage], 
-[tblObsolete BID Log].[Bid_UL508Reqd] AS [Bid_UL508Reqd], 
-[tblObsolete BID Log].[QADeadLineDateTime] AS [QADeadLineDateTime], 
-[tblObsolete BID Log].[ProjectFolder] AS [ProjectFolder], 
-[tblObsolete BID Log].[OwnerName] AS [OwnerName], 
-[tblObsolete BID Log].[AdvertiseDate] AS [AdvertiseDate], 
-[tblObsolete BID Log].[CityState] AS [CityState], 
-[tblObsolete BID Log].[PrimeSIEstimate] AS [PrimeSIEstimate], 
-[tblObsolete BID Log].[IAndCEstimate] AS [IAndCEstimate]
-FROM [dbo].[tblObsolete BID Log] AS [tblObsolete BID Log]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="tblSR Log Test" EntityType="Self.tblSR Log Test" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[tblSR Log Test].[FileFolder] AS [FileFolder], 
-[tblSR Log Test].[Quote] AS [Quote], 
-[tblSR Log Test].[ChemFeed] AS [ChemFeed], 
-[tblSR Log Test].[InactiveJob] AS [InactiveJob], 
-[tblSR Log Test].[PW] AS [PW], 
-[tblSR Log Test].[NotQuoted] AS [NotQuoted], 
-[tblSR Log Test].[Closed] AS [Closed], 
-[tblSR Log Test].[SRNumber] AS [SRNumber], 
-[tblSR Log Test].[Customer] AS [Customer], 
-[tblSR Log Test].[ProjectDescription] AS [ProjectDescription], 
-[tblSR Log Test].[CustomerContact] AS [CustomerContact], 
-[tblSR Log Test].[ContactPhone] AS [ContactPhone], 
-[tblSR Log Test].[Estimator] AS [Estimator], 
-[tblSR Log Test].[Division] AS [Division], 
-[tblSR Log Test].[CreationDate] AS [CreationDate], 
-[tblSR Log Test].[QuoteDue] AS [QuoteDue], 
-[tblSR Log Test].[JobWalkDate] AS [JobWalkDate], 
-[tblSR Log Test].[MandatoryJobWalk] AS [MandatoryJobWalk], 
-[tblSR Log Test].[WhoJobWalk] AS [WhoJobWalk], 
-[tblSR Log Test].[BidAsPrimeOrSub] AS [BidAsPrimeOrSub], 
-[tblSR Log Test].[Bonding] AS [Bonding], 
-[tblSR Log Test].[BondingMailSent] AS [BondingMailSent], 
-[tblSR Log Test].[PrevailingMailSent] AS [PrevailingMailSent], 
-[tblSR Log Test].[Notes] AS [Notes], 
-[tblSR Log Test].[ProjectManager] AS [ProjectManager], 
-[tblSR Log Test].[CreatedBy] AS [CreatedBy], 
-[tblSR Log Test].[JobOrQuote] AS [JobOrQuote], 
-[tblSR Log Test].[ProjectType] AS [ProjectType], 
-[tblSR Log Test].[PrevailingWageTBD] AS [PrevailingWageTBD], 
-[tblSR Log Test].[JobsiteAddress] AS [JobsiteAddress], 
-[tblSR Log Test].[Billing] AS [Billing], 
-[tblSR Log Test].[NewCustomer] AS [NewCustomer], 
-[tblSR Log Test].[ContactEmail] AS [ContactEmail], 
-[tblSR Log Test].[QuoteDate] AS [QuoteDate], 
-[tblSR Log Test].[QuoteTime] AS [QuoteTime], 
-[tblSR Log Test].[QuoteTypeI&amp;C] AS [QuoteTypeI&amp;C], 
-[tblSR Log Test].[QuoteTypeElectrical] AS [QuoteTypeElectrical], 
-[tblSR Log Test].[QuoteTypeNoBid] AS [QuoteTypeNoBid], 
-[tblSR Log Test].[FollowUp] AS [FollowUp], 
-[tblSR Log Test].[QuoteType] AS [QuoteType], 
-[tblSR Log Test].[Owner] AS [Owner], 
-[tblSR Log Test].[AdvertiseDate] AS [AdvertiseDate]
-FROM [dbo].[tblSR Log Test] AS [tblSR Log Test]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="tblst temp" EntityType="Self.tblst temp" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[tblst temp].[FileFolder] AS [FileFolder], 
-[tblst temp].[Quote] AS [Quote], 
-[tblst temp].[ChemFeed] AS [ChemFeed], 
-[tblst temp].[InactiveJob] AS [InactiveJob], 
-[tblst temp].[PW] AS [PW], 
-[tblst temp].[NotQuoted] AS [NotQuoted], 
-[tblst temp].[Closed] AS [Closed], 
-[tblst temp].[SRNumber] AS [SRNumber], 
-[tblst temp].[Customer] AS [Customer], 
-[tblst temp].[ProjectDescription] AS [ProjectDescription], 
-[tblst temp].[CustomerContact] AS [CustomerContact], 
-[tblst temp].[ContactPhone] AS [ContactPhone], 
-[tblst temp].[Estimator] AS [Estimator], 
-[tblst temp].[Division] AS [Division], 
-[tblst temp].[CreationDate] AS [CreationDate], 
-[tblst temp].[QuoteDue] AS [QuoteDue], 
-[tblst temp].[JobWalkDate] AS [JobWalkDate], 
-[tblst temp].[MandatoryJobWalk] AS [MandatoryJobWalk], 
-[tblst temp].[WhoJobWalk] AS [WhoJobWalk], 
-[tblst temp].[BidAsPrimeOrSub] AS [BidAsPrimeOrSub], 
-[tblst temp].[Bonding] AS [Bonding], 
-[tblst temp].[BondingMailSent] AS [BondingMailSent], 
-[tblst temp].[PrevailingMailSent] AS [PrevailingMailSent], 
-[tblst temp].[Notes] AS [Notes], 
-[tblst temp].[ProjectManager] AS [ProjectManager], 
-[tblst temp].[CreatedBy] AS [CreatedBy], 
-[tblst temp].[JobOrQuote] AS [JobOrQuote], 
-[tblst temp].[ProjectType] AS [ProjectType], 
-[tblst temp].[PrevailingWageTBD] AS [PrevailingWageTBD], 
-[tblst temp].[JobsiteAddress] AS [JobsiteAddress], 
-[tblst temp].[Billing] AS [Billing], 
-[tblst temp].[NewCustomer] AS [NewCustomer], 
-[tblst temp].[ContactEmail] AS [ContactEmail], 
-[tblst temp].[QuoteDate] AS [QuoteDate], 
-[tblst temp].[QuoteTime] AS [QuoteTime], 
-[tblst temp].[QuoteTypeI&amp;C] AS [QuoteTypeI&amp;C], 
-[tblst temp].[QuoteTypeElectrical] AS [QuoteTypeElectrical], 
-[tblst temp].[QuoteTypeNoBid] AS [QuoteTypeNoBid], 
-[tblst temp].[FollowUp] AS [FollowUp], 
-[tblst temp].[QuoteType] AS [QuoteType], 
-[tblst temp].[Owner] AS [Owner], 
-[tblst temp].[AdvertiseDate] AS [AdvertiseDate]
-FROM [dbo].[tblst temp] AS [tblst temp]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_tblCustAddress_tblCustomer" Association="Self.FK_tblCustAddress_tblCustomer">
             <End Role="tblCustomer" EntitySet="tblCustomer" />
             <End Role="tblCustAddress" EntitySet="tblCustAddress" />
@@ -835,139 +576,6 @@ FROM [dbo].[tblst temp] AS [tblst temp]</DefiningQuery>
           <Property Name="Accounting_Rights" Type="Boolean" />
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
-        <EntityType Name="tblObsolete_BID_Log">
-          <Key>
-            <PropertyRef Name="Mandatory_Job_Walk" />
-            <PropertyRef Name="BidDate" />
-            <PropertyRef Name="BiddingAs" />
-            <PropertyRef Name="BidTo" />
-          </Key>
-          <Property Name="Mandatory_Job_Walk" Type="Boolean" Nullable="false" />
-          <Property Name="BidDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="BiddingAs" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="BidTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProjectName" Type="String" MaxLength="125" FixedLength="false" Unicode="true" />
-          <Property Name="LastAddendumRecvd" Type="Int16" />
-          <Property Name="Estimator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="QuoteNumber" Type="Int32" />
-          <Property Name="Division" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="UID" Type="Int32" />
-          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="EngineersEstimate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="RedSheet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ScopeLetter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Job_Walk_Date" Type="DateTime" Precision="3" />
-          <Property Name="Bid_Rev" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-          <Property Name="Bid_Duration" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Bid_LiqDamage" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Bid_Warranty" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Bid_BondingReq" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Bid_LicenseReqd" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Bid_Qualified" Type="Boolean" />
-          <Property Name="Bid_PrevailingWage" Type="Boolean" />
-          <Property Name="Bid_UL508Reqd" Type="Boolean" />
-          <Property Name="QADeadLineDateTime" Type="DateTime" Precision="3" />
-          <Property Name="ProjectFolder" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="OwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AdvertiseDate" Type="DateTime" Precision="3" />
-          <Property Name="CityState" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="PrimeSIEstimate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="IAndCEstimate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="tblSR_Log_Test">
-          <Key>
-            <PropertyRef Name="SRNumber" />
-          </Key>
-          <Property Name="FileFolder" Type="Boolean" />
-          <Property Name="Quote" Type="Boolean" />
-          <Property Name="ChemFeed" Type="Boolean" />
-          <Property Name="InactiveJob" Type="Boolean" />
-          <Property Name="PW" Type="Boolean" />
-          <Property Name="NotQuoted" Type="Boolean" />
-          <Property Name="Closed" Type="Boolean" />
-          <Property Name="SRNumber" Type="Int32" Nullable="false" />
-          <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ProjectDescription" Type="String" MaxLength="125" FixedLength="false" Unicode="true" />
-          <Property Name="CustomerContact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ContactPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Estimator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Division" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="CreationDate" Type="DateTime" Precision="3" />
-          <Property Name="QuoteDue" Type="DateTime" Precision="3" />
-          <Property Name="JobWalkDate" Type="DateTime" Precision="3" />
-          <Property Name="MandatoryJobWalk" Type="Boolean" />
-          <Property Name="WhoJobWalk" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="BidAsPrimeOrSub" Type="Boolean" />
-          <Property Name="Bonding" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BondingMailSent" Type="Boolean" />
-          <Property Name="PrevailingMailSent" Type="Boolean" />
-          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ProjectManager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="JobOrQuote" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="ProjectType" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="PrevailingWageTBD" Type="Boolean" />
-          <Property Name="JobsiteAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Billing" Type="Boolean" />
-          <Property Name="NewCustomer" Type="Boolean" />
-          <Property Name="ContactEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="QuoteDate" Type="DateTime" Precision="3" />
-          <Property Name="QuoteTime" Type="DateTime" Precision="3" />
-          <Property Name="QuoteTypeI_C" Type="Boolean" />
-          <Property Name="QuoteTypeElectrical" Type="Boolean" />
-          <Property Name="QuoteTypeNoBid" Type="Boolean" />
-          <Property Name="FollowUp" Type="Boolean" />
-          <Property Name="QuoteType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AdvertiseDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="tblst_temp">
-          <Key>
-            <PropertyRef Name="SRNumber" />
-          </Key>
-          <Property Name="FileFolder" Type="Boolean" />
-          <Property Name="Quote" Type="Boolean" />
-          <Property Name="ChemFeed" Type="Boolean" />
-          <Property Name="InactiveJob" Type="Boolean" />
-          <Property Name="PW" Type="Boolean" />
-          <Property Name="NotQuoted" Type="Boolean" />
-          <Property Name="Closed" Type="Boolean" />
-          <Property Name="SRNumber" Type="Decimal" Precision="18" Scale="5" Nullable="false" />
-          <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ProjectDescription" Type="String" MaxLength="125" FixedLength="false" Unicode="true" />
-          <Property Name="CustomerContact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ContactPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Estimator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Division" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="CreationDate" Type="DateTime" Precision="3" />
-          <Property Name="QuoteDue" Type="DateTime" Precision="3" />
-          <Property Name="JobWalkDate" Type="DateTime" Precision="3" />
-          <Property Name="MandatoryJobWalk" Type="Boolean" />
-          <Property Name="WhoJobWalk" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="BidAsPrimeOrSub" Type="Boolean" />
-          <Property Name="Bonding" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BondingMailSent" Type="Boolean" />
-          <Property Name="PrevailingMailSent" Type="Boolean" />
-          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ProjectManager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="JobOrQuote" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="ProjectType" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="PrevailingWageTBD" Type="Boolean" />
-          <Property Name="JobsiteAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Billing" Type="Boolean" />
-          <Property Name="NewCustomer" Type="Boolean" />
-          <Property Name="ContactEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="QuoteDate" Type="DateTime" Precision="3" />
-          <Property Name="QuoteTime" Type="DateTime" Precision="3" />
-          <Property Name="QuoteTypeI_C" Type="Boolean" />
-          <Property Name="QuoteTypeElectrical" Type="Boolean" />
-          <Property Name="QuoteTypeNoBid" Type="Boolean" />
-          <Property Name="FollowUp" Type="Boolean" />
-          <Property Name="QuoteType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AdvertiseDate" Type="DateTime" Precision="3" />
-        </EntityType>
         <Association Name="FK_tblCustAddress_tblCustomer">
           <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="1" />
           <End Role="tblCustAddress" Type="Self.tblCustAddress" Multiplicity="*" />
@@ -991,9 +599,6 @@ FROM [dbo].[tblst temp] AS [tblst temp]</DefiningQuery>
           <EntitySet Name="tblCustomers" EntityType="Self.tblCustomer" />
           <EntitySet Name="tblGroupUsers" EntityType="Self.tblGroupUser" />
           <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
-          <EntitySet Name="tblObsolete_BID_Logs" EntityType="Self.tblObsolete_BID_Log" />
-          <EntitySet Name="tblSR_Log_Tests" EntityType="Self.tblSR_Log_Test" />
-          <EntitySet Name="tblst_temps" EntityType="Self.tblst_temp" />
           <AssociationSet Name="FK_tblCustAddress_tblCustomer" Association="Self.FK_tblCustAddress_tblCustomer">
             <End Role="tblCustomer" EntitySet="tblCustomers" />
             <End Role="tblCustAddress" EntitySet="tblCustAddresses" />
@@ -1336,6 +941,7 @@ FROM [dbo].[tblst temp] AS [tblst temp]</DefiningQuery>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FieldName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsSortable" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1487,139 +1093,6 @@ FROM [dbo].[tblst temp] AS [tblst temp]</DefiningQuery>
                 <ScalarProperty Name="Bid_Log_ReadOnly" ColumnName="Bid_Log_ReadOnly" />
                 <ScalarProperty Name="Accounting_Rights" ColumnName="Accounting_Rights" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblObsolete_BID_Logs">
-            <EntityTypeMapping TypeName="Model.tblObsolete_BID_Log">
-              <MappingFragment StoreEntitySet="tblObsolete BID Log">
-                <ScalarProperty Name="Mandatory_Job_Walk" ColumnName="Mandatory Job Walk" />
-                <ScalarProperty Name="BidDate" ColumnName="BidDate" />
-                <ScalarProperty Name="BiddingAs" ColumnName="BiddingAs" />
-                <ScalarProperty Name="BidTo" ColumnName="BidTo" />
-                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
-                <ScalarProperty Name="LastAddendumRecvd" ColumnName="LastAddendumRecvd" />
-                <ScalarProperty Name="Estimator" ColumnName="Estimator" />
-                <ScalarProperty Name="QuoteNumber" ColumnName="QuoteNumber" />
-                <ScalarProperty Name="Division" ColumnName="Division" />
-                <ScalarProperty Name="UID" ColumnName="UID" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="EngineersEstimate" ColumnName="EngineersEstimate" />
-                <ScalarProperty Name="RedSheet" ColumnName="RedSheet" />
-                <ScalarProperty Name="ScopeLetter" ColumnName="ScopeLetter" />
-                <ScalarProperty Name="Job_Walk_Date" ColumnName="Job Walk Date" />
-                <ScalarProperty Name="Bid_Rev" ColumnName="Bid_Rev" />
-                <ScalarProperty Name="Bid_Duration" ColumnName="Bid_Duration" />
-                <ScalarProperty Name="Bid_LiqDamage" ColumnName="Bid_LiqDamage" />
-                <ScalarProperty Name="Bid_Warranty" ColumnName="Bid_Warranty" />
-                <ScalarProperty Name="Bid_BondingReq" ColumnName="Bid_BondingReq" />
-                <ScalarProperty Name="Bid_LicenseReqd" ColumnName="Bid_LicenseReqd" />
-                <ScalarProperty Name="Bid_Qualified" ColumnName="Bid_Qualified" />
-                <ScalarProperty Name="Bid_PrevailingWage" ColumnName="Bid_PrevailingWage" />
-                <ScalarProperty Name="Bid_UL508Reqd" ColumnName="Bid_UL508Reqd" />
-                <ScalarProperty Name="QADeadLineDateTime" ColumnName="QADeadLineDateTime" />
-                <ScalarProperty Name="ProjectFolder" ColumnName="ProjectFolder" />
-                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
-                <ScalarProperty Name="AdvertiseDate" ColumnName="AdvertiseDate" />
-                <ScalarProperty Name="CityState" ColumnName="CityState" />
-                <ScalarProperty Name="PrimeSIEstimate" ColumnName="PrimeSIEstimate" />
-                <ScalarProperty Name="IAndCEstimate" ColumnName="IAndCEstimate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblSR_Log_Tests">
-            <EntityTypeMapping TypeName="Model.tblSR_Log_Test">
-              <MappingFragment StoreEntitySet="tblSR Log Test">
-                <ScalarProperty Name="FileFolder" ColumnName="FileFolder" />
-                <ScalarProperty Name="Quote" ColumnName="Quote" />
-                <ScalarProperty Name="ChemFeed" ColumnName="ChemFeed" />
-                <ScalarProperty Name="InactiveJob" ColumnName="InactiveJob" />
-                <ScalarProperty Name="PW" ColumnName="PW" />
-                <ScalarProperty Name="NotQuoted" ColumnName="NotQuoted" />
-                <ScalarProperty Name="Closed" ColumnName="Closed" />
-                <ScalarProperty Name="SRNumber" ColumnName="SRNumber" />
-                <ScalarProperty Name="Customer" ColumnName="Customer" />
-                <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
-                <ScalarProperty Name="CustomerContact" ColumnName="CustomerContact" />
-                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
-                <ScalarProperty Name="Estimator" ColumnName="Estimator" />
-                <ScalarProperty Name="Division" ColumnName="Division" />
-                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-                <ScalarProperty Name="QuoteDue" ColumnName="QuoteDue" />
-                <ScalarProperty Name="JobWalkDate" ColumnName="JobWalkDate" />
-                <ScalarProperty Name="MandatoryJobWalk" ColumnName="MandatoryJobWalk" />
-                <ScalarProperty Name="WhoJobWalk" ColumnName="WhoJobWalk" />
-                <ScalarProperty Name="BidAsPrimeOrSub" ColumnName="BidAsPrimeOrSub" />
-                <ScalarProperty Name="Bonding" ColumnName="Bonding" />
-                <ScalarProperty Name="BondingMailSent" ColumnName="BondingMailSent" />
-                <ScalarProperty Name="PrevailingMailSent" ColumnName="PrevailingMailSent" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="ProjectManager" ColumnName="ProjectManager" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="JobOrQuote" ColumnName="JobOrQuote" />
-                <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
-                <ScalarProperty Name="PrevailingWageTBD" ColumnName="PrevailingWageTBD" />
-                <ScalarProperty Name="JobsiteAddress" ColumnName="JobsiteAddress" />
-                <ScalarProperty Name="Billing" ColumnName="Billing" />
-                <ScalarProperty Name="NewCustomer" ColumnName="NewCustomer" />
-                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
-                <ScalarProperty Name="QuoteDate" ColumnName="QuoteDate" />
-                <ScalarProperty Name="QuoteTime" ColumnName="QuoteTime" />
-                <ScalarProperty Name="QuoteTypeI_C" ColumnName="QuoteTypeI&amp;C" />
-                <ScalarProperty Name="QuoteTypeElectrical" ColumnName="QuoteTypeElectrical" />
-                <ScalarProperty Name="QuoteTypeNoBid" ColumnName="QuoteTypeNoBid" />
-                <ScalarProperty Name="FollowUp" ColumnName="FollowUp" />
-                <ScalarProperty Name="QuoteType" ColumnName="QuoteType" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="AdvertiseDate" ColumnName="AdvertiseDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblst_temps">
-            <EntityTypeMapping TypeName="Model.tblst_temp">
-              <MappingFragment StoreEntitySet="tblst temp">
-                <ScalarProperty Name="FileFolder" ColumnName="FileFolder" />
-                <ScalarProperty Name="Quote" ColumnName="Quote" />
-                <ScalarProperty Name="ChemFeed" ColumnName="ChemFeed" />
-                <ScalarProperty Name="InactiveJob" ColumnName="InactiveJob" />
-                <ScalarProperty Name="PW" ColumnName="PW" />
-                <ScalarProperty Name="NotQuoted" ColumnName="NotQuoted" />
-                <ScalarProperty Name="Closed" ColumnName="Closed" />
-                <ScalarProperty Name="SRNumber" ColumnName="SRNumber" />
-                <ScalarProperty Name="Customer" ColumnName="Customer" />
-                <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
-                <ScalarProperty Name="CustomerContact" ColumnName="CustomerContact" />
-                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
-                <ScalarProperty Name="Estimator" ColumnName="Estimator" />
-                <ScalarProperty Name="Division" ColumnName="Division" />
-                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-                <ScalarProperty Name="QuoteDue" ColumnName="QuoteDue" />
-                <ScalarProperty Name="JobWalkDate" ColumnName="JobWalkDate" />
-                <ScalarProperty Name="MandatoryJobWalk" ColumnName="MandatoryJobWalk" />
-                <ScalarProperty Name="WhoJobWalk" ColumnName="WhoJobWalk" />
-                <ScalarProperty Name="BidAsPrimeOrSub" ColumnName="BidAsPrimeOrSub" />
-                <ScalarProperty Name="Bonding" ColumnName="Bonding" />
-                <ScalarProperty Name="BondingMailSent" ColumnName="BondingMailSent" />
-                <ScalarProperty Name="PrevailingMailSent" ColumnName="PrevailingMailSent" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="ProjectManager" ColumnName="ProjectManager" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="JobOrQuote" ColumnName="JobOrQuote" />
-                <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
-                <ScalarProperty Name="PrevailingWageTBD" ColumnName="PrevailingWageTBD" />
-                <ScalarProperty Name="JobsiteAddress" ColumnName="JobsiteAddress" />
-                <ScalarProperty Name="Billing" ColumnName="Billing" />
-                <ScalarProperty Name="NewCustomer" ColumnName="NewCustomer" />
-                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
-                <ScalarProperty Name="QuoteDate" ColumnName="QuoteDate" />
-                <ScalarProperty Name="QuoteTime" ColumnName="QuoteTime" />
-                <ScalarProperty Name="QuoteTypeI_C" ColumnName="QuoteTypeI&amp;C" />
-                <ScalarProperty Name="QuoteTypeElectrical" ColumnName="QuoteTypeElectrical" />
-                <ScalarProperty Name="QuoteTypeNoBid" ColumnName="QuoteTypeNoBid" />
-                <ScalarProperty Name="FollowUp" ColumnName="FollowUp" />
-                <ScalarProperty Name="QuoteType" ColumnName="QuoteType" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="AdvertiseDate" ColumnName="AdvertiseDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1862,6 +1335,7 @@ FROM [dbo].[tblst temp] AS [tblst temp]</DefiningQuery>
           <EntitySetMapping Name="tblSRLogColumns">
             <EntityTypeMapping TypeName="Model.tblSRLogColumn">
               <MappingFragment StoreEntitySet="tblSRLogColumns">
+                <ScalarProperty Name="IsSortable" ColumnName="IsSortable" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="FieldName" ColumnName="FieldName" />
                 <ScalarProperty Name="id" ColumnName="id" />

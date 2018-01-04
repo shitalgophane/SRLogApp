@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
@@ -9,6 +10,7 @@ using SRLog.Data.Settings;
 using SRLog.Entities.SRLog.ViewModels;
 using SRLog.Entities.Settings.ViewModels;
 using System.Data.SqlClient;
+using System.Data.Objects.SqlClient;
 
 namespace SRLog.Data.SRLog
 {
@@ -37,14 +39,31 @@ namespace SRLog.Data.SRLog
             return existingcolumns;
         }
 
-        public List<tblSR_Log> GetSRLogsList(int UserId, int startIndex, int count, string sorting)
+        public List<tblSR_Log> GetSRLogsList(int UserId, string sorting1, string sorting2, int startIndex, int count, string sorting)
         {
-            IEnumerable<tblSR_Log> query = db.tblSR_Logs.OrderByDescending(x => x.SRNumber);
+            IEnumerable<tblSR_Log> query = db.tblSR_Logs;//.OrderByDescending(x =>  x.SRNumber);
+            if (sorting1 != "" && sorting2 != "")
+            {
+                string sort = sorting1 + "," + sorting2;
+                query = query.OrderBy(sort);
+            }
+            else if (sorting1 != "" && sorting2 == "")
+            {
+                query = query.OrderBy(sorting1);
+            }
+            else if (sorting1 == "" && sorting2 != "")
+            {
+                query = query.OrderBy(sorting2);
+            }
+            else
+            {
+                query = query.OrderByDescending(x => x.SRNumber);
+            }
+
 
             return count > 0
                         ? query.Skip(startIndex).Take(count).ToList() //Paging
                         : query.ToList(); //No paging
-
 
         }
 
@@ -53,5 +72,65 @@ namespace SRLog.Data.SRLog
             return db.tblSR_Logs.Count();
         }
 
+        public List<tblSR_Log> GetSRLogsListByFilter(string keyword, string sorting1, string sorting2, int UserId, int startIndex, int count, string sorting)
+        {
+            IEnumerable<tblSR_Log> query = db.tblSR_Logs.Where(x =>
+                    SqlFunctions.PatIndex("%" + keyword + "%", SqlFunctions.StringConvert(x.SRNumber)) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.Customer) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.CustomerContact) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.ProjectDescription) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.ContactEmail) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.ContactPhone) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.WhoJobWalk) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.Estimator) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.Notes) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.Owner) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.JobsiteAddress) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.Bonding) > 0
+               );//.OrderByDescending(x => x.SRNumber);
+
+            if (sorting1 != "" && sorting2 != "")
+            {
+                string sort = sorting1 + "," + sorting2;
+                query = query.OrderBy(sort);
+            }
+            else if (sorting1 != "" && sorting2 == "")
+            {
+                query = query.OrderBy(sorting1);
+            }
+            else if (sorting1 == "" && sorting2 != "")
+            {
+                query = query.OrderBy(sorting2);
+            }
+            else
+            {
+                query = query.OrderByDescending(x => x.SRNumber);
+            }
+
+            return count > 0
+                        ? query.Skip(startIndex).Take(count).ToList() //Paging
+                        : query.ToList(); //No paging
+
+        }
+
+        public int GetSRLogcountByFilter(string keyword)
+        {
+            return db.tblSR_Logs.Where(x =>
+                    SqlFunctions.PatIndex("%" + keyword + "%", SqlFunctions.StringConvert(x.SRNumber)) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.Customer) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.CustomerContact) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.ProjectDescription) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.ContactEmail) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.ContactPhone) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.WhoJobWalk) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.Estimator) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.Notes) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.Owner) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.JobsiteAddress) > 0
+                    || SqlFunctions.PatIndex("%" + keyword + "%", x.Bonding) > 0
+               ).Count();
+        }
+
+       
     }
 }

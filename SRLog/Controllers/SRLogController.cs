@@ -18,27 +18,127 @@ namespace SRLog.Controllers
     {
         //
         // GET: /SRLog/
-        [AdminFilter]
-        public ActionResult Index()
+
+        public ActionResult Index(string Flag = "ListAllJobsBySRNumber")
         {
             UserInfoViewModel userinfo = (UserInfoViewModel)Session["UserInfo"];
             if (userinfo != null)
             {
+                ViewBag.Flag = Flag;
+                SettingsRepository _repository = new SettingsRepository();
+                if (Flag == "ListAllJobsBySRNumber")
+                {
+                    ViewBag.Title = "List All Jobs By SR Number";
+                    ViewBag.Sort1 = string.Empty;
+                    ViewBag.Sort2 = string.Empty;
+
+                    ViewBag.Order1 = "ASC";
+                    ViewBag.Order2 = "ASC";
+                }
+                else if (Flag == "ListAllJobsByKeywordSearch")
+                {
+                    ViewBag.Title = "List All Jobs By Keywords";
+                    ViewBag.Sort1 = string.Empty;
+                    ViewBag.Sort2 = string.Empty;
+
+                    ViewBag.Order1 = "ASC";
+                    ViewBag.Order2 = "ASC";
+                }
+                else if (Flag == "ListAllJobsByFilter")
+                {
+                    ViewBag.Title = "List All Jobs By Custom Sort";
+
+                    ViewBag.Sort1 = _repository.GetSort("Level1_Field_Name");
+                    ViewBag.Sort2 = _repository.GetSort("Level2_Field_Name");
+
+                    ViewBag.Order1 = _repository.GetSort("Level1_Sort_Type");
+                    ViewBag.Order2 = _repository.GetSort("Level2_Sort_Type");
+                    if (ViewBag.Order1 == "Descending")
+                        ViewBag.Order1 = "DESC";
+
+                    if (ViewBag.Order1 == "Ascending")
+                        ViewBag.Order1 = "ASC";
+
+                    if (ViewBag.Order2 == "Descending")
+                        ViewBag.Order2 = "DESC";
+
+                    if (ViewBag.Order2 == "Ascending")
+                        ViewBag.Order2 = "ASC";
+
+                }
+
+                List<tblSRLogColumn> fields = _repository.GetSortableColumnNames(userinfo.UserId);
+                tblSRLogColumn temp = new tblSRLogColumn();
+                temp.FieldName = "";
+
+                fields.Insert(0, temp);
+
+                ViewBag.FieldList =
+          new SelectList((from s in fields
+                          select new
+                          {
+                              FieldName = s.FieldName
+                          }),
+              "FieldName",
+              "FieldName",
+              ViewBag.Sort1);
+
+                ViewBag.FieldListTwo =
+         new SelectList((from s in fields
+                         select new
+                         {
+                             FieldName = s.FieldName
+                         }),
+             "FieldName",
+             "FieldName",
+             ViewBag.Sort2);
+
+                List<OrderByOptions> orderbylist = new List<OrderByOptions>();
+
+                OrderByOptions opt = new OrderByOptions();
+                opt.OrderBy = "Ascending";
+                opt.Value = "ASC";
+                orderbylist.Add(opt);
+
+                opt = new OrderByOptions();
+                opt.OrderBy = "Descending";
+                opt.Value = "DESC";
+                orderbylist.Add(opt);
+
+                ViewBag.OrderList =
+          new SelectList((from s in orderbylist
+                          select new
+                          {
+                              OrderBy = s.OrderBy,
+                              Value = s.Value
+                          }),
+              "Value",
+              "OrderBy",
+              ViewBag.Order1);
+
+                ViewBag.OrderListTwo =
+         new SelectList((from s in orderbylist
+                         select new
+                         {
+                             OrderBy = s.OrderBy,
+                             Value = s.Value
+                         }),
+             "Value",
+             "OrderBy",
+             ViewBag.Order2);
+
                 return View();
             }
             else
                 return RedirectToAction("Login", "Account");
         }
 
-        [AdminFilter]
         public ActionResult ConfigureColumns()
         {
             return View();
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        [AdminFilter]
         public JsonResult GetSRLogColumns()
         {
             try
@@ -68,8 +168,6 @@ namespace SRLog.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        [AdminFilter]
         public JsonResult GetConfiguredSRLogColumns()
         {
             try
@@ -111,8 +209,6 @@ namespace SRLog.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [AllowAnonymous]
-        [AdminFilter]
         public JsonResult GetAllSRLogColumns()
         {
             try
@@ -171,11 +267,11 @@ namespace SRLog.Controllers
                                     f.width = "5%";
                                 }
                                 else
-                                    f.width = "2%";                                
+                                    f.width = "2%";
                                 JFields.Add(f);
                             }
                         }
-                       
+
                         return Json(JFields, JsonRequestBehavior.AllowGet);
                     }
                     else
@@ -192,8 +288,6 @@ namespace SRLog.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        [AdminFilter]
         public JsonResult SaveConfiguredColumns(string optionValues)
         {
             try
@@ -225,9 +319,7 @@ namespace SRLog.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        [AdminFilter]
-        public JsonResult GetSRLogsList(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
+        public JsonResult GetSRLogsList(string keyword = "", string sortby1 = "", string sortby2 = "", int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
         {
             try
             {
@@ -237,12 +329,24 @@ namespace SRLog.Controllers
                     if (userinfo != null)
                     {
                         SRLogRepository _repository = new SRLogRepository();
-                        var srCount = _repository.GetSRLogcount();
+                        if (keyword == "")
+                        {
+                            var srCount = _repository.GetSRLogcount();
 
-                        var srlogs = _repository.GetSRLogsList(userinfo.UserId, jtStartIndex, jtPageSize, jtSorting);
+                            var srlogs = _repository.GetSRLogsList(userinfo.UserId, sortby1, sortby2, jtStartIndex, jtPageSize, jtSorting);
 
-                        //  List<tblBID_Log> bidlogs = _repository .GetBidLogs();
-                        return Json(new { Result = "OK", Records = srlogs, TotalRecordCount = srCount });
+                            //  List<tblBID_Log> bidlogs = _repository .GetBidLogs();
+                            return Json(new { Result = "OK", Records = srlogs, TotalRecordCount = srCount });
+                        }
+                        else
+                        {
+                            var srCount = _repository.GetSRLogcountByFilter(keyword);
+
+                            var srlogs = _repository.GetSRLogsListByFilter(keyword, sortby1, sortby2, userinfo.UserId, jtStartIndex, jtPageSize, jtSorting);
+
+                            //  List<tblBID_Log> bidlogs = _repository .GetBidLogs();
+                            return Json(new { Result = "OK", Records = srlogs, TotalRecordCount = srCount });
+                        }
                     }
                     else
                         return Json(new { Result = "ERROR", Message = "Session expired. Please login again" });
@@ -257,7 +361,6 @@ namespace SRLog.Controllers
         }
 
         [HttpPost]
-        [AdminFilter]
         public string SaveColumnWidth(string fieldsettings)
         {
             int colno = 2;
@@ -311,6 +414,55 @@ namespace SRLog.Controllers
             EventLog.LogData("Column width changed successfully by " + userinfo.User_Name + " on " + DateTime.Now, true);
             return "Settings saved successfully";
 
+        }
+
+        [HttpPost]
+        public JsonResult SaveOrderBy(string sort1, string order1, string sort2, string order2)
+        {
+            try
+            {
+                if (Session["UserInfo"] != null)
+                {
+                    UserInfoViewModel userinfo = (UserInfoViewModel)Session["UserInfo"];
+                    if (userinfo != null)
+                    {
+                        if (sort1 == "")
+                            order1 = "Ascending";
+
+                        if (sort2 == "")
+                            order2 = "Ascending";
+
+                        if (order1 == "ASC")
+                            order1 = "Ascending";
+
+                        if (order2 == "ASC")
+                            order2 = "Ascending";
+
+                        if (order1 == "DESC")
+                            order1 = "Descending";
+
+                        if (order2 == "DESC")
+                            order2 = "Descending";
+
+                        SettingsRepository _repository = new SettingsRepository();
+                        _repository.UpdateSetting(userinfo.UserId, "REPORT_BY_SR", "Level1_Field_Name", sort1);
+                        _repository.UpdateSetting(userinfo.UserId, "REPORT_BY_SR", "Level1_Sort_Type", order1);
+                        _repository.UpdateSetting(userinfo.UserId, "REPORT_BY_SR", "Level2_Field_Name", sort2);
+                        _repository.UpdateSetting(userinfo.UserId, "REPORT_BY_SR", "Level2_Sort_Type", order2);
+
+                        return Json("Sort order saved successfully.", JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                        return Json(new { Result = "ERROR", Message = "Session expired. Please login again" });
+                }
+                else
+                    return Json(new { Result = "ERROR", Message = "Session expired. Please login again" });
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
         }
     }
 }

@@ -15,9 +15,6 @@
         <EntityTypeShape EntityType="Model.tblCustomer" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.tblGroupUser" Width="1.5" PointX="5.75" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.tblUser" Width="1.5" PointX="9" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.tblObsolete_BID_Log" Width="1.5" PointX="0.625" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.tblSR_Log_Test" Width="1.5" PointX="12.75" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.tblst_temp" Width="1.5" PointX="4.625" PointY="6.625" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_tblCustAddress_tblCustomer" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Model.tblSetting" Width="1.5" PointX="0.625" PointY="0.625" />
         <EntityTypeShape EntityType="Model.tblSR_Log" Width="1.5" PointX="6.375" PointY="6.625" />

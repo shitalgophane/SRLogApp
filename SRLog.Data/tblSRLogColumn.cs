@@ -17,5 +17,6 @@ namespace SRLog.Data
         public int id { get; set; }
         public string FieldName { get; set; }
         public string DisplayName { get; set; }
+        public Nullable<bool> IsSortable { get; set; }
     }
 }

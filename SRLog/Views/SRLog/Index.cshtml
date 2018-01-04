@@ -1,10 +1,10 @@
 ﻿@{
-    ViewBag.Title = "List All Jobs By SR Number";
+    ViewBag.Title = @ViewBag.Title;
 }
 
+
+@Scripts.Render("~/bundles/modernizr")
 <link href="~/Scripts/jtable/themes/lightcolor/blue/jtable.css" rel="stylesheet" />
-
-
 
 <style type="text/css">
     #SRLogTableContainer {
@@ -15,14 +15,84 @@
 </style>
 
 
-<div id="SRLogTableContainer" style="border:1px solid #c6c3c3;">
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-3 table-bordered">
+            <label class="headerlabel">Records Sorted By :-</label>
+            <br />
+            <table>
+                <tr>
+                    <td>
+                        @Html.DropDownList("FieldList1", ViewBag.FieldList as SelectList, new { @class = "form-control", @style = "width:150px" })
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>
+                        @Html.DropDownList("FieldList2", ViewBag.FieldListTwo as SelectList, new { @class = "form-control", @style = "width:150px" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="height:5px;"></td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DropDownList("ddlOrderBy1", ViewBag.OrderList as SelectList, new { @class = "form-control", @style = "width:150px" })
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>
+                        @Html.DropDownList("ddlOrderBy2", ViewBag.OrderListTwo as SelectList, new { @class = "form-control", @style = "width:150px" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="height:5px;"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align:right;">
+                        <button type="button" class="btn btn-primary btnMain" id="SortRecordsButton">Apply Sort</button>
+                        <button type="button" class="btn btn-primary btnMain" id="SaveSortButton">Save Sort</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="height:5px;"></td>
+                </tr>
+            </table>
+        </div>
 
+    </div>
+</div>
+
+
+<div id="SRLogTableContainer" style="border:1px solid #c6c3c3;margin-top:10px;">
+
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="myModalForKeywordSearch">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header login">
+                <h5 class="modal-title">
+                    List All Jobs That Contains Certain Keywords.
+                </h5>
+            </div>
+            <div class="modal-body">
+                <form>
+                    Enter Keywords To Search: <input type="text" name="keyword" id="keyword" maxlength="30" />
+                </form>
+            </div>
+            <div class="modal-footer" style="text-align:center">
+                <button type="submit" class="btn btn-primary btnMain" id="LoadRecordsButton" data-dismiss="modal">Search</button>
+                <button type="button" class="btn btn-primary btnMain" data-dismiss="modal">Cancel</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>
 
 @section scripts
 {
     <script type="text/javascript">
         $(document).ready(function () {
+            var Flag = '@ViewBag.Flag';
+
+
             var fields = {
                 Id: {
                     key: true,
@@ -45,6 +115,24 @@
                                     width: item.width
                                 };
                         }
+                        else if (item.fieldname == "FileFolder" || item.fieldname == "Quote" || item.fieldname == "ChemFeed" || item.fieldname == "InactiveJob" || item.fieldname == "PW"
+                            || item.fieldname == "NotQuoted" || item.fieldname == "Closed" || item.fieldname == "MandatoryJobWalk" || item.fieldname == "BidAsPrimeOrSub" || item.fieldname == "BondingMailSent"
+                            || item.fieldname == "PrevailingMailSent" || item.fieldname == "PrevailingWageTBD" || item.fieldname == "Billing" || item.fieldname == "NewCustomer" || item.fieldname == "QuoteTypeI_C"
+                            || item.fieldname == "QuoteTypeElectrical" || item.fieldname == "QuoteTypeNoBid" || item.fieldname == "FollowUp" || item.fieldname == "NotifyPM") {
+                            fields[item.fieldname] =
+                                {
+                                    title: item.displayname,
+                                    width: item.width,
+                                    display: function (data) {
+                                        if (data.record[item.fieldname] == '1') {
+                                            return '<input type="checkbox" checked="checked" disabled="disabled" />';
+                                        }
+                                        else {
+                                            return '<input type="checkbox" disabled="disabled" />';
+                                        }
+                                    }
+                                };
+                        }
                         else if (item.fieldname == "JobOrQuote") {
                             fields[item.fieldname] =
                                 {
@@ -64,7 +152,7 @@
                             fields[item.fieldname] =
                                 {
                                     title: item.displayname,
-                                    width: item.width                                    
+                                    width: item.width
                                 };
                         }
                     });
@@ -81,14 +169,102 @@
                 sorting: false, //Enable sorting
                 columnResizable: true,
                 columnSelectable: false,
-                //saveUserPreferences: false,
+                saveUserPreferences: false,
                 actions:
                     {
                         listAction: '@Url.Action("GetSRLogsList")'
                     },
                 fields: fields
             });
-            $("#SRLogTableContainer").jtable('load');
+            // $("#SRLogTableContainer").jtable('load');
+
+            //Re-load records when user click 'load records' button.
+            $('#LoadRecordsButton').click(function (e) {
+                e.preventDefault();
+                var sort1 = '';
+                if ($('#FieldList1').val() != '') {
+                    sort1 = $('#FieldList1').val() + ' ' + $('#ddlOrderBy1').val();
+                }
+
+                var sort2 = '';
+                if ($('#FieldList2').val() != '') {
+                    sort2 = $('#FieldList2').val() + ' ' + $('#ddlOrderBy2').val();
+                }
+
+                $('#SRLogTableContainer').jtable('load', {
+                    keyword: $('#keyword').val(),
+                    sortby1: sort1,
+                    sortby2: sort2
+                });
+                $('#myModalForKeywordSearch').hide();
+            });
+
+            $('#SortRecordsButton').click(function (e) {
+                var sort1 = '';
+                if ($('#FieldList1').val() != '') {
+                    sort1 = $('#FieldList1').val() + ' ' + $('#ddlOrderBy1').val();
+                }
+
+                var sort2 = '';
+                if ($('#FieldList2').val() != '') {
+                    sort2 = $('#FieldList2').val() + ' ' + $('#ddlOrderBy2').val();
+                }
+
+                $('#SRLogTableContainer').jtable('load', {
+                    keyword: $('#keyword').val(),
+                    sortby1: sort1,
+                    sortby2: sort2
+                });
+            });
+
+            //if (Flag == "ListAllJobsBySRNumber" || Flag == "ListAllJobsByFilter") {
+            if (Flag == "ListAllJobsBySRNumber") {
+                //Load all records when page is first shown
+                $("#SaveSortButton").css("visibility", "hidden");
+                $('#LoadRecordsButton').click();
+            }
+            else if (Flag == "ListAllJobsByFilter") {
+                $("#SaveSortButton").css("visibility", "visible");
+                $('#LoadRecordsButton').click();
+            }
+            else if (Flag == "ListAllJobsByKeywordSearch") {
+                $("#SaveSortButton").css("visibility", "hidden");
+                $('#myModalForKeywordSearch').modal({
+                    show: true,
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            }
+
+
+            $('#SaveSortButton').click(function (e) {
+                var sort1 = $('#FieldList1').val();
+                var order1 = $('#ddlOrderBy1').val();
+
+                var sort2 = $('#FieldList2').val();
+                var order2 = $('#ddlOrderBy2').val();
+
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: '@Url.Action("SaveOrderBy")',
+                    data:
+                        {
+                            sort1: sort1,
+                            order1: order1,
+                            sort2: sort2,
+                            order2: order2
+                        },
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data);
+                        $('#LoadRecordsButton').click();
+                    },
+                    error: function (xhr) {
+                        alert('Error occured');
+                    }
+                });
+            });
         });
     </script>
 }
