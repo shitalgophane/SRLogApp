@@ -25,115 +25,81 @@ namespace SRLog.Data.BidLog
         public List<tblBID_Log> GetBidLogsList(int startIndex, int count, string sorting)
         {
             IEnumerable<tblBID_Log> query = db.tblBID_Logs;
-
-
-            //Sorting
-            //This ugly code is used just for demonstration.
-            //Normally, Incoming sorting text can be directly appended to an SQL query.
-            if (string.IsNullOrEmpty(sorting) || sorting.Equals("BidDate ASC"))
-            {
-                query = query.OrderBy(p => p.BidDate);
-            }
-            else if (sorting.Equals("BidDate DESC"))
-            {
-                query = query.OrderByDescending(p => p.BidDate);
-            }
-            else if (sorting.Equals("BiddingAs ASC"))
-            {
-                query = query.OrderBy(p => p.BiddingAs);
-            }
-            else if (sorting.Equals("BiddingAs DESC"))
-            {
-                query = query.OrderByDescending(p => p.BiddingAs);
-            }
-            else if (sorting.Equals("CityState ASC"))
-            {
-                query = query.OrderBy(p => p.CityState);
-            }
-            else if (sorting.Equals("CityState DESC"))
-            {
-                query = query.OrderByDescending(p => p.CityState);
-            }
-            else if (sorting.Equals("Owner ASC"))
-            {
-                query = query.OrderBy(p => p.OwnerName);
-            }
-            else if (sorting.Equals("Owner DESC"))
-            {
-                query = query.OrderByDescending(p => p.OwnerName);
-            }
-            else if (sorting.Equals("ProjectName ASC"))
-            {
-                query = query.OrderBy(p => p.ProjectName);
-            }
-            else if (sorting.Equals("ProjectName DESC"))
-            {
-                query = query.OrderByDescending(p => p.ProjectName);
-            }
-            else if (sorting.Equals("IAndCEstimate ASC"))
-            {
-                query = query.OrderBy(p => p.IAndCEstimate);
-            }
-            else if (sorting.Equals("IAndCEstimate DESC"))
-            {
-                query = query.OrderByDescending(p => p.IAndCEstimate);
-            }
-            else if (sorting.Equals("Division ASC"))
-            {
-                query = query.OrderBy(p => p.Division);
-            }
-            else if (sorting.Equals("Division DESC"))
-            {
-                query = query.OrderByDescending(p => p.Division);
-            }
-            else if (sorting.Equals("LastAddendumRecvd ASC"))
-            {
-                query = query.OrderBy(p => p.LastAddendumRecvd);
-            }
-            else if (sorting.Equals("LastAddendumRecvd DESC"))
-            {
-                query = query.OrderByDescending(p => p.LastAddendumRecvd);
-            }
-            else if (sorting.Equals("Estimator ASC"))
-            {
-                query = query.OrderBy(p => p.Estimator);
-            }
-            else if (sorting.Equals("Estimator DESC"))
-            {
-                query = query.OrderByDescending(p => p.Estimator);
-            }
-            else if (sorting.Equals("AdevertiseDate ASC"))
-            {
-                query = query.OrderBy(p => p.AdvertiseDate);
-            }
-            else if (sorting.Equals("AdevertiseDate DESC"))
-            {
-                query = query.OrderByDescending(p => p.AdvertiseDate);
-            }
-            else if (sorting.Equals("ProjectFolder ASC"))
-            {
-                query = query.OrderBy(p => p.ProjectFolder);
-            }
-            else if (sorting.Equals("ProjectFolder DESC"))
-            {
-                query = query.OrderByDescending(p => p.ProjectFolder);
-            }
-            else if (sorting.Equals("QuoteNumber ASC"))
-            {
-                query = query.OrderBy(p => p.QuoteNumber);
-            }
-            else if (sorting.Equals("QuoteNumber DESC"))
-            {
-                query = query.OrderByDescending(p => p.QuoteNumber);
-            }
-            else
-            {
-                query = query.OrderBy(p => p.OwnerName); //Default!
-            }
-
-            return count > 0
+            List<tblBID_Log> list = count > 0
                        ? query.Skip(startIndex).Take(count).ToList() //Paging
                        : query.ToList(); //No paging
+
+            foreach (tblBID_Log b in list)
+            {
+                b.DOW = Convert.ToDateTime(b.BidDate).ToString("ddd");
+                string[] strsplit = b.BiddingAs.Split('#');
+
+                string strBidAs = "";
+                if (strsplit.Length > 1)
+                {
+                    for (int i = 0; i < strsplit.Length - 1; i++)
+                    {
+                        switch (strsplit[i])
+                        {
+                            case "0":
+                                strBidAs = strBidAs + "I&C, ";
+                                break;
+                            case "1":
+                                strBidAs = strBidAs + "Electrical, ";
+                                break;
+                            case "2":
+                                strBidAs = strBidAs + "Prime, ";
+                                break;
+                            case "3":
+                                strBidAs = strBidAs + "Unknown, ";
+                                break;
+                            case "4":
+                                strBidAs = strBidAs + "Not Bidding, ";
+                                break;
+                            case "5":
+                                strBidAs = strBidAs + "Not Qualified, ";
+                                break;
+                            case "6":
+                                strBidAs = strBidAs + "Mechanical, ";
+                                break;
+                        }
+                    }
+                    strBidAs = strBidAs.Remove(strBidAs.LastIndexOf(','));
+                    b.BiddingAs = strBidAs;
+                }
+                else if (strsplit.Length == 1)
+                {
+                    switch (strsplit[0])
+                    {
+                        case "0":
+                            strBidAs = "I&C ";
+                            break;
+                        case "1":
+                            strBidAs = "Electrical ";
+                            break;
+                        case "2":
+                            strBidAs = "Prime ";
+                            break;
+                        case "3":
+                            strBidAs = "Unknown ";
+                            break;
+                        case "4":
+                            strBidAs = "Not Bidding ";
+                            break;
+                        case "5":
+                            strBidAs = "Not Qualified ";
+                            break;
+                        case "6":
+                            strBidAs = "Mechanical ";
+                            break;
+                    }
+                    b.BiddingAs = strBidAs;
+                }
+            }
+
+            return list;
+
+
         }
 
         public int GetBidlogCount()
@@ -141,6 +107,6 @@ namespace SRLog.Data.BidLog
             return db.tblBID_Logs.Count();
         }
 
-       
+
     }
 }

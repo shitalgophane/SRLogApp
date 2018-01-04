@@ -4,74 +4,85 @@
 }
 <div class="container-fluid text-center">
 
-  
-        <div class="row">
-            <div class="well well-sm" >
-                <p>SR Log</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                <div class="thumbnail homeimage">
-                    <a href="#">
 
+    <div class="row">
+        <div class="well well-sm">
+            <p>SR Log</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="thumbnail homeimage">
+                @if (Session["SR_Log_ReadOnly"].ToString() == "False")
+                {
+                    <a href="#">
                         <img src="~/Images/create.png" alt="Create New SR">
                         <div class="caption">
                             <p>Create New SR</p>
                         </div>
                     </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="thumbnail homeimage">
-                    <a href="/SRLog/Index">
-                        <img src="~/Images/list.png" alt="List All By SR NUmber">
-                        <div class="caption">
-                            <p>List All By SR NUmber</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="thumbnail homeimage">
-                    <a href="/SRLog/Index?Flag=ListAllJobsByKeywordSearch">
-                        <img src="~/Images/search.png" alt="Keyword Search">
-                        <div class="caption">
-                            <p>Keyword Search</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="thumbnail homeimage">
-                    <a href="/SRLog/Index?Flag=ListAllJobsByFilter">
-                        <img src="~/Images/filter.png" alt="Custom Sort/Filter All Records">
-                        <div class="caption">
-                            <p>Custom Sort/Filter All Records</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="thumbnail homeimage">
-                    <a href="/SRlog/ConfigureColumns">
-                        <img src="~/Images/order.png" alt="Configure Column Order">
-                        <div class="caption">
-                            <p>Configure Column Order</p>
-                        </div>
-                    </a>
-                </div>
+                }
+                else
+                {
+                    <img src="~/Images/create.png" alt="Create New SR">
+                    <div class="caption">
+                        <p class="disabled">Create New SR</p>
+                    </div>
+                }
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="thumbnail homeimage">
+                <a href="/SRLog/Index">
+                    <img src="~/Images/list.png" alt="List All By SR NUmber">
+                    <div class="caption">
+                        <p>List All By SR NUmber</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="thumbnail homeimage">
+                <a href="/SRLog/Index?Flag=ListAllJobsByKeywordSearch">
+                    <img src="~/Images/search.png" alt="Keyword Search">
+                    <div class="caption">
+                        <p>Keyword Search</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="thumbnail homeimage">
+                <a href="/SRLog/Index?Flag=ListAllJobsByFilter">
+                    <img src="~/Images/filter.png" alt="Custom Sort/Filter All Records">
+                    <div class="caption">
+                        <p>Custom Sort/Filter All Records</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="thumbnail homeimage">
+                <a href="/SRlog/ConfigureColumns">
+                    <img src="~/Images/order.png" alt="Configure Column Order">
+                    <div class="caption">
+                        <p>Configure Column Order</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 
-        <div class="row">
-            <div class="well well-sm" >
-                <p>Bid Log</p>
-            </div>
+    <div class="row">
+        <div class="well well-sm">
+            <p>Bid Log</p>
         </div>
-        <div class="row">
-            <div class="col-md-2">
-                <div class="thumbnail homeimage">
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="thumbnail homeimage">
+                @if (Session["Bid_Log_ReadOnly"].ToString() == "False")
+                {
                     <a href="/BidLog/Index">
 
                         <img src="~/Images/viewcreate.png" alt="View/Create Bids">
@@ -79,89 +90,112 @@
                             <p>View/Create Bids</p>
                         </div>
                     </a>
-                </div>
+                }
+                else
+                {
+                    <img src="~/Images/viewcreate.png" alt="View/Create Bids">
+                    <div class="caption">
+                        <p class="disabled">View/Create Bids</p>
+                    </div>
+                }
             </div>
-            <div class="col-md-3">
-                <div class="thumbnail homeimage">
-                    <a href="~/Images/archive.png">
-                        <img src="~/Images/archive.png" alt="View Archived Bids">
-                        <div class="caption">
-                            <p>View Archived Bids</p>
-                        </div>
-                    </a>
-                </div>
+        </div>
+        <div class="col-md-3">
+            <div class="thumbnail homeimage">
+                <a href="~/Images/archive.png">
+                    <img src="~/Images/archive.png" alt="View Archived Bids">
+                    <div class="caption">
+                        <p>View Archived Bids</p>
+                    </div>
+                </a>
             </div>
-            <div class="col-md-2">
-                <div class="thumbnail homeimage">
-                    <a href="#">
-                        <img src="~/Images/keywordsearcharchive.png" alt="Keyword Search Archived Bids">
-                        <div class="caption">
-                            <p>Keyword Search Archived Bids</p>
-                        </div>
-                    </a>
-                </div>
+        </div>
+        <div class="col-md-2">
+            <div class="thumbnail homeimage">
+                <a href="#">
+                    <img src="~/Images/keywordsearcharchive.png" alt="Keyword Search Archived Bids">
+                    <div class="caption">
+                        <p>Keyword Search Archived Bids</p>
+                    </div>
+                </a>
             </div>
-            <div class="col-md-3">
-                <div class="thumbnail homeimage">
+        </div>
+        <div class="col-md-3">
+            <div class="thumbnail homeimage">
+                @if (Session["Admin_Rights"].ToString() == "True")
+                {
                     <a href="#">
                         <img src="~/Images/settings.png" alt="Settings">
                         <div class="caption">
                             <p>Settings</p>
                         </div>
                     </a>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="thumbnail homeimage">
-                    <a href="#">
-                        <img src="~/Images/user.png" alt="Login With Different Password">
-                        <div class="caption">
-                            <p>Login With Different Password</p>
-                        </div>
-                    </a>
-                </div>
+                }
+                else
+                {
+
+                    <img src="~/Images/settings.png" alt="Settings">
+                    <div class="disabled">
+                        <p>Settings</p>
+                    </div>
+
+                }
+
             </div>
         </div>
-
-        <div class="row">
-            <div class="well well-sm">
-                <p>Quote Log</p>
+        <div class="col-md-2">
+            <div class="thumbnail homeimage">
+                <a href="#">
+                    <img src="~/Images/user.png" alt="Login With Different Password">
+                    <div class="caption">
+                        <p>Login With Different Password</p>
+                    </div>
+                </a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-2">
-                <div class="thumbnail homeimage">
-                    <a href="#">
+    </div>
 
-                        <img src="~/Images/viewactive.png" alt="View Active Quotes">
-                        <div class="caption">
-                            <p>View Active Quotes</p>
-                        </div>
-                    </a>
-                </div>
+    <div class="row">
+        <div class="well well-sm">
+            <p>Quote Log</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="thumbnail homeimage">
+                <a href="#">
+
+                    <img src="~/Images/viewactive.png" alt="View Active Quotes">
+                    <div class="caption">
+                        <p>View Active Quotes</p>
+                    </div>
+                </a>
             </div>
-            <div class="col-md-3">
-                <div class="thumbnail homeimage">
-                    <a href="#">
-                        <img src="~/Images/viewarchived.png" alt="View Archived Quotes">
-                        <div class="caption">
-                            <p>View Archived Quotes</p>
-                        </div>
-                    </a>
-                </div>
+        </div>
+        <div class="col-md-3">
+            <div class="thumbnail homeimage">
+                <a href="#">
+                    <img src="~/Images/viewarchived.png" alt="View Archived Quotes">
+                    <div class="caption">
+                        <p>View Archived Quotes</p>
+                    </div>
+                </a>
             </div>
-            <div class="col-md-2">
-                <div class="thumbnail homeimage">
-                    <a href="#">
-                        <img src="~/Images/keywordsearch.png" alt="Keyword Search">
-                        <div class="caption">
-                            <p>Keyword Search</p>
-                        </div>
-                    </a>
-                </div>
+        </div>
+        <div class="col-md-2">
+            <div class="thumbnail homeimage">
+                <a href="#">
+                    <img src="~/Images/keywordsearch.png" alt="Keyword Search">
+                    <div class="caption">
+                        <p>Keyword Search</p>
+                    </div>
+                </a>
             </div>
-            <div class="col-md-3">
-                <div class="thumbnail homeimage">
+        </div>
+        <div class="col-md-3">
+            <div class="thumbnail homeimage">
+                @if (Session["Admin_Rights"].ToString() == "True")
+                {
                     <a href="#">
 
                         <img src="~/Images/createcustomer.png" alt="Create New Customer">
@@ -169,21 +203,38 @@
                             <p>Create New Customer</p>
                         </div>
                     </a>
-                </div>
+                }
+                else
+                {
+                    <img src="~/Images/createcustomer.png" alt="Create New Customer">
+                    <div class="caption">
+                        <p class="disabled">Create New Customer</p>
+                    </div>
+                }
             </div>
-            <div class="col-md-2">
-                <div class="thumbnail homeimage">
+        </div>
+        <div class="col-md-2">
+            <div class="thumbnail homeimage">
+                @if (Session["Admin_Rights"].ToString() == "True")
+                {
                     <a href="#">
                         <img src="~/Images/managecustomer.png" alt="Manage Customer Details">
                         <div class="caption">
                             <p>Manage Customer Details</p>
                         </div>
                     </a>
-                </div>
+                }
+                else
+                {
+                    <img src="~/Images/managecustomer.png" alt="Manage Customer Details">
+                    <div class="caption">
+                        <p class="disabled">Manage Customer Details</p>
+                    </div>
+                }
             </div>
         </div>
-
-
-       
     </div>
 
+
+
+</div>

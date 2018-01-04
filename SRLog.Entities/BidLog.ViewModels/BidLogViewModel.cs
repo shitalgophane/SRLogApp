@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SRLog.Entities.BidLog.ViewModels
 {
-   public class BidLogViewModel
+    public class BidLogViewModel
     {
-        public Nullable<System.DateTime> BidDate { get; set; }
+        public Nullable<System.DateTime> BidDate { get; set; }        
         public string BiddingAs { get; set; }
         public string BidTo { get; set; }
         public string ProjectName { get; set; }

@@ -262,7 +262,7 @@
 
             $("#SRLogTableContainer").jtable({
                 paging: true, //Enable paging
-                pageSize: 6, //Set page size (default: 10)
+                pageSize: 10, //Set page size (default: 10)
                 sorting: false, //Enable sorting
                 columnResizable: true,
                 columnSelectable: false,
@@ -348,22 +348,16 @@
 
                     var FromDate = '@ViewBag.FromDate';
                     var ToDate = '@ViewBag.ToDate';
-
-                    alert(new Date(FromDate));
                     
-                    $("#datetimepicker1").datepicker({
-                        format: 'MM/DD/YYYY',
-                        autoclose: true
-                    }).datepicker("update", new Date(FromDate));
-
-                    
+                    $('#datetimepicker1').data("DateTimePicker").date(new Date(FromDate));
+                    $('#datetimepicker2').data("DateTimePicker").date(new Date(ToDate));
 
                     $("#lblHeader1").show();
                     $("#lblHeader2").show();
                     $('#datetimepicker1').show();
                     $('#datetimepicker2').show();
-
                 }
+                
                 $('#LoadRecordsButton').click();
             }
             else if (Flag == "ListAllJobsByKeywordSearch") {

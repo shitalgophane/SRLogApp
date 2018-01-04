@@ -21,9 +21,8 @@
             $('#BidLogTableContainer').jtable({
                 //title: 'View/Create Bids',
                 paging: true, //Enable paging
-                pageSize: 6, //Set page size (default: 10)
-                sorting: true, //Enable sorting
-                defaultSorting: 'Owner ASC', //Set default sorting
+                pageSize: 10, //Set page size (default: 10)
+                sorting: false, //Enable sorting                
                 bautowidth:true ,
                 actions: {
                     listAction: '@Url.Action("GetBidLogsList")'
@@ -38,6 +37,10 @@
                         width: '15%',
                         type: 'date',
                         displayFormat: 'mm/dd/yy'
+                    },
+                    DOW: {
+                        title: 'DOW',
+                        width: '15%'
                     },
                     BiddingAs: {
                         title: 'Bidding As',

@@ -55,6 +55,11 @@ namespace SRLog.Controllers
                         ViewBag.UserName = l.LoginName;
                         Session["UserInfo"] = l.UserInfo;
 
+                        Session["Admin_Rights"] = l.UserInfo.Admin_Rights;
+                        Session["Bid_Log_ReadOnly"] = l.UserInfo.Bid_Log_ReadOnly;
+                        Session["SR_Log_ReadOnly"] = l.UserInfo.SR_Log_ReadOnly;
+
+
                         //Log activity in database
                         act.AddActivityLog(l.UserInfo.User_Name, "Login", "Login", "User " + l.UserInfo.User_Name + " Logged in.");
 

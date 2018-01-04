@@ -8,15 +8,14 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="container-fuild">
-
+    <div class="container-fluid">
         <div class="row" style="background-color: #5DBCD2 !important">
             <div class="col-md-2">
                 <img src="~/Images/logo1.png" />
             </div>
             <div class="col-md-8">
                 <div>
-                    <div class="panelhead" style="font-size:27px"><center>SR Log Application</center></div>
+                    <div style="font-size: 27px; color: #fff;margin-top:18px;"><center>SR Log Application</center></div>
                 </div>
             </div>
             <div class="col-md-2">
@@ -29,8 +28,13 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle welcome " data-toggle="dropdown">Welcome, @Session["User"] <b class="glyphicon glyphicon-user"></b></a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink(" LogOut", "Login", "Account", null, new { @class = "btn btn-info btn-sm glyphicon glyphicon-log-out logout" })</li>
-                                <li>@Html.ActionLink(" Settings", "ConfigureColumns", "SRLog", null, new { @class = "btn btn-info btn-sm glyphicon glyphicon-tasks logout" })</li>
+                                <li>
+                                    <a class="btn btn-info " href="/Account/Login"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;&nbsp;LogOut </a>
+                                </li>
+
+                                <li>
+                                    <a class="btn btn-info " href="/SRLog/ConfigureColumns"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;&nbsp;Settings </a>
+                                </li>
 
                             </ul>
                         </li>
@@ -47,9 +51,7 @@
                             <li>
                                 @Html.ActionLink(" LogOut", "Login", "Account", null, new { @class = "btn btn-info btn-sm glyphicon glyphicon-log-out logout" })
                             </li>
-
                         </ul>
-
                     </div>*@
             </div>
 
@@ -58,12 +60,12 @@
 
 
         <div class="row">
-            <div class="col-md-12">
-                <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation" style="margin-top:10px">
+            <div class="col-md-12 columnmenu">
+                <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
                     <div class="container-fluid">
                         <div class="navbar-header">
                             @*<a class="navbar-brand" href="#">Brand</a>*@
-                            <a class="navbar-brand" href="/home/Index" style="color:#fff">Home</a>
+                            @*<a class="navbar-brand" href="/home/Index" style="color:#fff">Home</a>*@
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
                                 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                             </button>
@@ -71,9 +73,19 @@
                         <div class="collapse navbar-collapse navbar-menubuilder">
                             <ul class="nav navbar-nav navbar-left">
                                 <li class="dropdown">
+                                    <a href="/home/Index">HOME</a>
+                                </li>
+                                <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">SR LOG<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">Create New SR</a></li>
+                                        @if (Session["SR_Log_ReadOnly"].ToString() == "False")
+                                        {
+                                            <li><a href="#">Create New SR</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="#" style="cursor:not-allowed">Create New SR</a></li>
+                                        }
                                         <li>@Html.ActionLink("List All By SR Number", "Index", "SRLog")</li>
                                         <li>@Html.ActionLink("Keyword Search", "Index", "SRLog", new { Flag = "ListAllJobsByKeywordSearch" }, null)</li>
                                         <li>@Html.ActionLink("Custom Sort/Filter All Records", "Index", "SRLog", new { Flag = "ListAllJobsByFilter" }, null)</li>
@@ -83,11 +95,25 @@
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">BID LOG<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li>@Html.ActionLink("View/Create Bids", "Index", "BidLog")</li>
+                                        @if (Session["Bid_Log_ReadOnly"].ToString() == "False")
+                                        {
+                                            <li>@Html.ActionLink("View/Create Bids", "Index", "BidLog")</li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="#" style="cursor:not-allowed">View/Create Bids</a> </li>
+                                        }
                                         <li><a href="#">View Archived Bids</a></li>
                                         <li><a href="#">Keyword Search Archived Bids</a></li>
-                                        <li><a href="#">Settings</a></li>
-                                        <li><a href="#">Login With Different Password</a></li>
+                                        @if (Session["Admin_Rights"].ToString() == "True")
+                                        {
+                                            <li><a href="#">Settings</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="#" style="cursor:not-allowed">Settings</a></li>
+                                        }
+
                                     </ul>
                                 </li>
                                 <li class="dropdown">
@@ -96,8 +122,17 @@
                                         <li><a href="#">View Active Quotes</a></li>
                                         <li><a href="#">View Archived Quotes</a></li>
                                         <li><a href="#">Keyword Search</a></li>
-                                        <li><a href="#">Manage Customer Details</a></li>
-                                        <li><a href="#">Create New Customer</a></li>
+                                        @if (Session["Admin_Rights"].ToString() == "True")
+                                        {
+                                            <li><a href="#">Manage Customer Details</a></li>
+                                            <li><a href="#">Create New Customer</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="#" style="cursor:not-allowed">Manage Customer Details</a></li>
+                                            <li><a href="#" style="cursor:not-allowed">Create New Customer</a></li>
+                                        }
+
                                     </ul>
                                 </li>
 
@@ -136,18 +171,18 @@
     @*@Scripts.Render("~/bundles/jtable")*@
 
     @*@Scripts.Render("~/bundles/jqueryui")*@
-  
+
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/moment.js"></script>
     <script type="text/javascript" src="~/scripts/bootstrap-datetimepicker.js"></script>
     <link rel="stylesheet" href="~/Content/bootstrap-datetimepicker.css" />
 
     <script src="~/Scripts/jtable/jquery.jtable.js"></script>
-    
-  
+
+
 
     @RenderSection("scripts", required: false)
-    
+
 
 </body>
 </html>
