@@ -6,6 +6,7 @@
 @Scripts.Render("~/bundles/modernizr")
 <link href="~/Scripts/jtable/themes/lightcolor/blue/jtable.css" rel="stylesheet" />
 
+
 <style type="text/css">
     #SRLogTableContainer {
         width: 99%;
@@ -17,7 +18,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="col-md-3 table-bordered">
+        <div class="col-md-3 table-bordered" style="height:105px">
             <label class="headerlabel">Records Sorted By :-</label>
             <br />
             <table>
@@ -45,10 +46,69 @@
                 <tr>
                     <td colspan="3" style="height:5px;"></td>
                 </tr>
+
+            </table>
+        </div>
+        <div class="col-md-3 table-bordered" style="height:105px">
+            <input type="checkbox" class="jtable-checkbox-input" id="chkApplyDateFilter" />
+            <label class="headerlabel" style="vertical-align:middle">Filter by Creation Date</label>
+            <br />
+            <table id="tblDateFilter" name="tblDateFilter">
                 <tr>
-                    <td colspan="3" style="text-align:right;">
-                        <button type="button" class="btn btn-primary btnMain" id="SortRecordsButton">Apply Sort</button>
-                        <button type="button" class="btn btn-primary btnMain" id="SaveSortButton">Save Sort</button>
+                    <td>
+                        <label class="headerlabel" id="lblHeader1" name="lblHeader1">
+                            from date
+                        </label>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="height:5px;"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="headerlabel" id="lblHeader2" name="lblHeader2">
+                            To Date
+                        </label>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <div class='input-group date' id='datetimepicker2'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="height:5px;"></td>
+                </tr>
+            </table>
+
+
+
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-6 table-bordered">
+            <table style="align-content:center;width:100%">
+                <tr>
+                    <td colspan="3" style="height:5px;"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align:center;">
+                        <button type="button" class="btn btn-primary btnMain" id="SortRecordsButton">Apply Sort/Filter</button>
+                        <button type="button" class="btn btn-primary btnMain" id="SaveSortButton">Save Sort/Filter</button>
                     </td>
                 </tr>
                 <tr>
@@ -56,7 +116,6 @@
                 </tr>
             </table>
         </div>
-
     </div>
 </div>
 
@@ -90,7 +149,45 @@
 {
     <script type="text/javascript">
         $(document).ready(function () {
+            $('#datetimepicker1').datetimepicker({
+                defaultDate: new Date(), format: 'MM/DD/YYYY'
+            });
+
+            $('#datetimepicker2').datetimepicker({
+                defaultDate: new Date(), format: 'MM/DD/YYYY'
+            });
+
+
+            if ($('#chkApplyDateFilter').is(":checked")) {
+                $("#lblHeader1").show();
+                $("#lblHeader2").show();
+                $('#datetimepicker1').show();
+                $('#datetimepicker2').show();
+            }
+            else {
+                $("#lblHeader1").hide();
+                $("#lblHeader2").hide();
+                $('#datetimepicker1').hide();
+                $('#datetimepicker2').hide();
+            }
+
+            $("#chkApplyDateFilter").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#lblHeader1").show();
+                    $("#lblHeader2").show();
+                    $('#datetimepicker1').show();
+                    $('#datetimepicker2').show();
+                } else {
+                    $("#lblHeader1").hide();
+                    $("#lblHeader2").hide();
+                    $('#datetimepicker1').hide();
+                    $('#datetimepicker2').hide();
+                }
+            });
+
             var Flag = '@ViewBag.Flag';
+
+
 
 
             var fields = {
@@ -191,10 +288,19 @@
                     sort2 = $('#FieldList2').val() + ' ' + $('#ddlOrderBy2').val();
                 }
 
+                var fromdate = '';
+                var todate = '';
+                if ($('#chkApplyDateFilter').is(":checked")) {
+                    fromdate = $('#datetimepicker1').data('date');
+                    todate = $('#datetimepicker2').data('date');
+                }
+
                 $('#SRLogTableContainer').jtable('load', {
                     keyword: $('#keyword').val(),
                     sortby1: sort1,
-                    sortby2: sort2
+                    sortby2: sort2,
+                    FromDate: fromdate,
+                    ToDate: todate
                 });
                 $('#myModalForKeywordSearch').hide();
             });
@@ -210,10 +316,20 @@
                     sort2 = $('#FieldList2').val() + ' ' + $('#ddlOrderBy2').val();
                 }
 
+                var fromdate = '';
+                var todate = '';
+                if ($('#chkApplyDateFilter').is(":checked")) {
+                    fromdate = $('#datetimepicker1').data('date');
+                    todate = $('#datetimepicker2').data('date');
+                }
+
+
                 $('#SRLogTableContainer').jtable('load', {
                     keyword: $('#keyword').val(),
                     sortby1: sort1,
-                    sortby2: sort2
+                    sortby2: sort2,
+                    FromDate: fromdate,
+                    ToDate: todate
                 });
             });
 
@@ -225,6 +341,29 @@
             }
             else if (Flag == "ListAllJobsByFilter") {
                 $("#SaveSortButton").css("visibility", "visible");
+                var isFilter = '@ViewBag.IsDateFilter';
+
+                if (isFilter == 'True') {
+                    $('#chkApplyDateFilter').attr('checked', 'checked');
+
+                    var FromDate = '@ViewBag.FromDate';
+                    var ToDate = '@ViewBag.ToDate';
+
+                    alert(new Date(FromDate));
+                    
+                    $("#datetimepicker1").datepicker({
+                        format: 'MM/DD/YYYY',
+                        autoclose: true
+                    }).datepicker("update", new Date(FromDate));
+
+                    
+
+                    $("#lblHeader1").show();
+                    $("#lblHeader2").show();
+                    $('#datetimepicker1').show();
+                    $('#datetimepicker2').show();
+
+                }
                 $('#LoadRecordsButton').click();
             }
             else if (Flag == "ListAllJobsByKeywordSearch") {
@@ -244,6 +383,13 @@
                 var sort2 = $('#FieldList2').val();
                 var order2 = $('#ddlOrderBy2').val();
 
+                var fromdate = '';
+                var todate = '';
+                if ($('#chkApplyDateFilter').is(":checked")) {
+                    fromdate = $('#datetimepicker1').data('date');
+                    todate = $('#datetimepicker2').data('date');
+                }
+
                 $.ajax({
                     cache: false,
                     type: "POST",
@@ -253,7 +399,9 @@
                             sort1: sort1,
                             order1: order1,
                             sort2: sort2,
-                            order2: order2
+                            order2: order2,
+                            FromDate: fromdate,
+                            ToDate: todate
                         },
                     dataType: "json",
                     success: function (data) {
@@ -266,5 +414,7 @@
                 });
             });
         });
+
+
     </script>
 }
