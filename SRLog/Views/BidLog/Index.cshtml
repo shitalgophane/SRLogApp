@@ -114,6 +114,21 @@
                             return '<a onclick="ArchieveRecord(' + data.record.QuoteNumber + ')" style="cursor:pointer">Archive Record</a>';
                         }
                     }
+                },
+                rowInserted: function (event, data) {
+                    if (data.record) {
+                        if (data.record.Division == "Concord") {
+                            data.row.css("background", "#FFFFFF");
+                        }
+                        else if(data.record.Division=="Hanford")
+                        {
+                            data.row.css("background", "#D6DFF7");
+                        }
+                        else if(data.record.Division=="Sacramento")
+                        {
+                            data.row.css("background", "#C6FFC6");
+                        }
+                    }
                 }
             });
             //Load student list from server
