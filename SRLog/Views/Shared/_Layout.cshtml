@@ -8,15 +8,8 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-<<<<<<< HEAD
     <div class="container-fluid">
         <div class="row" style="background-color: #5DBCD2 !important">
-=======
-
-    <div class="container-fluid">
-
-        <div class="row rowheader" style="background-color: #5DBCD2 !important">
->>>>>>> a44959540be732ef0e353b41371a15b43c335c13
             <div class="col-md-2">
                 <img src="~/Images/logo1.png" />
             </div>
@@ -28,7 +21,6 @@
             <div class="col-md-2">
 
                 <br />
-<<<<<<< HEAD
                 <div>
                     <ul class="nav">
                         <li class="dropdown">
@@ -41,35 +33,30 @@
                                 <li>
                                     <a class="btn btn-info " href="/SRLog/ConfigureColumns"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;&nbsp;Settings </a>
                                 </li>
-=======
 
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                @*<div class="btn-group dropdown">
 
-                <ul class="nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle welcome " data-toggle="dropdown">Welcome, @Session["User"] <b class="glyphicon glyphicon-user"></b></a>
-                        <ul class="dropdown-menu" style="font-family:open sans,arial">
->>>>>>> a44959540be732ef0e353b41371a15b43c335c13
+                        <button class="btn-welcome btn-sm dropdown-toggle logout" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            WelCome  @Session["User"]
+                            <span class="glyphicon glyphicon-user"></span>
+                        </button>
 
+                        <ul class="dropdown-menu">
                             <li>
                                 @Html.ActionLink(" LogOut", "Login", "Account", null, new { @class = "btn btn-info btn-sm glyphicon glyphicon-log-out logout" })
-                                <a class="btn btn-info btn-sm " href="/home/Index"><span class="glyphicon glyphicon-log-out" style="font-size: 18px;"></span><span class="logout">&nbsp;&nbsp;&nbsp;LogOut </span></a>
                             </li>
                         </ul>
-<<<<<<< HEAD
                     </div>*@
-=======
-                    </li>
-                </ul>
-
-
->>>>>>> a44959540be732ef0e353b41371a15b43c335c13
             </div>
 
         </div>
 
 
 
-<<<<<<< HEAD
         <div class="row">
             <div class="col-md-12 columnmenu">
                 <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
@@ -149,65 +136,11 @@
 
                             </ul>
                         </div>
-=======
-        <div class="row rowmenu">
-            <div class="col-md-12 columnmenu">
-                <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
-
-                    <div class="navbar-header">
-
-                        @*<a class="navbar-brand" href="/home/Index" style="color:#fff">Home</a>*@
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
-                            <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                        </button>
->>>>>>> a44959540be732ef0e353b41371a15b43c335c13
                     </div>
-                    <div class="collapse navbar-collapse navbar-menubuilder">
-                        <ul class="nav navbar-nav navbar-left">
-                            <li class="dropdown">
-                                <a href="/home/Index">HOME<span class="caret"></span></a>
-
-                            </li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">SR LOG<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Create New SR</a></li>
-                                    <li>@Html.ActionLink("List All By SR Number", "Index", "SRLog")</li>
-                                    <li><a href="#">Keyword Search</a></li>
-                                    <li><a href="#">Custom Sort//Filter All Records</a></li>
-                                    <li>@Html.ActionLink("Configure Column Order", "ConfigureColumns", "SRLog") </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">BID LOG<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("View/Create Bids", "Index", "BidLog")</li>
-                                    <li><a href="#">View Archived Bids</a></li>
-                                    <li><a href="#">Keyword Search Archived Bids</a></li>
-                                    <li><a href="#">Settings</a></li>
-                                    <li><a href="#">Login With Different Password</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">QUOTE LOG<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">View Active Quotes</a></li>
-                                    <li><a href="#">View Archived Quotes</a></li>
-                                    <li><a href="#">Keyword Search</a></li>
-                                    <li><a href="#">Manage Customer Details</a></li>
-                                    <li><a href="#">Create New Customer</a></li>
-                                </ul>
-                            </li>
-
-                        </ul>
-                    </div>
-
                 </div>
 
             </div>
         </div>
-
-
         <div class="row">
             <div class="col-md-12">
                 @RenderBody()
@@ -229,16 +162,13 @@
 
     <div>
         <div style="margin: 0 auto;width:98%">
-
-
         </div>
-
     </div>
 
-
     @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jtable")*@
+
     @*@Scripts.Render("~/bundles/jqueryui")*@
-<<<<<<< HEAD
 
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/moment.js"></script>
@@ -248,10 +178,7 @@
     <script src="~/Scripts/jtable/jquery.jtable.js"></script>
 
 
-=======
->>>>>>> a44959540be732ef0e353b41371a15b43c335c13
 
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
 

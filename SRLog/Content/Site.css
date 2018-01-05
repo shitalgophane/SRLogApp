@@ -1,6 +1,6 @@
 ﻿
 body {
-    font-family:open sans,arial !important;
+    font-family:open sans,arial;
     /*font-family: Corbert Condensed Italic;*/
 }
 /* Styles for validation helpers
@@ -34,11 +34,6 @@ body {
 
 
 
-
-.rowheader {
-    /*margin-right: 0px !important;
-    margin-left: 0px !important;*/
-}
 
 
 .header {
@@ -160,7 +155,6 @@ body {
 }
 .logout{
    font-size:18px;
-   font-family:open sans,arial !important;
 }
 
 
@@ -178,12 +172,8 @@ body {
    background-color: #5DBCD2 !important;
    color:rgb(5, 95, 117) !important;
 }
-.rowmenu{
-    /*margin-right:0px !important;
-    margin-left:0px !important;*/
-}
 
-.columnmenu {
-    padding-right: 0px !important;
-    padding-left: 0px !important;
+.columnmenu{
+    padding-right:0px !important;
+    padding-left:0px !important;
 }
