@@ -193,7 +193,5 @@ namespace SRLog.Data.SRLog
                   ).Count();
             }
         }
-
-
     }
 }
