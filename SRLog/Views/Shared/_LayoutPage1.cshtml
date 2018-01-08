@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .header_top_bar {
+    background: #202242;
+}
+        .call_us_menu {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    overflow: hidden;
+}
+
+        .call_us_menu .call_us_bottom {
+    text-align: right;
+}
+
+        .main_menu_bg {
+    margin-top: 0px;
+    background-color: #fff;
+}
+
+
+    </style>
+</head>
+<body>
+    <header id="main_menu" class="header navbar-fixed-top">
+        <div class="header_top_bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="nav">
+                            <div class="call_us_menu">
+                                <div class="col-sm-8 col-xs-12">
+                                    <p>SR LOG APPLICATION</p>
+                                </div>
+                                <div class="col-sm-4 col-xs-5">
+                                    <div class="call_us_bottom">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-xs-6 no-padding">
+                                                <div class="btn_left">
+                                                <a href="http://www.free-css.com/free-css-templates" class="btn-primary">Welcome, @Session["User"]</a></div>
+                                            </div>
+                                            <div class="col-sm-6 col-xs-6">
+                                                <div class="phone_numbr"><a href="/Account/Login">LogOut</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main_menu_bg">
+            <div class="container">
+                <div class="row">
+                    <div class="nave_menu">
+                        <nav class="navbar navbar-default" id="#navmenu">
+                            <div class="container-fluid">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                                    <a class="navbar-brand" href="http://www.free-css.com/free-css-templates"><img src="http://localhost:61172/Images/logo1.png" alt="website template image"></a>
+                                </div>
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li><a href="#home">Home</a></li>
+                                        <li><a href="#abouts">About</a></li>
+                                        <li><a href="#feature">Features</a></li>
+                                        <li><a href="#clients">Clients</a></li>
+                                        <li><a href="#pricing">Domain</a></li>
+                                        <li><a href="#contact">Hosting</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>@RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jtable")*@
+
+    @*@Scripts.Render("~/bundles/jqueryui")*@
+
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/moment.js"></script>
+    <script type="text/javascript" src="~/scripts/bootstrap-datetimepicker.js"></script>
+    <link rel="stylesheet" href="~/Content/bootstrap-datetimepicker.css" />
+
+    <script src="~/Scripts/jtable/jquery.jtable.js"></script>
+
+
+
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>

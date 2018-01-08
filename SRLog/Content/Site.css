@@ -1,6 +1,6 @@
 ﻿
 body {
-    font-family:open sans,arial;
+    font-family: open sans,arial;
     /*font-family: Corbert Condensed Italic;*/
 }
 /* Styles for validation helpers
@@ -28,8 +28,8 @@ body {
 }
 
 .homeimage {
-    padding-top:20px!important;
-    border:none !important;
+    padding-top: 20px !important;
+    border: none !important;
 }
 
 
@@ -38,17 +38,17 @@ body {
 
 .header {
     margin-top: 8px !important;
-    height:60px;
-    margin-left:-10px;
-    margin-right:-10px;
-    color:white;
+    height: 60px;
+    margin-left: -10px;
+    margin-right: -10px;
+    color: white;
 }
 
 
 .background {
     background-image: url('../../../Images/bk1.jpg');
     /*height: auto;*/
-    height:490px;
+    height: 490px;
     background-repeat: no-repeat;
 }
 
@@ -66,9 +66,7 @@ body {
 }
 
 .panelhead {
- 
     color: #fff;
-
 }
 
 .btnMain {
@@ -80,6 +78,7 @@ body {
 #custom-bootstrap-menu.navbar-default .navbar-brand {
     color: rgba(119, 119, 119, 1);
 }
+
 #custom-bootstrap-menu.navbar-default {
     font-size: 14px;
     background-color: rgba(93, 188, 210, 1);
@@ -87,81 +86,84 @@ body {
     background: linear-gradient(to bottom, rgba(50, 155, 181, 1) 0%, rgba(93, 188, 210, 1) 100%);
     border-width: 1px;
     border-radius: 4px;
-     
-}
-#custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
-    color: rgba(255, 255, 255, 1) !important;
-    background-color: rgba(248, 248, 248, 0) !important;
-}
-#custom-bootstrap-menu.navbar-default .navbar-nav>li>a:hover,
-#custom-bootstrap-menu.navbar-default .navbar-nav>li>a:focus {
-    color: rgba(255, 255, 255, 1) !important;
-    background-color: rgba(33, 109, 128, 1) !important;
-    background: -webkit-linear-gradient(top, rgba(50, 157, 184, 1) 0%, rgba(33, 109, 128, 1) 100%) !important;
-    background: linear-gradient(to bottom, rgba(50, 157, 184, 1) 0%, rgba(33, 109, 128, 1) 100%) !important;
-}
-#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a,
-#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:hover,
-#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:focus {
-    color: rgba(255, 255, 255, 1);
-    background-color: rgba(48, 153, 179, 1);
-}
-#custom-bootstrap-menu.navbar-default .navbar-toggle {
-    border-color: #3099b3;
-}
-#custom-bootstrap-menu.navbar-default .navbar-toggle:hover,
-#custom-bootstrap-menu.navbar-default .navbar-toggle:focus {
-    background-color: #3099b3;
-}
-#custom-bootstrap-menu.navbar-default .navbar-toggle .icon-bar {
-    background-color: #3099b3;
-}
-#custom-bootstrap-menu.navbar-default .navbar-toggle:hover .icon-bar,
-#custom-bootstrap-menu.navbar-default .navbar-toggle:focus .icon-bar {
-    background-color: #5dbcd2;
 }
 
-#custom-bootstrap-menu.navbar-default .navbar-nav > li > .dropdown-menu {
- 
-    background: #216d80;
-}
+    #custom-bootstrap-menu.navbar-default .navbar-nav > li > a {
+        color: rgba(255, 255, 255, 1) !important;
+        background-color: rgba(248, 248, 248, 0) !important;
+    }
+
+        #custom-bootstrap-menu.navbar-default .navbar-nav > li > a:hover,
+        #custom-bootstrap-menu.navbar-default .navbar-nav > li > a:focus {
+            color: rgba(255, 255, 255, 1) !important;
+            background-color: rgba(33, 109, 128, 1) !important;
+            background: -webkit-linear-gradient(top, rgba(50, 157, 184, 1) 0%, rgba(33, 109, 128, 1) 100%) !important;
+            background: linear-gradient(to bottom, rgba(50, 157, 184, 1) 0%, rgba(33, 109, 128, 1) 100%) !important;
+        }
+
+    #custom-bootstrap-menu.navbar-default .navbar-nav > .active > a,
+    #custom-bootstrap-menu.navbar-default .navbar-nav > .active > a:hover,
+    #custom-bootstrap-menu.navbar-default .navbar-nav > .active > a:focus {
+        color: rgba(255, 255, 255, 1);
+        background-color: rgba(48, 153, 179, 1);
+    }
+
+    #custom-bootstrap-menu.navbar-default .navbar-toggle {
+        border-color: #fff;
+    }
+
+        #custom-bootstrap-menu.navbar-default .navbar-toggle:hover,
+        #custom-bootstrap-menu.navbar-default .navbar-toggle:focus {
+            background-color: #3099b3;
+        }
+
+        #custom-bootstrap-menu.navbar-default .navbar-toggle .icon-bar {
+            background-color: #fff;
+        }
+
+        #custom-bootstrap-menu.navbar-default .navbar-toggle:hover .icon-bar,
+        #custom-bootstrap-menu.navbar-default .navbar-toggle:focus .icon-bar {
+            background-color: #fff;
+        }
+
+    #custom-bootstrap-menu.navbar-default .navbar-nav > li > .dropdown-menu {
+        background: #216d80;
+    }
 
 #custom-bootstrap-menu.navbar-default {
     background-color: #f8f8f8;
     /* border-color: #e7e7e7; */
-    border:none!important;
+    border: none !important;
 }
 
-@media (max-width: 767px)
-{
-   
+@media (max-width: 767px) {
 }
 
 
-.navbar
-{
-    border-radius:0px !important;
+.navbar {
+    border-radius: 0px !important;
 }
+
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
     /*color: #262626;
     text-decoration: none;
     background-color: red;*/
-    color:rgb(151, 149, 149) !important;
+    color: rgb(151, 149, 149) !important;
     background-color: #216d80 !important;
 }
-.dropdown-menu > li > a
-{
-    color:#fff !important;
+
+.dropdown-menu > li > a {
+    color: #fff !important;
 }
-.logout{
-   font-size:18px;
+
+.logout {
+    font-size: 18px;
 }
 
 
 .welcome {
-
     color: #fff;
-      font-size:18px;
+    font-size: 18px;
     /*background-color: #5DBCD2;
     border-color: #5DBCD2;
     border:none;*/
@@ -169,11 +171,43 @@ body {
 
 .nav > li > a:hover, .nav > li > a:focus {
     text-decoration: none;
-   background-color: #5DBCD2 !important;
-   color:rgb(5, 95, 117) !important;
+    background-color: #5DBCD2 !important;
+    color: rgb(5, 95, 117) !important;
 }
 
-.columnmenu{
-    padding-right:0px !important;
-    padding-left:0px !important;
+.columnmenu {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+@media (max-width: 920px) and (min-width: 768px) {
+    .navbar-nav > li > a {
+        padding-top: 30px;
+        padding-bottom: 30px;
+        font-size: 12px !important;
+    }
+
+    .navbar-brand {
+     padding-top:10px !important;
+    }
+
+    .imglogo {
+        width: 130px;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .navbar-nav > li > a {
+        padding-top: 30px;
+        padding-bottom: 30px;
+      
+    }
+  
+}
+
+
+.navbar-brand {
+    height: 80px;
+    padding: 0px 15px;
 }

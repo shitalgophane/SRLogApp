@@ -4,25 +4,43 @@
 @Scripts.Render("~/bundles/modernizr")
 <link href="~/Scripts/jtable/themes/lightcolor/blue/jtable.css" rel="stylesheet" />
 
+
 <style type="text/css">
     #SRLogTableContainer {
-        width: 99%;
+        width: 100%;
         display: block;
         overflow-x: auto;
+        /*height: 500px;
+        overflow-y: auto;*/
         border: 1px solid #c6c3c3;
     }
 
-    /*#SRLogTableContainer thead, .jtable thead {
-        display: inline-block;
-        width:100%;
+        /*.scroll-content {
+        width: 99%;
+        display: block;
+        overflow-x: auto;
+        height: 500px;
+        overflow-y: auto;
+        border: 1px solid #c6c3c3;
     }
 
-    #SRLogTableContainer tbody,.jtable tbody {
+    div.jtable-main-container {
         height: 500px;
-         width: 100%;
-        display:block;
-        overflow-y: auto;
     }*/
+
+
+        /*#SRLogTableContainer thead, .jtable thead {
+            display: table-header-group;            
+            width:98%;
+        }
+
+        #SRLogTableContainer tbody, .jtable tbody {
+            height: 400px;
+            width:99%;
+
+            display: table;            
+            overflow-y: auto;
+        }*/
 </style>
 
 
@@ -37,17 +55,18 @@
     </tr>
     <tr>
         <td>
+            
             @Html.DropDownList("FieldList1", ViewBag.FieldList as SelectList, new { @class = "form-control" })
         </td>
         <td>@Html.DropDownList("ddlOrderBy1", ViewBag.OrderList as SelectList, new { @class = "form-control" })</td>
         <td>@Html.DropDownList("FieldList2", ViewBag.FieldListTwo as SelectList, new { @class = "form-control" })</td>
         <td>@Html.DropDownList("ddlOrderBy2", ViewBag.OrderListTwo as SelectList, new { @class = "form-control" })</td>
-        <td>
+        <td style="width:43px">
             <span id="lblHeader1" name="lblHeader1">
                 From
             </span>
         </td>
-        <td>
+        <td style="width:242px">
             <div class='input-group date' id='datetimepicker1'>
                 <input type='text' class="form-control" />
                 <span class="input-group-addon">
@@ -55,12 +74,12 @@
                 </span>
             </div>
         </td>
-        <td>
+        <td style="width:43px">
             <span id="lblHeader2" name="lblHeader2">
                 To
             </span>
         </td>
-        <td>
+        <td style="width:242px">
             <div class='input-group date' id='datetimepicker2'>
                 <input type='text' class="form-control" />
                 <span class="input-group-addon">
@@ -76,113 +95,6 @@
         </td>
     </tr>
 </table>
-
-
-
-
-
-@*<div class="row">
-        <div class="col-md-12">
-            <div class="col-md-6 table-bordered" style="height:105px">
-                <label class="headerlabel">Records Sorted By :-</label>
-                <br />
-                <table>
-                    <tr>
-                        <td>
-                            @Html.DropDownList("FieldList1", ViewBag.FieldList as SelectList, new { @class = "form-control"})
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>
-                            @Html.DropDownList("FieldList2", ViewBag.FieldListTwo as SelectList, new { @class = "form-control"})
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" style="height:5px;"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @Html.DropDownList("ddlOrderBy1", ViewBag.OrderList as SelectList, new { @class = "form-control"})
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>
-                            @Html.DropDownList("ddlOrderBy2", ViewBag.OrderListTwo as SelectList, new { @class = "form-control"})
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" style="height:5px;"></td>
-                    </tr>
-
-                </table>
-            </div>
-            <div class="col-md-6 table-bordered" style="height:105px">
-                <input type="checkbox" class="jtable-checkbox-input" id="chkApplyDateFilter" />
-                <label class="headerlabel" style="vertical-align:middle">Filter by Creation Date</label>
-                <br />
-                <table id="tblDateFilter" name="tblDateFilter">
-                    <tr>
-                        <td>
-                            <label class="headerlabel" id="lblHeader1" name="lblHeader1">
-                                from date
-                            </label>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>
-                            <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" style="height:5px;"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="headerlabel" id="lblHeader2" name="lblHeader2">
-                                To Date
-                            </label>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>
-                            <div class='input-group date' id='datetimepicker2'>
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" style="height:5px;"></td>
-                    </tr>
-                </table>
-
-
-
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="col-md-12 table-bordered">
-                <table style="align-content:center;width:100%">
-                    <tr>
-                        <td colspan="3" style="height:5px;"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" style="text-align:center;">
-                            <button type="button" class="btn btn-primary btnMain" id="SortRecordsButton">Apply Sort/Filter</button>
-                            <button type="button" class="btn btn-primary btnMain" id="SaveSortButton">Save Sort/Filter</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" style="height:5px;"></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>*@
 
 
 <div id="SRLogTableContainer">
@@ -210,23 +122,7 @@
     </div><!-- /.modal-dialog -->
 </div>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="myModalForLongFields">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header login">
-                <h5 class="modal-title">
-                    <span id="modelheader" name="modelheader"></span>
-                </h5>
-            </div>
-            <div class="modal-body">
-                <p id="modelbody" name="modelbody"></p>
-            </div>
-            <div class="modal-footer" style="text-align:center">
-                <button type="button" class="btn btn-primary btnMain" data-dismiss="modal">Ok</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
+
 
 @section scripts
 {
@@ -236,6 +132,10 @@
             $('#datetimepicker1').datetimepicker({
                 defaultDate: new Date(), format: 'MM/DD/YYYY'
             });
+
+            $('[data-toggle="tooltip"]').tooltip();
+            //$('.jtable tbody').wrap('<div class="jtable-main-container scroll-content" />');
+
 
             $('#datetimepicker2').datetimepicker({
                 defaultDate: new Date(), format: 'MM/DD/YYYY'
@@ -329,9 +229,9 @@
                                {
                                    title: item.displayname,
                                    width: item.width,
-                                   display: function (data) {                                       
+                                   display: function (data) {
                                        if (data.record[item.fieldname].length > 25) {
-                                           return data.record[item.fieldname].substring(0, 25) + '<a onclick="ShowComment(\'' + item.fieldname + ' \',\'' + $.trim(data.record[item.fieldname]) + '\')" style="cursor:pointer">...</a>';
+                                           return data.record[item.fieldname].substring(0, 25) + '<a href= "#" style="cursor:pointer" data-toggle="tooltip" title="' + data.record[item.fieldname] + '">...</a>';
                                        }
                                        else {
                                            return data.record[item.fieldname];
@@ -355,7 +255,7 @@
             });
 
             $("#SRLogTableContainer").jtable({
-                title: "View SR Log",
+                //title: "View SR Log",
                 paging: true, //Enable paging
                 pageSize: 10, //Set page size (default: 10)
                 sorting: false, //Enable sorting
@@ -367,6 +267,18 @@
                         listAction: '@Url.Action("GetSRLogsList")'
                     },
                 fields: fields
+                //rowInserted: function (event, data) {
+                //    //alert("Header width");
+                //    $(".jtable thead th").each(function (index) {
+                //        var header_width = $(this).css("width");
+                //        $(".jtable tbody").find('td:nth-child(' + index + ')').css('width', header_width);
+                //    });
+
+                //    //alert("body width");
+                //    //$(".jtable tbody td").each(function () {
+                //    //    alert($(this).css("width"));
+                //    //});
+                //}
             });
             // $("#SRLogTableContainer").jtable('load');
 
@@ -398,7 +310,11 @@
                     ToDate: todate
                 });
                 $('#myModalForKeywordSearch').hide();
+                //$('.jtable tbody').wrap('<div class="jtable-main-container scroll-content" />');
             });
+
+
+
 
             $('#SortRecordsButton').click(function (e) {
                 var sort1 = '';
@@ -475,7 +391,6 @@
                     fromdate = $('#datetimepicker1').data('date');
                     todate = $('#datetimepicker2').data('date');
                 }
-
                 $.ajax({
                     cache: false,
                     type: "POST",
@@ -500,15 +415,7 @@
                 });
             });
         });
-        function ShowComment(fieldname, comment) {
-            $('#modelheader').text(fieldname);
-            $('#modelbody').text(comment);
-            $('#myModalForLongFields').modal({
-                show: true,
-                backdrop: 'static',
-                keyboard: false
-            });
-        }
+
 
     </script>
 }
