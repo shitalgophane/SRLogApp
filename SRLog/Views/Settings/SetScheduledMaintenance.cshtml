@@ -1,0 +1,99 @@
+﻿@model SRLog.Entities.TestSite.ViewModels.TestSiteViewModel
+@{
+    ViewBag.Title = "Schedule Maintenance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("SetScheduledMaintenance", "Settings", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        @*<a href="file:///C:/Users/">Link to test data</a>*@
+
+        <div class="row">
+
+            <div class="col-md-12 text-center title">
+                <p class="title">Set Scheduled Maintenance</p>
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="labelform">Show Maintenance Message</label><span class="field-validation-error"> *</span>
+
+                    </div>
+                    <div class="col-md-6">
+                        @Html.CheckBoxFor(model => model.DisplayMessage, new { id = "chkShowMessage" })
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="labelform">Message</label><span class="field-validation-error"> *</span>
+
+                    </div>
+                    <div class="col-md-6">
+                        @Html.TextAreaFor(model => model.Value, new { @class = "form-control", @style = "text-transform: uppercase;", id = "txtMessage", tabindex = "3" })
+                        @Html.ValidationMessageFor(model => model.Value)
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <input type="submit" value="Add/Update" id="btnAdd" class="btn btn-primary btnMain" />
+                <input type="button" title="Close" value="Close" id="btnClose" class="btn btn-primary btnMain" onclick="location.href='@Url.Action("Index", "Home")'" />
+            </div>
+        </div>
+    </div>
+
+}
+
+@section scripts
+{
+
+    <style>
+    </style>
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var local = moment();
+            // $('#local').html(local.format());
+            var tz = local.tz('US/Pacific').format('MM/DD/YYYY HH:mm');
+
+            // alert(tz);
+            $('#FromDate').datetimepicker({
+                //  defaultDate: new Date(),
+                //defaultDate: tz,
+                format: 'MM/DD/YYYY HH:mm'
+
+            });
+
+            $('#ToDate').datetimepicker({
+                //  defaultDate: new Date(),
+
+                //defaultDate: tz,
+                format: 'MM/DD/YYYY HH:mm'
+
+            });
+        })
+    </script>
+
+}
+

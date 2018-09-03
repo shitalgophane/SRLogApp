@@ -1,0 +1,2174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="application_config">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FlagName" Type="varchar" MaxLength="50" />
+          <Property Name="Value" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Bidlog_Result_Mail">
+          <Key>
+            <PropertyRef Name="BidlogResultMailId" />
+          </Key>
+          <Property Name="BidlogResultMail" Type="ntext" />
+          <Property Name="BidlogResultMailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bonding_Mail_CC">
+          <Key>
+            <PropertyRef Name="BondingMailCCId" />
+          </Key>
+          <Property Name="BondingMailCC" Type="ntext" />
+          <Property Name="BondingMailCCId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bonding_Mail_TO">
+          <Key>
+            <PropertyRef Name="BondingMailToId" />
+          </Key>
+          <Property Name="BondingMailTO" Type="ntext" />
+          <Property Name="BondingMailToId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer_Info_Mail">
+          <Key>
+            <PropertyRef Name="CustomerInfoMailId" />
+          </Key>
+          <Property Name="CustomerInfoMail" Type="ntext" />
+          <Property Name="CustomerInfoMailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMail Info">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExceptionLogger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExceptionMessage" Type="nvarchar(max)" />
+          <Property Name="ControllerName" Type="nvarchar" MaxLength="200" />
+          <Property Name="ActionName" Type="nvarchar" MaxLength="200" />
+          <Property Name="ExceptionStackTrace" Type="nvarchar(max)" />
+          <Property Name="LogTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SMTPDetails">
+          <Key>
+            <PropertyRef Name="SMTPAddress" />
+          </Key>
+          <Property Name="SMTPAddress" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SMTPPort" Type="nvarchar" MaxLength="10" />
+          <Property Name="SMTPUserName" Type="nvarchar" MaxLength="20" />
+          <Property Name="SMTPPassword" Type="nvarchar" MaxLength="20" />
+          <Property Name="FromAddress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblActivityLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ActivityDate" Type="datetime" />
+          <Property Name="FormName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Action" Type="nvarchar" MaxLength="50" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tblAttachmentsForBidLog">
+          <Key>
+            <PropertyRef Name="UID" />
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="RowId" Type="int" Nullable="false" />
+          <Property Name="ListOfAttachments" Type="image" />
+          <Property Name="FileNames" Type="nvarchar" MaxLength="50" />
+          <Property Name="upsize_ts" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tblBID Checklist">
+          <Key>
+            <PropertyRef Name="BIDChecklist_Id" />
+          </Key>
+          <Property Name="SRNumber" Type="int" />
+          <Property Name="PrequalificationRequired" Type="bit" />
+          <Property Name="IsTelstarPrequalified" Type="bit" />
+          <Property Name="QualificationPacketReceived" Type="bit" />
+          <Property Name="Map" Type="bit" />
+          <Property Name="BidForm" Type="bit" />
+          <Property Name="SubsRequireListing" Type="bit" />
+          <Property Name="EquipmentRequiresListing" Type="bit" />
+          <Property Name="SpareParts" Type="bit" />
+          <Property Name="IsAnotherContractorHardSpecdForThisWork" Type="nvarchar" MaxLength="50" />
+          <Property Name="EquipmentRequiresListingText" Type="nvarchar" MaxLength="50" />
+          <Property Name="SparePartsText" Type="nvarchar" MaxLength="50" />
+          <Property Name="ElectricalEngineer" Type="nvarchar" MaxLength="50" />
+          <Property Name="ElectricalEngineeringContact" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerContact" Type="nvarchar" MaxLength="50" />
+          <Property Name="PAndSSourcePh" Type="nvarchar" MaxLength="50" />
+          <Property Name="Weblink" Type="nvarchar" MaxLength="50" />
+          <Property Name="PlanholdersList" Type="nvarchar" MaxLength="50" />
+          <Property Name="HowLongDoWeNeedToHoldPricesFor" Type="nvarchar" MaxLength="50" />
+          <Property Name="BidScheduleItemsTelstarIsBiddingOn" Type="nvarchar" MaxLength="50" />
+          <Property Name="Instrumentation" Type="nvarchar" MaxLength="50" />
+          <Property Name="PlcControls" Type="nvarchar" MaxLength="50" />
+          <Property Name="Hmi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Power" Type="nvarchar" MaxLength="50" />
+          <Property Name="PlcProgrammingBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="HmiProgrammingBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReportProgrammingBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="WhoAreYouGoingToUseForTheIntegration" Type="nvarchar" MaxLength="50" />
+          <Property Name="WasThereAPrequalProcess" Type="nvarchar" MaxLength="50" />
+          <Property Name="QualificationsProcess" Type="nvarchar" MaxLength="50" />
+          <Property Name="WhenWillYouNotifyUsThatWeWillBeListed" Type="nvarchar" MaxLength="50" />
+          <Property Name="HaveThereBeenAnyAddendumsListedSoFar" Type="nvarchar" MaxLength="50" />
+          <Property Name="AreYouTheOneThatDecidesTheSystemsIntegrator" Type="nvarchar" MaxLength="50" />
+          <Property Name="WhenIsTheNextPrequalification" Type="nvarchar" MaxLength="50" />
+          <Property Name="BIDChecklist_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblBID Log">
+          <Key>
+            <PropertyRef Name="BidId" />
+          </Key>
+          <Property Name="BidDate" Type="datetime" />
+          <Property Name="BiddingAs" Type="nvarchar" MaxLength="20" />
+          <Property Name="BidTo" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="125" />
+          <Property Name="LastAddendumRecvd" Type="smallint" />
+          <Property Name="Estimator" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuoteNumber" Type="int" />
+          <Property Name="UID" Type="int" />
+          <Property Name="Notes" Type="ntext" />
+          <Property Name="EngineersEstimate" Type="nvarchar" MaxLength="20" />
+          <Property Name="Division" Type="nvarchar" MaxLength="10" />
+          <Property Name="RedSheet" Type="ntext" />
+          <Property Name="ScopeLetter" Type="ntext" />
+          <Property Name="BidTypeIandC" Type="bit" />
+          <Property Name="BidTypeElectrical" Type="bit" />
+          <Property Name="BidTypeNOBID" Type="bit" />
+          <Property Name="MandetoryJobWalk" Type="bit" />
+          <Property Name="JobWalkDate" Type="datetime" />
+          <Property Name="Bid_Rev" Type="nvarchar" MaxLength="2" />
+          <Property Name="Bid_Duration" Type="nvarchar" MaxLength="10" />
+          <Property Name="Bid_LiqDamage" Type="nvarchar" MaxLength="15" />
+          <Property Name="Bid_Warranty" Type="nvarchar" MaxLength="10" />
+          <Property Name="Bid_BondingReq" Type="nvarchar" MaxLength="255" />
+          <Property Name="Bid_LicenseReqd" Type="nvarchar" MaxLength="10" />
+          <Property Name="Bid_Qualified" Type="bit" />
+          <Property Name="Bid_PrevailingWage" Type="bit" />
+          <Property Name="Bid_UL508Reqd" Type="bit" />
+          <Property Name="QADeadLineDateTime" Type="datetime" />
+          <Property Name="OwnerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdvertiseDate" Type="datetime" />
+          <Property Name="ProjectFolder" Type="nvarchar" MaxLength="500" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="CityState" Type="nvarchar" MaxLength="500" />
+          <Property Name="PrimeSIEstimate" Type="nvarchar" MaxLength="20" />
+          <Property Name="IAndCEstimate" Type="nvarchar" MaxLength="20" />
+          <Property Name="BidId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblBID Results">
+          <Key>
+            <PropertyRef Name="BIDResults_Id" />
+          </Key>
+          <Property Name="UID" Type="int" />
+          <Property Name="BidStatus" Type="int" />
+          <Property Name="TelstarQuote" Type="nvarchar" MaxLength="50" />
+          <Property Name="LowGC" Type="nvarchar" MaxLength="50" />
+          <Property Name="LowElecSub" Type="nvarchar" MaxLength="50" />
+          <Property Name="BidType" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column4" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column5" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column6" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column7" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column8" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column9" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column10" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="BIDResults_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblBID ResultsTemp">
+          <Key>
+            <PropertyRef Name="BIDResults_Id" />
+          </Key>
+          <Property Name="UID" Type="int" />
+          <Property Name="BidStatus" Type="int" />
+          <Property Name="TelstarQuote" Type="nvarchar" MaxLength="50" />
+          <Property Name="LowGC" Type="nvarchar" MaxLength="50" />
+          <Property Name="LowElecSub" Type="nvarchar" MaxLength="50" />
+          <Property Name="BidType" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column4" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column5" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column6" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column7" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column8" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column9" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column10" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="BIDResults_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblCustAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZipCode" Type="nchar" MaxLength="10" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsPrimaryAddress" Type="bit" />
+          <Property Name="DateAdded" Type="datetime" />
+          <Property Name="SiteName" Type="nvarchar" MaxLength="20" />
+          <Property Name="ProjectManager" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblCustContacts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="CustomerContact" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactEmail" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsPrimaryContact" Type="bit" />
+          <Property Name="DateAdded" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblCustomer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateAdded" Type="datetime" />
+          <Property Name="Notes" Type="ntext" />
+          <Property Name="IsInActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblGroupUser">
+          <Key>
+            <PropertyRef Name="Userid" />
+          </Key>
+          <Property Name="Userid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Group Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblObsolete BID Log">
+          <Key>
+            <PropertyRef Name="ObsoleteBID_Id" />
+          </Key>
+          <Property Name="Mandatory Job Walk" Type="bit" Nullable="false" />
+          <Property Name="BidDate" Type="datetime" Nullable="false" />
+          <Property Name="BiddingAs" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="BidTo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="125" />
+          <Property Name="LastAddendumRecvd" Type="smallint" />
+          <Property Name="Estimator" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuoteNumber" Type="int" />
+          <Property Name="Division" Type="nvarchar" MaxLength="10" />
+          <Property Name="UID" Type="int" />
+          <Property Name="Notes" Type="ntext" />
+          <Property Name="EngineersEstimate" Type="nvarchar" MaxLength="20" />
+          <Property Name="RedSheet" Type="ntext" />
+          <Property Name="ScopeLetter" Type="ntext" />
+          <Property Name="Job Walk Date" Type="datetime" />
+          <Property Name="Bid_Rev" Type="nvarchar" MaxLength="2" />
+          <Property Name="Bid_Duration" Type="nvarchar" MaxLength="10" />
+          <Property Name="Bid_LiqDamage" Type="nvarchar" MaxLength="15" />
+          <Property Name="Bid_Warranty" Type="nvarchar" MaxLength="10" />
+          <Property Name="Bid_BondingReq" Type="nvarchar" MaxLength="255" />
+          <Property Name="Bid_LicenseReqd" Type="nvarchar" MaxLength="10" />
+          <Property Name="Bid_Qualified" Type="bit" />
+          <Property Name="Bid_PrevailingWage" Type="bit" />
+          <Property Name="Bid_UL508Reqd" Type="bit" />
+          <Property Name="QADeadLineDateTime" Type="datetime" />
+          <Property Name="ProjectFolder" Type="nvarchar" MaxLength="500" />
+          <Property Name="OwnerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdvertiseDate" Type="datetime" />
+          <Property Name="CityState" Type="nvarchar" MaxLength="500" />
+          <Property Name="PrimeSIEstimate" Type="nvarchar" MaxLength="20" />
+          <Property Name="IAndCEstimate" Type="nvarchar" MaxLength="20" />
+          <Property Name="ObsoleteBID_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblObsolete Quotes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Mandatory Job Walk" Type="bit" Nullable="false" />
+          <Property Name="BidDate" Type="datetime" Nullable="false" />
+          <Property Name="BiddingAs" Type="nvarchar" MaxLength="20" />
+          <Property Name="BidTo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="125" />
+          <Property Name="LastAddendumRecvd" Type="smallint" />
+          <Property Name="Estimator" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuoteNumber" Type="int" />
+          <Property Name="Division" Type="nvarchar" MaxLength="10" />
+          <Property Name="UID" Type="int" />
+          <Property Name="Notes" Type="ntext" />
+          <Property Name="EngineersEstimate" Type="nvarchar" MaxLength="20" />
+          <Property Name="RedSheet" Type="ntext" />
+          <Property Name="ScopeLetter" Type="ntext" />
+          <Property Name="Job Walk Date" Type="datetime" />
+          <Property Name="QADeadLineDateTime" Type="datetime" />
+          <Property Name="QuoteStatus" Type="nvarchar" MaxLength="40" />
+          <Property Name="dtpLastDateFollowup" Type="datetime" />
+          <Property Name="LastFollowupBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="FollowupNote" Type="nvarchar" MaxLength="255" />
+          <Property Name="EmailAddress" Type="nvarchar(max)" />
+          <Property Name="MandetoryJobWalk" Type="bit" />
+          <Property Name="JobWalkDate" Type="datetime" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblObsoluteBID Results">
+          <Key>
+            <PropertyRef Name="ObsoluteBIDResults_Id" />
+          </Key>
+          <Property Name="UID" Type="int" />
+          <Property Name="BidStatus" Type="int" />
+          <Property Name="TelstarQuote" Type="nvarchar" MaxLength="50" />
+          <Property Name="LowGC" Type="nvarchar" MaxLength="50" />
+          <Property Name="LowElecSub" Type="nvarchar" MaxLength="50" />
+          <Property Name="BidType" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column4" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column5" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column6" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column7" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column8" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column9" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column10" Type="nvarchar" MaxLength="50" />
+          <Property Name="ObsoluteBIDResults_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblObsoluteBID Results Temp">
+          <Key>
+            <PropertyRef Name="ObsoluteBIDResults_Id" />
+          </Key>
+          <Property Name="UID" Type="int" />
+          <Property Name="BidStatus" Type="int" />
+          <Property Name="TelstarQuote" Type="nvarchar" MaxLength="50" />
+          <Property Name="LowGC" Type="nvarchar" MaxLength="50" />
+          <Property Name="LowElecSub" Type="nvarchar" MaxLength="50" />
+          <Property Name="BidType" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column4" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column5" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column6" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column7" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column8" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column9" Type="nvarchar" MaxLength="50" />
+          <Property Name="Column10" Type="nvarchar" MaxLength="50" />
+          <Property Name="ObsoluteBIDResults_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblQuoteLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="BidDate" Type="datetime" />
+          <Property Name="BiddingAs" Type="nvarchar" MaxLength="20" />
+          <Property Name="BidTo" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="125" />
+          <Property Name="LastAddendumRecvd" Type="smallint" />
+          <Property Name="Estimator" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuoteNumber" Type="int" />
+          <Property Name="UID" Type="int" />
+          <Property Name="Notes" Type="ntext" />
+          <Property Name="EngineersEstimate" Type="nvarchar" MaxLength="20" />
+          <Property Name="Division" Type="nvarchar" MaxLength="10" />
+          <Property Name="RedSheet" Type="ntext" />
+          <Property Name="ScopeLetter" Type="ntext" />
+          <Property Name="BidTypeIandC" Type="bit" />
+          <Property Name="BidTypeElectrical" Type="bit" />
+          <Property Name="BidTypeNOBID" Type="bit" />
+          <Property Name="MandetoryJobWalk" Type="bit" />
+          <Property Name="JobWalkDate" Type="datetime" />
+          <Property Name="QADeadLineDateTime" Type="datetime" />
+          <Property Name="QuoteStatus" Type="nvarchar" MaxLength="40" />
+          <Property Name="dtpLastDateFollowup" Type="datetime" />
+          <Property Name="LastFollowupBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="FollowupNote" Type="nvarchar" MaxLength="255" />
+          <Property Name="EmailAddress" Type="nvarchar(max)" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblScheduledMaintenance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FromDate" Type="datetime" />
+          <Property Name="ToDate" Type="datetime" />
+          <Property Name="Message" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblSettings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="SectionName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsFixedInGrid" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblSR Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="FileFolder" Type="bit" />
+          <Property Name="Quote" Type="bit" />
+          <Property Name="ChemFeed" Type="bit" />
+          <Property Name="InactiveJob" Type="bit" />
+          <Property Name="PW" Type="bit" />
+          <Property Name="NotQuoted" Type="bit" />
+          <Property Name="Closed" Type="bit" />
+          <Property Name="SRNumber" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="Customer" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProjectDescription" Type="nvarchar" MaxLength="125" />
+          <Property Name="CustomerContact" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Estimator" Type="nvarchar" MaxLength="50" />
+          <Property Name="Division" Type="nvarchar" MaxLength="10" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="QuoteDue" Type="datetime" />
+          <Property Name="JobWalkDate" Type="datetime" />
+          <Property Name="MandatoryJobWalk" Type="bit" />
+          <Property Name="WhoJobWalk" Type="nvarchar" MaxLength="10" />
+          <Property Name="BidAsPrimeOrSub" Type="bit" />
+          <Property Name="Bonding" Type="nvarchar" MaxLength="50" />
+          <Property Name="BondingMailSent" Type="bit" />
+          <Property Name="PrevailingMailSent" Type="bit" />
+          <Property Name="Notes" Type="ntext" />
+          <Property Name="ProjectManager" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="JobOrQuote" Type="nvarchar" MaxLength="1" />
+          <Property Name="ProjectType" Type="nvarchar" MaxLength="1" />
+          <Property Name="PrevailingWageTBD" Type="bit" />
+          <Property Name="JobsiteAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="Billing" Type="bit" />
+          <Property Name="NewCustomer" Type="bit" />
+          <Property Name="ContactEmail" Type="nvarchar" MaxLength="255" />
+          <Property Name="QuoteDate" Type="datetime" />
+          <Property Name="QuoteTime" Type="datetime" />
+          <Property Name="QuoteTypeI&amp;C" Type="bit" />
+          <Property Name="QuoteTypeElectrical" Type="bit" />
+          <Property Name="QuoteTypeNoBid" Type="bit" />
+          <Property Name="FollowUp" Type="bit" />
+          <Property Name="QuoteType" Type="nvarchar" MaxLength="20" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdvertiseDate" Type="datetime" />
+          <Property Name="NotifyPM" Type="bit" />
+          <Property Name="ServerJobFolder" Type="nvarchar" MaxLength="500" />
+          <Property Name="SiteForeman" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EditedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="EditedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblSRLogColumns">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FieldName" Type="nvarchar" MaxLength="100" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsSortable" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="User_Password" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="SR_Log_ReadOnly" Type="bit" Nullable="false" />
+          <Property Name="User_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Admin_Rights" Type="bit" Nullable="false" />
+          <Property Name="Bid_Log_ReadOnly" Type="bit" Nullable="false" />
+          <Property Name="Accounting_Rights" Type="bit" />
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatabaseUpdate_Rights" Type="bit" />
+        </EntityType>
+        <Function Name="USP_TT_GetBidLogModifiedToday" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ModifiedDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="USP_TT_GetBidLogResultsModifiedToday" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ModifiedDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="USP_TT_GetNextPrevLastFirst" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SRNumber" Type="decimal" Mode="In" />
+          <Parameter Name="FlgNPLF" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="USP_TT_GetSRLogCreatedToday" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="USP_TT_InsertActivityLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="ActivityDate" Type="datetime" Mode="In" />
+          <Parameter Name="FormName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Action" Type="nvarchar" Mode="In" />
+          <Parameter Name="Comment" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="USP_TT_InsertCustAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustumerId" Type="int" Mode="In" />
+          <Parameter Name="Address1" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address2" Type="nvarchar" Mode="In" />
+          <Parameter Name="City" Type="nvarchar" Mode="In" />
+          <Parameter Name="State" Type="nvarchar" Mode="In" />
+          <Parameter Name="Zip" Type="nchar" Mode="In" />
+          <Parameter Name="Country" Type="nvarchar" Mode="In" />
+          <Parameter Name="SiteName" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsPrimaryAddress" Type="bit" Mode="In" />
+          <Parameter Name="ProjectManager" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="USP_TT_InsertCustContacts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="int" Mode="In" />
+          <Parameter Name="CustomerContact" Type="nvarchar" Mode="In" />
+          <Parameter Name="ContactPhone" Type="nvarchar" Mode="In" />
+          <Parameter Name="ContactEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsPrimaryContact" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="USP_TT_InsertUpdateBidLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BidId" Type="int" Mode="In" />
+          <Parameter Name="BidDate" Type="datetime" Mode="In" />
+          <Parameter Name="BiddingAs" Type="nvarchar" Mode="In" />
+          <Parameter Name="BidTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="ProjectName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastAddendumRecvd" Type="int" Mode="In" />
+          <Parameter Name="Estimator" Type="nvarchar" Mode="In" />
+          <Parameter Name="QuoteNumber" Type="int" Mode="In" />
+          <Parameter Name="UID" Type="int" Mode="In" />
+          <Parameter Name="Notes" Type="nvarchar" Mode="In" />
+          <Parameter Name="EngineersEstimate" Type="nvarchar" Mode="In" />
+          <Parameter Name="Division" Type="nvarchar" Mode="In" />
+          <Parameter Name="RedSheet" Type="nvarchar" Mode="In" />
+          <Parameter Name="ScopeLetter" Type="nvarchar" Mode="In" />
+          <Parameter Name="BidTypeIandC" Type="bit" Mode="In" />
+          <Parameter Name="BidTypeElectrical" Type="bit" Mode="In" />
+          <Parameter Name="BidTypeNOBID" Type="bit" Mode="In" />
+          <Parameter Name="MandetoryJobWalk" Type="bit" Mode="In" />
+          <Parameter Name="JobWalkDate" Type="datetime" Mode="In" />
+          <Parameter Name="Bid_Rev" Type="nvarchar" Mode="In" />
+          <Parameter Name="Bid_Duration" Type="nvarchar" Mode="In" />
+          <Parameter Name="Bid_LiqDamage" Type="nvarchar" Mode="In" />
+          <Parameter Name="Bid_Warranty" Type="nvarchar" Mode="In" />
+          <Parameter Name="Bid_BondingReq" Type="nvarchar" Mode="In" />
+          <Parameter Name="Bid_LicenseReqd" Type="nvarchar" Mode="In" />
+          <Parameter Name="Bid_Qualified" Type="bit" Mode="In" />
+          <Parameter Name="Bid_PrevailingWage" Type="bit" Mode="In" />
+          <Parameter Name="Bid_UL508Reqd" Type="bit" Mode="In" />
+          <Parameter Name="QADeadLineDateTime" Type="datetime" Mode="In" />
+          <Parameter Name="OwnerName" Type="nvarchar" Mode="In" />
+          <Parameter Name="AdvertiseDate" Type="datetime" Mode="In" />
+          <Parameter Name="ProjectFolder" Type="nvarchar" Mode="In" />
+          <Parameter Name="ModifiedDate" Type="datetime" Mode="In" />
+          <Parameter Name="CityState" Type="nvarchar" Mode="In" />
+          <Parameter Name="PrimeSIEstimate" Type="nvarchar" Mode="In" />
+          <Parameter Name="IAndCEstimate" Type="nvarchar" Mode="In" />
+          <Parameter Name="FlgAddEdit" Type="nvarchar" Mode="In" />
+          <Parameter Name="result" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="USP_TT_InsertUpdateCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerName" Type="nvarchar" Mode="In" />
+          <Parameter Name="notes" Type="ntext" Mode="In" />
+          <Parameter Name="IsInActive" Type="bit" Mode="In" />
+          <Parameter Name="result" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="USP_TT_InsertUpdateQuote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BidDate" Type="datetime" Mode="In" />
+          <Parameter Name="BiddingAs" Type="nvarchar" Mode="In" />
+          <Parameter Name="BidTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="ProjectName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastAddendumRecvd" Type="smallint" Mode="In" />
+          <Parameter Name="Estimator" Type="nvarchar" Mode="In" />
+          <Parameter Name="SRNumber" Type="int" Mode="In" />
+          <Parameter Name="UID" Type="int" Mode="In" />
+          <Parameter Name="Notes" Type="ntext" Mode="In" />
+          <Parameter Name="EngineersEstimate" Type="nvarchar" Mode="In" />
+          <Parameter Name="Division" Type="nvarchar" Mode="In" />
+          <Parameter Name="MandetoryJobWalk" Type="bit" Mode="In" />
+          <Parameter Name="JobWalkDate" Type="datetime" Mode="In" />
+          <Parameter Name="QADeadLineDateTime" Type="datetime" Mode="In" />
+          <Parameter Name="QuoteStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpLastDateFollowup" Type="datetime" Mode="In" />
+          <Parameter Name="LastFollowupBy" Type="nvarchar" Mode="In" />
+          <Parameter Name="FollowupNote" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmailAddress" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="FlgAddEdit" Type="nvarchar" Mode="In" />
+          <Parameter Name="FlgFollowUp" Type="nvarchar" Mode="In" />
+          <Parameter Name="result" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="USP_TT_InsertUpdateSRLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="JobOrQuote" Type="nvarchar" Mode="In" />
+          <Parameter Name="PrevailingWageTBD" Type="bit" Mode="In" />
+          <Parameter Name="PW" Type="bit" Mode="In" />
+          <Parameter Name="ProjectType" Type="nvarchar" Mode="In" />
+          <Parameter Name="NewCustomer" Type="bit" Mode="In" />
+          <Parameter Name="Billing" Type="bit" Mode="In" />
+          <Parameter Name="JobsiteAddress" Type="nvarchar" Mode="In" />
+          <Parameter Name="QuoteTypeIC" Type="bit" Mode="In" />
+          <Parameter Name="QuoteTypeElectrical" Type="bit" Mode="In" />
+          <Parameter Name="QuoteTypeNoBid" Type="bit" Mode="In" />
+          <Parameter Name="QuoteDate" Type="datetime" Mode="In" />
+          <Parameter Name="QuoteTime" Type="datetime" Mode="In" />
+          <Parameter Name="SRNumber" Type="decimal" Mode="In" />
+          <Parameter Name="Customer" Type="nvarchar" Mode="In" />
+          <Parameter Name="ProjectDescription" Type="nvarchar" Mode="In" />
+          <Parameter Name="CustomerContact" Type="nvarchar" Mode="In" />
+          <Parameter Name="ContactPhone" Type="nvarchar" Mode="In" />
+          <Parameter Name="ContactEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="Estimator" Type="nvarchar" Mode="In" />
+          <Parameter Name="Division" Type="nvarchar" Mode="In" />
+          <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+          <Parameter Name="QuoteDue" Type="datetime" Mode="In" />
+          <Parameter Name="JobWalkDate" Type="datetime" Mode="In" />
+          <Parameter Name="MandatoryJobWalk" Type="bit" Mode="In" />
+          <Parameter Name="Bonding" Type="nvarchar" Mode="In" />
+          <Parameter Name="ProjectManager" Type="nvarchar" Mode="In" />
+          <Parameter Name="Notes" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CreatedBy" Type="nvarchar" Mode="In" />
+          <Parameter Name="FollowUp" Type="bit" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="BidType" Type="nvarchar" Mode="In" />
+          <Parameter Name="Owner" Type="nvarchar" Mode="In" />
+          <Parameter Name="AdvertiseDate" Type="datetime" Mode="In" />
+          <Parameter Name="NotifyPM" Type="bit" Mode="In" />
+          <Parameter Name="ServerJobFolder" Type="nvarchar" Mode="In" />
+          <Parameter Name="SiteForeman" Type="nvarchar" Mode="In" />
+          <Parameter Name="EditedBy" Type="nvarchar" Mode="In" />
+          <Parameter Name="EditedDate" Type="datetime" Mode="In" />
+          <Parameter Name="FlgAddEdit" Type="nvarchar" Mode="In" />
+          <Parameter Name="result" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="USP_TT_SetReportUtilityPreference" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SMTPHost" Type="nvarchar" Mode="In" />
+          <Parameter Name="SMTPPort" Type="int" Mode="In" />
+          <Parameter Name="FromAddress" Type="nvarchar" Mode="In" />
+          <Parameter Name="BidLogResultsFlag" Type="bit" Mode="In" />
+          <Parameter Name="BidLogNotesFlag" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="application_config" EntityType="Self.application_config" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bidlog_Result_Mail" EntityType="Self.Bidlog_Result_Mail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bonding_Mail_CC" EntityType="Self.Bonding_Mail_CC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bonding_Mail_TO" EntityType="Self.Bonding_Mail_TO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer_Info_Mail" EntityType="Self.Customer_Info_Mail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMail Info" EntityType="Self.EMail Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExceptionLogger" EntityType="Self.ExceptionLogger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SMTPDetails" EntityType="Self.SMTPDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblActivityLog" EntityType="Self.tblActivityLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAttachmentsForBidLog" EntityType="Self.tblAttachmentsForBidLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBID Checklist" EntityType="Self.tblBID Checklist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBID Log" EntityType="Self.tblBID Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBID Results" EntityType="Self.tblBID Results" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBID ResultsTemp" EntityType="Self.tblBID ResultsTemp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCustAddress" EntityType="Self.tblCustAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCustContacts" EntityType="Self.tblCustContacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCustomer" EntityType="Self.tblCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGroupUser" EntityType="Self.tblGroupUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblObsolete BID Log" EntityType="Self.tblObsolete BID Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblObsolete Quotes" EntityType="Self.tblObsolete Quotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblObsoluteBID Results" EntityType="Self.tblObsoluteBID Results" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblObsoluteBID Results Temp" EntityType="Self.tblObsoluteBID Results Temp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblQuoteLog" EntityType="Self.tblQuoteLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblScheduledMaintenance" EntityType="Self.tblScheduledMaintenance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSettings" EntityType="Self.tblSettings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSR Log" EntityType="Self.tblSR Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSRLogColumns" EntityType="Self.tblSRLogColumns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SR_Log_DatabaseSQLEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="tblActivityLogs" EntityType="Model.tblActivityLog" />
+          <EntitySet Name="tblAttachmentsForBidLogs" EntityType="Model.tblAttachmentsForBidLog" />
+          <EntitySet Name="tblBID_Logs" EntityType="Model.tblBID_Log" />
+          <EntitySet Name="tblCustAddresses" EntityType="Model.tblCustAddress" />
+          <EntitySet Name="tblCustContacts" EntityType="Model.tblCustContact" />
+          <EntitySet Name="tblCustomers" EntityType="Model.tblCustomer" />
+          <EntitySet Name="tblGroupUsers" EntityType="Model.tblGroupUser" />
+          <EntitySet Name="tblObsolete_Quotes" EntityType="Model.tblObsolete_Quote" />
+          <EntitySet Name="tblQuoteLogs" EntityType="Model.tblQuoteLog" />
+          <EntitySet Name="tblSettings" EntityType="Model.tblSetting" />
+          <EntitySet Name="tblSR_Logs" EntityType="Model.tblSR_Log" />
+          <EntitySet Name="tblSRLogColumns" EntityType="Model.tblSRLogColumn" />
+          <EntitySet Name="tblUsers" EntityType="Model.tblUser" />
+          <AssociationSet Name="FK_tblCustAddress_tblCustomer" Association="Model.FK_tblCustAddress_tblCustomer">
+            <End Role="tblCustomer" EntitySet="tblCustomers" />
+            <End Role="tblCustAddress" EntitySet="tblCustAddresses" />
+          </AssociationSet>
+          <FunctionImport Name="USP_TT_GetBidLogModifiedToday" ReturnType="Collection(Model.USP_TT_GetBidLogModifiedToday_Result)">
+          <Parameter Name="ModifiedDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="USP_TT_GetBidLogResultsModifiedToday" ReturnType="Collection(Model.USP_TT_GetBidLogResultsModifiedToday_Result)">
+          <Parameter Name="ModifiedDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="USP_TT_GetSRLogCreatedToday" ReturnType="Collection(Model.USP_TT_GetSRLogCreatedToday_Result)">
+          <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="USP_TT_InsertActivityLog">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="ActivityDate" Mode="In" Type="DateTime" />
+            <Parameter Name="FormName" Mode="In" Type="String" />
+            <Parameter Name="Action" Mode="In" Type="String" />
+            <Parameter Name="Comment" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_TT_InsertCustAddress">
+            <Parameter Name="CustumerId" Mode="In" Type="Int32" />
+            <Parameter Name="Address1" Mode="In" Type="String" />
+            <Parameter Name="Address2" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="State" Mode="In" Type="String" />
+            <Parameter Name="Zip" Mode="In" Type="String" />
+            <Parameter Name="Country" Mode="In" Type="String" />
+            <Parameter Name="SiteName" Mode="In" Type="String" />
+            <Parameter Name="IsPrimaryAddress" Mode="In" Type="Boolean" />
+            <Parameter Name="ProjectManager" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_TT_InsertCustContacts">
+            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerContact" Mode="In" Type="String" />
+            <Parameter Name="ContactPhone" Mode="In" Type="String" />
+            <Parameter Name="ContactEmail" Mode="In" Type="String" />
+            <Parameter Name="IsPrimaryContact" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="USP_TT_InsertUpdateCustomer" ReturnType="Collection(Int32)">
+            <Parameter Name="CustomerName" Mode="In" Type="String" />
+            <Parameter Name="notes" Mode="In" Type="String" />
+            <Parameter Name="IsInActive" Mode="In" Type="Boolean" />
+            <Parameter Name="result" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="USP_TT_InsertUpdateQuote" ReturnType="Collection(String)">
+            <Parameter Name="BidDate" Mode="In" Type="DateTime" />
+            <Parameter Name="BiddingAs" Mode="In" Type="String" />
+            <Parameter Name="BidTo" Mode="In" Type="String" />
+            <Parameter Name="ProjectName" Mode="In" Type="String" />
+            <Parameter Name="LastAddendumRecvd" Mode="In" Type="Int16" />
+            <Parameter Name="Estimator" Mode="In" Type="String" />
+            <Parameter Name="SRNumber" Mode="In" Type="Int32" />
+            <Parameter Name="UID" Mode="In" Type="Int32" />
+            <Parameter Name="Notes" Mode="In" Type="String" />
+            <Parameter Name="EngineersEstimate" Mode="In" Type="String" />
+            <Parameter Name="Division" Mode="In" Type="String" />
+            <Parameter Name="MandetoryJobWalk" Mode="In" Type="Boolean" />
+            <Parameter Name="JobWalkDate" Mode="In" Type="DateTime" />
+            <Parameter Name="QADeadLineDateTime" Mode="In" Type="DateTime" />
+            <Parameter Name="QuoteStatus" Mode="In" Type="String" />
+            <Parameter Name="dtpLastDateFollowup" Mode="In" Type="DateTime" />
+            <Parameter Name="LastFollowupBy" Mode="In" Type="String" />
+            <Parameter Name="FollowupNote" Mode="In" Type="String" />
+            <Parameter Name="EmailAddress" Mode="In" Type="String" />
+            <Parameter Name="FlgAddEdit" Mode="In" Type="String" />
+            <Parameter Name="FlgFollowUp" Mode="In" Type="String" />
+            <Parameter Name="result" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_TT_InsertUpdateSRLog" ReturnType="Collection(String)">
+            <Parameter Name="JobOrQuote" Mode="In" Type="String" />
+            <Parameter Name="PrevailingWageTBD" Mode="In" Type="Boolean" />
+            <Parameter Name="PW" Mode="In" Type="Boolean" />
+            <Parameter Name="ProjectType" Mode="In" Type="String" />
+            <Parameter Name="NewCustomer" Mode="In" Type="Boolean" />
+            <Parameter Name="Billing" Mode="In" Type="Boolean" />
+            <Parameter Name="JobsiteAddress" Mode="In" Type="String" />
+            <Parameter Name="QuoteTypeIC" Mode="In" Type="Boolean" />
+            <Parameter Name="QuoteTypeElectrical" Mode="In" Type="Boolean" />
+            <Parameter Name="QuoteTypeNoBid" Mode="In" Type="Boolean" />
+            <Parameter Name="QuoteDate" Mode="In" Type="DateTime" />
+            <Parameter Name="QuoteTime" Mode="In" Type="DateTime" />
+            <Parameter Name="SRNumber" Mode="In" Type="Decimal" />
+            <Parameter Name="Customer" Mode="In" Type="String" />
+            <Parameter Name="ProjectDescription" Mode="In" Type="String" />
+            <Parameter Name="CustomerContact" Mode="In" Type="String" />
+            <Parameter Name="ContactPhone" Mode="In" Type="String" />
+            <Parameter Name="ContactEmail" Mode="In" Type="String" />
+            <Parameter Name="Estimator" Mode="In" Type="String" />
+            <Parameter Name="Division" Mode="In" Type="String" />
+            <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+            <Parameter Name="QuoteDue" Mode="In" Type="DateTime" />
+            <Parameter Name="JobWalkDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MandatoryJobWalk" Mode="In" Type="Boolean" />
+            <Parameter Name="Bonding" Mode="In" Type="String" />
+            <Parameter Name="ProjectManager" Mode="In" Type="String" />
+            <Parameter Name="Notes" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="String" />
+            <Parameter Name="FollowUp" Mode="In" Type="Boolean" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="BidType" Mode="In" Type="String" />
+            <Parameter Name="Owner" Mode="In" Type="String" />
+            <Parameter Name="AdvertiseDate" Mode="In" Type="DateTime" />
+            <Parameter Name="NotifyPM" Mode="In" Type="Boolean" />
+            <Parameter Name="ServerJobFolder" Mode="In" Type="String" />
+            <Parameter Name="SiteForeman" Mode="In" Type="String" />
+            <Parameter Name="EditedBy" Mode="In" Type="String" />
+            <Parameter Name="EditedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="FlgAddEdit" Mode="In" Type="String" />
+            <Parameter Name="result" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_TT_SetReportUtilityPreference">
+            <Parameter Name="SMTPHost" Mode="In" Type="String" />
+            <Parameter Name="SMTPPort" Mode="In" Type="Int32" />
+            <Parameter Name="FromAddress" Mode="In" Type="String" />
+            <Parameter Name="BidLogResultsFlag" Mode="In" Type="Boolean" />
+            <Parameter Name="BidLogNotesFlag" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="USP_TT_InsertUpdateBidLog">
+            <Parameter Name="BidId" Mode="In" Type="Int32" />
+            <Parameter Name="BidDate" Mode="In" Type="DateTime" />
+            <Parameter Name="BiddingAs" Mode="In" Type="String" />
+            <Parameter Name="BidTo" Mode="In" Type="String" />
+            <Parameter Name="ProjectName" Mode="In" Type="String" />
+            <Parameter Name="LastAddendumRecvd" Mode="In" Type="Int32" />
+            <Parameter Name="Estimator" Mode="In" Type="String" />
+            <Parameter Name="QuoteNumber" Mode="In" Type="Int32" />
+            <Parameter Name="UID" Mode="In" Type="Int32" />
+            <Parameter Name="Notes" Mode="In" Type="String" />
+            <Parameter Name="EngineersEstimate" Mode="In" Type="String" />
+            <Parameter Name="Division" Mode="In" Type="String" />
+            <Parameter Name="RedSheet" Mode="In" Type="String" />
+            <Parameter Name="ScopeLetter" Mode="In" Type="String" />
+            <Parameter Name="BidTypeIandC" Mode="In" Type="Boolean" />
+            <Parameter Name="BidTypeElectrical" Mode="In" Type="Boolean" />
+            <Parameter Name="BidTypeNOBID" Mode="In" Type="Boolean" />
+            <Parameter Name="MandetoryJobWalk" Mode="In" Type="Boolean" />
+            <Parameter Name="JobWalkDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Bid_Rev" Mode="In" Type="String" />
+            <Parameter Name="Bid_Duration" Mode="In" Type="String" />
+            <Parameter Name="Bid_LiqDamage" Mode="In" Type="String" />
+            <Parameter Name="Bid_Warranty" Mode="In" Type="String" />
+            <Parameter Name="Bid_BondingReq" Mode="In" Type="String" />
+            <Parameter Name="Bid_LicenseReqd" Mode="In" Type="String" />
+            <Parameter Name="Bid_Qualified" Mode="In" Type="Boolean" />
+            <Parameter Name="Bid_PrevailingWage" Mode="In" Type="Boolean" />
+            <Parameter Name="Bid_UL508Reqd" Mode="In" Type="Boolean" />
+            <Parameter Name="QADeadLineDateTime" Mode="In" Type="DateTime" />
+            <Parameter Name="OwnerName" Mode="In" Type="String" />
+            <Parameter Name="AdvertiseDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ProjectFolder" Mode="In" Type="String" />
+            <Parameter Name="ModifiedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CityState" Mode="In" Type="String" />
+            <Parameter Name="PrimeSIEstimate" Mode="In" Type="String" />
+            <Parameter Name="IAndCEstimate" Mode="In" Type="String" />
+            <Parameter Name="FlgAddEdit" Mode="In" Type="String" />
+            <Parameter Name="result" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="tblBID_Results" EntityType="Model.tblBID_Result" />
+          <EntitySet Name="tblBID_Checklists" EntityType="Model.tblBID_Checklist" />
+          <EntitySet Name="tblBID_ResultsTemps" EntityType="Model.tblBID_ResultsTemp" />
+          <EntitySet Name="tblObsolete_BID_Logs" EntityType="Model.tblObsolete_BID_Log" />
+          <EntitySet Name="tblObsoluteBID_Results" EntityType="Model.tblObsoluteBID_Result" />
+          <EntitySet Name="tblObsoluteBID_Results_Temps" EntityType="Model.tblObsoluteBID_Results_Temp" />
+          <EntitySet Name="Bidlog_Result_Mail" EntityType="Model.Bidlog_Result_Mail" />
+          <EntitySet Name="Bonding_Mail_CC" EntityType="Model.Bonding_Mail_CC" />
+          <EntitySet Name="Bonding_Mail_TO" EntityType="Model.Bonding_Mail_TO" />
+          <EntitySet Name="Customer_Info_Mail" EntityType="Model.Customer_Info_Mail" />
+          <EntitySet Name="EMail_Infoes" EntityType="Model.EMail_Info" />
+          <EntitySet Name="SMTPDetails" EntityType="Model.SMTPDetail" />
+          <EntitySet Name="ExceptionLoggers" EntityType="Model.ExceptionLogger" />
+          <FunctionImport Name="USP_TT_GetNextPrevLastFirst" ReturnType="Collection(Model.USP_TT_GetNextPrevLastFirst_Result)">
+            <Parameter Name="SRNumber" Mode="In" Type="Decimal" />
+            <Parameter Name="FlgNPLF" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="tblScheduledMaintenances" EntityType="Model.tblScheduledMaintenance" />
+          <EntitySet Name="application_config" EntityType="Model.application_config" />
+        </EntityContainer>
+        <EntityType Name="tblActivityLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ActivityDate" Type="DateTime" Precision="3" />
+          <Property Name="FormName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Action" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Comment" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblAttachmentsForBidLog">
+          <Key>
+            <PropertyRef Name="UID" />
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="RowId" Type="Int32" Nullable="false" />
+          <Property Name="ListOfAttachments" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FileNames" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="upsize_ts" Type="Binary" MaxLength="8" FixedLength="true" p1:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tblBID_Log">
+          <Key>
+            <PropertyRef Name="BidId" />
+          </Key>
+          <Property Name="BidDate" Type="DateTime" Precision="3" />
+          <Property Name="BiddingAs" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="BidTo" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ProjectName" Type="String" MaxLength="125" Unicode="true" FixedLength="false" />
+          <Property Name="LastAddendumRecvd" Type="Int16" />
+          <Property Name="Estimator" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="QuoteNumber" Type="Int32" />
+          <Property Name="UID" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="EngineersEstimate" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Division" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="RedSheet" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ScopeLetter" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BidTypeIandC" Type="Boolean" />
+          <Property Name="BidTypeElectrical" Type="Boolean" />
+          <Property Name="BidTypeNOBID" Type="Boolean" />
+          <Property Name="MandetoryJobWalk" Type="Boolean" />
+          <Property Name="JobWalkDate" Type="DateTime" Precision="3" />
+          <Property Name="Bid_Rev" Type="String" MaxLength="2" Unicode="true" FixedLength="false" />
+          <Property Name="Bid_Duration" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="Bid_LiqDamage" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="Bid_Warranty" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="Bid_BondingReq" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Bid_LicenseReqd" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="Bid_Qualified" Type="Boolean" />
+          <Property Name="Bid_PrevailingWage" Type="Boolean" />
+          <Property Name="Bid_UL508Reqd" Type="Boolean" />
+          <Property Name="QADeadLineDateTime" Type="DateTime" Precision="3" />
+          <Property Name="OwnerName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AdvertiseDate" Type="DateTime" Precision="3" />
+          <Property Name="ProjectFolder" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="CityState" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="PrimeSIEstimate" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="IAndCEstimate" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="BidId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="tblCustAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="Address1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Address2" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="City" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="Country" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IsPrimaryAddress" Type="Boolean" />
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <Property Name="SiteName" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="ProjectManager" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tblCustomer" Relationship="Model.FK_tblCustAddress_tblCustomer" FromRole="tblCustAddress" ToRole="tblCustomer" />
+        </EntityType>
+        <EntityType Name="tblCustContact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerContact" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ContactPhone" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ContactEmail" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="IsPrimaryContact" Type="Boolean" />
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tblCustomer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IsInActive" Type="Boolean" />
+          <NavigationProperty Name="tblCustAddresses" Relationship="Model.FK_tblCustAddress_tblCustomer" FromRole="tblCustomer" ToRole="tblCustAddress" />
+        </EntityType>
+        <EntityType Name="tblGroupUser">
+          <Key>
+            <PropertyRef Name="Userid" />
+          </Key>
+          <Property Name="Userid" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Group_Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblObsolete_Quote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Mandatory_Job_Walk" Type="Boolean" Nullable="false" />
+          <Property Name="BidDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BiddingAs" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="BidTo" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ProjectName" Type="String" MaxLength="125" Unicode="true" FixedLength="false" />
+          <Property Name="LastAddendumRecvd" Type="Int16" />
+          <Property Name="Estimator" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="QuoteNumber" Type="Int32" />
+          <Property Name="Division" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="UID" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="EngineersEstimate" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="RedSheet" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ScopeLetter" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Job_Walk_Date" Type="DateTime" Precision="3" />
+          <Property Name="QADeadLineDateTime" Type="DateTime" Precision="3" />
+          <Property Name="QuoteStatus" Type="String" MaxLength="40" Unicode="true" FixedLength="false" />
+          <Property Name="dtpLastDateFollowup" Type="DateTime" Precision="3" />
+          <Property Name="LastFollowupBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="FollowupNote" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="MandetoryJobWalk" Type="Boolean" />
+          <Property Name="JobWalkDate" Type="DateTime" Precision="3" />
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="tblQuoteLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="BidDate" Type="DateTime" Precision="3" />
+          <Property Name="BiddingAs" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="BidTo" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ProjectName" Type="String" MaxLength="125" Unicode="true" FixedLength="false" />
+          <Property Name="LastAddendumRecvd" Type="Int16" />
+          <Property Name="Estimator" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="QuoteNumber" Type="Int32" />
+          <Property Name="UID" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="EngineersEstimate" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Division" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="RedSheet" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ScopeLetter" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BidTypeIandC" Type="Boolean" />
+          <Property Name="BidTypeElectrical" Type="Boolean" />
+          <Property Name="BidTypeNOBID" Type="Boolean" />
+          <Property Name="MandetoryJobWalk" Type="Boolean" />
+          <Property Name="JobWalkDate" Type="DateTime" Precision="3" />
+          <Property Name="QADeadLineDateTime" Type="DateTime" Precision="3" />
+          <Property Name="QuoteStatus" Type="String" MaxLength="40" Unicode="true" FixedLength="false" />
+          <Property Name="dtpLastDateFollowup" Type="DateTime" Precision="3" />
+          <Property Name="LastFollowupBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="FollowupNote" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="tblSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="SectionName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="IsFixedInGrid" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblSR_Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="FileFolder" Type="Boolean" />
+          <Property Name="Quote" Type="Boolean" />
+          <Property Name="ChemFeed" Type="Boolean" />
+          <Property Name="InactiveJob" Type="Boolean" />
+          <Property Name="PW" Type="Boolean" />
+          <Property Name="NotQuoted" Type="Boolean" />
+          <Property Name="Closed" Type="Boolean" />
+          <Property Name="SRNumber" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="Customer" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ProjectDescription" Type="String" MaxLength="125" Unicode="true" FixedLength="false" />
+          <Property Name="CustomerContact" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ContactPhone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Estimator" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Division" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="QuoteDue" Type="DateTime" Precision="3" />
+          <Property Name="JobWalkDate" Type="DateTime" Precision="3" />
+          <Property Name="MandatoryJobWalk" Type="Boolean" />
+          <Property Name="WhoJobWalk" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="BidAsPrimeOrSub" Type="Boolean" />
+          <Property Name="Bonding" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="BondingMailSent" Type="Boolean" />
+          <Property Name="PrevailingMailSent" Type="Boolean" />
+          <Property Name="Notes" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ProjectManager" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="JobOrQuote" Type="String" MaxLength="1" Unicode="true" FixedLength="false" />
+          <Property Name="ProjectType" Type="String" MaxLength="1" Unicode="true" FixedLength="false" />
+          <Property Name="PrevailingWageTBD" Type="Boolean" />
+          <Property Name="JobsiteAddress" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Billing" Type="Boolean" />
+          <Property Name="NewCustomer" Type="Boolean" />
+          <Property Name="ContactEmail" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="QuoteDate" Type="DateTime" Precision="3" />
+          <Property Name="QuoteTime" Type="DateTime" Precision="3" />
+          <Property Name="QuoteTypeI_C" Type="Boolean" />
+          <Property Name="QuoteTypeElectrical" Type="Boolean" />
+          <Property Name="QuoteTypeNoBid" Type="Boolean" />
+          <Property Name="FollowUp" Type="Boolean" />
+          <Property Name="QuoteType" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Owner" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AdvertiseDate" Type="DateTime" Precision="3" />
+          <Property Name="NotifyPM" Type="Boolean" />
+          <Property Name="ServerJobFolder" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="SiteForeman" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tblSRLogColumn">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="FieldName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="IsSortable" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="User_Password" Type="String" Nullable="false" MaxLength="8" Unicode="true" FixedLength="false" />
+          <Property Name="SR_Log_ReadOnly" Type="Boolean" Nullable="false" />
+          <Property Name="User_Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Admin_Rights" Type="Boolean" Nullable="false" />
+          <Property Name="Bid_Log_ReadOnly" Type="Boolean" Nullable="false" />
+          <Property Name="Accounting_Rights" Type="Boolean" />
+          <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DatabaseUpdate_Rights" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_tblCustAddress_tblCustomer">
+          <End Role="tblCustomer" Type="Model.tblCustomer" Multiplicity="1" />
+          <End Role="tblCustAddress" Type="Model.tblCustAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="tblCustAddress">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="USP_TT_GetBidLogModifiedToday_Result">
+          <Property Type="Int32" Name="QuoteNumber" Nullable="true" />
+          <Property Type="String" Name="BidTo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProjectName" Nullable="true" MaxLength="125" />
+          <Property Type="String" Name="Estimator" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="OwnerName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="USP_TT_GetBidLogResultsModifiedToday_Result">
+          <Property Type="Int32" Name="UID" Nullable="true" />
+          <Property Type="Int32" Name="BidStatus" Nullable="true" />
+          <Property Type="String" Name="TelstarQuote" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LowGC" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LowElecSub" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="BidType" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Column1" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Column2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Column3" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Column4" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Column5" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Column6" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Column7" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Column8" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Column9" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Column10" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="USP_TT_GetSRLogCreatedToday_Result">
+          <Property Type="Decimal" Name="SRNumber" Nullable="true" Precision="18" Scale="5" />
+          <Property Type="String" Name="Customer" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProjectDescription" Nullable="true" MaxLength="125" />
+          <Property Type="String" Name="Estimator" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Division" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ProjectManager" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SiteForeman" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="tblBID_Result">
+          <Key>
+            <PropertyRef Name="BIDResults_Id" />
+          </Key>
+          <Property Type="Int32" Name="UID" />
+          <Property Type="Int32" Name="BidStatus" />
+          <Property Type="String" Name="TelstarQuote" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LowGC" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LowElecSub" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="BidType" />
+          <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column1" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column2" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column3" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column4" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column5" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column6" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column7" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column8" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column9" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column10" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <Property Type="Int32" Name="BIDResults_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="tblBID_Checklist">
+          <Key>
+            <PropertyRef Name="BIDChecklist_Id" />
+          </Key>
+          <Property Type="Int32" Name="SRNumber" />
+          <Property Type="Boolean" Name="PrequalificationRequired" />
+          <Property Type="Boolean" Name="IsTelstarPrequalified" />
+          <Property Type="Boolean" Name="QualificationPacketReceived" />
+          <Property Type="Boolean" Name="Map" />
+          <Property Type="Boolean" Name="BidForm" />
+          <Property Type="Boolean" Name="SubsRequireListing" />
+          <Property Type="Boolean" Name="EquipmentRequiresListing" />
+          <Property Type="Boolean" Name="SpareParts" />
+          <Property Type="String" Name="IsAnotherContractorHardSpecdForThisWork" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EquipmentRequiresListingText" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SparePartsText" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ElectricalEngineer" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ElectricalEngineeringContact" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CustomerContact" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PAndSSourcePh" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Weblink" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PlanholdersList" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="HowLongDoWeNeedToHoldPricesFor" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="BidScheduleItemsTelstarIsBiddingOn" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Instrumentation" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PlcControls" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Hmi" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Power" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PlcProgrammingBy" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="HmiProgrammingBy" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ReportProgrammingBy" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="WhoAreYouGoingToUseForTheIntegration" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="WasThereAPrequalProcess" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="QualificationsProcess" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="WhenWillYouNotifyUsThatWeWillBeListed" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="HaveThereBeenAnyAddendumsListedSoFar" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AreYouTheOneThatDecidesTheSystemsIntegrator" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="WhenIsTheNextPrequalification" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="BIDChecklist_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="tblBID_ResultsTemp">
+          <Key>
+            <PropertyRef Name="BIDResults_Id" />
+          </Key>
+          <Property Type="Int32" Name="UID" />
+          <Property Type="Int32" Name="BidStatus" />
+          <Property Type="String" Name="TelstarQuote" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LowGC" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LowElecSub" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="BidType" />
+          <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column1" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column2" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column3" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column4" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column5" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column6" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column7" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column8" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column9" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column10" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <Property Type="Int32" Name="BIDResults_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserID" />
+        </EntityType>
+        <EntityType Name="tblObsolete_BID_Log">
+          <Key>
+            <PropertyRef Name="ObsoleteBID_Id" />
+          </Key>
+          <Property Type="Boolean" Name="Mandatory_Job_Walk" Nullable="false" />
+          <Property Type="DateTime" Name="BidDate" Nullable="false" Precision="3" />
+          <Property Type="String" Name="BiddingAs" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="BidTo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ProjectName" MaxLength="125" FixedLength="false" Unicode="true" />
+          <Property Type="Int16" Name="LastAddendumRecvd" />
+          <Property Type="String" Name="Estimator" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="QuoteNumber" />
+          <Property Type="String" Name="Division" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="UID" />
+          <Property Type="String" Name="Notes" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EngineersEstimate" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RedSheet" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ScopeLetter" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Job_Walk_Date" Precision="3" />
+          <Property Type="String" Name="Bid_Rev" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Bid_Duration" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Bid_LiqDamage" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Bid_Warranty" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Bid_BondingReq" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Bid_LicenseReqd" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Bid_Qualified" />
+          <Property Type="Boolean" Name="Bid_PrevailingWage" />
+          <Property Type="Boolean" Name="Bid_UL508Reqd" />
+          <Property Type="DateTime" Name="QADeadLineDateTime" Precision="3" />
+          <Property Type="String" Name="ProjectFolder" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="OwnerName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="AdvertiseDate" Precision="3" />
+          <Property Type="String" Name="CityState" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PrimeSIEstimate" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="IAndCEstimate" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ObsoleteBID_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="tblObsoluteBID_Result">
+          <Key>
+            <PropertyRef Name="ObsoluteBIDResults_Id" />
+          </Key>
+          <Property Type="Int32" Name="UID" />
+          <Property Type="Int32" Name="BidStatus" />
+          <Property Type="String" Name="TelstarQuote" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LowGC" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LowElecSub" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="BidType" />
+          <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column1" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column2" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column3" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column4" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column5" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column6" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column7" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column8" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column9" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column10" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ObsoluteBIDResults_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="tblObsoluteBID_Results_Temp">
+          <Key>
+            <PropertyRef Name="ObsoluteBIDResults_Id" />
+          </Key>
+          <Property Type="Int32" Name="UID" />
+          <Property Type="Int32" Name="BidStatus" />
+          <Property Type="String" Name="TelstarQuote" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LowGC" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LowElecSub" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="BidType" />
+          <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column1" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column2" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column3" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column4" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column5" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column6" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column7" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column8" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column9" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Column10" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ObsoluteBIDResults_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserID" />
+        </EntityType>
+        <EntityType Name="Bidlog_Result_Mail">
+          <Key>
+            <PropertyRef Name="BidlogResultMailId" />
+          </Key>
+          <Property Type="String" Name="BidlogResultMail" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="BidlogResultMailId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Bonding_Mail_CC">
+          <Key>
+            <PropertyRef Name="BondingMailCCId" />
+          </Key>
+          <Property Type="String" Name="BondingMailCC" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="BondingMailCCId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Bonding_Mail_TO">
+          <Key>
+            <PropertyRef Name="BondingMailToId" />
+          </Key>
+          <Property Type="String" Name="BondingMailTO" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="BondingMailToId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Customer_Info_Mail">
+          <Key>
+            <PropertyRef Name="CustomerInfoMailId" />
+          </Key>
+          <Property Type="String" Name="CustomerInfoMail" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CustomerInfoMailId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="EMail_Info">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="SMTPDetail">
+          <Key>
+            <PropertyRef Name="SMTPAddress" />
+          </Key>
+          <Property Type="String" Name="SMTPAddress" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SMTPPort" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SMTPUserName" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SMTPPassword" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FromAddress" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ExceptionLogger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ExceptionMessage" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ControllerName" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ExceptionStackTrace" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="LogTime" Precision="3" />
+          <Property Type="String" Name="ActionName" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="USP_TT_GetNextPrevLastFirst_Result">
+          <Property Type="Boolean" Name="FileFolder" Nullable="true" />
+          <Property Type="Boolean" Name="Quote" Nullable="true" />
+          <Property Type="Boolean" Name="ChemFeed" Nullable="true" />
+          <Property Type="Boolean" Name="InactiveJob" Nullable="true" />
+          <Property Type="Boolean" Name="PW" Nullable="true" />
+          <Property Type="Boolean" Name="NotQuoted" Nullable="true" />
+          <Property Type="Boolean" Name="Closed" Nullable="true" />
+          <Property Type="Decimal" Name="SRNumber" Nullable="true" Precision="18" Scale="5" />
+          <Property Type="String" Name="Customer" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProjectDescription" Nullable="true" MaxLength="125" />
+          <Property Type="String" Name="CustomerContact" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ContactPhone" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Estimator" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Division" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="QuoteDue" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="JobWalkDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="MandatoryJobWalk" Nullable="true" />
+          <Property Type="String" Name="WhoJobWalk" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="BidAsPrimeOrSub" Nullable="true" />
+          <Property Type="String" Name="Bonding" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="BondingMailSent" Nullable="true" />
+          <Property Type="Boolean" Name="PrevailingMailSent" Nullable="true" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="ProjectManager" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="JobOrQuote" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="ProjectType" Nullable="true" MaxLength="1" />
+          <Property Type="Boolean" Name="PrevailingWageTBD" Nullable="true" />
+          <Property Type="String" Name="JobsiteAddress" Nullable="true" MaxLength="255" />
+          <Property Type="Boolean" Name="Billing" Nullable="true" />
+          <Property Type="Boolean" Name="NewCustomer" Nullable="true" />
+          <Property Type="String" Name="ContactEmail" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="QuoteDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="QuoteTime" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="QuoteTypeI_C" Nullable="true" />
+          <Property Type="Boolean" Name="QuoteTypeElectrical" Nullable="true" />
+          <Property Type="Boolean" Name="QuoteTypeNoBid" Nullable="true" />
+          <Property Type="Boolean" Name="FollowUp" Nullable="true" />
+          <Property Type="String" Name="QuoteType" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="AdvertiseDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="NotifyPM" Nullable="true" />
+          <Property Type="String" Name="ServerJobFolder" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="SiteForeman" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="EditedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="EditedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <EntityType Name="tblScheduledMaintenance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FromDate" Type="DateTime" Precision="3" />
+          <Property Name="ToDate" Type="DateTime" Precision="3" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="application_config">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FlagName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="SR_Log_DatabaseSQLEntities">
+          <EntitySetMapping Name="tblActivityLogs">
+            <EntityTypeMapping TypeName="Model.tblActivityLog">
+              <MappingFragment StoreEntitySet="tblActivityLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
+                <ScalarProperty Name="FormName" ColumnName="FormName" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAttachmentsForBidLogs">
+            <EntityTypeMapping TypeName="Model.tblAttachmentsForBidLog">
+              <MappingFragment StoreEntitySet="tblAttachmentsForBidLog">
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+                <ScalarProperty Name="ListOfAttachments" ColumnName="ListOfAttachments" />
+                <ScalarProperty Name="FileNames" ColumnName="FileNames" />
+                <ScalarProperty Name="upsize_ts" ColumnName="upsize_ts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBID_Logs">
+            <EntityTypeMapping TypeName="Model.tblBID_Log">
+              <MappingFragment StoreEntitySet="tblBID Log">
+                <ScalarProperty Name="BidDate" ColumnName="BidDate" />
+                <ScalarProperty Name="BiddingAs" ColumnName="BiddingAs" />
+                <ScalarProperty Name="BidTo" ColumnName="BidTo" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="LastAddendumRecvd" ColumnName="LastAddendumRecvd" />
+                <ScalarProperty Name="Estimator" ColumnName="Estimator" />
+                <ScalarProperty Name="QuoteNumber" ColumnName="QuoteNumber" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="EngineersEstimate" ColumnName="EngineersEstimate" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="RedSheet" ColumnName="RedSheet" />
+                <ScalarProperty Name="ScopeLetter" ColumnName="ScopeLetter" />
+                <ScalarProperty Name="BidTypeIandC" ColumnName="BidTypeIandC" />
+                <ScalarProperty Name="BidTypeElectrical" ColumnName="BidTypeElectrical" />
+                <ScalarProperty Name="BidTypeNOBID" ColumnName="BidTypeNOBID" />
+                <ScalarProperty Name="MandetoryJobWalk" ColumnName="MandetoryJobWalk" />
+                <ScalarProperty Name="JobWalkDate" ColumnName="JobWalkDate" />
+                <ScalarProperty Name="Bid_Rev" ColumnName="Bid_Rev" />
+                <ScalarProperty Name="Bid_Duration" ColumnName="Bid_Duration" />
+                <ScalarProperty Name="Bid_LiqDamage" ColumnName="Bid_LiqDamage" />
+                <ScalarProperty Name="Bid_Warranty" ColumnName="Bid_Warranty" />
+                <ScalarProperty Name="Bid_BondingReq" ColumnName="Bid_BondingReq" />
+                <ScalarProperty Name="Bid_LicenseReqd" ColumnName="Bid_LicenseReqd" />
+                <ScalarProperty Name="Bid_Qualified" ColumnName="Bid_Qualified" />
+                <ScalarProperty Name="Bid_PrevailingWage" ColumnName="Bid_PrevailingWage" />
+                <ScalarProperty Name="Bid_UL508Reqd" ColumnName="Bid_UL508Reqd" />
+                <ScalarProperty Name="QADeadLineDateTime" ColumnName="QADeadLineDateTime" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="AdvertiseDate" ColumnName="AdvertiseDate" />
+                <ScalarProperty Name="ProjectFolder" ColumnName="ProjectFolder" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CityState" ColumnName="CityState" />
+                <ScalarProperty Name="PrimeSIEstimate" ColumnName="PrimeSIEstimate" />
+                <ScalarProperty Name="IAndCEstimate" ColumnName="IAndCEstimate" />
+                <ScalarProperty Name="BidId" ColumnName="BidId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustAddresses">
+            <EntityTypeMapping TypeName="Model.tblCustAddress">
+              <MappingFragment StoreEntitySet="tblCustAddress">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="IsPrimaryAddress" ColumnName="IsPrimaryAddress" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="ProjectManager" ColumnName="ProjectManager" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustContacts">
+            <EntityTypeMapping TypeName="Model.tblCustContact">
+              <MappingFragment StoreEntitySet="tblCustContacts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CustomerContact" ColumnName="CustomerContact" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="IsPrimaryContact" ColumnName="IsPrimaryContact" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustomers">
+            <EntityTypeMapping TypeName="Model.tblCustomer">
+              <MappingFragment StoreEntitySet="tblCustomer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="IsInActive" ColumnName="IsInActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGroupUsers">
+            <EntityTypeMapping TypeName="Model.tblGroupUser">
+              <MappingFragment StoreEntitySet="tblGroupUser">
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Group_Name" ColumnName="Group Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblObsolete_Quotes">
+            <EntityTypeMapping TypeName="Model.tblObsolete_Quote">
+              <MappingFragment StoreEntitySet="tblObsolete Quotes">
+                <ScalarProperty Name="Mandatory_Job_Walk" ColumnName="Mandatory Job Walk" />
+                <ScalarProperty Name="BidDate" ColumnName="BidDate" />
+                <ScalarProperty Name="BiddingAs" ColumnName="BiddingAs" />
+                <ScalarProperty Name="BidTo" ColumnName="BidTo" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="LastAddendumRecvd" ColumnName="LastAddendumRecvd" />
+                <ScalarProperty Name="Estimator" ColumnName="Estimator" />
+                <ScalarProperty Name="QuoteNumber" ColumnName="QuoteNumber" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="EngineersEstimate" ColumnName="EngineersEstimate" />
+                <ScalarProperty Name="RedSheet" ColumnName="RedSheet" />
+                <ScalarProperty Name="ScopeLetter" ColumnName="ScopeLetter" />
+                <ScalarProperty Name="Job_Walk_Date" ColumnName="Job Walk Date" />
+                <ScalarProperty Name="QADeadLineDateTime" ColumnName="QADeadLineDateTime" />
+                <ScalarProperty Name="QuoteStatus" ColumnName="QuoteStatus" />
+                <ScalarProperty Name="dtpLastDateFollowup" ColumnName="dtpLastDateFollowup" />
+                <ScalarProperty Name="LastFollowupBy" ColumnName="LastFollowupBy" />
+                <ScalarProperty Name="FollowupNote" ColumnName="FollowupNote" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="MandetoryJobWalk" ColumnName="MandetoryJobWalk" />
+                <ScalarProperty Name="JobWalkDate" ColumnName="JobWalkDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblQuoteLogs">
+            <EntityTypeMapping TypeName="Model.tblQuoteLog">
+              <MappingFragment StoreEntitySet="tblQuoteLog">
+                <ScalarProperty Name="BidDate" ColumnName="BidDate" />
+                <ScalarProperty Name="BiddingAs" ColumnName="BiddingAs" />
+                <ScalarProperty Name="BidTo" ColumnName="BidTo" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="LastAddendumRecvd" ColumnName="LastAddendumRecvd" />
+                <ScalarProperty Name="Estimator" ColumnName="Estimator" />
+                <ScalarProperty Name="QuoteNumber" ColumnName="QuoteNumber" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="EngineersEstimate" ColumnName="EngineersEstimate" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="RedSheet" ColumnName="RedSheet" />
+                <ScalarProperty Name="ScopeLetter" ColumnName="ScopeLetter" />
+                <ScalarProperty Name="BidTypeIandC" ColumnName="BidTypeIandC" />
+                <ScalarProperty Name="BidTypeElectrical" ColumnName="BidTypeElectrical" />
+                <ScalarProperty Name="BidTypeNOBID" ColumnName="BidTypeNOBID" />
+                <ScalarProperty Name="MandetoryJobWalk" ColumnName="MandetoryJobWalk" />
+                <ScalarProperty Name="JobWalkDate" ColumnName="JobWalkDate" />
+                <ScalarProperty Name="QADeadLineDateTime" ColumnName="QADeadLineDateTime" />
+                <ScalarProperty Name="QuoteStatus" ColumnName="QuoteStatus" />
+                <ScalarProperty Name="dtpLastDateFollowup" ColumnName="dtpLastDateFollowup" />
+                <ScalarProperty Name="LastFollowupBy" ColumnName="LastFollowupBy" />
+                <ScalarProperty Name="FollowupNote" ColumnName="FollowupNote" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSettings">
+            <EntityTypeMapping TypeName="Model.tblSetting">
+              <MappingFragment StoreEntitySet="tblSettings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="IsFixedInGrid" ColumnName="IsFixedInGrid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSR_Logs">
+            <EntityTypeMapping TypeName="Model.tblSR_Log">
+              <MappingFragment StoreEntitySet="tblSR Log">
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="FileFolder" ColumnName="FileFolder" />
+                <ScalarProperty Name="Quote" ColumnName="Quote" />
+                <ScalarProperty Name="ChemFeed" ColumnName="ChemFeed" />
+                <ScalarProperty Name="InactiveJob" ColumnName="InactiveJob" />
+                <ScalarProperty Name="PW" ColumnName="PW" />
+                <ScalarProperty Name="NotQuoted" ColumnName="NotQuoted" />
+                <ScalarProperty Name="Closed" ColumnName="Closed" />
+                <ScalarProperty Name="SRNumber" ColumnName="SRNumber" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
+                <ScalarProperty Name="CustomerContact" ColumnName="CustomerContact" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+                <ScalarProperty Name="Estimator" ColumnName="Estimator" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="QuoteDue" ColumnName="QuoteDue" />
+                <ScalarProperty Name="JobWalkDate" ColumnName="JobWalkDate" />
+                <ScalarProperty Name="MandatoryJobWalk" ColumnName="MandatoryJobWalk" />
+                <ScalarProperty Name="WhoJobWalk" ColumnName="WhoJobWalk" />
+                <ScalarProperty Name="BidAsPrimeOrSub" ColumnName="BidAsPrimeOrSub" />
+                <ScalarProperty Name="Bonding" ColumnName="Bonding" />
+                <ScalarProperty Name="BondingMailSent" ColumnName="BondingMailSent" />
+                <ScalarProperty Name="PrevailingMailSent" ColumnName="PrevailingMailSent" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="ProjectManager" ColumnName="ProjectManager" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="JobOrQuote" ColumnName="JobOrQuote" />
+                <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
+                <ScalarProperty Name="PrevailingWageTBD" ColumnName="PrevailingWageTBD" />
+                <ScalarProperty Name="JobsiteAddress" ColumnName="JobsiteAddress" />
+                <ScalarProperty Name="Billing" ColumnName="Billing" />
+                <ScalarProperty Name="NewCustomer" ColumnName="NewCustomer" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="QuoteDate" ColumnName="QuoteDate" />
+                <ScalarProperty Name="QuoteTime" ColumnName="QuoteTime" />
+                <ScalarProperty Name="QuoteTypeI_C" ColumnName="QuoteTypeI&amp;C" />
+                <ScalarProperty Name="QuoteTypeElectrical" ColumnName="QuoteTypeElectrical" />
+                <ScalarProperty Name="QuoteTypeNoBid" ColumnName="QuoteTypeNoBid" />
+                <ScalarProperty Name="FollowUp" ColumnName="FollowUp" />
+                <ScalarProperty Name="QuoteType" ColumnName="QuoteType" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="AdvertiseDate" ColumnName="AdvertiseDate" />
+                <ScalarProperty Name="NotifyPM" ColumnName="NotifyPM" />
+                <ScalarProperty Name="ServerJobFolder" ColumnName="ServerJobFolder" />
+                <ScalarProperty Name="SiteForeman" ColumnName="SiteForeman" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSRLogColumns">
+            <EntityTypeMapping TypeName="Model.tblSRLogColumn">
+              <MappingFragment StoreEntitySet="tblSRLogColumns">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IsSortable" ColumnName="IsSortable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="Model.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="DatabaseUpdate_Rights" ColumnName="DatabaseUpdate_Rights" />
+                <ScalarProperty Name="User_Password" ColumnName="User_Password" />
+                <ScalarProperty Name="SR_Log_ReadOnly" ColumnName="SR_Log_ReadOnly" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="Admin_Rights" ColumnName="Admin_Rights" />
+                <ScalarProperty Name="Bid_Log_ReadOnly" ColumnName="Bid_Log_ReadOnly" />
+                <ScalarProperty Name="Accounting_Rights" ColumnName="Accounting_Rights" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="USP_TT_GetBidLogModifiedToday" FunctionName="Model.Store.USP_TT_GetBidLogModifiedToday">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.USP_TT_GetBidLogModifiedToday_Result">
+                <ScalarProperty Name="QuoteNumber" ColumnName="QuoteNumber" />
+                <ScalarProperty Name="BidTo" ColumnName="BidTo" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="Estimator" ColumnName="Estimator" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_TT_GetBidLogResultsModifiedToday" FunctionName="Model.Store.USP_TT_GetBidLogResultsModifiedToday">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.USP_TT_GetBidLogResultsModifiedToday_Result">
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="BidStatus" ColumnName="BidStatus" />
+                <ScalarProperty Name="TelstarQuote" ColumnName="TelstarQuote" />
+                <ScalarProperty Name="LowGC" ColumnName="LowGC" />
+                <ScalarProperty Name="LowElecSub" ColumnName="LowElecSub" />
+                <ScalarProperty Name="BidType" ColumnName="BidType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="Column2" ColumnName="Column2" />
+                <ScalarProperty Name="Column3" ColumnName="Column3" />
+                <ScalarProperty Name="Column4" ColumnName="Column4" />
+                <ScalarProperty Name="Column5" ColumnName="Column5" />
+                <ScalarProperty Name="Column6" ColumnName="Column6" />
+                <ScalarProperty Name="Column7" ColumnName="Column7" />
+                <ScalarProperty Name="Column8" ColumnName="Column8" />
+                <ScalarProperty Name="Column9" ColumnName="Column9" />
+                <ScalarProperty Name="Column10" ColumnName="Column10" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_TT_GetSRLogCreatedToday" FunctionName="Model.Store.USP_TT_GetSRLogCreatedToday">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.USP_TT_GetSRLogCreatedToday_Result">
+                <ScalarProperty Name="SRNumber" ColumnName="SRNumber" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
+                <ScalarProperty Name="Estimator" ColumnName="Estimator" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="ProjectManager" ColumnName="ProjectManager" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="SiteForeman" ColumnName="SiteForeman" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_TT_InsertActivityLog" FunctionName="Model.Store.USP_TT_InsertActivityLog" />
+          <FunctionImportMapping FunctionImportName="USP_TT_InsertCustAddress" FunctionName="Model.Store.USP_TT_InsertCustAddress" />
+          <FunctionImportMapping FunctionImportName="USP_TT_InsertCustContacts" FunctionName="Model.Store.USP_TT_InsertCustContacts" />
+          <FunctionImportMapping FunctionImportName="USP_TT_InsertUpdateCustomer" FunctionName="Model.Store.USP_TT_InsertUpdateCustomer" />
+          <FunctionImportMapping FunctionImportName="USP_TT_InsertUpdateQuote" FunctionName="Model.Store.USP_TT_InsertUpdateQuote" />
+          <FunctionImportMapping FunctionImportName="USP_TT_InsertUpdateSRLog" FunctionName="Model.Store.USP_TT_InsertUpdateSRLog" />
+          <FunctionImportMapping FunctionImportName="USP_TT_SetReportUtilityPreference" FunctionName="Model.Store.USP_TT_SetReportUtilityPreference" />
+          <FunctionImportMapping FunctionImportName="USP_TT_InsertUpdateBidLog" FunctionName="Model.Store.USP_TT_InsertUpdateBidLog" />
+          <EntitySetMapping Name="tblBID_Results">
+            <EntityTypeMapping TypeName="Model.tblBID_Result">
+              <MappingFragment StoreEntitySet="tblBID Results">
+                <ScalarProperty Name="BIDResults_Id" ColumnName="BIDResults_Id" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Column10" ColumnName="Column10" />
+                <ScalarProperty Name="Column9" ColumnName="Column9" />
+                <ScalarProperty Name="Column8" ColumnName="Column8" />
+                <ScalarProperty Name="Column7" ColumnName="Column7" />
+                <ScalarProperty Name="Column6" ColumnName="Column6" />
+                <ScalarProperty Name="Column5" ColumnName="Column5" />
+                <ScalarProperty Name="Column4" ColumnName="Column4" />
+                <ScalarProperty Name="Column3" ColumnName="Column3" />
+                <ScalarProperty Name="Column2" ColumnName="Column2" />
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BidType" ColumnName="BidType" />
+                <ScalarProperty Name="LowElecSub" ColumnName="LowElecSub" />
+                <ScalarProperty Name="LowGC" ColumnName="LowGC" />
+                <ScalarProperty Name="TelstarQuote" ColumnName="TelstarQuote" />
+                <ScalarProperty Name="BidStatus" ColumnName="BidStatus" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBID_Checklists">
+            <EntityTypeMapping TypeName="Model.tblBID_Checklist">
+              <MappingFragment StoreEntitySet="tblBID Checklist">
+                <ScalarProperty Name="BIDChecklist_Id" ColumnName="BIDChecklist_Id" />
+                <ScalarProperty Name="WhenIsTheNextPrequalification" ColumnName="WhenIsTheNextPrequalification" />
+                <ScalarProperty Name="AreYouTheOneThatDecidesTheSystemsIntegrator" ColumnName="AreYouTheOneThatDecidesTheSystemsIntegrator" />
+                <ScalarProperty Name="HaveThereBeenAnyAddendumsListedSoFar" ColumnName="HaveThereBeenAnyAddendumsListedSoFar" />
+                <ScalarProperty Name="WhenWillYouNotifyUsThatWeWillBeListed" ColumnName="WhenWillYouNotifyUsThatWeWillBeListed" />
+                <ScalarProperty Name="QualificationsProcess" ColumnName="QualificationsProcess" />
+                <ScalarProperty Name="WasThereAPrequalProcess" ColumnName="WasThereAPrequalProcess" />
+                <ScalarProperty Name="WhoAreYouGoingToUseForTheIntegration" ColumnName="WhoAreYouGoingToUseForTheIntegration" />
+                <ScalarProperty Name="ReportProgrammingBy" ColumnName="ReportProgrammingBy" />
+                <ScalarProperty Name="HmiProgrammingBy" ColumnName="HmiProgrammingBy" />
+                <ScalarProperty Name="PlcProgrammingBy" ColumnName="PlcProgrammingBy" />
+                <ScalarProperty Name="Power" ColumnName="Power" />
+                <ScalarProperty Name="Hmi" ColumnName="Hmi" />
+                <ScalarProperty Name="PlcControls" ColumnName="PlcControls" />
+                <ScalarProperty Name="Instrumentation" ColumnName="Instrumentation" />
+                <ScalarProperty Name="BidScheduleItemsTelstarIsBiddingOn" ColumnName="BidScheduleItemsTelstarIsBiddingOn" />
+                <ScalarProperty Name="HowLongDoWeNeedToHoldPricesFor" ColumnName="HowLongDoWeNeedToHoldPricesFor" />
+                <ScalarProperty Name="PlanholdersList" ColumnName="PlanholdersList" />
+                <ScalarProperty Name="Weblink" ColumnName="Weblink" />
+                <ScalarProperty Name="PAndSSourcePh" ColumnName="PAndSSourcePh" />
+                <ScalarProperty Name="CustomerContact" ColumnName="CustomerContact" />
+                <ScalarProperty Name="ElectricalEngineeringContact" ColumnName="ElectricalEngineeringContact" />
+                <ScalarProperty Name="ElectricalEngineer" ColumnName="ElectricalEngineer" />
+                <ScalarProperty Name="SparePartsText" ColumnName="SparePartsText" />
+                <ScalarProperty Name="EquipmentRequiresListingText" ColumnName="EquipmentRequiresListingText" />
+                <ScalarProperty Name="IsAnotherContractorHardSpecdForThisWork" ColumnName="IsAnotherContractorHardSpecdForThisWork" />
+                <ScalarProperty Name="SpareParts" ColumnName="SpareParts" />
+                <ScalarProperty Name="EquipmentRequiresListing" ColumnName="EquipmentRequiresListing" />
+                <ScalarProperty Name="SubsRequireListing" ColumnName="SubsRequireListing" />
+                <ScalarProperty Name="BidForm" ColumnName="BidForm" />
+                <ScalarProperty Name="Map" ColumnName="Map" />
+                <ScalarProperty Name="QualificationPacketReceived" ColumnName="QualificationPacketReceived" />
+                <ScalarProperty Name="IsTelstarPrequalified" ColumnName="IsTelstarPrequalified" />
+                <ScalarProperty Name="PrequalificationRequired" ColumnName="PrequalificationRequired" />
+                <ScalarProperty Name="SRNumber" ColumnName="SRNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBID_ResultsTemps">
+            <EntityTypeMapping TypeName="Model.tblBID_ResultsTemp">
+              <MappingFragment StoreEntitySet="tblBID ResultsTemp">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="BIDResults_Id" ColumnName="BIDResults_Id" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Column10" ColumnName="Column10" />
+                <ScalarProperty Name="Column9" ColumnName="Column9" />
+                <ScalarProperty Name="Column8" ColumnName="Column8" />
+                <ScalarProperty Name="Column7" ColumnName="Column7" />
+                <ScalarProperty Name="Column6" ColumnName="Column6" />
+                <ScalarProperty Name="Column5" ColumnName="Column5" />
+                <ScalarProperty Name="Column4" ColumnName="Column4" />
+                <ScalarProperty Name="Column3" ColumnName="Column3" />
+                <ScalarProperty Name="Column2" ColumnName="Column2" />
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BidType" ColumnName="BidType" />
+                <ScalarProperty Name="LowElecSub" ColumnName="LowElecSub" />
+                <ScalarProperty Name="LowGC" ColumnName="LowGC" />
+                <ScalarProperty Name="TelstarQuote" ColumnName="TelstarQuote" />
+                <ScalarProperty Name="BidStatus" ColumnName="BidStatus" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblObsolete_BID_Logs">
+            <EntityTypeMapping TypeName="Model.tblObsolete_BID_Log">
+              <MappingFragment StoreEntitySet="tblObsolete BID Log">
+                <ScalarProperty Name="ObsoleteBID_Id" ColumnName="ObsoleteBID_Id" />
+                <ScalarProperty Name="IAndCEstimate" ColumnName="IAndCEstimate" />
+                <ScalarProperty Name="PrimeSIEstimate" ColumnName="PrimeSIEstimate" />
+                <ScalarProperty Name="CityState" ColumnName="CityState" />
+                <ScalarProperty Name="AdvertiseDate" ColumnName="AdvertiseDate" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="ProjectFolder" ColumnName="ProjectFolder" />
+                <ScalarProperty Name="QADeadLineDateTime" ColumnName="QADeadLineDateTime" />
+                <ScalarProperty Name="Bid_UL508Reqd" ColumnName="Bid_UL508Reqd" />
+                <ScalarProperty Name="Bid_PrevailingWage" ColumnName="Bid_PrevailingWage" />
+                <ScalarProperty Name="Bid_Qualified" ColumnName="Bid_Qualified" />
+                <ScalarProperty Name="Bid_LicenseReqd" ColumnName="Bid_LicenseReqd" />
+                <ScalarProperty Name="Bid_BondingReq" ColumnName="Bid_BondingReq" />
+                <ScalarProperty Name="Bid_Warranty" ColumnName="Bid_Warranty" />
+                <ScalarProperty Name="Bid_LiqDamage" ColumnName="Bid_LiqDamage" />
+                <ScalarProperty Name="Bid_Duration" ColumnName="Bid_Duration" />
+                <ScalarProperty Name="Bid_Rev" ColumnName="Bid_Rev" />
+                <ScalarProperty Name="Job_Walk_Date" ColumnName="Job Walk Date" />
+                <ScalarProperty Name="ScopeLetter" ColumnName="ScopeLetter" />
+                <ScalarProperty Name="RedSheet" ColumnName="RedSheet" />
+                <ScalarProperty Name="EngineersEstimate" ColumnName="EngineersEstimate" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="QuoteNumber" ColumnName="QuoteNumber" />
+                <ScalarProperty Name="Estimator" ColumnName="Estimator" />
+                <ScalarProperty Name="LastAddendumRecvd" ColumnName="LastAddendumRecvd" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="BidTo" ColumnName="BidTo" />
+                <ScalarProperty Name="BiddingAs" ColumnName="BiddingAs" />
+                <ScalarProperty Name="BidDate" ColumnName="BidDate" />
+                <ScalarProperty Name="Mandatory_Job_Walk" ColumnName="Mandatory Job Walk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblObsoluteBID_Results">
+            <EntityTypeMapping TypeName="Model.tblObsoluteBID_Result">
+              <MappingFragment StoreEntitySet="tblObsoluteBID Results">
+                <ScalarProperty Name="ObsoluteBIDResults_Id" ColumnName="ObsoluteBIDResults_Id" />
+                <ScalarProperty Name="Column10" ColumnName="Column10" />
+                <ScalarProperty Name="Column9" ColumnName="Column9" />
+                <ScalarProperty Name="Column8" ColumnName="Column8" />
+                <ScalarProperty Name="Column7" ColumnName="Column7" />
+                <ScalarProperty Name="Column6" ColumnName="Column6" />
+                <ScalarProperty Name="Column5" ColumnName="Column5" />
+                <ScalarProperty Name="Column4" ColumnName="Column4" />
+                <ScalarProperty Name="Column3" ColumnName="Column3" />
+                <ScalarProperty Name="Column2" ColumnName="Column2" />
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BidType" ColumnName="BidType" />
+                <ScalarProperty Name="LowElecSub" ColumnName="LowElecSub" />
+                <ScalarProperty Name="LowGC" ColumnName="LowGC" />
+                <ScalarProperty Name="TelstarQuote" ColumnName="TelstarQuote" />
+                <ScalarProperty Name="BidStatus" ColumnName="BidStatus" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblObsoluteBID_Results_Temps">
+            <EntityTypeMapping TypeName="Model.tblObsoluteBID_Results_Temp">
+              <MappingFragment StoreEntitySet="tblObsoluteBID Results Temp">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ObsoluteBIDResults_Id" ColumnName="ObsoluteBIDResults_Id" />
+                <ScalarProperty Name="Column10" ColumnName="Column10" />
+                <ScalarProperty Name="Column9" ColumnName="Column9" />
+                <ScalarProperty Name="Column8" ColumnName="Column8" />
+                <ScalarProperty Name="Column7" ColumnName="Column7" />
+                <ScalarProperty Name="Column6" ColumnName="Column6" />
+                <ScalarProperty Name="Column5" ColumnName="Column5" />
+                <ScalarProperty Name="Column4" ColumnName="Column4" />
+                <ScalarProperty Name="Column3" ColumnName="Column3" />
+                <ScalarProperty Name="Column2" ColumnName="Column2" />
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BidType" ColumnName="BidType" />
+                <ScalarProperty Name="LowElecSub" ColumnName="LowElecSub" />
+                <ScalarProperty Name="LowGC" ColumnName="LowGC" />
+                <ScalarProperty Name="TelstarQuote" ColumnName="TelstarQuote" />
+                <ScalarProperty Name="BidStatus" ColumnName="BidStatus" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bidlog_Result_Mail">
+            <EntityTypeMapping TypeName="Model.Bidlog_Result_Mail">
+              <MappingFragment StoreEntitySet="Bidlog_Result_Mail">
+                <ScalarProperty Name="BidlogResultMailId" ColumnName="BidlogResultMailId" />
+                <ScalarProperty Name="BidlogResultMail" ColumnName="BidlogResultMail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bonding_Mail_CC">
+            <EntityTypeMapping TypeName="Model.Bonding_Mail_CC">
+              <MappingFragment StoreEntitySet="Bonding_Mail_CC">
+                <ScalarProperty Name="BondingMailCCId" ColumnName="BondingMailCCId" />
+                <ScalarProperty Name="BondingMailCC" ColumnName="BondingMailCC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bonding_Mail_TO">
+            <EntityTypeMapping TypeName="Model.Bonding_Mail_TO">
+              <MappingFragment StoreEntitySet="Bonding_Mail_TO">
+                <ScalarProperty Name="BondingMailToId" ColumnName="BondingMailToId" />
+                <ScalarProperty Name="BondingMailTO" ColumnName="BondingMailTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer_Info_Mail">
+            <EntityTypeMapping TypeName="Model.Customer_Info_Mail">
+              <MappingFragment StoreEntitySet="Customer_Info_Mail">
+                <ScalarProperty Name="CustomerInfoMailId" ColumnName="CustomerInfoMailId" />
+                <ScalarProperty Name="CustomerInfoMail" ColumnName="CustomerInfoMail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMail_Infoes">
+            <EntityTypeMapping TypeName="Model.EMail_Info">
+              <MappingFragment StoreEntitySet="EMail Info">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SMTPDetails">
+            <EntityTypeMapping TypeName="Model.SMTPDetail">
+              <MappingFragment StoreEntitySet="SMTPDetails">
+                <ScalarProperty Name="FromAddress" ColumnName="FromAddress" />
+                <ScalarProperty Name="SMTPPassword" ColumnName="SMTPPassword" />
+                <ScalarProperty Name="SMTPUserName" ColumnName="SMTPUserName" />
+                <ScalarProperty Name="SMTPPort" ColumnName="SMTPPort" />
+                <ScalarProperty Name="SMTPAddress" ColumnName="SMTPAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExceptionLoggers">
+            <EntityTypeMapping TypeName="Model.ExceptionLogger">
+              <MappingFragment StoreEntitySet="ExceptionLogger">
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+                <ScalarProperty Name="ExceptionStackTrace" ColumnName="ExceptionStackTrace" />
+                <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+                <ScalarProperty Name="ExceptionMessage" ColumnName="ExceptionMessage" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="USP_TT_GetNextPrevLastFirst" FunctionName="Model.Store.USP_TT_GetNextPrevLastFirst">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.USP_TT_GetNextPrevLastFirst_Result">
+                <ScalarProperty Name="FileFolder" ColumnName="FileFolder" />
+                <ScalarProperty Name="Quote" ColumnName="Quote" />
+                <ScalarProperty Name="ChemFeed" ColumnName="ChemFeed" />
+                <ScalarProperty Name="InactiveJob" ColumnName="InactiveJob" />
+                <ScalarProperty Name="PW" ColumnName="PW" />
+                <ScalarProperty Name="NotQuoted" ColumnName="NotQuoted" />
+                <ScalarProperty Name="Closed" ColumnName="Closed" />
+                <ScalarProperty Name="SRNumber" ColumnName="SRNumber" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
+                <ScalarProperty Name="CustomerContact" ColumnName="CustomerContact" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+                <ScalarProperty Name="Estimator" ColumnName="Estimator" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="QuoteDue" ColumnName="QuoteDue" />
+                <ScalarProperty Name="JobWalkDate" ColumnName="JobWalkDate" />
+                <ScalarProperty Name="MandatoryJobWalk" ColumnName="MandatoryJobWalk" />
+                <ScalarProperty Name="WhoJobWalk" ColumnName="WhoJobWalk" />
+                <ScalarProperty Name="BidAsPrimeOrSub" ColumnName="BidAsPrimeOrSub" />
+                <ScalarProperty Name="Bonding" ColumnName="Bonding" />
+                <ScalarProperty Name="BondingMailSent" ColumnName="BondingMailSent" />
+                <ScalarProperty Name="PrevailingMailSent" ColumnName="PrevailingMailSent" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="ProjectManager" ColumnName="ProjectManager" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="JobOrQuote" ColumnName="JobOrQuote" />
+                <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
+                <ScalarProperty Name="PrevailingWageTBD" ColumnName="PrevailingWageTBD" />
+                <ScalarProperty Name="JobsiteAddress" ColumnName="JobsiteAddress" />
+                <ScalarProperty Name="Billing" ColumnName="Billing" />
+                <ScalarProperty Name="NewCustomer" ColumnName="NewCustomer" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="QuoteDate" ColumnName="QuoteDate" />
+                <ScalarProperty Name="QuoteTime" ColumnName="QuoteTime" />
+                <ScalarProperty Name="QuoteTypeI_C" ColumnName="QuoteTypeI&amp;C" />
+                <ScalarProperty Name="QuoteTypeElectrical" ColumnName="QuoteTypeElectrical" />
+                <ScalarProperty Name="QuoteTypeNoBid" ColumnName="QuoteTypeNoBid" />
+                <ScalarProperty Name="FollowUp" ColumnName="FollowUp" />
+                <ScalarProperty Name="QuoteType" ColumnName="QuoteType" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="AdvertiseDate" ColumnName="AdvertiseDate" />
+                <ScalarProperty Name="NotifyPM" ColumnName="NotifyPM" />
+                <ScalarProperty Name="ServerJobFolder" ColumnName="ServerJobFolder" />
+                <ScalarProperty Name="SiteForeman" ColumnName="SiteForeman" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tblScheduledMaintenances">
+            <EntityTypeMapping TypeName="Model.tblScheduledMaintenance">
+              <MappingFragment StoreEntitySet="tblScheduledMaintenance">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="application_config">
+            <EntityTypeMapping TypeName="Model.application_config">
+              <MappingFragment StoreEntitySet="application_config">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="FlagName" ColumnName="FlagName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

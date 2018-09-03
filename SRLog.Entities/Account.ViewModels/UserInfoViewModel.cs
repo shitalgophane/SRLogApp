@@ -14,6 +14,7 @@ namespace SRLog.Entities.Account.ViewModels
         public bool Admin_Rights { get; set; }
         public bool Bid_Log_ReadOnly { get; set; }
         public Nullable<bool> Accounting_Rights { get; set; }
+        public Nullable<bool> DatabaseUpdate_Rights { get; set; }
         public int UserId { get; set; }
     }
 }

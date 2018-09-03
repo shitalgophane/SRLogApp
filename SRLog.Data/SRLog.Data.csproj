@@ -34,6 +34,9 @@
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SRLog.Common">
+      <HintPath>..\SRLog.Common\bin\Debug\SRLog.Common.dll</HintPath>
+    </Reference>
     <Reference Include="SRLog.Entities">
       <HintPath>..\SRLog.Entities\bin\Debug\SRLog.Entities.dll</HintPath>
       <Private>True</Private>
@@ -59,104 +62,18 @@
     <Compile Include="Activity\ActivityRepository.cs" />
     <Compile Include="BidLog\BidLogRepository.cs" />
     <Compile Include="Class1.cs" />
-    <Compile Include="C__MigrationHistory.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EMail_Info.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Customer\CustomerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuoteLog\QuoteLogRepository.cs" />
     <Compile Include="Settings\SettingsRepository.cs" />
-    <Compile Include="SRLogDb.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SRLogDb.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SRLogDb.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SRLogDb.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SRLogDb.edmx</DependentUpon>
-    </Compile>
     <Compile Include="SRLog\SRLogRepository.cs" />
-    <Compile Include="tblActivityLog.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblAttachmentsForBidLog.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblBID_Log.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblCustAddress.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblCustContact.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblCustomer.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblGroupUser.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblObsolete_Quote.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblQuoteLog.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblSetting.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblSRLogColumn.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblSR_Log.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblUser.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="USP_TT_GetBidLogModifiedToday_Result.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="USP_TT_GetBidLogResultsModifiedToday_Result.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="USP_TT_GetNextPrevLastFirst_Result.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="USP_TT_GetSRLogCreatedToday_Result.cs">
-      <DependentUpon>SRLogDb.tt</DependentUpon>
-    </Compile>
+    <Compile Include="TestSite\TestSiteRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="SRLogDb.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SRLogDb.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="packages.config" />
-    <None Include="SRLogDb.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SRLogDb.edmx</DependentUpon>
-      <LastGenOutput>SRLogDb.Context.cs</LastGenOutput>
-    </None>
-    <None Include="SRLogDb.edmx.diagram">
-      <DependentUpon>SRLogDb.edmx</DependentUpon>
-    </None>
-    <None Include="SRLogDb.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SRLogDb.edmx</DependentUpon>
-      <LastGenOutput>SRLogDb.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

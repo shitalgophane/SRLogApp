@@ -10,5 +10,7 @@ namespace SRLog.Entities.Settings.ViewModels
     {
         public string FieldName { get; set; }
         public string DisplayName { get; set; }
+        public Boolean Visible { get; set; }
+        public Boolean fixedcolumn { get; set; }
     }
 }

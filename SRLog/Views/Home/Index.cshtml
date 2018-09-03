@@ -1,239 +1,357 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "SR Log";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .panel-heading {
+        font-weight: bold !important;
+    }
+
+    .panel {
+        margin-bottom: 10px !important;
+    }
+
+    .panel-heading {
+        padding: 5px 10px !important;
+        border-bottom: 1px solid transparent;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+</style>
 <div class="container-fluid text-center">
+    @*
+        <div class="panel-group">
+    *@
+
+    @if ( ViewBag.IsScheduledMaintenance != "0")
+    {
+        <label style="font-size:large;font-weight :bold ;color:red;background-color:yellow">@ViewBag.IsScheduledMaintenance</label>
+    }
 
 
+
+    <br />
+
     <div class="row">
-        <div class="well well-sm">
-            <p>SR Log</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <div class="thumbnail homeimage">
-                @if (Session["SR_Log_ReadOnly"].ToString() == "False")
-                {
-                    <a href="#">
-                        <img src="~/Images/create.png" alt="Create New SR">
-                        <div class="caption">
-                            <p>Create New SR</p>
+        <div class="col-md-6 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">SR Log</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            <div class="thumbnail homeimage">
+
+
+
+                                <div class="caption">
+                                    @if (ViewBag.SR_Log_ReadOnly != "True")
+                                    {
+                                        <a href="/SRLog/Create"><img src="~/Images/create.png" alt="Create New SR" style="margin-bottom:10px">Create/Edit SR</a>
+                                        @*<a href="/SRLog/Create">Create New SR</a>*@
+                                    }
+                                    else
+                                    {
+                                        <a href="#" style="cursor:not-allowed"><img src="~/Images/create.png" alt="Create New SR" style="margin-bottom:10px">Create/Edit SR</a>
+                                        @*<a href="#" style="cursor:not-allowed">Create New SR</a>*@
+                                    }
+                                </div>
+
+                            </div>
                         </div>
-                    </a>
-                }
-                else
-                {
-                    <img src="~/Images/create.png" alt="Create New SR">
-                    <div class="caption">
-                        <p class="disabled">Create New SR</p>
-                    </div>
-                }
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="thumbnail homeimage">
-                <a href="/SRLog/Index">
-                    <img src="~/Images/list.png" alt="List All By SR NUmber">
-                    <div class="caption">
-                        <p>List All By SR Number</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="thumbnail homeimage">
-                <a href="/SRLog/Index?Flag=ListAllJobsByKeywordSearch">
-                    <img src="~/Images/search.png" alt="Keyword Search">
-                    <div class="caption">
-                        <p>Keyword Search</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="thumbnail homeimage">
-                <a href="/SRLog/Index?Flag=ListAllJobsByFilter">
-                    <img src="~/Images/filter.png" alt="Custom Sort/Filter All Records">
-                    <div class="caption">
-                        <p>Custom Sort/Filter All Records</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="thumbnail homeimage">
-                <a href="/SRlog/ConfigureColumns">
-                    <img src="~/Images/order.png" alt="Configure Column Order">
-                    <div class="caption">
-                        <p>Configure Column Order</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="well well-sm">
-            <p>Bid Log</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <div class="thumbnail homeimage">
-                @if (Session["Bid_Log_ReadOnly"].ToString() == "False")
-                {
-                    <a href="/BidLog/Index">
+                        <div class="col-md-4 col-sm-4">
+                            <div class="thumbnail homeimage">
 
-                        <img src="~/Images/viewcreate.png" alt="View/Create Bids">
-                        <div class="caption">
-                            <p>View/Create Bids</p>
+
+                                <div class="caption">
+                                    <a href="/SRLog/Index?Flag=ListAllJobsByKeywordSearch"><img src="~/Images/search.png" alt="Search Records" style="margin-bottom:10px">Search Records</a>
+
+                                </div>
+
+                            </div>
                         </div>
-                    </a>
-                }
-                else
-                {
-                    <img src="~/Images/viewcreate.png" alt="View/Create Bids">
-                    <div class="caption">
-                        <p class="disabled">View/Create Bids</p>
-                    </div>
-                }
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="thumbnail homeimage">
-                <a href="~/Images/archive.png">
-                    <img src="~/Images/archive.png" alt="View Archived Bids">
-                    <div class="caption">
-                        <p>View Archived Bids</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="thumbnail homeimage">
-                <a href="#">
-                    <img src="~/Images/keywordsearcharchive.png" alt="Keyword Search Archived Bids">
-                    <div class="caption">
-                        <p>Keyword Search Archived Bids</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="thumbnail homeimage">
-                @if (Session["Admin_Rights"].ToString() == "True")
-                {
-                    <a href="#">
-                        <img src="~/Images/settings.png" alt="Settings">
-                        <div class="caption">
-                            <p>Settings</p>
+
+
+                        <div class="col-md-4 col-sm-4">
+                            <div class="thumbnail homeimage">
+
+                                @*<img src="~/Images/list.png" alt="List All By SR NUmber">*@
+                                <div class="caption">
+                                    <a href="/SRLog/Index?Flag=ListAllJobsByFilter"><img src="~/Images/list.png" alt="List All By SR NUmber" style="margin-bottom:10px">Custom Sort/Filter All Records</a>
+                                    @*@Html.ActionLink("Custom Sort/Filter All Records", "Index", "SRLog", new { Flag = "ListAllJobsByFilter" }, null)*@
+                                </div>
+
+                            </div>
                         </div>
-                    </a>
-                }
-                else
-                {
 
-                    <img src="~/Images/settings.png" alt="Settings">
-                    <div class="disabled">
-                        <p>Settings</p>
+
                     </div>
-
-                }
-
+                </div>
             </div>
         </div>
-        <div class="col-md-2">
-            <div class="thumbnail homeimage">
-                <a href="#">
-                    <img src="~/Images/user.png" alt="Login With Different Password">
-                    <div class="caption">
-                        <p>Login With Different Password</p>
+        <div class="col-md-6 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Bid Log</div>
+                <div class="panel-body">
+                    <div class="row">
+
+                        <div class="col-md-6 col-sm-6">
+                            <div class="thumbnail homeimage">
+
+
+                                @*<img src="~/Images/viewcreate.png" alt="View/Create Bids">*@
+                                <div class="caption">
+                                    <a href="/BidLog/Index"><img src="~/Images/viewcreate.png" alt="View/Create Bids" style="margin-bottom:10px">View/Create Bids</a>
+                                    @*@Html.ActionLink("View/Create Bids", "Index", "BidLog")*@
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="thumbnail homeimage">
+
+                                @*<img src="~/Images/archive.png" alt="View Archived Bids">*@
+                                <div class="caption">
+                                    @*@Html.ActionLink("View Archived Bids", "IndexArchiveBids", "BidLog")*@
+                                    <a href="/BidLog/IndexArchiveBids"><img src="~/Images/archive.png" alt="View Archived Bids" style="margin-bottom:10px">View Archived Bids</a>
+                                </div>
+
+                            </div>
+                        </div>
+                        @* <div class="col-md-4 col-sm-4">
+                                <div class="thumbnail homeimage">
+
+                                    <img src="~/Images/keywordsearcharchive.png" alt="Keyword Search Archived Bids">
+                                    <div class="caption">
+                                        <p>Keyword Search Archived Bids</p>
+                                    </div>
+
+                                </div>
+                            </div>*@
+
+                        @*
+                            <div class="col-md-2">
+                                <div class="thumbnail homeimage">
+                                    <a href="#">
+                                        <img src="~/Images/user.png" alt="Login With Different Password">
+                                        <div class="caption">
+                                            <p>Login With Different Password</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        *@
                     </div>
-                </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @if (ViewBag.SR_Log_ReadOnly == "True" && ViewBag.Bid_Log_ReadOnly == "True")
+    {
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="panel panel-default" style="padding-bottom: 15px">
+                    <div class="panel-heading">Quote Log</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="thumbnail homeimage">
+
+
+                                    @*<img src="~/Images/viewactive.png" alt="View Active Quotes">*@
+                                    <div class="caption">
+
+                                        @*@Html.ActionLink("View Active Quotes", "Index", "QuoteLog")*@
+                                        <a href="/QuoteLog/Index"><img src="~/Images/viewactive.png" alt="View Active Quotes" style="margin-bottom:10px">View Active Quotes</a>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="thumbnail homeimage">
+
+                                    @*<img src="~/Images/viewarchived.png" alt="View Archived Quotes">*@
+                                    <div class="caption">
+                                        <a href="/QuoteLog/ArchivedIndex"><img src="~/Images/viewarchived.png" alt="View Archived Quotes" style="margin-bottom:10px">View Archived Quotes</a>
+                                        @*@Html.ActionLink("View Archived Quotes", "ArchivedIndex", "QuoteLog")*@
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {<div class="row">
+        <div class="col-md-6 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Customer</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            <div class="thumbnail homeimage">
+
+
+                                @*<img src="~/Images/user.png" alt="Create New Customer">*@
+                                <div class="caption">
+                                    <a href="/Customer/Index"><img src="~/Images/user.png" alt="Create New Customer" style="margin-bottom:10px">Create New Customer</a>
+                                    @*@Html.ActionLink("Create New Customer", "Index", "Customer")*@
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="thumbnail homeimage">
+
+                                @*<img src="~/Images/home.png" alt="Manage Customer Details">*@
+                                <div class="caption">
+                                    <a href="/Customer/ManageCustomerAddress"><img src="~/Images/home.png" alt="Manage Customer Details" style="margin-bottom:10px">Manage Customer Address</a>
+                                    @*@Html.ActionLink("Manage Customer Address", "ManageCustomerAddress", "Customer")*@
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="thumbnail homeimage">
+
+                                @*<img src="~/Images/contact.png" alt="Manage Customer Details">*@
+                                <div class="caption">
+                                    <a href="/Customer/ManageCustomerContacts"><img src="~/Images/contact.png" alt="Manage Customer Details" style="margin-bottom:10px">Manage Customer Contacts</a>
+                                    @*@Html.ActionLink("Manage Customer Contacts", "ManageCustomerContacts", "Customer")*@
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <div class="panel panel-default" style="padding-bottom: 15px">
+                <div class="panel-heading">Quote Log</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="thumbnail homeimage">
+
+
+                                @*<img src="~/Images/viewactive.png" alt="View Active Quotes">*@
+                                <div class="caption">
+                                    <a href="/QuoteLog/Index"><img src="~/Images/viewactive.png" alt="View Active Quotes" style="margin-bottom:10px">View Active Quotes</a>
+                                    @*@Html.ActionLink("View Active Quotes", "Index", "QuoteLog")*@
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="thumbnail homeimage">
+
+                                @*<img src="~/Images/viewarchived.png" alt="View Archived Quotes">*@
+                                <div class="caption">
+                                    @*@Html.ActionLink("View Archived Quotes", "ArchivedIndex", "QuoteLog")*@
+                                    <a href="/QuoteLog/ArchivedIndex"><img src="~/Images/viewarchived.png" alt="View Archived Quotes" style="margin-bottom:10px">View Archived Quotes</a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    }
 
-    <div class="row">
-        <div class="well well-sm">
-            <p>Quote Log</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <div class="thumbnail homeimage">
-                <a href="#">
 
-                    <img src="~/Images/viewactive.png" alt="View Active Quotes">
-                    <div class="caption">
-                        <p>View Active Quotes</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="thumbnail homeimage">
-                <a href="#">
-                    <img src="~/Images/viewarchived.png" alt="View Archived Quotes">
-                    <div class="caption">
-                        <p>View Archived Quotes</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="thumbnail homeimage">
-                <a href="#">
-                    <img src="~/Images/keywordsearch.png" alt="Keyword Search">
-                    <div class="caption">
-                        <p>Keyword Search</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="thumbnail homeimage">
-                @if (Session["Admin_Rights"].ToString() == "True")
-                {
-                    <a href="#">
+    @if (ViewBag.Admin_Rights == "True")
+    {
+        <div class="row">
 
-                        <img src="~/Images/createcustomer.png" alt="Create New Customer">
-                        <div class="caption">
-                            <p>Create New Customer</p>
+            <div class="col-md-12 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Settings</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3">
+                                <div class="thumbnail homeimage">
+
+
+                                    @*<img src="~/Images/viewactive.png" alt="View Active Quotes">*@
+                                    <div class="caption">
+                                        <a href="/Settings/ManageUser"><img src="~/Images/viewactive.png" alt="View Active Quotes" style="margin-bottom:10px">Manage User</a>
+                                        @*@Html.ActionLink("Manage User", "ManageUser", "Settings")*@
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <div class="thumbnail homeimage">
+
+                                    @*<img src="~/Images/viewarchived.png" alt="View Archived Quotes">*@
+                                    <div class="caption">
+                                        <a href="/Settings/ManageMailList"><img src="~/Images/viewarchived.png" alt="View Archived Quotes" style="margin-bottom:10px">Manage Mail List</a>
+                                        @*@Html.ActionLink("Manage Mail List", "ManageMailList", "Settings")*@
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <div class="thumbnail homeimage">
+
+                                    @*<img src="~/Images/keywordsearch.png" alt="Keyword Search">*@
+                                    <div class="caption">
+                                        <a href="/Settings/ManageProjectManager"><img src="~/Images/keywordsearch.png" alt="Keyword Search" style="margin-bottom:10px">Project Manager List</a>
+                                        @*@Html.ActionLink("Project Manager List", "ManageProjectManager", "Settings")*@
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <div class="thumbnail homeimage">
+
+
+                                    @*<img src="~/Images/user.png" alt="Create New Customer">*@
+                                    <div class="caption">
+                                        <a href="/Settings/ViewActivityLog"><img src="~/Images/user.png" alt="Create New Customer" style="margin-bottom:10px">View Activity Log</a>
+                                        @*@Html.ActionLink("View Activity Log", "ViewActivityLog", "Settings")*@
+                                    </div>
+
+                                </div>
+                            </div>
+
                         </div>
-                    </a>
-                }
-                else
-                {
-                    <img src="~/Images/createcustomer.png" alt="Create New Customer">
-                    <div class="caption">
-                        <p class="disabled">Create New Customer</p>
                     </div>
-                }
+                </div>
             </div>
         </div>
-        <div class="col-md-2">
-            <div class="thumbnail homeimage">
-                @if (Session["Admin_Rights"].ToString() == "True")
-                {
-                    <a href="#">
-                        <img src="~/Images/managecustomer.png" alt="Manage Customer Details">
-                        <div class="caption">
-                            <p>Manage Customer Details</p>
-                        </div>
-                    </a>
-                }
-                else
-                {
-                    <img src="~/Images/managecustomer.png" alt="Manage Customer Details">
-                    <div class="caption">
-                        <p class="disabled">Manage Customer Details</p>
-                    </div>
-                }
-            </div>
+    }
+
+
+
+
+
+    @*
         </div>
-    </div>
+    *@
+
+
+
+
+
+
+
+
+
+
+
 
 
 

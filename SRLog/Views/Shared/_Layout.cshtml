@@ -3,311 +3,286 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="~/Images/logo.ico">
+
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    @*<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.16/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/select/1.2.5/css/select.jqueryui.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.jqueryui.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/fixedheader/3.1.3/css/fixedHeader.dataTables.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/colreorder/1.4.1/css/colReorder.dataTables.min.css" rel="stylesheet" />
+         <link href="https://cdn.datatables.net/fixedcolumns/3.2.4/css/fixedColumns.dataTables.min.css" rel="stylesheet" />*@
+
+
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/dataTables.jqueryui.min.css" rel="stylesheet" />
+    <link href="~/Content/buttons.jqueryui.min.css" rel="stylesheet" />
+    <link href="~/Content/select.jqueryui.css" rel="stylesheet" />
+
+    <link href="~/Content/fixedHeader.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/colReorder.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/fixedColumns.dataTables.min.css" rel="stylesheet" />
+
+
+
+
     @*<style>
-        /* Remove the navbar's default margin-bottom and rounded borders */
-        .navbar {
-            margin-bottom: 0;
-            border-radius: 0;
-        }
-    </style>*@
+            .navbar-custom ul.nav li a {
+                font-size: 13px;
+                letter-spacing: 1px;
+                color: #fff !important;
+                text-transform: uppercase;
+                font-weight: 700;
+                background: transparent;
+            }
+
+            .navbar-custom ul.nav ul.dropdown-menu li a {
+                color: black !important;
+            }
+
+            .navbar-custom .nav li a:hover, .navbar-custom .nav li a:focus {
+                -webkit-transition: background .3s ease-in-out;
+                -moz-transition: background .3s ease-in-out;
+                transition: background .3s ease-in-out;
+                color: #e9e4e4 !important;
+                /*color: #4ACCD1 !important;*/
+            }
+
+            .nav > li > a:hover, .nav > li > a:focus {
+                background-color: transparent !important;
+            }
+        </style>*@
     <style>
+        .Main {
+            /*margin-top: 30px;*/
+        }
     </style>
 </head>
 <body>
-
-
-
-    <nav id="custom-bootstrap-menu" class="navbar navbar-default ">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#"><img src="~/Images/logo1.png" class="img-responsive imglogo" /></a>
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
-                    <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse navbar-menubuilder">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-
-                        <a href="/home/Index">HOME</a>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">SR LOG<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            @if (Session["SR_Log_ReadOnly"].ToString() == "False")
-                            {
-                                <li><a href="#">Create New SR</a></li>
-                            }
-                            else
-                            {
-                                <li><a href="#" style="cursor:not-allowed">Create New SR</a></li>
-                            }
-                            <li>@Html.ActionLink("List All By SR Number", "Index", "SRLog")</li>
-                            <li>@Html.ActionLink("Keyword Search", "Index", "SRLog", new { Flag = "ListAllJobsByKeywordSearch" }, null)</li>
-                            <li>@Html.ActionLink("Custom Sort/Filter All Records", "Index", "SRLog", new { Flag = "ListAllJobsByFilter" }, null)</li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">BID LOG<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            @if (Session["Bid_Log_ReadOnly"].ToString() == "False")
-                            {
-                                <li>@Html.ActionLink("View/Create Bids", "Index", "BidLog")</li>
-                            }
-                            else
-                            {
-                                <li><a href="#" style="cursor:not-allowed">View/Create Bids</a> </li>
-                            }
-                            <li><a href="#">View Archived Bids</a></li>
-                            <li><a href="#">Keyword Search Archived Bids</a></li>
-                            @if (Session["Admin_Rights"].ToString() == "True")
-                            {
-                                <li><a href="#">Settings</a></li>
-                            }
-                            else
-                            {
-                                <li><a href="#" style="cursor:not-allowed">Settings</a></li>
-                            }
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">QUOTE LOG<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">View Active Quotes</a></li>
-                            <li><a href="#">View Archived Quotes</a></li>
-                            <li><a href="#">Keyword Search</a></li>
-                            @if (Session["Admin_Rights"].ToString() == "True")
-                            {
-                                <li><a href="#">Manage Customer Details</a></li>
-                                <li><a href="#">Create New Customer</a></li>
-                            }
-                            else
-                            {
-                                <li><a href="#" style="cursor:not-allowed">Manage Customer Details</a></li>
-                                <li><a href="#" style="cursor:not-allowed">Create New Customer</a></li>
-                            }
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">SETTING<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Manage User</a></li>
-                            <li><a href="#">Manage Mail List</a></li>
-                            <li><a href="#">Project Manager List</a></li>
-                            <li><a href="#">View Activity Log</a></li>
-                        </ul>
-                    </li>
-                   
-                </ul>
-
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle welcome " data-toggle="dropdown">Welcome, @Session["User"] <b class="glyphicon glyphicon-user"></b></a>
-                        <ul class="dropdown-menu">
-                            <li style="margin-bottom:5px">
-                                <a class="btn btn-info " href="/Account/Login" style="border-radius: 0px;"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;&nbsp;LogOut </a>
-                            </li>
-
-                            <li style="margin-bottom:5px">
-                                <a class="btn btn-info " href="/SRLog/ConfigureColumns" style="border-radius: 0px;"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;&nbsp;Settings </a>
-                            </li>
-
-                        </ul>
-                    </li>
-                </ul>
+    <header class="topbar">
+        <div class="top-area" style="background-color: #204d74">
+            <div class="container-fluid">
+                <div class="row" style="margin-bottom:0px !important;">
+                    <div class="col-sm-12 col-md-12" style="color:white"><span style="float:left">SR Log Application</span><span style="float:right">@Session["UserRights"]&nbsp;&nbsp;&nbsp;</span></div>
+                    @* <div class="col-sm-3 col-md-3">
+                          <p class="bold text-left" style="color:white">SR Log Application</p>
+                        </div>
+                        <div class="col-sm-9 col-md-9">
+                          <p class="bold text-right" style="color:white"> @Session["UserRights"]&nbsp&nbsp&nbsp;</p>
+                        </div>*@
+                </div>
             </div>
         </div>
-    </nav>
-    @RenderBody()
-    @*<nav id="custom-bootstrap-menu" class="navbar navbar-default " style="margin-bottom:50px;">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#"><img src="http://localhost:61172/Images/logo1.png" class="img-responsive" /></a>
+        <nav class="navbar navbar-custom" role="navigation" style="background-color: #5dbcd2">
 
-                </div>
+            <div class="container-fluid navigation">
 
-                <div>
-                    <a class="text-center" href="#">
-                        Brand Text
+                <div class="navbar-header page-scroll">
+
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+
+                    <a class="navbar-brand" href="/Home/Index">
+                        <img src="~/Images/logo_new.jpg" alt="" />
                     </a>
                 </div>
 
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse  navbar-main-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="active"><a href="/Home/Index">HOME</a></li>
+
+                        <li class="dropdown">
+                            <a href="#pricing" class="dropdown-toggle" data-toggle="dropdown">SR LOG</a>
+                            <ul class="dropdown-menu">
+                                @if (Convert.ToString(Session["SR_Log_ReadOnly"]) == "False")
+                                {
+                                    <li><a href="/SRLog/Create">Create/Edit SR</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="#" style="cursor: not-allowed">Create/Edit SR</a></li>
+                                }
+                                <li>@Html.ActionLink("Search Records", "Index", "SRLog", new { Flag = "ListAllJobsByKeywordSearch" }, null)</li>
+                                <li>@Html.ActionLink("Custom Sort/Filter All Records", "Index", "SRLog", new { Flag = "ListAllJobsByFilter" }, null)</li>
+                                @*
+                                    <li>@Html.ActionLink("Keyword Search", "Index", "SRLog", new { Flag = "ListAllJobsByKeywordSearch" }, null)</li>
+                                    <li>@Html.ActionLink("Custom Sort/Filter All Records", "Index", "SRLog", new { Flag = "ListAllJobsByFilter" }, null)</li>
+                                *@
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#pricing" class="dropdown-toggle" data-toggle="dropdown">BID LOG</a>
+                            <ul class="dropdown-menu">
+
+                                <li>@Html.ActionLink("View/Create Bids", "Index", "BidLog")</li>
 
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle welcome " data-toggle="dropdown">Welcome, @Session["User"] <b class="glyphicon glyphicon-user"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="btn btn-info " href="/Account/Login"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;&nbsp;LogOut </a>
-                            </li>
+                                <li><a href="/BidLog/IndexArchiveBids">View Archived Bids</a></li>
+                                @*  <li><a href="#">Keyword Search Archived Bids</a></li>*@
 
-                            <li>
-                                <a class="btn btn-info " href="/SRLog/ConfigureColumns"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;&nbsp;Settings </a>
-                            </li>
-
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>*@
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#pricing" class="dropdown-toggle" data-toggle="dropdown">QUOTE LOG</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/QuoteLog/Index">View Active Quotes</a></li>
+                                <li><a href="/QuoteLog/ArchivedIndex">View Archived Quotes</a></li>
 
 
-
-    <div class="container-fluid">
-        @*<div class="row" style="background-color: #5DBCD2 !important">
-                <div class="col-md-2 col-sm-2 col-xs-12">
-                    <img src="~/Images/logo1.png" class="img-responsive" />
-                </div>
-                <div class="col-md-8  col-sm-8 col-xs-12">
-                    <div>
-                        <div style="font-size: 27px; color: #fff;margin-top:18px;"><center>SR Log Application</center></div>
-                    </div>
-                </div>
-                <div class="col-md-2  col-sm-2 col-xs-12">
-                    <div>
-                        <ul class="nav">
+                            </ul>
+                        </li>
+                        @if (Convert.ToString(Session["SR_Log_ReadOnly"]) == "True" && Convert.ToString(Session["Bid_Log_ReadOnly"]) == "True")
+                        {
+                        }
+                        else
+                        {
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle welcome " data-toggle="dropdown">Welcome, @Session["User"] <b class="glyphicon glyphicon-user"></b></a>
+                                <a href="#pricing" class="dropdown-toggle" data-toggle="dropdown">Customer</a>
                                 <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="btn btn-info " href="/Account/Login"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;&nbsp;LogOut </a>
-                                    </li>
 
-                                    <li>
-                                        <a class="btn btn-info " href="/SRLog/ConfigureColumns"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;&nbsp;Settings </a>
-                                    </li>
+                                    <li><a href="/Customer/ManageCustomerAddress">Manage Customer Address</a></li>
+                                    <li><a href="/Customer/ManageCustomerContacts">Manage Customer Contacts</a></li>
+
+                                    <li><a href="/Customer/Index">Create New Customer</a></li>
+
 
                                 </ul>
                             </li>
-                        </ul>
-                    </div>
+                        }
+                        @if (Convert.ToString(Session["Admin_Rights"]) == "True")
+                        {
+                            <li class="dropdown">
+                                <a href="#pricing" class="dropdown-toggle" data-toggle="dropdown">SETTING</a>
+                                <ul class="dropdown-menu">
 
-                </div>
-
-            </div>*@
 
 
+                                    <li><a href="/Settings/ManageUser">Manage User</a></li>
 
-        @*<div class="row">
-                <div class="col-md-12 columnmenu">
-                    <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
-                        <div class="container-fluid">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
-                                    <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                                </button>
-                            </div>
-                            <div class="collapse navbar-collapse navbar-menubuilder">
-                                <ul class="nav navbar-nav navbar-left">
-                                    <li class="dropdown">
-                                        <a href="/home/Index">HOME</a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">SR LOG<span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            @if (Session["SR_Log_ReadOnly"].ToString() == "False")
-                                            {
-                                                <li><a href="#">Create New SR</a></li>
-                                            }
-                                            else
-                                            {
-                                                <li><a href="#" style="cursor:not-allowed">Create New SR</a></li>
-                                            }
-                                            <li>@Html.ActionLink("List All By SR Number", "Index", "SRLog")</li>
-                                            <li>@Html.ActionLink("Keyword Search", "Index", "SRLog", new { Flag = "ListAllJobsByKeywordSearch" }, null)</li>
-                                            <li>@Html.ActionLink("Custom Sort/Filter All Records", "Index", "SRLog", new { Flag = "ListAllJobsByFilter" }, null)</li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">BID LOG<span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            @if (Session["Bid_Log_ReadOnly"].ToString() == "False")
-                                            {
-                                                <li>@Html.ActionLink("View/Create Bids", "Index", "BidLog")</li>
-                                            }
-                                            else
-                                            {
-                                                <li><a href="#" style="cursor:not-allowed">View/Create Bids</a> </li>
-                                            }
-                                            <li><a href="#">View Archived Bids</a></li>
-                                            <li><a href="#">Keyword Search Archived Bids</a></li>
-                                            @if (Session["Admin_Rights"].ToString() == "True")
-                                            {
-                                                <li><a href="#">Settings</a></li>
-                                            }
-                                            else
-                                            {
-                                                <li><a href="#" style="cursor:not-allowed">Settings</a></li>
-                                            }
+                                    <li><a href="/Settings/ManageMailList">Manage Mail List</a></li>
+                                    <li><a href="/Settings/ManageProjectManager">Project Manager List</a></li>
+                                    <li><a href="/Settings/ViewActivityLog">View Activity Log</a></li>
 
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">QUOTE LOG<span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">View Active Quotes</a></li>
-                                            <li><a href="#">View Archived Quotes</a></li>
-                                            <li><a href="#">Keyword Search</a></li>
-                                            @if (Session["Admin_Rights"].ToString() == "True")
-                                            {
-                                                <li><a href="#">Manage Customer Details</a></li>
-                                                <li><a href="#">Create New Customer</a></li>
-                                            }
-                                            else
-                                            {
-                                                <li><a href="#" style="cursor:not-allowed">Manage Customer Details</a></li>
-                                                <li><a href="#" style="cursor:not-allowed">Create New Customer</a></li>
-                                            }
-
-                                        </ul>
-                                    </li>
-
+                                    @if (Convert.ToString(Session["DatabaseUpdate_Rights"]) == "True")
+                                    {
+                                        <li><a href="/Settings/SetScheduledMaintenance">Set Scheduled Maintenance</a></li>
+                                    }
                                 </ul>
-                            </div>
-                        </div>
-                    </div>
+                            </li>
+                        }
+                    </ul>
+                    @if (Convert.ToString(Session["IsTestSite"]) != "0")
+                    {
+                        <ul class="nav navbar-nav">
+                            <li><label style="font-size:x-large;font-weight :bold ;color:blueviolet;padding-top:10px;padding-left:10px">@Session["IsTestSite"]</label></li>
+                        </ul>
+                    }
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;WELCOME, @Session["User"]</a></li>
+                        <li><a href="/Account/Login"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+
+        </nav>
+    </header>
+
+
+    <div class="container-fluid Main" id="content">
+        @RenderBody()
+    </div>
+    <br />
+    <div class="footer">
+        <p>Copyright 2018 – Telstar Instruments, Inc.</p>
+    </div>
+
+
+    @*    <div class="container-fluid" style="background-color: #5dbcd2">
+
+
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <center>
+                        <footer>
+                            <p>Copyright @DateTime.Now.Year - SR Log</p>
+                        </footer>
+                    </center>
 
                 </div>
-            </div>*@
-
-
-
-        <div class="row">
-            <div class="col-md-12">
-                <center>
-                    <footer>
-                        <p>Copyright @DateTime.Now.Year - SR Log</p>
-                    </footer>
-                </center>
 
             </div>
+        </div>*@
 
-        </div>
-    </div>
 
-    <div>
-        <div style="margin: 0 auto;width:98%">
-        </div>
-    </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @*@Scripts.Render("~/bundles/jtable")*@
-
-    @*@Scripts.Render("~/bundles/jqueryui")*@
-
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
-    <script src="~/Scripts/moment.js"></script>
+
+
+
+
+    @*<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/colreorder/1.4.1/js/dataTables.colReorder.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.1.3/js/dataTables.fixedHeader.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/scroller/1.4.3/js/dataTables.scroller.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.jqueryui.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.2.4/js/dataTables.fixedColumns.min.js"></script>
+    *@
+
+
+
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+
+    <script src="~/Scripts/dataTables.jqueryui.min.js"></script>
+    <script src="~/Scripts/dataTables.select.js"></script>
+    <script src="~/Scripts/dataTables.select.min.js"></script>
+    <script src="~/Scripts/dataTables.colReorder.min.js"></script>
+    <script src="~/Scripts/dataTables.fixedHeader.min.js"></script>
+    <script src="~/Scripts/dataTables.scroller.min.js"></script>
+    <script src="~/Scripts/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/buttons.jqueryui.min.js"></script>
+    <script src="~/Scripts/jszip.min.js"></script>
+    <script src="~/Scripts/pdfmake.min.js"></script>
+    <script src="~/Scripts/vfs_fonts.js"></script>
+    <script src="~/Scripts/buttons.html5.min.js"></script>
+    <script src="~/Scripts/buttons.print.min.js"></script>
+    <script src="~/Scripts/buttons.colVis.min.js"></script>
+    <script src="~/Scripts/dataTables.fixedColumns.min.js"></script>
+
+
+    @*<script src="~/Scripts/moment.js"></script>*@
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/moment-timezone.js"></script>
     <script type="text/javascript" src="~/scripts/bootstrap-datetimepicker.js"></script>
     <link rel="stylesheet" href="~/Content/bootstrap-datetimepicker.css" />
 
-    <script src="~/Scripts/jtable/jquery.jtable.js"></script>
+
 
 
 

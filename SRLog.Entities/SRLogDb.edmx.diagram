@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ffe9bbfcd5dd4b77bb8003c169ee8dbe" Name="Diagram1" ZoomLevel="78">
+        <EntityTypeShape EntityType="Model.tblActivityLog" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblAttachmentsForBidLog" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblBID_Log" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblCustAddress" Width="1.5" PointX="2.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblCustContact" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblCustomer" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblGroupUser" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblObsolete_Quote" Width="2.5" PointX="7.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblQuoteLog" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblSetting" Width="1.5" PointX="6.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblSR_Log" Width="1.5" PointX="10.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblSRLogColumn" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblUser" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_tblCustAddress_tblCustomer" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.tblBID_Result" Width="1.5" PointX="7.4710346886287606" PointY="18.595186808423691" />
+        <EntityTypeShape EntityType="Model.tblBID_Checklist" Width="1.5" PointX="11.518276545926126" PointY="21.903822804756381" />
+        <EntityTypeShape EntityType="Model.tblBID_ResultsTemp" Width="1.5" PointX="2.9101404840639513" PointY="13.904106772460093" />
+        <EntityTypeShape EntityType="Model.tblObsolete_BID_Log" Width="1.5" PointX="8.4952593522589925" PointY="5.5983805533490987" />
+        <EntityTypeShape EntityType="Model.tblObsoluteBID_Result" Width="1.5" PointX="3.875" PointY="0.5" />
+        <EntityTypeShape EntityType="Model.tblObsoluteBID_Results_Temp" Width="1.5" PointX="6.6900893946597773" PointY="24.260352086397052" />
+        <EntityTypeShape EntityType="Model.Bidlog_Result_Mail" Width="1.5" PointX="4.6074448864010371" PointY="15.735793866094106" />
+        <EntityTypeShape EntityType="Model.Bonding_Mail_CC" Width="1.5" PointX="9.0366106205790349" PointY="0.36538907902566209" />
+        <EntityTypeShape EntityType="Model.Bonding_Mail_TO" Width="1.5" PointX="14.75" PointY="1" />
+        <EntityTypeShape EntityType="Model.Customer_Info_Mail" Width="1.5" PointX="9.0160471131168531" PointY="17.70468822946059" />
+        <EntityTypeShape EntityType="Model.EMail_Info" Width="1.5" PointX="11.610703065810121" PointY="23.30043437671868" />
+        <EntityTypeShape EntityType="Model.SMTPDetail" Width="1.5" PointX="10.387191339576241" PointY="1.4715469188390054" />
+        <EntityTypeShape EntityType="Model.ExceptionLogger" Width="1.5" PointX="1.9344671172716037" PointY="12.195379993037964" />
+        <EntityTypeShape EntityType="Model.tblScheduledMaintenance" Width="1.5" PointX="13.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Model.application_config" Width="1.5" PointX="0.75" PointY="8.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

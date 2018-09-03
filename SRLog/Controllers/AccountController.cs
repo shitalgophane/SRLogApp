@@ -9,17 +9,18 @@ using SRLog.Data.Account;
 using SRLog.Data.Activity;
 using SRLog.Data.Settings;
 using SRLog.Filters;
-
+using SRLog.Data.TestSite;
 namespace SRLog.Controllers
 {
     [Authorize]
-    
+
     public class AccountController : Controller
     {
         //
         // GET: /Account/
         [AllowAnonymous]
         [SkipCustomAuthFilter]
+        [ExceptionHandler]
         public ActionResult Login()
         {
             return View();
@@ -29,13 +30,14 @@ namespace SRLog.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [SkipCustomAuthFilter]
+        [ExceptionHandler]
         public ActionResult Login(LoginViewModel model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    EventLog.LogData(DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss") + " Login - Validating user.", true);
+                    // EventLog.LogData(DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss") + " Login - Validating user.", true);
 
                     var user = new LoginRepository();
                     var act = new ActivityRepository();
@@ -49,16 +51,38 @@ namespace SRLog.Controllers
                     }
                     else
                     {
-                        EventLog.LogData(DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss") + " Login - User Validation completed.", true);
+                        // EventLog.LogData(DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss") + " Login - User Validation completed.", true);
                         //Store user details and previleges in userinfo object
                         Session["User"] = l.LoginName;
                         ViewBag.UserName = l.LoginName;
                         Session["UserInfo"] = l.UserInfo;
-
+                        Session["UserId"] = l.UserInfo.UserId;
                         Session["Admin_Rights"] = l.UserInfo.Admin_Rights;
                         Session["Bid_Log_ReadOnly"] = l.UserInfo.Bid_Log_ReadOnly;
                         Session["SR_Log_ReadOnly"] = l.UserInfo.SR_Log_ReadOnly;
+                        Session["Accounting_Rights"] = l.UserInfo.Accounting_Rights;
+                        Session["DatabaseUpdate_Rights"] = l.UserInfo.DatabaseUpdate_Rights;
+                         
+                        if (Session["Bid_Log_ReadOnly"].ToString() == "True" && Session["SR_Log_ReadOnly"].ToString() == "False")
+                        {
+                            Session["UserRights"] = "Rights: SR Log Table Change, Bid Log Table Read Only";
 
+                        }
+                        if (Session["Bid_Log_ReadOnly"].ToString() == "False" && Session["SR_Log_ReadOnly"].ToString() == "True")
+                        {
+                            Session["UserRights"] = "Rights: SR Log Table Read Only, Bid Log Table Change";
+                        }
+                        if (Session["Bid_Log_ReadOnly"].ToString() == "True" && Session["SR_Log_ReadOnly"].ToString() == "True")
+                        {
+                            Session["UserRights"] = "Rights: SR Log Table Read Only, Bid Log Table Read Only";
+                        }
+                        if (Session["Bid_Log_ReadOnly"].ToString() == "False" && Session["SR_Log_ReadOnly"].ToString() == "False")
+                        {
+                            Session["UserRights"] = "Rights: SR Log Table Change, Bid Log Table Change";
+
+                        }
+                        TestSiteRepository _repository = new TestSiteRepository();
+                        Session["IsTestSite"] = _repository.GetTestSiteDetails();
 
                         //Log activity in database
                         act.AddActivityLog(l.UserInfo.User_Name, "Login", "Login", "User " + l.UserInfo.User_Name + " Logged in.");
@@ -80,6 +104,7 @@ namespace SRLog.Controllers
             }
         }
 
+        [ExceptionHandler]
         public void CheckINIFile(int userid)
         {
             var setting = new SettingsRepository();
@@ -115,7 +140,7 @@ namespace SRLog.Controllers
                         {
                             setting.AddSetting(userid, "ReportQuery", queryfields[i].ToString().Trim(), queryfields[i].ToString().Trim());
                         }
-                    }                    
+                    }
                 }
 
                 //Read columnsettings

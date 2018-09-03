@@ -9,9 +9,27 @@
     <title>Error</title>
 </head>
 <body>
-    <hgroup>
+   @* <hgroup>
         <h1>Error.</h1>
         <h2>An error occurred while processing your request.</h2>
+    </hgroup>*@
+
+  <hgroup>
+        <h1>Error.</h1>
+
+   @model System.Web.Mvc.HandleErrorInfo
+
+       @if (Model != null)
+       {
+        <div>
+            <h2>
+                @Model.Exception.Message
+              
+            </h2>
+            
+</div>
+       }
+        
     </hgroup>
 </body>
 </html>

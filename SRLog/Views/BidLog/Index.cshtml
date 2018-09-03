@@ -1,153 +1,1314 @@
 ﻿@{
     ViewBag.Title = "View/Create Bid";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@Scripts.Render("~/bundles/modernizr")
-<link href="~/Scripts/jtable/themes/lightcolor/blue/jtable.css" rel="stylesheet" />
+
+<style>
+    thead {
+        background-color: #d3d0d0;
+    }
+</style>
+
+@*<input type="button" value="Save Setting" id="reset">*@
+@*
+    <div>
+        Toggle column: <a class="toggle-vis" runat="server" data-column="0">BidDate</a> -<a class="toggle-vis" data-column="1">DOW</a> - <a class="toggle-vis" data-column="2">BiddingAs</a> - <a class="toggle-vis" data-column="3">CityState</a>
+        - <a class="toggle-vis" data-column="4">ProjectName</a> - <a class="toggle-vis" data-column="5">IAndCEstimate</a> - <a class="toggle-vis" data-column="6">Division</a>
+        - <a class="toggle-vis" data-column="7">LastAddendumRecvd</a> - <a class="toggle-vis" data-column="8">Estimator</a> - <a class="toggle-vis" data-column="9">ProjectFolder</a>
+        - <a class="toggle-vis" data-column="10">QuoteNumber</a>
+    </div>
+*@
 
 
-<div id="BidLogTableContainer" style="border:1px solid #c6c3c3">
-    
+
+
+
+<div class="row">
+    <div class="col-md-12 text-center title">
+        <p class="title">View/Create Bids</p>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="ajax-loader" style="visibility:hidden">
+        <img src="/Images/loading.gif" class="i class=" img-responsive" />
+    </div>
+
+    <div class="col-md-1 col-sm-1  col-xs-12">
+        <label class="labelform">Filter Criteria:</label>
+    </div>
+
+
+    <div class="col-md-4 col-sm-4  col-xs-12">
+        <label class="labelform">By Bidding As</label>&nbsp;&nbsp;
+        <input type="checkbox" id="chkByBiddingAs" />&nbsp;&nbsp;&nbsp;&nbsp;
+        <label class="labelform">By Division</label>&nbsp;&nbsp;
+        <input type="checkbox" id="chkByDivision" />&nbsp;&nbsp;&nbsp;&nbsp;
+        <label class="labelform">Remove Filter(s)</label>&nbsp;&nbsp;
+        <input type="checkbox" id="chkRemoveFilters" />
+    </div>
+    <div class="col-md-7">
+        <input type="button" value="Change sort order to first by Division and after Bid Date Ascending" id="btnSortBy" class="btn btn-primary btnMain btnBidlogSortOrder" />
+        <button type="button" class="btn btn-primary btnMain" id="SaveSortButton">Save Filter</button>
+        @*   @{ var attributesforAdd = ViewBag.AddDisable ? (object)new { @class = "form-control", disabled = "disabled" } : (object)new { @class = "form-control"}; }*@
+
+        <input type="button" title="Create Bid" value="Create Bid" onclick="location.href='@Url.Action("Create", "BidLog")'" class="btn btn-primary btnMain" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-1 col-sm-12  col-xs-12">
+        <label class="labelform">Legend:</label>
+    </div>
+    <div class="col-md-7 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-md-2 col-sm-4 col-xs-4">
+                <label class="labelform">Concord</label><div class="colorbox white"></div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-4">
+                <label class="labelform">Hanford</label><div class="colorbox blue"></div>
+
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-4">
+                <label class="labelform">Sacramento</label><div class="colorbox green"></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 col-xs-12">
+        <input type="button" value="Print" id="btnPrint" class="btn btn-primary btnMain" onclick="location.href='@Url.Action("PreviewReport", "BidLog")'" />
+        <a class="btn btn-primary btnMain" id="ExportReporttoCSV" style="margin-left:15px">Export To Excel</a>
+    </div>
+</div>
+
+@* <input type="button" value="Edit Bid" id="btnEditBid"  class="btn btn-primary btnMain" />*@
+
+<table id="BidLogTableContainer" class="display  compact" width="100%"></table>
+
+<div class="modal fade" id="mdBiddingAs" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" id="btnCloseBiddingAs">&times;</button>
+                <h4 class="modal-title">Select Bidding As</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="labelform">I & C:</label>
+                        <input type="checkbox" id="chkIandC" name="biddingAs" value="I&C" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="labelform">Electrical:</label>
+                        <input type="checkbox" id="chkElectircal" name="biddingAs" value="Electrical" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="labelform">Prime:</label>
+                        <input type="checkbox" id="chkPrime" name="biddingAs" value="Prime" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="labelform">Unknown:</label>
+                        <input type="checkbox" id="chkUnknown" name="biddingAs" value="Unknown" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="labelform">Not Bidding:</label>
+                        <input type="checkbox" id="chkNotBidding" name="biddingAs" value="Not Bidding" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="labelform">Not Qualified:</label>
+                        <input type="checkbox" id="chkNotQualified" name="biddingAs" value="Not Qualified" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="labelform">Mechanical:</label>
+                        <input type="checkbox" id="chkMechanical" name="biddingAs" value="Mechanical" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnCloseBiddingAs2">Close</button>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 
-@section scripts
+<div class="modal fade" id="mdByDivision" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" id="btnDivision">&times;</button>
+                <h4 class="modal-title">Select Division Option</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="labelform">Concord:</label>
+                        <input type="checkbox" id="chkConcord" name="division" value="Concord" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="labelform">Hanford:</label>
+                        <input type="checkbox" id="chkHanford" name="division" value="Hanford" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="labelform">Sacramento:</label>
+                        <input type="checkbox" id="chkSacramento" name="division" value="Sacramento" />
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="btnDivision2">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <input type="hidden" id="hdnSession" data-value="@Request.RequestContext.HttpContext.Session["Bid_Log_ReadOnly"]" />
+
+    @section scripts
 {
+        <style>
+            .ajax-loader {
+                visibility: hidden;
+                background-color: rgba(255,255,255,0.7);
+                position: absolute;
+                z-index: +100 !important;
+                width: 100%;
+                height: 100%;
+            }
 
-    <script type="text/javascript">
+                .ajax-loader img {
+                    position: relative;
+                    top: 50%;
+                    left: 50%;
+                }
 
-        $(document).ready(function () {
-            @*'@Url.Action("GetBidLogsList")'
-                 'http://localhost:61172/BidLog/GetBidLogsList'*@
-            $('#BidLogTableContainer').jtable({
-                title: 'View/Create Bids',
-                paging: true, //Enable paging
-                pageSize: 10, //Set page size (default: 10)
-                sorting: false, //Enable sorting                
-                bautowidth:true ,
-                actions: {
-                    listAction: '@Url.Action("GetBidLogsList")'
-                },
-                fields: {
-                    BidId: {
-                        key: true,
-                        list: false
-                    },
-                    BidDate: {
-                        title: 'Bid Due Date',
-                        width: '15%',
-                        type: 'date',
-                        displayFormat: 'mm/dd/yy'
-                    },
-                    DOW: {
-                        title: 'DOW',
-                        width: '15%'
-                    },
-                    BiddingAs: {
-                        title: 'Bidding As',
-                        width: '10%'
-                    },
-                    Customer: {
-                        title: 'Customer',
-                        width: '15%',
-                        sorting: false
-                    },
-                    CityState: {
-                        title: 'City, State',
-                        width: '10%'
-                    },
-                    Owner: {
-                        title: 'Owner',
-                        width: '10%'
-                    },
-                    ProjectName: {
-                        title: 'Project Description',
-                        width: '15%'
-                    },
-                    IAndCEstimate: {
-                        title: 'I & C Estimate',
-                        width: '10%'
-                    },
-                    Division: {
-                        title: 'Division',
-                        width: '10%'
-                    },
-                    LastAddendumRecvd: {
-                        title: 'Last Addendum Received',
-                        width: '10%'
-                    },
-                    Estimator: {
-                        title: 'Estimator',
-                        width: '10%'
-                    },
-                    AdevertiseDate: {
-                        title: 'Advertise Date',
-                        width: '10%',
-                        type: 'date',
-                        displayFormat: 'mm/dd/yyyy'
-                    },
-                    ProjectFolder: {
-                        title: 'Project Folder',
-                        width: '10%'
-                    },
-                    QuoteNumber: {
-                        title: 'Quote Number',
-                        width: '10%'
-                    },
-                    RedSheet: {
-                        title: "Generate SR",
-                        width: '20%',
-                        sorting: false,
-                        display: function (data) {
-                            if (data.record.QuoteNumber == 0) {
-                                return '<a onclick="GenerateSR()" style="cursor:pointer">Generate SR</a>';
-                            }
-                            else {
-                                return 'SR Generated';
-                            }
-                        }
-                    },
-                    ScopeLetter: {
-                        title: "",
-                        width: '20%',
-                        sorting: false,
-                        display: function (data) {
-                            return '<a onclick="ArchieveRecord(' + data.record.QuoteNumber + ')" style="cursor:pointer">Archive Record</a>';
-                        }
+            .colorbox {
+                float: left;
+                width: 20px;
+                height: 20px;
+                /*margin: 5px;*/
+                margin-right: 5px;
+                border: 1px solid rgba(0, 0, 0, .2);
+            }
+
+
+
+            .blue {
+                background: #D6DFF7;
+            }
+
+            .green {
+                background: #C6FFC6;
+            }
+
+            .white {
+                background: white;
+            }
+
+
+            .Hanford {
+                background-color: #D6DFF7 !important;
+            }
+
+            .Sacramento {
+                background-color: #C6FFC6 !important;
+            }
+
+            .Concord {
+                background-color: white !important;
+            }
+
+            .selectrow {
+                background-color: #0e7d96 !important;
+            }
+
+
+            .hide {
+                display: none;
+            }
+        </style>
+        <script type="text/javascript">
+
+
+            $('#chkByBiddingAs').on('change', function (e) {
+                if (e.target.checked) {
+                    $('#mdBiddingAs').modal({ backdrop: 'static', keyboard: false })
+                    $('#chkByDivision').not(this).prop('checked', false);
+                    $('#chkRemoveFilters').not(this).prop('checked', false);
+
+                    $('#chkConcord').not(this).prop('checked', false);
+                    $('#chkHanford').not(this).prop('checked', false);
+                    $('#chkSacramento').not(this).prop('checked', false);
+
+
+                }
+                else {
+                    var checkatlestone = false;
+                    if ($('#chkRemoveFilters').is(":checked")) {
+                        checkatlestone = true
                     }
-                },
-                rowInserted: function (event, data) {
-                    if (data.record) {
-                        if (data.record.Division == "Concord") {
-                            data.row.css("background", "#FFFFFF");
-                        }
-                        else if(data.record.Division=="Hanford")
-                        {
-                            data.row.css("background", "#D6DFF7");
-                        }
-                        else if(data.record.Division=="Sacramento")
-                        {
-                            data.row.css("background", "#C6FFC6");
-                        }
+                    if ($('#mdByDivision').is(":checked")) {
+                        checkatlestone = true
                     }
+
+                    if (checkatlestone == false) {
+
+                        Removeallfilter();
+                    }
+
                 }
             });
-            //Load student list from server
-            $('#BidLogTableContainer').jtable('load');
+
+
+            $('#chkByDivision').on('change', function (e) {
+                if (e.target.checked) {
+                    $('#mdByDivision').modal({ backdrop: 'static', keyboard: false })
+                    $('#chkByBiddingAs').not(this).prop('checked', false);
+                    $('#chkRemoveFilters').not(this).prop('checked', false);
+
+
+                    $('#chkIandC').not(this).prop('checked', false);
+                    $('#chkElectircal').not(this).prop('checked', false);
+                    $('#chkPrime').not(this).prop('checked', false);
+                    $('#chkUnknown').not(this).prop('checked', false);
+                    $('#chkNotBidding').not(this).prop('checked', false);
+                    $('#chkMechanical').not(this).prop('checked', false);
+                    $('#chkNotQualified').not(this).prop('checked', false);
+
+                }
+                else {
+                    var checkatlestone = false;
+                    if ($('#chkRemoveFilters').is(":checked")) {
+                        checkatlestone = true
+                    }
+                    if ($('#chkByBiddingAs').is(":checked")) {
+                        checkatlestone = true
+                    }
+
+                    if (checkatlestone == false) {
+
+                        Removeallfilter();
+                    }
+
+                }
+            });
+
+            $('#chkRemoveFilters').on('change', function (e) {
+                if (e.target.checked) {
+
+                }
+                else {
+                    var checkatlestone = false;
+                    if ($('#chkByDivision').is(":checked")) {
+                        checkatlestone = true
+                    }
+                    if ($('#mdByDivision').is(":checked")) {
+                        checkatlestone = true
+                    }
+
+                    if (checkatlestone == false) {
+
+                        Removeallfilter();
+                    }
+
+                }
+            });
+
+            function GenerateSR(BidId) {
+                var choice = confirm("This Will Generate SR Number For Current Record. Are You Sure?")
+                if (choice === true) {
+
+                    $.ajax({
+                        url: '/BidLog/GenerateSr',
+                        type: 'POST',
+                        datatype: 'application/json',
+                        beforeSend: function () {
+                            $('.ajax-loader').css("visibility", "visible");
+                        },
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            bidId: +BidId
+
+                        }),
+                        success: function (result) {
+                            // alert(result);
+                            $('#BidLogTableContainer').DataTable().ajax.reload();
+                            window.open('/SRLog/EditSR?id=' + result + '', '_blank', 'left=100,top=100,width=600,height=600,toolbar=1,resizable=0');
+
+                            //alert("Record Updated Successfully.");
+                        },
+                        complete: function () {
+                            $('.ajax-loader').css("visibility", "hidden");
+                        },
+                        error: function () {
+                            alert("Whooaaa! Something went wrong..")
+                            $('.ajax-loader').css("visibility", "hidden");
+                        },
+                    });
+
+                }
+
+            }
+
+            function ArchieveRecord(BidId) {
+
+                var choice = confirm("This Will Move Current Record To Obsolete Items Table. Are You Sure")
+                if (choice === true) {
+
+
+                    $.ajax({
+                        url: '/BidLog/ArchieveRecord',
+                        type: 'POST',
+                        datatype: 'application/json',
+                        beforeSend: function () {
+                            $('.ajax-loader').css("visibility", "visible");
+                        },
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            bidId: +BidId
+
+                        }),
+                        complete: function () {
+                            $('.ajax-loader').css("visibility", "hidden");
+                        },
+                        success: function (result) {
+                            $('#BidLogTableContainer').DataTable().ajax.reload();
+                            alert("Record Updated Successfully.");
+                            $('.ajax-loader').css("visibility", "hidden");
+                        },
+                        error: function () {
+                            alert("Whooaaa! Something went wrong..")
+                            $('.ajax-loader').css("visibility", "hidden");
+                        },
+                    });
+                }
+            }
 
 
 
-        });
+            $(document).ready(function () {
+                $('.ajax-loader').css("visibility", "hidden");
 
-        function GenerateSR() {
-            confirm("This Will Generate SR Number For Current Record. Are You Sure?")
+                var table = $('#BidLogTableContainer').DataTable({
+                    //colReorder: true,
+                    "destroy": true,
+                    oLanguage: {
+                        sProcessing: "<img src='/Images/loading.gif'>"
+                    },
+                    select: true,
+                    "bProcessing": true,
+                    "bServerSide": false,
+                    "bSort": false,
+                    //"bSortClasses": true,
+                    //"aaSorting": [[16, "desc"]],
+                    bPaginate: true,
+                    //pagelength: 25,
+                    'iDisplayLength': 15,//use for 2
+                    fixedHeader: true,
+                    "scrollY": 450,
+                    "scrollX": true,
+                    "pagingType": "full_numbers",
+                    // dom: 'Bfrtip',
+                    "jQueryUI": true,
+                    buttons: [{
+                        extend: 'excelHtml5',
+                        text: 'Export All',
+                        exportOptions: {
+                            columns: [16, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 12, 13],
+                        },
+                        title: 'Bid List'
+                    }, {
+                        extend: 'excelHtml5',
+                        text: 'Export selected',
+                        exportOptions: {
+                            // columns: ':visible:not(.not-exported)',
+                            columns: [16, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 12, 13],
+                            modifier: {
+                                selected: true
+                            }
+                        },
+                        title: 'Bid List'
+                    }
+                    ],
+                    select: {
+                        style: 'multi'
+                    }
+                    ,
+                    // buttons: [ 'copy', 'excel', 'pdf', 'colvis' ],
+                    //scrollCollapse: true,
+                    //fixedColumns:   {
 
+                    //    rightColumns: 2
+                    //},
+                    "sAjaxSource": "/BidLog/GetBidlogData?orderby=Bid Date",
+                    "aoColumns": [
+                        {
+                            "data": "BidDate",
+                            "title": "Bid Due Date",
+                            // orderData: [16],
+                            //"type": "date ",
+                            "render": function (value) {
+                                if (value === null) return "";
+
+                                var pattern = /Date\(([^)]+)\)/;
+                                var results = pattern.exec(value);
+                                var dt = new Date(parseFloat(results[1]));
+                                return '<span class=hide>' + dt.getFullYear() + (dt.getMonth() + 1) + dt.getDate() + '</span>' + (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+
+                                //return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+                            }
+
+
+
+                        },
+                        {
+                            "data": "BidDate",
+                            "title": "DOW",
+                            "type": "date ",
+                            "render": function (value) {
+                                if (value === null) return "";
+
+                                var pattern = /Date\(([^)]+)\)/;
+                                var results = pattern.exec(value);
+                                var dt = new Date(parseFloat(results[1]));
+
+
+                                var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                                var d = new Date(dt);
+                                var dayName = days[d.getDay()];
+                                return dayName;
+                            }
+
+                        },
+     {
+         "data": "BiddingAs",
+         "title": "Bidding As"
+
+     },
+    {
+        "data": "BidTo",
+        "title": "Customer"
+    },
+    {
+        "data": "CityState",
+        "title": "City, State"
+
+    },
+    {
+        "data": "OwnerName",
+        "title": "OwnerName"
+
+    },
+    {
+        "data": "ProjectName",
+        "title": "Project Description",
+
+    },
+    {
+        "data": "IAndCEstimate",
+        "title": "I&C Estimate"
+
+    },
+    {
+        "data": "Division",
+        "title": "Division"
+
+    },
+    {
+        "data": "LastAddendumRecvd",
+        "title": "Last Addendum Received"
+
+    },
+    {
+        "data": "Estimator",
+        "title": "Estimator"
+
+    },
+    {
+        "data": "AdvertiseDate",
+        "title": "AdvertiseDate",
+        //orderData: [17],
+        "type": "date ",
+        "render": function (value) {
+            if (value === null) return "";
+
+            var pattern = /Date\(([^)]+)\)/;
+            var results = pattern.exec(value);
+            var dt = new Date(parseFloat(results[1]));
+            return '<span class=hide>' + dt.getFullYear() + (dt.getMonth() + 1) + dt.getDate() + '</span>' + (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+
+            // return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
         }
 
-        function ArchieveRecord(quotenumber) {
+    },
+    {
+        "data": "ProjectFolder",
+        "title": "Project Folder"
 
-            confirm("This Will Move Current Record To Obsolete Items Table. Are You Sure?")
+    },
+    {
+        "data": "QuoteNumber",
+        "title": "Quote Number"
+
+    }
+    ,
+    {
+        "data": "QuoteNumber",
+        "title": "Generate SR",
+        "render": function (data, type, row) {
+            if (data == 0 || data == null || data == '') {
+                var sessionValue = $("#hdnSession").data('value');
+
+                if (sessionValue == "True") {
+                    return '<a style="cursor: not-allowed">Generate SR</a>';
+                }
+                else {
+                    return '<a onclick="GenerateSR(' + row.BidId + ')" style="cursor:pointer">Generate SR</a>';
+                }
+
+            }
+            else {
+                return 'SR Generated';
+            }
+
         }
-    </script>
+    },
+    {
+        "data": "QuoteNumber",
+        "title": "",
+        "render": function (data, type, row) {
+            var sessionValue = $("#hdnSession").data('value');
 
-}
+            if (sessionValue == "True") {
+                return '<a   style="cursor: not-allowed">Archive Record</a>';
+            }
+            else {
+                return '<a onclick="ArchieveRecord(' + row.BidId + ')" style="cursor:pointer">Archive Record</a>';
+            }
+        }
+
+    },
+          {
+              "data": "BidDate",
+              "title": "BidDate",
+              visible: false,
+              "type": "date ",
+              "render": function (value) {
+                  if (value === null) return "";
+
+                  var pattern = /Date\(([^)]+)\)/;
+                  var results = pattern.exec(value);
+                  var dt = new Date(parseFloat(results[1]));
+                  return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+
+                  //return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+              }
+
+
+          },
+    {
+        "data": "AdvertiseDate",
+        "title": "Advertise Date",
+        visible: false,
+        "type": "date",
+
+        "render": function (value) {
+            if (value === null) return "";
+
+            var pattern = /Date\(([^)]+)\)/;
+            var results = pattern.exec(value);
+            var dt = new Date(parseFloat(results[1]));
+            return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+
+            // return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+        }
+
+    },
+
+                    ],
+                    "rowCallback": function (row, data, dataIndex) {
+                        if (data["Division"] == "Concord") {
+                            $(row).addClass('Concord');
+                            //$(row).css('background-color', 'White!important;');
+                            //$('td', row).css('background-color', 'White');
+                        }
+                        else if (data["Division"] == "Hanford") {
+                            $(row).addClass('Hanford');
+                            // $('td', row).addClass('redrow');
+                            $(row).addClass('red');
+                            //$(row).css('background-color', '#D6DFF7;');
+                            // $('td', row).css('background-color', '#D6DFF7;');
+                        }
+                        else if (data["Division"] == "Sacramento") {
+                            $(row).addClass('Sacramento');
+                            // $(row).css('background-color', '#C6FFC6;');
+                            //  $('td', row).css('background-color', '#C6FFC6;');
+
+                        }
+
+                    }
+
+
+
+                });
+
+                //table.buttons().container()
+                //      .insertBefore( '#BidLogTableContainer' );
+
+                //table.on( 'select', function ( e, dt, type, indexes ) {
+                //    if(table[ type ]( indexes ).nodes().to$().hasClass( 'green' ))
+                //    {table[ type ]( indexes ).nodes().to$().removeClass( 'green' );
+                //    }
+                //    else
+                //    {
+                //        table[ type ]( indexes ).nodes().to$().addClass( 'green' );
+
+                //    }
+                //} );
+
+                $('#BidLogTableContainer tbody').on('click', 'tr', function () {
+                    if ($(this).hasClass('selectrow')) {
+                        $(this).removeClass('selectrow');
+                    }
+                    else {
+                        $(this).addClass('selectrow');
+                    }
+
+                });
+                $('#BidLogTableContainer tbody').on('dblclick', 'tr', function () {
+                    var data = table.row(this).data();
+                    // alert( 'You clicked on '+data[0]+'\'s row' );
+
+                    //console.log(data);
+                    var bid = data.BidId;
+                    window.location = "@Url.Action("EditBid","BidLog")" + "/" + bid;
+                });
+
+
+                //table.on( 'select', function ( e, dt, type, indexes ) {
+                //    if ( type === 'row' ) {
+                //        $(row).css('background-color', '#6e6db9!important;');
+                //        $('td', row).css('background-color', '#6e6db9!important;');
+                //    }
+                //} );
+                //$('#reset').click(function (e) {
+                //    e.preventDefault();
+
+
+
+                //    $('#BidLogTableContainer').find('thead th').each(function () {
+                //        alert($(this).width());
+                //        alert($(this).text());
+                //    });
+
+
+                //});
+
+                //$('a.toggle-vis').on('click', function (e) {
+                //    e.preventDefault();
+
+                //    // Get the column API object
+                //    var column = table.column($(this).attr('data-column'));
+
+                //    // Toggle the visibility
+                //    column.visible(!column.visible());
+                //});
+
+                //$("#btnEditBid").click(function (e) {
+
+                //    var idx = table.cell('.selected', 0).index();
+                //    if(idx==undefined)
+                //    {
+                //        alert("Please select row for editing");
+                //    }
+                //    else
+                //    {
+                //        var data = table.row(idx.row).data();
+                //        //console.log(data);
+                //        var bid = data.BidId;
+                //        // alert(sr);
+                //        // $("#hdnEditSR").val(data.SRNumber);
+                //        // alert($("#hdnEditSR").val());
+
+                //        window.location = "@Url.Action("EditBid","BidLog")" + "/" + bid;
+                //    }
+
+
+                //});
+
+                var ByDivision = '@ViewBag.Division';
+                if (ByDivision != "") {
+                    $('#chkByDivision').not(this).prop('checked', true);
+                    var ArrDivision = ByDivision.split("|");
+                    for (i = 0; i < ArrDivision.length; i++) {
+
+                        if (ArrDivision[i] == "Concord") {
+                            $('#chkConcord').not(this).prop('checked', true);
+                        }
+                        if (ArrDivision[i] == "Hanford") {
+                            $('#chkHanford').not(this).prop('checked', true);
+                        }
+                        if (ArrDivision[i] == "Sacramento") {
+                            $('#chkSacramento').not(this).prop('checked', true);
+                        }
+                    }
+                    var s = ByDivision.substring(0, ByDivision.length - 1);
+                    table.columns(8).search(s, true, false, true).draw();
+                }
+
+                var BiddingAs = '@ViewBag.BiddingAs';
+
+                if (BiddingAs != "") {
+                    BiddingAs = BiddingAs.replace(/&amp;/g, '&');
+
+                    $('#chkByBiddingAs').not(this).prop('checked', true);
+
+                    var ArrBiddAs = BiddingAs.split("|");
+
+                    for (i = 0; i < ArrBiddAs.length; i++) {
+                        if (ArrBiddAs[i] == "I&C") {
+                            $('#chkIandC').not(this).prop('checked', true);
+                        }
+                        if (ArrBiddAs[i] == "Electrical") {
+                            $('#chkElectircal').not(this).prop('checked', true);
+                        }
+                        if (ArrBiddAs[i] == "Prime") {
+                            $('#chkPrime').not(this).prop('checked', true);
+                        }
+                        if (ArrBiddAs[i] == "Unknown") {
+                            $('#chkUnknown').not(this).prop('checked', true);
+                        }
+                        if (ArrBiddAs[i] == "Not Bidding") {
+                            $('#chkNotBidding').not(this).prop('checked', true);
+                        }
+                        if (ArrBiddAs[i] == "Not Qualified") {
+                            $('#chkNotQualified').not(this).prop('checked', true);
+                        }
+                        if (ArrBiddAs[i] == "Mechanical") {
+                            $('#chkMechanical').not(this).prop('checked', true);
+                        }
+                    }
+                    var s = BiddingAs.substring(0, BiddingAs.length - 1);
+                    table.columns(2).search(s, true, false, true).draw();
+                }
+
+                $("#btnCloseBiddingAs2").click(function (e) {
+                    var table = $('#BidLogTableContainer').DataTable();
+                    table.search('').columns().search('').draw();
+                    var searchtext;
+                    $('input[name="biddingAs"]:checked').each(function () {
+                        searchtext += this.value + "|";
+                    });
+
+
+                    searchtext = searchtext.replace(undefined, '')
+                    var s = searchtext.substring(0, searchtext.length - 1);
+                    table.columns(2).search(s, true, false, true).draw();
+
+                    //table.columns(2).search('Mechanical|Not Qualified', true, false, true).draw();
+                });
+
+                $("#btnCloseBiddingAs").click(function (e) {
+                    var table = $('#BidLogTableContainer').DataTable();
+                    table.search('').columns().search('').draw();
+                    var searchtext;
+                    $('input[name="biddingAs"]:checked').each(function () {
+
+                        searchtext += this.value + "|";
+                    });
+
+                    searchtext = searchtext.replace(undefined, '')
+                    var s = searchtext.substring(0, searchtext.length - 1);
+                    table.columns(2).search(s, true, false, true).draw();
+
+                    //table.columns(2).search(selectedLanguage, true, false, true).draw();
+                });
+
+                $("#btnDivision2").click(function (e) {
+                    debugger;
+                    var table = $('#BidLogTableContainer').DataTable();
+
+                    table.search('').columns().search('').draw();
+                    var searchtext;
+                    $('input[name="division"]:checked').each(function () {
+                        searchtext += this.value + "|";
+                    });
+
+                    if (searchtext == undefined) {
+                        table.search('').columns().search('').draw();
+                    }
+                    else {
+                        searchtext = searchtext.replace(undefined, '')
+                        var s = searchtext.substring(0, searchtext.length - 1);
+                        table.columns(8).search(s, true, false, true).draw();
+                    }
+                    //table.columns(2).search('Mechanical|Not Qualified', true, false, true).draw();
+                });
+
+                $("#btnDivision").click(function (e) {
+                    var table = $('#BidLogTableContainer').DataTable();
+                    table.search('').columns().search('').draw();
+                    var searchtext;
+                    $('input[name="division"]:checked').each(function () {
+
+                        searchtext += this.value + "|";
+                    });
+                    if (searchtext == undefined) {
+                        table.fnFilterClear();
+                    }
+                    else {
+                        searchtext = searchtext.replace(undefined, '')
+                        var s = searchtext.substring(0, searchtext.length - 1);
+                        table.columns(8).search(s, true, false, true).draw();
+                    }
+
+
+                    //table.columns(2).search(selectedLanguage, true, false, true).draw();
+                });
+
+                $('#chkRemoveFilters').on('change', function (e) {
+                    if (e.target.checked) {
+                        var table = $('#BidLogTableContainer').DataTable();
+                        table.search('').columns().search('').draw();
+                        //$('#BidLogTableContainer').DataTable().ajax.reload();
+                        $('#chkByBiddingAs').not(this).prop('checked', false);
+                        $('#chkByDivision').not(this).prop('checked', false);
+
+                        $('#chkIandC').not(this).prop('checked', false);
+                        $('#chkElectircal').not(this).prop('checked', false);
+                        $('#chkPrime').not(this).prop('checked', false);
+                        $('#chkUnknown').not(this).prop('checked', false);
+                        $('#chkNotBidding').not(this).prop('checked', false);
+                        $('#chkMechanical').not(this).prop('checked', false);
+                        $('#chkNotQualified').not(this).prop('checked', false);
+
+                        $('#chkConcord').not(this).prop('checked', false);
+                        $('#chkHanford').not(this).prop('checked', false);
+                        $('#chkSacramento').not(this).prop('checked', false);
+                    }
+                });
+
+
+
+
+                //var table = $('#tblSharpSpring').DataTable();
+                $("#ExportReporttoCSV").on("click", function () {
+                    var table = $('#BidLogTableContainer').DataTable();
+                    table.button('.buttons-excel').trigger();
+                });
+
+            });
+
+            function Removeallfilter() {
+                var table = $('#BidLogTableContainer').DataTable();
+                table.search('').columns().search('').draw();
+                //$('#BidLogTableContainer').DataTable().ajax.reload();
+                $('#chkByBiddingAs').not(this).prop('checked', false);
+                $('#chkByDivision').not(this).prop('checked', false);
+
+                $('#chkIandC').not(this).prop('checked', false);
+                $('#chkElectircal').not(this).prop('checked', false);
+                $('#chkPrime').not(this).prop('checked', false);
+                $('#chkUnknown').not(this).prop('checked', false);
+                $('#chkNotBidding').not(this).prop('checked', false);
+                $('#chkMechanical').not(this).prop('checked', false);
+                $('#chkNotQualified').not(this).prop('checked', false);
+
+                $('#chkConcord').not(this).prop('checked', false);
+                $('#chkHanford').not(this).prop('checked', false);
+                $('#chkSacramento').not(this).prop('checked', false);
+            }
+            $("#btnSortBy").click(function (e) {
+                if ($("#btnSortBy").val() == "Change sort order to first by Division and after Bid Date Ascending") {
+                    //$('#BidLogTableContainer').dataTable().fnSort([[8, 'asc'], [0, 'asc'], [13, 'desc']]);
+                    redrawTable('Division,Bid Date');
+                    // table.order( [ [8, 'desc'][0, 'desc'],[13, 'asc']] ).draw( false );
+                    $("#btnSortBy").val("Change sort order to Bid Date Ascending");
+                }
+                else {
+                    //$('#BidLogTableContainer').dataTable().order([[0, 'asc'], [13, 'desc']]).draw();
+                    redrawTable('Bid Date');
+                    $("#btnSortBy").val("Change sort order to first by Division and after Bid Date Ascending");
+                }
+
+
+            });
+
+            function redrawTable(sort) {
+                table = $('#BidLogTableContainer').DataTable({
+                    //colReorder: true,
+                    "destroy": true,
+                    oLanguage: {
+                        sProcessing: "<img src='/Images/loading.gif'>"
+                    },
+                    select: true,
+                    "bProcessing": true,
+                    "bServerSide": false,
+                    "bSort": false,
+                    //"bSortClasses": true,
+                    //"aaSorting": [[16, "desc"]],
+                    bPaginate: true,
+                    //pagelength: 25,
+                    'iDisplayLength': 15,//use for 2
+                    fixedHeader: true,
+                    "scrollY": 450,
+                    "scrollX": true,
+                    "pagingType": "full_numbers",
+                    // dom: 'Bfrtip',
+                    "jQueryUI": true,
+                    buttons: [{
+                        extend: 'excelHtml5',
+                        text: 'Export All',
+                        exportOptions: {
+                            columns: [16, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 12, 13],
+                        },
+                        title: 'Bid List'
+                    }, {
+                        extend: 'excelHtml5',
+                        text: 'Export selected',
+                        exportOptions: {
+                            // columns: ':visible:not(.not-exported)',
+                            columns: [16, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 12, 13],
+                            modifier: {
+                                selected: true
+                            }
+                        },
+                        title: 'Bid List'
+                    }
+                    ],
+                    select: {
+                        style: 'multi'
+                    }
+                    ,
+                    // buttons: [ 'copy', 'excel', 'pdf', 'colvis' ],
+                    //scrollCollapse: true,
+                    //fixedColumns:   {
+
+                    //    rightColumns: 2
+                    //},
+                    "sAjaxSource": "/BidLog/GetBidlogData?orderby=" + sort,
+                    "aoColumns": [
+                        {
+                            "data": "BidDate",
+                            "title": "Bid Due Date",
+                            // orderData: [16],
+                            //"type": "date ",
+                            "render": function (value) {
+                                if (value === null) return "";
+
+                                var pattern = /Date\(([^)]+)\)/;
+                                var results = pattern.exec(value);
+                                var dt = new Date(parseFloat(results[1]));
+                                return '<span class=hide>' + dt.getFullYear() + (dt.getMonth() + 1) + dt.getDate() + '</span>' + (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+
+                                //return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+                            }
+
+
+
+                        },
+                        {
+                            "data": "BidDate",
+                            "title": "DOW",
+                            "type": "date ",
+                            "render": function (value) {
+                                if (value === null) return "";
+
+                                var pattern = /Date\(([^)]+)\)/;
+                                var results = pattern.exec(value);
+                                var dt = new Date(parseFloat(results[1]));
+
+
+                                var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                                var d = new Date(dt);
+                                var dayName = days[d.getDay()];
+                                return dayName;
+                            }
+
+                        },
+     {
+         "data": "BiddingAs",
+         "title": "Bidding As"
+
+     },
+    {
+        "data": "BidTo",
+        "title": "Customer"
+    },
+    {
+        "data": "CityState",
+        "title": "City, State"
+
+    },
+    {
+        "data": "OwnerName",
+        "title": "OwnerName"
+
+    },
+    {
+        "data": "ProjectName",
+        "title": "Project Description",
+
+    },
+    {
+        "data": "IAndCEstimate",
+        "title": "I&C Estimate"
+
+    },
+    {
+        "data": "Division",
+        "title": "Division"
+
+    },
+    {
+        "data": "LastAddendumRecvd",
+        "title": "Last Addendum Received"
+
+    },
+    {
+        "data": "Estimator",
+        "title": "Estimator"
+
+    },
+    {
+        "data": "AdvertiseDate",
+        "title": "AdvertiseDate",
+        //orderData: [17],
+        "type": "date ",
+        "render": function (value) {
+            if (value === null) return "";
+
+            var pattern = /Date\(([^)]+)\)/;
+            var results = pattern.exec(value);
+            var dt = new Date(parseFloat(results[1]));
+            return '<span class=hide>' + dt.getFullYear() + (dt.getMonth() + 1) + dt.getDate() + '</span>' + (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+
+            // return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+        }
+
+    },
+    {
+        "data": "ProjectFolder",
+        "title": "Project Folder"
+
+    },
+    {
+        "data": "QuoteNumber",
+        "title": "Quote Number"
+
+    }
+    ,
+    {
+        "data": "QuoteNumber",
+        "title": "Generate SR",
+        "render": function (data, type, row) {
+            if (data == 0 || data == null || data == '') {
+                var sessionValue = $("#hdnSession").data('value');
+
+                if (sessionValue == "True") {
+                    return '<a style="cursor: not-allowed">Generate SR</a>';
+                }
+                else {
+                    return '<a onclick="GenerateSR(' + row.BidId + ')" style="cursor:pointer">Generate SR</a>';
+                }
+
+            }
+            else {
+                return 'SR Generated';
+            }
+
+        }
+    },
+    {
+        "data": "QuoteNumber",
+        "title": "",
+        "render": function (data, type, row) {
+            var sessionValue = $("#hdnSession").data('value');
+
+            if (sessionValue == "True") {
+                return '<a   style="cursor: not-allowed">Archive Record</a>';
+            }
+            else {
+                return '<a onclick="ArchieveRecord(' + row.BidId + ')" style="cursor:pointer">Archive Record</a>';
+            }
+        }
+
+    },
+          {
+              "data": "BidDate",
+              "title": "BidDate",
+              visible: false,
+              "type": "date ",
+              "render": function (value) {
+                  if (value === null) return "";
+
+                  var pattern = /Date\(([^)]+)\)/;
+                  var results = pattern.exec(value);
+                  var dt = new Date(parseFloat(results[1]));
+                  return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+
+                  //return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+              }
+
+
+          },
+    {
+        "data": "AdvertiseDate",
+        "title": "Advertise Date",
+        visible: false,
+        "type": "date",
+
+        "render": function (value) {
+            if (value === null) return "";
+
+            var pattern = /Date\(([^)]+)\)/;
+            var results = pattern.exec(value);
+            var dt = new Date(parseFloat(results[1]));
+            return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+
+            // return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+        }
+
+    },
+
+                    ],
+                    "rowCallback": function (row, data, dataIndex) {
+                        if (data["Division"] == "Concord") {
+                            $(row).addClass('Concord');
+                            //$(row).css('background-color', 'White!important;');
+                            //$('td', row).css('background-color', 'White');
+                        }
+                        else if (data["Division"] == "Hanford") {
+                            $(row).addClass('Hanford');
+                            // $('td', row).addClass('redrow');
+                            $(row).addClass('red');
+                            //$(row).css('background-color', '#D6DFF7;');
+                            // $('td', row).css('background-color', '#D6DFF7;');
+                        }
+                        else if (data["Division"] == "Sacramento") {
+                            $(row).addClass('Sacramento');
+                            // $(row).css('background-color', '#C6FFC6;');
+                            //  $('td', row).css('background-color', '#C6FFC6;');
+
+                        }
+
+                    }
+                });
+                debugger;
+                if ($('#chkByDivision').is(":checked")) {
+                    table.search('').columns().search('').draw();
+                    var searchtext;
+                    $('input[name="division"]:checked').each(function () {
+                        searchtext += this.value + "|";
+                    });
+
+                    if (searchtext == undefined) {
+                        table.search('').columns().search('').draw();
+                    }
+                    else {
+                        searchtext = searchtext.replace(undefined, '')
+                        var s = searchtext.substring(0, searchtext.length - 1);
+                        table.columns(8).search(s, true, false, true).draw();
+                    }
+                }
+
+                if ($('#chkByBiddingAs').is(":checked")) {
+                    table.search('').columns().search('').draw();
+                    var searchtext;
+                    $('input[name="biddingAs"]:checked').each(function () {
+                        searchtext += this.value + "|";
+                    });
+
+
+                    searchtext = searchtext.replace(undefined, '')
+                    var s = searchtext.substring(0, searchtext.length - 1);
+                    table.columns(2).search(s, true, false, true).draw();
+                }
+            }
+
+            $('#SaveSortButton').click(function (e) {
+
+                var strBidAs = "";
+                var division = "";
+                if ($('#chkIandC').is(":checked")) {
+                    strBidAs = "0#";
+                }
+                if ($('#chkElectircal').is(":checked")) {
+                    strBidAs = strBidAs + "1#";
+                }
+                if ($('#chkPrime').is(":checked")) {
+                    strBidAs = strBidAs + "2#";
+                }
+                if ($('#chkUnknown').is(":checked")) {
+                    strBidAs = strBidAs + "3#";
+                }
+                if ($('#chkNotBidding').is(":checked")) {
+                    strBidAs = strBidAs + "4#";
+                }
+
+                if ($('#chkNotQualified').is(":checked")) {
+                    strBidAs = strBidAs + "5#";
+                }
+                if ($('#chkMechanical').is(":checked")) {
+                    strBidAs = strBidAs + "6#";
+                }
+
+
+
+                if ($('#chkConcord').is(":checked")) {
+                    division = "Concord#";
+                }
+                if ($('#chkHanford').is(":checked")) {
+                    division = division + "Hanford#";
+                }
+                if ($('#chkSacramento').is(":checked")) {
+                    division = division + "Sacramento#";
+                }
+
+
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: '@Url.Action("SaveFilterCriteria")',
+                    data:
+                        {
+                            BiddingAs: strBidAs,
+                            ByDivision: division
+                        },
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function (xhr) {
+                        alert('Error occured');
+                    }
+                });
+
+
+            });
+
+
+            //$('#BidLogTableContainer').on('column-visibility.dt', function (e, settings, column, state) {
+            //    alert(
+            //        'Column ' + column + ' has changed to ' + (state ? 'visible' : 'hidden')
+            //    );
+            //});
+
+
+
+        </script>
+    }
 

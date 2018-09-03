@@ -10,6 +10,7 @@ namespace SRLog
         {
             filters.Add(new HandleErrorAttribute());
             filters.Add(new CustomAuthFilterAttribute());
+            filters.Add(new ExceptionHandlerAttribute());
         }
     }
 }

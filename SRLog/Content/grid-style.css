@@ -1,0 +1,56 @@
+﻿.webgrid-table      {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    width: 100%;
+    display: table;
+    border-collapse: separate;
+    border: solid 1px #98BF21;
+    background-color: white;
+}
+
+.webgrid-table th {
+    background-color: #418aad !important;
+    color: #FFFFFF !important;
+    /*padding-bottom: 4px !important;
+        padding-top: 5px !important;*/
+    text-align: center !important;
+    padding: 8px !important;
+}
+
+  .webgrid-table  th a {
+        color: #FFFFFF !important;
+    }
+
+    .webgrid-table td, th      {
+        border: 1px solid #0067a8;
+        padding: 3px 7px 2px;
+    }
+
+.webgrid-header      {
+    background-color: #0067a8;
+    color: #FFFFFF;
+    padding-bottom: 4px;
+    padding-top: 5px;
+    text-align: left;
+}
+
+.webgrid-footer      {
+    color: #003300;
+}
+
+.webgrid-row-style      {
+    padding: 3px 7px 2px;
+}
+
+.webgrid-alternating-row      {
+    background-color: #EAF2D3;
+    padding: 3px 7px 2px;
+}
+
+.cell-border {
+    border-left: 1px solid;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-color:gray;
+}
+

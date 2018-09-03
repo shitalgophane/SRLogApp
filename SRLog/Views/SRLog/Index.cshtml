@@ -1,136 +1,204 @@
 ﻿@{
     ViewBag.Title = @ViewBag.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@Scripts.Render("~/bundles/modernizr")
-<link href="~/Scripts/jtable/themes/lightcolor/blue/jtable.css" rel="stylesheet" />
 
-
-<style type="text/css">
-    #SRLogTableContainer {
-        width: 100%;
-        display: block;
-        overflow-x: auto;
-        /*height: 500px;
-        overflow-y: auto;*/
-        border: 1px solid #c6c3c3;
-    }
-
-        /*.scroll-content {
-        width: 99%;
-        display: block;
-        overflow-x: auto;
-        height: 500px;
-        overflow-y: auto;
-        border: 1px solid #c6c3c3;
-    }
-
-    div.jtable-main-container {
-        height: 500px;
-    }*/
-
-
-        /*#SRLogTableContainer thead, .jtable thead {
-            display: table-header-group;            
-            width:98%;
-        }
-
-        #SRLogTableContainer tbody, .jtable tbody {
-            height: 400px;
-            width:99%;
-
-            display: table;            
-            overflow-y: auto;
-        }*/
-</style>
-
-
-<table class="table-condensed">
-    <tr>
-        <td colspan="4" style="text-align:center"><span>Records Sorted By </span></td>
-        <td colspan="4" style="text-align:center">
-            <input type="checkbox" class="jtable-checkbox-input" id="chkApplyDateFilter" />
-            <span style="vertical-align:middle">Filter by Creation Date</span>
-        </td>
-        <td colspan="2">&nbsp;</td>
-    </tr>
-    <tr>
-        <td>
-            
+<div class="row">
+    <div class="col-md-12 text-center title">
+        <p class="title" id="pTitle"></p>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <span>Records Sorted By </span>
+    </div>
+    <div class="ajax-loader" style="visibility:hidden">
+        <img src="/Images/loading.gif" class="i class=" img-responsive" />
+    </div>
+    @*<div class="col-md-2 col-sm-2 col-xs-3">
             @Html.DropDownList("FieldList1", ViewBag.FieldList as SelectList, new { @class = "form-control" })
-        </td>
-        <td>@Html.DropDownList("ddlOrderBy1", ViewBag.OrderList as SelectList, new { @class = "form-control" })</td>
-        <td>@Html.DropDownList("FieldList2", ViewBag.FieldListTwo as SelectList, new { @class = "form-control" })</td>
-        <td>@Html.DropDownList("ddlOrderBy2", ViewBag.OrderListTwo as SelectList, new { @class = "form-control" })</td>
-        <td style="width:43px">
-            <span id="lblHeader1" name="lblHeader1">
-                From
-            </span>
-        </td>
-        <td style="width:242px">
-            <div class='input-group date' id='datetimepicker1'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-        </td>
-        <td style="width:43px">
-            <span id="lblHeader2" name="lblHeader2">
-                To
-            </span>
-        </td>
-        <td style="width:242px">
-            <div class='input-group date' id='datetimepicker2'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-        </td>
-        <td>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-3">
+            @Html.DropDownList("ddlOrderBy1", ViewBag.OrderList as SelectList, new { @class = "form-control" })
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-3">
+            @Html.DropDownList("FieldList2", ViewBag.FieldListTwo as SelectList, new { @class = "form-control" })
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-3">
+            @Html.DropDownList("ddlOrderBy2", ViewBag.OrderListTwo as SelectList, new { @class = "form-control" })
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-3">
             <button type="button" class="btn btn-primary btnMain" id="SortRecordsButton">Apply Sort/Filter</button>
-        </td>
-        <td>
-            <button type="button" class="btn btn-primary btnMain" id="SaveSortButton">Save Sort/Filter</button>
-        </td>
-    </tr>
-</table>
+        </div>*@
 
 
-<div id="SRLogTableContainer">
+    <div class="col-md-4 col-sm-4 col-xs-4" style="border:1px solid grey;">
+        <div class="row" style="margin-top:10px">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                @Html.DropDownList("FieldList1", ViewBag.FieldList as SelectList, new { @class = "form-control" })
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                @Html.DropDownList("ddlOrderBy1", ViewBag.OrderList as SelectList, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-4" style="border:1px solid grey;">
+        <div class="row" style="margin-top:10px">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                @Html.DropDownList("FieldList2", ViewBag.FieldListTwo as SelectList, new { @class = "form-control" })
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                @Html.DropDownList("ddlOrderBy2", ViewBag.OrderListTwo as SelectList, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-3">
+        <button type="button" class="btn btn-primary btnMain" id="SortRecordsButton">Apply Sort/Filter</button>
+    </div>
+</div>
+<div class="row" style="margin-top: 10px">
+    <div class="col-md-2 col-sm-2 col-xs-12">
+
+        <input type="checkbox" class="jtable-checkbox-input" id="chkApplyDateFilter" />
+        Filter by Creation Date
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-3 text-right">
+        <span id="lblHeader1" name="lblHeader1">
+            From Date:
+        </span>
+    </div>
+
+    <div class="col-md-2 col-sm-2 col-xs-3">
+        <div class='input-group date' id='datetimepicker1'>
+            <input type='text' class="form-control" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2  col-xs-3 text-right">
+
+
+        <span id="lblHeader2" name="lblHeader2">
+            To Date :
+        </span>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-3">
+        <div class='input-group date' id='datetimepicker2'>
+            <input type='text' class="form-control" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-3">
+        <button type="button" class="btn btn-primary btnMain" id="SaveSortButton">Save Sort/Filter</button>
+        <a data-toggle="modal" data-target="#mdNote" data-backdrop="static" data-keyboard="false" id="HelpSave">
+            <span class="glyphicon glyphicon-question-sign"></span>
+        </a><!-- Modal -->
+        <div class="modal fade" id="mdNote" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Help</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Saved settings will become the default action when this screen is reopened again.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </div>
-
-<div class="modal fade" tabindex="-1" role="dialog" id="myModalForKeywordSearch">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header login">
-                <h5 class="modal-title">
-                    List All Jobs That Contains Certain Keywords.
-                </h5>
-            </div>
-            <div class="modal-body">
-                <form>
-                    Enter Keywords To Search: <input type="text" name="keyword" id="keyword" maxlength="30" />
-                </form>
-            </div>
-            <div class="modal-footer" style="text-align:center">
-                <button type="submit" class="btn btn-primary btnMain" id="LoadRecordsButton" data-dismiss="modal">Search</button>
-                <button type="button" class="btn btn-primary btnMain" data-dismiss="modal">Cancel</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+<div class="row">
+    <div class="col-md-4">
+        <button type="button" class="btn btn-primary btnMain" id="btnPreviewReport">Preview Report</button>
+        <button type="button" class="btn btn-primary btnMain" id="btnPrint" onclick="Print()">Print</button>
+        <button type="button" class="btn btn-primary btnMain" id="btnRemoveSortFilter">Remove Sort/Filter</button>
+        @*<a class="btn btn-primary btnMain" id="ColumnVisibility">Column Visibility</a>*@
+    </div>
+    <div class="col-md-3" style="color:red">
+        <p>[ Note : Only 500 records at a time are shown ]  </p>
+        <p>[ Note : Double click on any record to display detail screen. ] </p>
+    </div>
+    <div class="col-md-3">
+        @Html.TextBox("Keyword", null, new { @class = "form-control", autocomplete = "off" })
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-3">
+        <button type="button" class="btn btn-primary btnMain" id="ApplySearchButton">Search These Results</button>
+    </div>
 </div>
+
+@*<div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+     <input type="submit" value="EditSR" id="btnEditSR"  class="btn btn-primary btnMain" />
+        </div>
+    </div>*@
+<table id="SRLogTableContainer" class="display  compact" width="100%"></table>
+
+@Html.Hidden("hdnSort1", "")
+@Html.Hidden("hdnSort2", "")
+@Html.Hidden("hdnRemoveFilte", "")
+@Html.Hidden("hdnOrder2", "")
+@Html.Hidden("hdnFromDate", "")
+@Html.Hidden("hdnToDate", "")
+@Html.Hidden("hdnSearch", "")
 
 
 
 @section scripts
 {
+    <style>
+        .hide {
+            display: none;
+        }
+
+        .ajax-loader {
+            visibility: hidden;
+            background-color: rgba(255,255,255,0.7);
+            position: absolute;
+            z-index: +100 !important;
+            width: 100%;
+            height: 100%;
+        }
+
+            .ajax-loader img {
+                position: relative;
+                top: 50%;
+                left: 50%;
+            }
+    </style>
+
     <script type="text/javascript">
+
+
         $(document).ready(function () {
+            //var localTime = new Date();
+            //var year = localTime.getFullYear();
+            //var month = localTime.getMonth() + 1;
+            //var date = localTime.getDate();
+            //var hours = localTime.getHours();
+            //var minutes = localTime.getMinutes();
+            //var seconds = localTime.getSeconds();
+            //var today=month + "/" + date + "/" + year + " " + hours + ":" + minutes + ":" + seconds;
+            $('.ajax-loader').css("visibility", "hidden");
+
+            var local = moment();
+            // $('#local').html(local.format());
+            var tz = local.tz('US/Pacific').format('MM/DD/YYYY');
 
             $('#datetimepicker1').datetimepicker({
-                defaultDate: new Date(), format: 'MM/DD/YYYY'
+                defaultDate: tz,
+                format: 'MM/DD/YYYY'
             });
 
             $('[data-toggle="tooltip"]').tooltip();
@@ -138,7 +206,8 @@
 
 
             $('#datetimepicker2').datetimepicker({
-                defaultDate: new Date(), format: 'MM/DD/YYYY'
+                defaultDate: tz,
+                format: 'MM/DD/YYYY'
             });
 
             if ($('#chkApplyDateFilter').is(":checked")) {
@@ -154,6 +223,7 @@
                 $('#datetimepicker2').hide();
             }
 
+
             $("#chkApplyDateFilter").click(function () {
                 if ($(this).is(":checked")) {
                     $("#lblHeader1").show();
@@ -168,189 +238,21 @@
                 }
             });
 
+
+
+
             var Flag = '@ViewBag.Flag';
-            var fields = {
-                Id: {
-                    key: true,
-                    list: false
-                }
-            };
-            $.ajax({
-                url: '@Url.Action("GetAllSRLogColumns")',
-                async: false,
-                type: "POST",
-                dataType: "json",
-                success: function (fielddata) {
-                    $.each(fielddata, function (i, item) {
-                        if (item.fieldname == "CreationDate" || item.fieldname == "QuoteDue" || item.fieldname == "JobWalkDate" || item.fieldname == "QuoteDate" || item.fieldname == "QuoteTime" || item.fieldname == "AdvertiseDate") {
-                            fields[item.fieldname] =
-                                {
-                                    title: item.displayname,
-                                    type: 'date',
-                                    displayFormat: 'mm/dd/yy',
-                                    width: item.width
-                                };
-                        }
-                        else if (item.fieldname == "FileFolder" || item.fieldname == "Quote" || item.fieldname == "ChemFeed" || item.fieldname == "InactiveJob" || item.fieldname == "PW"
-                            || item.fieldname == "NotQuoted" || item.fieldname == "Closed" || item.fieldname == "MandatoryJobWalk" || item.fieldname == "BidAsPrimeOrSub" || item.fieldname == "BondingMailSent"
-                            || item.fieldname == "PrevailingMailSent" || item.fieldname == "PrevailingWageTBD" || item.fieldname == "Billing" || item.fieldname == "NewCustomer" || item.fieldname == "QuoteTypeI_C"
-                            || item.fieldname == "QuoteTypeElectrical" || item.fieldname == "QuoteTypeNoBid" || item.fieldname == "FollowUp" || item.fieldname == "NotifyPM") {
-                            fields[item.fieldname] =
-                                {
-                                    title: item.displayname,
-                                    width: item.width,
-                                    display: function (data) {
-                                        if (data.record[item.fieldname] == '1') {
-                                            return '<input type="checkbox" checked="checked" disabled="disabled" />';
-                                        }
-                                        else {
-                                            return '<input type="checkbox" disabled="disabled" />';
-                                        }
-                                    }
-                                };
-                        }
-                        else if (item.fieldname == "JobOrQuote") {
-                            fields[item.fieldname] =
-                                {
-                                    title: item.displayname,
-                                    width: item.width,
-                                    display: function (data) {
-                                        if (data.record.JobOrQuote == 1) {
-                                            return 'Job';
-                                        }
-                                        else {
-                                            return 'Quote';
-                                        }
-                                    }
-                                };
-                        }
-                        else if (item.fieldname == "Notes" || item.fieldname == "ProjectDescription") {
-                            fields[item.fieldname] =
-                               {
-                                   title: item.displayname,
-                                   width: item.width,
-                                   display: function (data) {
-                                       if (data.record[item.fieldname].length > 25) {
-                                           return data.record[item.fieldname].substring(0, 25) + '<a href= "#" style="cursor:pointer" data-toggle="tooltip" title="' + data.record[item.fieldname] + '">...</a>';
-                                       }
-                                       else {
-                                           return data.record[item.fieldname];
-                                       }
-                                   }
-                               }
-                        }
-                        else {
-                            fields[item.fieldname] =
-                                {
-                                    title: item.displayname,
-                                    width: item.width
-                                };
-                        }
-                    });
-                },
-                error: function (xhr) {
-                    alert(xhr);
-                    alert('Error occured');
-                }
-            });
-
-            $("#SRLogTableContainer").jtable({
-                //title: "View SR Log",
-                paging: true, //Enable paging
-                pageSize: 10, //Set page size (default: 10)
-                sorting: false, //Enable sorting
-                columnResizable: true,
-                columnSelectable: false,
-                saveUserPreferences: false,
-                actions:
-                    {
-                        listAction: '@Url.Action("GetSRLogsList")'
-                    },
-                fields: fields
-                //rowInserted: function (event, data) {
-                //    //alert("Header width");
-                //    $(".jtable thead th").each(function (index) {
-                //        var header_width = $(this).css("width");
-                //        $(".jtable tbody").find('td:nth-child(' + index + ')').css('width', header_width);
-                //    });
-
-                //    //alert("body width");
-                //    //$(".jtable tbody td").each(function () {
-                //    //    alert($(this).css("width"));
-                //    //});
-                //}
-            });
-            // $("#SRLogTableContainer").jtable('load');
-
-            //Re-load records when user click 'load records' button.
-            $('#LoadRecordsButton').click(function (e) {
-                e.preventDefault();
-                var sort1 = '';
-                if ($('#FieldList1').val() != '') {
-                    sort1 = $('#FieldList1').val() + ' ' + $('#ddlOrderBy1').val();
-                }
-
-                var sort2 = '';
-                if ($('#FieldList2').val() != '') {
-                    sort2 = $('#FieldList2').val() + ' ' + $('#ddlOrderBy2').val();
-                }
-
-                var fromdate = '';
-                var todate = '';
-                if ($('#chkApplyDateFilter').is(":checked")) {
-                    fromdate = $('#datetimepicker1').data('date');
-                    todate = $('#datetimepicker2').data('date');
-                }
-
-                $('#SRLogTableContainer').jtable('load', {
-                    keyword: $('#keyword').val(),
-                    sortby1: sort1,
-                    sortby2: sort2,
-                    FromDate: fromdate,
-                    ToDate: todate
-                });
-                $('#myModalForKeywordSearch').hide();
-                //$('.jtable tbody').wrap('<div class="jtable-main-container scroll-content" />');
-            });
-
-
-
-
-            $('#SortRecordsButton').click(function (e) {
-                var sort1 = '';
-                if ($('#FieldList1').val() != '') {
-                    sort1 = $('#FieldList1').val() + ' ' + $('#ddlOrderBy1').val();
-                }
-
-                var sort2 = '';
-                if ($('#FieldList2').val() != '') {
-                    sort2 = $('#FieldList2').val() + ' ' + $('#ddlOrderBy2').val();
-                }
-
-                var fromdate = '';
-                var todate = '';
-                if ($('#chkApplyDateFilter').is(":checked")) {
-                    fromdate = $('#datetimepicker1').data('date');
-                    todate = $('#datetimepicker2').data('date');
-                }
-
-                $('#SRLogTableContainer').jtable('load', {
-                    keyword: $('#keyword').val(),
-                    sortby1: sort1,
-                    sortby2: sort2,
-                    FromDate: fromdate,
-                    ToDate: todate
-                });
-            });
-
             //if (Flag == "ListAllJobsBySRNumber" || Flag == "ListAllJobsByFilter") {
             if (Flag == "ListAllJobsBySRNumber") {
                 //Load all records when page is first shown
                 $("#SaveSortButton").css("visibility", "hidden");
-                $('#LoadRecordsButton').click();
+                $("#HelpSave").css("visibility", "hidden");
+                //$('#LoadRecordsButton').click();
             }
             else if (Flag == "ListAllJobsByFilter") {
                 $("#SaveSortButton").css("visibility", "visible");
+                $("#HelpSave").css("visibility", "visible");
+                $('#pTitle').text('Custom Sort/Filter All Records')
                 var isFilter = '@ViewBag.IsDateFilter';
 
                 if (isFilter == 'True') {
@@ -371,12 +273,1029 @@
             }
             else if (Flag == "ListAllJobsByKeywordSearch") {
                 $("#SaveSortButton").css("visibility", "hidden");
-                $('#myModalForKeywordSearch').modal({
-                    show: true,
-                    backdrop: 'static',
-                    keyboard: false
-                });
+                $("#HelpSave").css("visibility", "hidden");
+                $('#pTitle').text('Search Records')
+                //$('#myModalForKeywordSearch').modal({
+                //    show: true,
+                //    backdrop: 'static',
+                //    keyboard: false
+                //});
+
+                var isFilter = '@ViewBag.IsDateFilter';
+
+                if (isFilter == 'True') {
+                    $('#chkApplyDateFilter').attr('checked', 'checked');
+
+                    var FromDate = '@ViewBag.FromDate';
+                    var ToDate = '@ViewBag.ToDate';
+
+                    $('#datetimepicker1').data("DateTimePicker").date(new Date(FromDate));
+                    $('#datetimepicker2').data("DateTimePicker").date(new Date(ToDate));
+
+                    $("#lblHeader1").show();
+                    $("#lblHeader2").show();
+                    $('#datetimepicker1').show();
+                    $('#datetimepicker2').show();
+                }
+                $('#LoadRecordsButton').click();
             }
+
+
+            var sort1 = '';
+            var sort2 = '';
+            var fromdate = '';
+            var todate = '';
+            var keyword = '';
+
+            if ($('#FieldList1').val() != '') {
+                sort1 = $('#FieldList1').val() + ' ' + $('#ddlOrderBy1').val();
+                $('#hdnSort1').val($('#FieldList1').val() + ' ' + $('#ddlOrderBy1').val());
+            }
+
+
+            if ($('#FieldList2').val() != '') {
+                sort2 = $('#FieldList2').val() + ' ' + $('#ddlOrderBy2').val();
+                $('#hdnSort2').val($('#FieldList2').val() + ' ' + $('#ddlOrderBy2').val());
+            }
+
+
+            if ($('#chkApplyDateFilter').is(":checked")) {
+                fromdate = $('#datetimepicker1').data('date');
+                todate = $('#datetimepicker2').data('date');
+                $('#hdnFromDate').val(fromdate);
+                $('#hdnToDate').val(todate);
+            }
+            else {
+                fromdate = '';
+                todate = '';
+            }
+
+            if ($('#keyword').val() != "") {
+                keyword = $('#Keyword').val()
+            }
+            else {
+                // alert("RemoveFilter");
+                keyword = "RemoveFilter";
+            }
+
+            var table = $("#SRLogTableContainer").DataTable({
+                "destroy": true,
+                //oLanguage: {
+                //    sProcessing: "<img src='/Images/loading.gif'>"
+                //},
+                //processing: true,
+                select: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'colvis',
+                        collectionLayout: 'fixed two-column',
+                        postfixButtons: ['colvisRestore']
+                    }
+                ],
+                stateSave: true,
+                "searching": true,
+                'iDisplayLength': 500,//use for 2
+                //'bLengthChange': false,//use for 2
+                "ordering": false,
+                colReorder: true,
+                //"bProcessing": true,
+                "bServerSide": true,
+                "order": [],
+                bPaginate: true,
+                select: {
+                    style: 'multi'
+                }
+                ,
+                // "bSort": true,
+                //fixedHeader: true,
+                "scrollY": 450,
+                "scrollX": true,
+                "pagingType": "full_numbers",
+                ajax: {
+                    url: "/SRLog/GetSRLogsList", // Change this URL to where your json data comes from
+                    type: "POST", // This is the default value, could also be POST, or anything you want.
+                    datatype: JSON,
+                    beforeSend: function () {
+                        $('.ajax-loader').css("visibility", "visible");
+                    },
+                    data: function (d) {
+                        d.FromDate = fromdate
+                        d.ToDate = todate
+                        d.sortby1 = sort1
+                        d.sortby2 = sort2
+                        d.keyword = keyword
+                    },
+                    complete: function () {
+                        $('.ajax-loader').css("visibility", "hidden");
+                    }
+
+                },
+                //fixedColumns: {
+                //    leftColumns: 4
+
+                //},
+                "aoColumns": [
+                                    {
+                                        "data": "SRNumber",
+                                        "title": "SRNumber"
+                                    },
+                                    {
+                                        "data": "Customer",
+                                        "title": "Customer"
+                                    },
+                                    {
+                                        "data": "Owner",
+                                        "title": "Owner"
+                                    },
+                                    {
+                                        "data": "ProjectDescription",
+                                        "title": "Project Description",
+                                        "render": function (data, type, row) {
+                                            if (data != null) {
+                                                if (data.length > 40) {
+                                                    return data.substring(0, 40) + '<a href= "#" style="cursor:pointer" data-toggle="tooltip" title="' + data + '">...</a>';
+                                                }
+                                                else {
+                                                    return data;
+                                                }
+                                            }
+                                            else {
+                                                return data;
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "data": "Division",
+                                        "title": "Division"
+                                    },
+                                    {
+                                        "data": "InactiveJob",
+                                        "title": "Inactive Job",
+
+                                        "render": function (data, type, row) {
+                                            if (data == 1)
+                                            { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                            else {
+                                                return '<input type="checkbox" disabled="disabled" />';
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "data": "ProjectManager",
+                                        "title": "Project Manager"
+                                    },
+                                    {
+                                        "data": "Estimator",
+                                        "title": "Estimator"
+                                    },
+                                    {
+                                        "data": "CreationDate",
+                                        "title": "CreationDate",
+                                        //  "type": "date",
+                                        // orderData: [29],
+                                        "render": function (value) {
+                                            if (value === null) return "";
+
+                                            var pattern = /Date\(([^)]+)\)/;
+                                            var results = pattern.exec(value);
+                                            var dt = new Date(parseFloat(results[1]));
+                                            //   return dt.getDate()   + "/" +(dt.getMonth() + 1)  + "/" + dt.getFullYear();
+                                            return '<span class=hide>' + dt.getFullYear() + (dt.getMonth() + 1) + dt.getDate() + '</span>' + (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+
+                                        }
+
+                                    },
+                                      {
+                                          "data": "JobOrQuote",
+                                          "title": "JobOrQuote",
+                                          "render": function (data, type, row) {
+                                              if (data == 1)
+                                              { return '<span>Job</span>'; }
+                                              else {
+                                                  return '<span>Quote</span>';
+                                              }
+                                          }
+                                      },
+                                        {
+                                            "data": "ContactEmail",
+                                            "title": "ContactEmail"
+                                        },
+                                          {
+                                              "data": "SiteForeman",
+                                              "title": "SiteForeman"
+                                          },
+                                       {
+                                           "data": "CustomerContact",
+                                           "title": "CustomerContact"
+                                       },
+                                        {
+                                            "data": "ContactPhone",
+                                            "title": "ContactPhone"
+                                        },
+                                        {
+                                            "data": "FileFolder",
+                                            "title": "FileFolder",
+                                            "render": function (data, type, row) {
+                                                if (data == 1)
+                                                { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                                else {
+                                                    return '<input type="checkbox" disabled="disabled" />';
+                                                }
+                                            }
+                                        },
+                                         {
+                                             "data": "PW",
+                                             "title": "PW",
+                                             "render": function (data, type, row) {
+                                                 if (data == 1)
+                                                 { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                                 else {
+                                                     return '<input type="checkbox" disabled="disabled" />';
+                                                 }
+                                             }
+                                         },
+                                          {
+                                              "data": "ChemFeed",
+                                              "title": "ChemFeed",
+                                              "render": function (data, type, row) {
+                                                  if (data == 1)
+                                                  { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                                  else {
+                                                      return '<input type="checkbox" disabled="disabled" />';
+                                                  }
+                                              }
+                                          },
+                                            {
+                                                "data": "QuoteDue",
+                                                "title": "QuoteDue",
+                                                // "type": "date",
+                                                //orderData: [28],
+                                                "render": function (value) {
+                                                    if (value === null) return "";
+
+                                                    var pattern = /Date\(([^)]+)\)/;
+                                                    var results = pattern.exec(value);
+                                                    var dt = new Date(parseFloat(results[1]));
+                                                    //return dt.getDate()   + "/" +(dt.getMonth() + 1)  + "/" + dt.getFullYear();
+                                                    return '<span class=hide>' + dt.getFullYear() + (dt.getMonth() + 1) + dt.getDate() + '</span>' + (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+
+                                                }
+                                            },
+                                             {
+                                                 "data": "WhoJobWalk",
+                                                 "title": "WhoJobWalk"
+                                             },
+                                              {
+                                                  "data": "NotQuoted",
+                                                  "title": "NotQuoted",
+                                                  "render": function (data, type, row) {
+                                                      if (data == 1)
+                                                      { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                                      else {
+                                                          return '<input type="checkbox" disabled="disabled" />';
+                                                      }
+                                                  }
+                                              },
+                                             {
+                                                 "data": "Closed",
+                                                 "title": "Closed",
+                                                 "render": function (data, type, row) {
+                                                     if (data == 1)
+                                                     { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                                     else {
+                                                         return '<input type="checkbox" disabled="disabled" />';
+                                                     }
+                                                 }
+                                             },
+                                              {
+                                                  "data": "BidAsPrimeOrSub",
+                                                  "title": "BidAsPrimeOrSub",
+                                                  "render": function (data, type, row) {
+                                                      if (data == 1)
+                                                      { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                                      else {
+                                                          return '<input type="checkbox" disabled="disabled" />';
+                                                      }
+                                                  }
+                                              },
+                                               {
+                                                   "data": "Bonding",
+                                                   "title": "Bonding"
+                                               },
+                                               {
+                                                   "data": "BondingMailSent",
+                                                   "title": "BondingMailSent",
+                                                   "render": function (data, type, row) {
+                                                       if (data == 1)
+                                                       { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                                       else {
+                                                           return '<input type="checkbox" disabled="disabled" />';
+                                                       }
+                                                   }
+                                               },
+                                               {
+                                                   "data": "PrevailingMailSent",
+                                                   "title": "PrevailingMailSent",
+                                                   "render": function (data, type, row) {
+                                                       if (data == 1)
+                                                       { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                                       else {
+                                                           return '<input type="checkbox" disabled="disabled" />';
+                                                       }
+                                                   }
+                                               },
+                                               {
+                                                   "data": "Notes",
+                                                   "title": "Notes",
+                                                   "render": function (data, type, row) {
+
+                                                       if (data != null) {
+                                                           if (data.length > 25) {
+                                                               return data.substring(0, 25) + '<a href= "#" style="cursor:pointer" data-toggle="tooltip" title="' + data + '">...</a>';
+                                                           }
+                                                           else {
+                                                               return data;
+                                                           }
+                                                       }
+                                                       else {
+                                                           return data;
+                                                       }
+
+
+                                                   }
+                                               },
+                                                 {
+                                                     "data": "JobsiteAddress",
+                                                     "title": "JobsiteAddress"
+                                                 },
+                                                   {
+                                                       "data": "ServerJobFolder",
+                                                       "title": "ServerJobFolder"
+                                                   }
+//{
+//    "data": "QuoteDue",
+//    "title": "QuoteDue",
+//    visible: false,
+//         "type": "date"
+
+//},
+//{
+//    "data": "CreationDate",
+//    "title": "CreationDate",
+//    visible: false,
+//    "type": "date-uk"
+
+//}
+                ]
+            });
+
+            //table.on('page', function () {
+            //    alert('page changed');
+            //});
+
+            //$("#ColumnVisibility").on("click", function () {
+            //    table.button('.buttons-colvis').trigger();
+            //});
+
+            //  table.search('').draw();
+
+            $('#SRLogTableContainer_filter').css('visibility', 'hidden');
+
+
+
+            //$('#LoadRecordsButton').click(function (e) {
+            //    e.preventDefault();
+            //    var sort1 = '';
+            //    if ($('#FieldList1').val() != '') {
+            //        sort1 = $('#FieldList1').val() + ' ' + $('#ddlOrderBy1').val();
+            //    }
+
+            //    var sort2 = '';
+            //    if ($('#FieldList2').val() != '') {
+            //        sort2 = $('#FieldList2').val() + ' ' + $('#ddlOrderBy2').val();
+            //    }
+
+            //    var fromdate = '';
+            //    var todate = '';
+            //    if ($('#chkApplyDateFilter').is(":checked")) {
+            //        fromdate = $('#datetimepicker1').data('date');
+            //        todate = $('#datetimepicker2').data('date');
+            //    }
+
+            //    //$('#SRLogTableContainer').jtable('load', {
+            //    //    keyword: $('#keyword').val(),
+            //    //    sortby1: sort1,
+            //    //    sortby2: sort2,
+            //    //    FromDate: fromdate,
+            //    //    ToDate: todate
+            //    //});
+
+
+
+            //    $('#myModalForKeywordSearch').hide();
+            //    //$('.jtable tbody').wrap('<div class="jtable-main-container scroll-content" />');
+            //    //$(".jtable thead th").each(function (index) {
+            //    //    $(this).attr("scope", "col");
+            //    //    $(this).attr("data-th", $(this).text());
+            //    //    //var header_width = $(this).css("width");
+            //    //    //$(".jtable tbody").find('td:nth-child(' + index + ')').css('width', header_width);
+            //    //});
+
+            //});
+
+
+
+
+            $('#SortRecordsButton').click(function (e) {
+                RedrawTable("Sort");
+            });
+
+            $('#ApplySearchButton').click(function (e) {
+
+                RedrawTable("Search");
+                //var table = $('#SRLogTableContainer').DataTable();
+
+                ////// #myInput is a <input type="text"> element
+
+                //table.search($('#Keyword').val()).draw();
+            });
+
+            function RedrawTable(type) {
+
+                var sort1 = '';
+                var sort2 = '';
+                var fromdate = '';
+                var todate = '';
+                var keyword = '';
+
+
+                if (type == "Sort") {
+
+                    if ($('#FieldList1').val() == "" && $('#FieldList2').val() == '') {
+                        alert("Please select fields to sort");
+                        return;
+                    }
+
+                    if ($('#FieldList1').val() == $('#FieldList2').val()) {
+                        alert("Fields are same,Please select different fields to sort");
+                        return;
+                    }
+
+
+
+
+                    if ($('#FieldList1').val() != '') {
+                        sort1 = $('#FieldList1').val() + ' ' + $('#ddlOrderBy1').val();
+                        $('#hdnSort1').val($('#FieldList1').val() + ' ' + $('#ddlOrderBy1').val());
+                    }
+
+
+                    if ($('#FieldList2').val() != '') {
+                        sort2 = $('#FieldList2').val() + ' ' + $('#ddlOrderBy2').val();
+                        $('#hdnSort2').val($('#FieldList2').val() + ' ' + $('#ddlOrderBy2').val());
+                    }
+
+
+                    if ($('#chkApplyDateFilter').is(":checked")) {
+
+                        fromdate = $('#datetimepicker1').data('date');
+                        todate = $('#datetimepicker2').data('date');
+                        $('#hdnFromDate').val(fromdate);
+                        $('#hdnToDate').val(todate);
+                    }
+                    else {
+                        fromdate = '';
+                        todate = '';
+                    }
+
+                    if ($('#keyword').val() != "") {
+                        keyword = $('#Keyword').val()
+                    }
+                    else {
+                        // alert("RemoveFilter");
+                        keyword = "RemoveFilter";
+                    }
+
+                    //if ($('#Keyword').val() != "") {
+                    //    keyword = $('#Keyword').val();
+                    //    $('#hdnSearch').val($('#Keyword').val());
+                    //}
+
+                }
+                else if (type == "Search") {
+
+                    if ($('#Keyword').val() != "") {
+
+                        $("#hdnSearch").val($('#Keyword').val());
+
+                        if ($('#FieldList1').val() != '') {
+                            sort1 = $('#FieldList1').val() + ' ' + $('#ddlOrderBy1').val();
+                            $('#hdnSort1').val($('#FieldList1').val() + ' ' + $('#ddlOrderBy1').val());
+                        }
+
+
+                        if ($('#FieldList2').val() != '') {
+                            sort2 = $('#FieldList2').val() + ' ' + $('#ddlOrderBy2').val();
+                            $('#hdnSort2').val($('#FieldList2').val() + ' ' + $('#ddlOrderBy2').val());
+                        }
+
+
+                        if ($('#chkApplyDateFilter').is(":checked")) {
+                            fromdate = $('#datetimepicker1').data('date');
+                            todate = $('#datetimepicker2').data('date');
+                            $('#hdnFromDate').val(fromdate);
+                            $('#hdnToDate').val(todate);
+                        }
+
+                        if ($('#keyword').val() != "") {
+                            keyword = $('#Keyword').val()
+                        }
+                        else {
+                            // alert("RemoveFilter");
+                            keyword = "RemoveFilter";
+                        }
+                    }
+                }
+                else {
+                    //  var d = new Date();
+                    //  var dateaftersixmonth= new Date();
+                    //  dateaftersixmonth.setFullYear(dateaftersixmonth.getFullYear() - 2);
+                    ////  $('#datetimepicker1').val(d);
+                    //  // $('#datetimepicker2').val(dateaftersixmonth);
+                    //  $('#FieldList1').val('');
+                    //  $('#FieldList2').val('');
+                    //  //$('#datetimepicker2').data("DateTimePicker").date(new Date(d));
+                    // // $('#datetimepicker1').data("DateTimePicker").date(new Date(dateaftersixmonth));
+                    //  $('#hdnSort1').val('');
+                    //  $('#hdnSort2').val('');
+                    //  $('#hdnFromDate').val( $('#datetimepicker1').data('date'));
+                    //  $('#hdnToDate').val( $('#datetimepicker2').data('date'));
+
+                    //   $('#datetimepicker1').val(d);
+                    //   $('#datetimepicker2').val(dateaftersixmonth);
+                    $('#chkApplyDateFilter').prop('checked', false);
+                    $('#FieldList1').val('');
+                    $('#FieldList2').val('');
+                    $("#lblHeader1").hide();
+                    $("#lblHeader2").hide();
+                    $('#datetimepicker1').hide();
+                    $('#datetimepicker2').hide();
+
+
+                    if ($('#keyword').val() != "") {
+                        keyword = $('#Keyword').val()
+                    }
+                    else {
+                        // alert("RemoveFilter");
+                        keyword = "RemoveFilter";
+                    }
+
+                    //if ($('#Keyword').val() != "") {
+                    //    sort1 = '';
+                    //    sort2 = '';
+                    //    fromdate = '';
+                    //    todate = '';
+
+                    //    keyword = $('#Keyword').val();
+                    //    $('#hdnSearch').val($('#Keyword').val());
+                    //}
+                }
+
+                table = $('#SRLogTableContainer').DataTable({
+                    "destroy": true,
+                    'iDisplayLength': 500,
+                    "searching": true,
+                    "order": [],
+                    //pagelength:500,
+                    select: true,
+                    //oLanguage: {
+                    //    sProcessing: "<img src='/Images/loading.gif'>"
+                    //},
+                    //processing: true,
+                    // stateSave: true,
+                    dom: 'Bfrtip',
+                    buttons: [
+                            {
+                                extend: 'colvis',
+                                collectionLayout: 'fixed two-column',
+                                postfixButtons: ['colvisRestore']
+                            }
+                    ],
+                    ajax: {
+                        url: "/SRLog/GetSRLogsList", // Change this URL to where your json data comes from
+                        type: "POST", // This is the default value, could also be POST, or anything you want.
+                        datatype: JSON,
+                        beforeSend: function () {
+                            $('.ajax-loader').css("visibility", "visible");
+                        },
+                        data: function (d) {
+                            d.FromDate = fromdate
+                            d.ToDate = todate
+                            d.sortby1 = sort1
+                            d.sortby2 = sort2
+                            d.keyword = keyword
+                        },
+                        complete: function () {
+                            $('.ajax-loader').css("visibility", "hidden");
+                        }
+
+                    },
+                    // 'iDisplayLength': 50,
+                    //'bLengthChange': false,
+                    "ordering": false,
+                    //pagelenth: 10,
+                    colReorder: true,
+                    //"bProcessing": true,
+                    "bServerSide": true,
+                    //"bSort": true,
+                    stateSave: true,
+                    bPaginate: true,
+                    //fixedColumns: {
+                    //    leftColumns: 4
+
+                    //},
+                    //fixedHeader: true,
+                    "scrollY": 450,
+                    "scrollX": true,
+                    select: {
+                        style: 'multi'
+                    },
+
+                    "pagingType": "full_numbers",
+                    "aoColumns": [
+                                     {
+                                         "data": "SRNumber",
+                                         "title": "SRNumber"
+
+
+                                     },
+                                     {
+                                         "data": "Customer",
+                                         "title": "Customer"
+
+
+
+                                     },
+                                     {
+                                         "data": "Owner",
+                                         "title": "Owner"
+
+
+
+                                     },
+                                     {
+                                         "data": "ProjectDescription",
+                                         "title": "Project Description",
+                                         "render": function (data, type, row) {
+
+                                             if (data != null) {
+                                                 if (data.length > 10) {
+                                                     return data.substring(0, 10) + '<a href= "#" style="cursor:pointer" data-toggle="tooltip" title="' + data + '">...</a>';
+                                                 }
+                                                 else {
+                                                     return data;
+                                                 }
+                                             }
+                                             else {
+                                                 return data;
+                                             }
+                                         }
+
+                                     },
+                 {
+                     "data": "Division",
+                     "title": "Division"
+
+
+                 },
+                 {
+                     "data": "InactiveJob",
+                     "title": "Inactive Job",
+
+                     "render": function (data, type, row) {
+                         if (data == 1) {
+                             return '<input type="checkbox" checked="checked" disabled="disabled" />';
+                         }
+                         else {
+                             return '<input type="checkbox" disabled="disabled" />';
+                         }
+
+                     }
+
+                 },
+                 {
+                     "data": "ProjectManager",
+                     "title": "Project Manager"
+
+
+
+                 },
+                 {
+                     "data": "Estimator",
+                     "title": "Estimator"
+                 },
+                 {
+                     "data": "CreationDate",
+                     "title": "CreationDate",
+                     // "type": "date",
+                     // "orderData": [29],
+                     "render": function (value) {
+                         if (value === null) return "";
+
+                         var pattern = /Date\(([^)]+)\)/;
+                         var results = pattern.exec(value);
+                         var dt = new Date(parseFloat(results[1]));
+                         //  return dt.getDate()   + "/" +(dt.getMonth() + 1)  + "/" + dt.getFullYear();
+                         return '<span class=hide>' + dt.getFullYear() + (dt.getMonth() + 1) + dt.getDate() + '</span>' + (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+
+                     }
+
+                 },
+                   {
+                       "data": "JobOrQuote",
+                       "title": "JobOrQuote",
+                       "render": function (data, type, row) {
+                           if (data == 1)
+                           { return '<span>Job</span>'; }
+                           else {
+                               return '<span>Quote</span>';
+                           }
+                       }
+                   },
+
+                     {
+                         "data": "ContactEmail",
+                         "title": "ContactEmail"
+                     },
+                       {
+                           "data": "SiteForeman",
+                           "title": "SiteForeman"
+                       },
+                        {
+                            "data": "CustomerContact",
+                            "title": "CustomerContact"
+                        },
+{
+    "data": "ContactPhone",
+    "title": "ContactPhone"
+},
+                         {
+                             "data": "FileFolder",
+                             "title": "FileFolder",
+                             "render": function (data, type, row) {
+                                 if (data == 1)
+                                 { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                 else {
+                                     return '<input type="checkbox" disabled="disabled" />';
+                                 }
+                             }
+                         },
+                          {
+                              "data": "PW",
+                              "title": "PW",
+                              "render": function (data, type, row) {
+                                  if (data == 1)
+                                  { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                  else {
+                                      return '<input type="checkbox" disabled="disabled" />';
+                                  }
+                              }
+                          },
+                           {
+                               "data": "ChemFeed",
+                               "title": "ChemFeed",
+                               "render": function (data, type, row) {
+                                   if (data == 1)
+                                   { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                   else {
+                                       return '<input type="checkbox" disabled="disabled" />';
+                                   }
+                               }
+                           },
+                             {
+                                 "data": "QuoteDue",
+                                 "title": "QuoteDue",
+                                 //"type": "date",
+                                 //orderData: [28],
+
+                                 "render": function (value) {
+                                     if (value === null) return "";
+
+                                     var pattern = /Date\(([^)]+)\)/;
+                                     var results = pattern.exec(value);
+                                     var dt = new Date(parseFloat(results[1]));
+                                     // return dt.getDate()   + "/" +(dt.getMonth() + 1)  + "/" + dt.getFullYear();
+                                     return '<span class=hide>' + dt.getFullYear() + (dt.getMonth() + 1) + dt.getDate() + '</span>' + (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+
+                                 }
+                             },
+                              {
+                                  "data": "WhoJobWalk",
+                                  "title": "WhoJobWalk"
+                              },
+                               {
+                                   "data": "NotQuoted",
+                                   "title": "NotQuoted",
+                                   "render": function (data, type, row) {
+                                       if (data == 1)
+                                       { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                       else {
+                                           return '<input type="checkbox" disabled="disabled" />';
+                                       }
+                                   }
+                               },
+                                  {
+                                      "data": "Closed",
+                                      "title": "Closed",
+                                      "render": function (data, type, row) {
+                                          if (data == 1)
+                                          { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                          else {
+                                              return '<input type="checkbox" disabled="disabled" />';
+                                          }
+                                      }
+                                  },
+                                   {
+                                       "data": "BidAsPrimeOrSub",
+                                       "title": "BidAsPrimeOrSub",
+                                       "render": function (data, type, row) {
+                                           if (data == 1)
+                                           { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                           else {
+                                               return '<input type="checkbox" disabled="disabled" />';
+                                           }
+                                       }
+                                   },
+                                    {
+                                        "data": "Bonding",
+                                        "title": "Bonding"
+                                    },
+                                    {
+                                        "data": "BondingMailSent",
+                                        "title": "BondingMailSent",
+                                        "render": function (data, type, row) {
+                                            if (data == 1)
+                                            { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                            else {
+                                                return '<input type="checkbox" disabled="disabled" />';
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "data": "PrevailingMailSent",
+                                        "title": "PrevailingMailSent",
+                                        "render": function (data, type, row) {
+                                            if (data == 1)
+                                            { return '<input type="checkbox" checked="checked" disabled="disabled" />'; }
+                                            else {
+                                                return '<input type="checkbox" disabled="disabled" />';
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "data": "Notes",
+                                        "title": "Notes",
+                                        "render": function (data, type, row) {
+
+                                            if (data != null) {
+                                                if (data.length > 25) {
+                                                    return data.substring(0, 25) + '<a href= "#" style="cursor:pointer" data-toggle="tooltip" title="' + data + '">...</a>';
+                                                }
+                                                else {
+                                                    return data;
+                                                }
+                                            }
+                                            else {
+                                                return data;
+                                            }
+                                        }
+
+
+                                    },
+                                      {
+                                          "data": "JobsiteAddress",
+                                          "title": "JobsiteAddress"
+                                      },
+                                        {
+                                            "data": "ServerJobFolder",
+                                            "title": "ServerJobFolder"
+                                        }
+//{
+//    "data": "QuoteDue",
+//    "title": "QuoteDue",
+//    visible: false,
+//    "type": "date"
+
+//},
+//{
+//    "data": "CreationDate",
+//    "title": "CreationDate",
+//    visible: false,
+//    "type": "date-uk"
+
+//}
+
+                    ]
+
+                });
+
+                //var table = $('#tblSharpSpring').DataTable();
+                //$("#ColumnVisibility").on("click", function () {
+                //    table.button('.buttons-colvis').trigger();
+                //});
+
+                $('#SRLogTableContainer_filter').css('visibility', 'hidden');
+            }
+
+            //$('#SRLogTableContainer').on('search.dt', function () {
+            //    var value = $('.dataTables_filter input').val();
+            //    $("#hdnSearch").val(value);
+            //});
+            $('#SRLogTableContainer tbody').on('dblclick', 'tr', function () {
+                var data = table.row(this).data();
+                // alert( 'You clicked on '+data[0]+'\'s row' );
+
+                //console.log(data);
+                var path = "";
+                if ($('#pTitle').text() == "Custom Sort/Filter All Records") {
+                    path = "All";
+                }
+                else {
+                    path = "Search";
+                }
+                var sr = data.SRNumber + "^" + path;
+                // alert(sr);
+                // $("#hdnEditSR").val(data.SRNumber);
+                // alert($("#hdnEditSR").val());
+
+                window.location = "@Url.Action("EditSR","SRLog")" + "/" + sr;
+            });
+
+            $("#btnRemoveSortFilter").on("click", function (event) {
+                RedrawTable("Remove");
+                //  $("#hdnRemoveFilte).val("Remove");
+            });
+
+            $("#btnPreviewReport").click(function (e) {
+
+
+                //var idx=  table.rows('.selected').data().toArray()
+                //if(idx.length==0)
+                //{
+                //    alert("Please select row for Preview Report");
+                //}
+                //else
+                //{
+
+                //    var sr="";
+                //    var ids = $.map(table.rows('.selected').data(), function (item) {
+                //        sr += item.SRNumber+";";
+                //    });
+
+
+                //    window.location = "@Url.Action("PreviewReport", "SRLog")?id="+ sr;
+
+                //}
+
+
+
+                var sr = "";
+                var ids = $.map(table.rows('.selected').data(), function (item) {
+                    sr += item.SRNumber + ";";
+                });
+
+                var sortby1 = $("#hdnSort1").val();
+                var sortby2 = $("#hdnSort2").val();
+                var fromdate = $("#hdnFromDate").val();
+                var todate = $("#hdnToDate").val();
+
+                var search = $("#hdnSearch").val();
+
+                window.location = "@Url.Action("PreviewReport", "SRLog")?Sort1by=" + sortby1 + "&Sort2by=" + sortby2 + "&FromDate=" + fromdate + "&ToDate=" + todate + "&searchby=" + search;
+            });
+
+            if ($('#FieldList1').val() != '') {
+
+                $('#hdnSort1').val($('#FieldList1').val() + ' ' + $('#ddlOrderBy1').val());
+            }
+
+
+            if ($('#FieldList2').val() != '') {
+
+                $('#hdnSort2').val($('#FieldList2').val() + ' ' + $('#ddlOrderBy2').val());
+            }
+
+
+            if ($('#chkApplyDateFilter').is(":checked")) {
+
+                $('#hdnFromDate').val($('#datetimepicker1').data('date'));
+                $('#hdnToDate').val($('#datetimepicker2').data('date'));
+            }
+
+
+
+
 
             $('#SaveSortButton').click(function (e) {
                 var sort1 = $('#FieldList1').val();
@@ -394,6 +1313,9 @@
                 $.ajax({
                     cache: false,
                     type: "POST",
+                    beforeSend: function () {
+                        $('.ajax-loader').css("visibility", "visible");
+                    },
                     url: '@Url.Action("SaveOrderBy")',
                     data:
                         {
@@ -408,13 +1330,25 @@
                     success: function (data) {
                         alert(data);
                         $('#LoadRecordsButton').click();
+                        $('.ajax-loader').css("visibility", "hidden");
                     },
                     error: function (xhr) {
                         alert('Error occured');
+                        $('.ajax-loader').css("visibility", "hidden");
+                    },
+                    complete: function () {
+                        $('.ajax-loader').css("visibility", "hidden");
                     }
                 });
+
+
             });
         });
+
+        function Print() {
+            window.print();
+        }
+
 
 
     </script>
