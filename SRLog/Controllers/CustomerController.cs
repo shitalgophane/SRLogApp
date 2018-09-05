@@ -76,8 +76,6 @@ namespace SRLog.Controllers
                     ViewBag.Deletedisable = false;
                     return View("Index", cust);
                 }
-
-
             }
             else
             {

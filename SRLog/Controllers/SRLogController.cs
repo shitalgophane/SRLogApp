@@ -916,6 +916,10 @@ namespace SRLog.Controllers
                     //model.Notes = model.Notes + "This SR Record is regenerated from original SR Number " + model.SRNumber;
                     ViewBag.Notes = "This SR Record is regenerated from original SR Number " + model.SRNumber;
                     model.SRNumber = LastSrNumber;
+                    //HD
+                    //5 Sept 2018
+                    //9/4/18	32	Regenerating an SR record must uncheck the "inactive" field.
+                    model.InactiveJob = false;
                     ViewBag.ReSRNumber = "Renegenrate";
                     ViewBag.Message = null;
                     ViewBag.SubmitValue = "Add";
@@ -943,8 +947,6 @@ namespace SRLog.Controllers
                 }
                 else
                 {
-
-
                     ViewBag.Message = "Selected Sr number is empty to generate new sr number";
                     ViewBag.SubmitValue = "Add";
                     ViewBag.HideButtons = true;
@@ -1036,6 +1038,7 @@ namespace SRLog.Controllers
                     {
                         model.CreatedBy = Convert.ToString(Session["User"]);
                         ViewBag.CreatedBy = Convert.ToString(Session["User"]);
+                        
                         CommonFunctions cm = new CommonFunctions();
                         ViewBag.CreatedDate = cm.GetCurrentDate().ToString("MM/dd/yyyy");
                         model.EditedDate = Convert.ToDateTime(EditedDate);
