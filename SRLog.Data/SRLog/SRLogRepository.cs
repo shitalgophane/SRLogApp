@@ -343,10 +343,6 @@ namespace SRLog.Data.SRLog
             }
         }
 
-
-
-
-
         public IEnumerable<tblSR_Log> GetSRLogsList(int UserId)
         {
             db = new SR_Log_DatabaseSQLEntities();
@@ -1378,7 +1374,7 @@ namespace SRLog.Data.SRLog
                     string Customer = Convert.ToString(i.Customer);
                     //List<tblCustomer> customer = (db.tblCustomers.Where(c => c.CustomerName == Customer)).ToList();
 
-                    
+
                     //int ncustomer = 0;
                     //foreach (var c in customer)
                     //{
@@ -1409,7 +1405,7 @@ namespace SRLog.Data.SRLog
                         vwSR.NewCustomerNo = true;
                     }
 
-                    
+
 
                     if (i.ProjectType == "1")
                     {
@@ -1424,7 +1420,7 @@ namespace SRLog.Data.SRLog
                         vwSR.ProjectTypeTAndMNTE = true;
                     }
 
-                    
+
 
                     if (i.Division == "Concord")
                     {
@@ -1472,7 +1468,7 @@ namespace SRLog.Data.SRLog
                     vwSR.ContactPhone = i.ContactPhone;
                     vwSR.ContactEmail = i.ContactEmail;
                     vwSR.Estimator = i.Estimator;
-                    
+
                     vwSR.CreationDate = i.CreationDate;
                     vwSR.EditedDate = i.EditedDate;
 
@@ -1486,7 +1482,7 @@ namespace SRLog.Data.SRLog
                     vwSR.PrevailingMailSent = i.PrevailingMailSent;
                     vwSR.Notes = i.Notes;
                     vwSR.ProjectManager = i.ProjectManager;
-                    
+
                     vwSR.CreatedBy = i.CreatedBy;
                     vwSR.EditedBy = i.EditedBy;
 

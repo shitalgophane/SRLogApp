@@ -176,8 +176,14 @@ namespace SRLog.Controllers
 
 
         [ExceptionHandler]
-        public ActionResult Create()
+        public ActionResult Create(string returnpath)
         {
+            ViewBag.ResturnPath = "";
+            if (!string.IsNullOrEmpty(returnpath))
+            {
+                ViewBag.ReturnPath = returnpath;
+            }
+
             SRLogRepository objdata = new SRLogRepository();
             SRLogViewModel objcre = new SRLogViewModel();
 
@@ -257,6 +263,8 @@ namespace SRLog.Controllers
 
             string NewSR = Convert.ToString(form["hdnSRNumber"]);
             string Print = form["hdnPrint"].ToString();
+            string returnpath = form["hdnReturnPath"].ToString();
+
             if (Print == "Print")
             {
                 string creationdate = Convert.ToString(form["txtCreationDate"]);
@@ -580,7 +588,7 @@ namespace SRLog.Controllers
                 reportViewer.LocalReport.SetParameters(new ReportParameter[] { rp1, rp2, rp3, rp4, rp5, rp6, rp7, rp8, rp9, rp10, rp11, rp12 });
                 ViewBag.ReportViewer = reportViewer;
                 ViewBag.ReportViewerFlag = true;
-
+                
                 return View("Print");
             }
             #region validation
@@ -1238,6 +1246,7 @@ namespace SRLog.Controllers
 
             ViewBag.CustomerName = model.Customer;
             ViewBag.PrintView = "";
+            ViewBag.ReturnPath = returnpath;
 
             return View(model);
         }
@@ -1277,10 +1286,17 @@ namespace SRLog.Controllers
 
 
         [ExceptionHandler]
-        public ActionResult GetFirst()
+        public ActionResult GetFirst(string returnpath)
         {
             SRLogRepository _repository = new SRLogRepository();
             SRLogViewModel objSRLog = new SRLogViewModel();
+
+            ViewBag.ResturnPath = "";
+            if (!string.IsNullOrEmpty(returnpath))
+            {
+                ViewBag.ReturnPath = returnpath;
+            }
+
 
             objSRLog = _repository.GetSrRecords("F", 0);
             if (objSRLog.PrevailingWageTBD == true)
@@ -1410,8 +1426,14 @@ namespace SRLog.Controllers
         }
 
         [ExceptionHandler]
-        public ActionResult GetLast()
+        public ActionResult GetLast(string returnpath)
         {
+            ViewBag.ResturnPath = "";
+            if (!string.IsNullOrEmpty(returnpath))
+            {
+                ViewBag.ReturnPath = returnpath;
+            }
+
             SR_Log_DatabaseSQLEntities db = new SR_Log_DatabaseSQLEntities();
             SRLogRepository _repository = new SRLogRepository();
             SRLogViewModel objSRLog = new SRLogViewModel();
@@ -1562,8 +1584,15 @@ namespace SRLog.Controllers
         }
 
         [ExceptionHandler]
-        public ActionResult GetPrevious(string id)
+        public ActionResult GetPrevious(string id,string returnpath)
         {
+            ViewBag.ResturnPath = "";
+            if (!string.IsNullOrEmpty(returnpath))
+            {
+                ViewBag.ReturnPath = returnpath;
+            }
+
+
             // string firstid = "0";
             SRLogRepository _repository = new SRLogRepository();
             SRLogViewModel objSRLog = new SRLogViewModel();
@@ -1738,7 +1767,7 @@ namespace SRLog.Controllers
             {
                 ViewBag.InActive = true;
             }
-
+                                                                                                                                                                                                                                     
             if (Convert.ToString(Session["SR_Log_ReadOnly"]) == "True" && Convert.ToString(Session["Bid_Log_ReadOnly"]) == "True")
             {
                 ViewBag.EditCustomerDisable = true;
@@ -1749,8 +1778,13 @@ namespace SRLog.Controllers
             return View("Create", objSRLog);
 
         }
-        public ActionResult GetNext(string id)
+        public ActionResult GetNext(string id,string returnpath)
         {
+            ViewBag.ResturnPath = "";
+            if (!string.IsNullOrEmpty(returnpath))
+            {
+                ViewBag.ReturnPath = returnpath;
+            }
 
             SRLogRepository _repository = new SRLogRepository();
             SRLogViewModel objSRLog = new SRLogViewModel();

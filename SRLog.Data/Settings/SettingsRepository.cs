@@ -361,13 +361,7 @@ namespace SRLog.Data.Settings
             return bondingmailto;
         }
 
-        public List<Bonding_Mail_TO> GetBondingMailTo()
-        {
-            db = new SR_Log_DatabaseSQLEntities();
-
-            List<Bonding_Mail_TO> bondingmailto = (db.Bonding_Mail_TO).ToList();
-            return bondingmailto;
-        }
+       
         public List<Bonding_Mail_CC> GetBondingMailCC()
         {
             db = new SR_Log_DatabaseSQLEntities();
